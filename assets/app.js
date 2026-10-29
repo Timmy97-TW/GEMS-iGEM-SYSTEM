@@ -25,6 +25,7 @@
     renderProblems();
     renderGraph();
     renderDepth();
+    renderFlow();
     renderPeople();
     renderTimeline();
     renderFacts();
@@ -145,6 +146,128 @@
     const f = DRIVE.find(x => x.id === state.folder);
     $("#tree-panel").innerHTML = `<div class="panel__head"><span class="panel__kind">${f.drive === "ops" ? "ReLEAF Ops" : "ReLEAF 2027"}</span><h3>${esc(f.name)}</h3></div>
       <dl>${row(t("lbl.holds"), L(f.holds))}${row(t("lbl.edit"), L(f.edit))}${row(t("lbl.rule"), L(f.rule))}</dl>`;
+  }
+
+  // ---------- flow ----------
+  const roleById = Object.fromEntries(ROLES.map(r => [r.id, r]));
+  const tierName = { s: () => t("ppl.students"), a: () => t("ppl.advisors"), i: () => t("ppl.staff") };
+  const flow = { sc: 0, step: 0, playing: false, seen: false, timer: null };
+  const STEP_MS = 3200;
+
+  function renderFlow() {
+    $("#flow-tabs").innerHTML = SCENARIOS.map((s, i) => `
+      <button role="tab" data-sc="${i}" aria-selected="${i === flow.sc}" style="--c:var(--${s.color})"><i></i>${esc(L(s.name))}</button>`).join("");
+    $$("#flow-tabs button").forEach(b => b.addEventListener("click", () => { stopFlow(); goFlow(+b.dataset.sc, 0); }));
+
+    const board = $("#board");
+    $$(".tile", board).forEach(n => n.remove());
+    board.insertAdjacentHTML("beforeend", FLOW_TILES.map(tl => `
+      <div class="tile${tl.out ? " tile--out" : ""}${tl.wide ? " tile--wide" : ""}" data-tile="${tl.id}">
+        <span class="tile__name">${esc(L(tl.name))}</span>
+        ${tl.owners ? `<span class="tile__owners">${tl.owners.map(o => `<span class="chip" data-role="${o}" style="--c:var(--${roleById[o].color})"><i></i>${esc(L(roleById[o].name))}</span>`).join("")}</span>` : ""}
+      </div>`).join(""));
+
+    $("#flow-prev").setAttribute("aria-label", t("flow.prev"));
+    $("#flow-next").setAttribute("aria-label", t("flow.next"));
+    paintFlow(false);
+  }
+
+  function goFlow(sc, step) {
+    flow.sc = sc; flow.step = step;
+    $$("#flow-tabs button").forEach(b => b.setAttribute("aria-selected", +b.dataset.sc === sc));
+    paintFlow(true);
+  }
+
+  function tileCenter(id) {
+    const board = $("#board"), el = $(`[data-tile="${id}"]`, board);
+    const b = board.getBoundingClientRect(), r = el.getBoundingClientRect();
+    // Anchor at the tile's top-right so the token never covers its name or owners.
+    return [r.right - b.left - 26, r.top - b.top + 26];
+  }
+
+  function paintFlow(animate) {
+    const sc = SCENARIOS[flow.sc], steps = sc.steps, cur = steps[flow.step];
+    const visited = steps.slice(0, flow.step + 1).map(s => s.at);
+
+    $$("#board .tile").forEach(el => {
+      const id = el.dataset.tile;
+      el.classList.toggle("is-now", id === cur.at);
+      el.classList.toggle("is-past", id !== cur.at && visited.includes(id));
+      el.classList.toggle("is-path", steps.some(s => s.at === id));
+      $$(".chip", el).forEach(c => c.classList.toggle("is-act", id === cur.at && c.dataset.role === cur.who));
+    });
+
+    const board = $("#board");
+    board.style.setProperty("--sc", `var(--${sc.color})`);
+    const pts = [];
+    visited.forEach(id => { const p = tileCenter(id); const last = pts[pts.length - 1]; if (!last || last[0] !== p[0] || last[1] !== p[1]) pts.push(p); });
+    const bb = board.getBoundingClientRect();
+    $("#board-trail").setAttribute("viewBox", `0 0 ${bb.width} ${bb.height}`);
+    $("#board-trail").innerHTML = pts.length > 1
+      ? `<polyline points="${pts.map(p => p.join(",")).join(" ")}"/>` + pts.slice(0, -1).map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="4"/>`).join("")
+      : "";
+
+    const [x, y] = tileCenter(cur.at);
+    const tok = $("#token");
+    tok.classList.toggle("no-anim", !animate);
+    tok.style.transform = `translate(${x}px, ${y}px)`;
+    tok.innerHTML = `<svg viewBox="0 0 16 20" aria-hidden="true"><path d="M2 1h8l4 4v14H2z"/><path d="M10 1v4h4" fill="none"/></svg>`;
+    tok.classList.remove("pop"); void tok.offsetWidth; tok.classList.add("pop");
+
+    renderFlowPanel();
+  }
+
+  function renderFlowPanel() {
+    const sc = SCENARIOS[flow.sc], steps = sc.steps, cur = steps[flow.step];
+    const r = roleById[cur.who];
+    const cells = {}; let fresh = {};
+    steps.slice(0, flow.step + 1).forEach((s, i) => { if (s.row) Object.entries(s.row).forEach(([k, v]) => { cells[k] = v; if (i === flow.step) fresh[k] = 1; }); });
+    const cols = L(sc.cols);
+    let stateIx = -1; steps.slice(0, flow.step + 1).forEach(s => { if (s.state !== undefined) stateIx = s.state; });
+
+    $("#fpanel").innerHTML = `
+      <div class="fpanel__top">
+        <span class="fpanel__count">${esc(t("flow.step"))} ${flow.step + 1} / ${steps.length}</span>
+        <span class="fpanel__dots">${steps.map((_, i) => `<button data-step="${i}" class="${i === flow.step ? "is-on" : i < flow.step ? "is-past" : ""}" aria-label="${t("flow.step")} ${i + 1}"></button>`).join("")}</span>
+      </div>
+      <p class="fpanel__act">${esc(L(cur.act))}</p>
+      <div class="fpanel__who" style="--c:var(--${r.color})"><i></i><span><b>${esc(L(r.name))}</b><small>${esc(tierName[r.tier]())}</small></span></div>
+      <div class="fpanel__kv"><span>${esc(t("flow.file"))}</span><code>${esc(cur.file)}</code></div>
+      ${stateIx >= 0 ? `<div class="fpanel__kv"><span>${esc(t("flow.state"))}</span><span class="pills">${STATES.map((s, i) => `<em class="${i === stateIx ? "is-on" : i < stateIx ? "is-past" : ""}">${esc(L(s.name))}</em>`).join("")}</span></div>` : ""}
+      <div class="sheet">
+        <div class="sheet__name"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M1 6h14M1 11h14M6 1v14"/></svg>01 Registers / ${esc(L(sc.register))}</div>
+        <div class="sheet__grid" style="--n:${cols.length}">
+          ${cols.map(c => `<span class="sheet__h">${esc(c)}</span>`).join("")}
+          ${cols.map((_, i) => `<span class="sheet__c${fresh[i] ? " is-new" : ""}">${cells[i] !== undefined ? esc(L(cells[i])) : ""}</span>`).join("")}
+        </div>
+      </div>`;
+    $$("#fpanel .fpanel__dots button").forEach(b => b.addEventListener("click", () => { stopFlow(); goFlow(flow.sc, +b.dataset.step); }));
+  }
+
+  function stepFlow(d) {
+    const n = SCENARIOS[flow.sc].steps.length;
+    let s = flow.step + d, sc = flow.sc;
+    if (s >= n) { sc = (sc + 1) % SCENARIOS.length; s = 0; }
+    if (s < 0) { sc = (sc - 1 + SCENARIOS.length) % SCENARIOS.length; s = SCENARIOS[sc].steps.length - 1; }
+    goFlow(sc, s);
+  }
+  function playFlow() {
+    flow.playing = true; $("#flow-play").classList.add("is-playing"); $("#flow-play").setAttribute("aria-label", t("flow.pause"));
+    clearInterval(flow.timer); flow.timer = setInterval(() => stepFlow(1), STEP_MS);
+  }
+  function stopFlow() {
+    flow.playing = false; flow.seen = true; $("#flow-play").classList.remove("is-playing"); $("#flow-play").setAttribute("aria-label", t("flow.play"));
+    clearInterval(flow.timer);
+  }
+  $("#flow-play").addEventListener("click", () => (flow.playing ? stopFlow() : playFlow()));
+  $("#flow-prev").addEventListener("click", () => { stopFlow(); stepFlow(-1); });
+  $("#flow-next").addEventListener("click", () => { stopFlow(); stepFlow(1); });
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting && !flow.seen && !reduce) { flow.seen = true; playFlow(); }
+      if (!e.isIntersecting && flow.playing) stopFlow();
+    }), { threshold: 0.35 }).observe($("#board"));
   }
 
   // ---------- people ----------
@@ -291,8 +414,8 @@
   const nav = $("#nav");
   addEventListener("scroll", () => nav.classList.toggle("is-scrolled", scrollY > 8), { passive: true });
   let rz;
-  addEventListener("resize", () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(() => { drawLines(); paintGraph(); layoutTimeline(); }); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { drawLines(); paintGraph(); layoutTimeline(); });
+  addEventListener("resize", () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(() => { drawLines(); paintGraph(); layoutTimeline(); paintFlow(false); }); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { drawLines(); paintGraph(); layoutTimeline(); paintFlow(false); });
 
   // Hero and section intros fade up too.
   $$(".hero > *, .sec .eyebrow, .sec .headline, .sec .lede").forEach(e => e.classList.add("reveal"));

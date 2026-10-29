@@ -17,6 +17,7 @@
       <a href="#problems" data-i18n="nav.problems"></a>
       <a href="#architecture" data-i18n="nav.arch"></a>
       <a href="#depth" data-i18n="nav.depth"></a>
+      <a href="#flow" data-i18n="nav.flow"></a>
       <a href="#people" data-i18n="nav.people"></a>
       <a href="#timeline" data-i18n="nav.time"></a>
       <a href="#facts" data-i18n="nav.facts"></a>
@@ -89,7 +90,32 @@
   </div>
 </section>
 
-<section class="sec" id="people">
+<section class="sec" id="flow">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="flow.eyebrow"></p>
+    <h2 class="headline" data-i18n="flow.title"></h2>
+    <p class="lede" data-i18n="flow.sub"></p>
+  </div>
+  <div class="wrap wrap--wide">
+    <div class="flow__bar">
+      <div class="seg" id="flow-tabs" role="tablist"></div>
+      <div class="flow__ctl">
+        <button id="flow-prev" class="ctl"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+        <button id="flow-play" class="ctl ctl--main"><svg viewBox="0 0 16 16" class="i-play"><path d="M5 3v10l8-5z"/></svg><svg viewBox="0 0 16 16" class="i-pause"><path d="M5 3v10M11 3v10"/></svg></button>
+        <button id="flow-next" class="ctl"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
+      </div>
+    </div>
+    <div class="flow">
+      <div class="board" id="board">
+        <svg class="board__trail" id="board-trail" aria-hidden="true"></svg>
+        <div class="board__token" id="token"></div>
+      </div>
+      <div class="fpanel" id="fpanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="people">
   <div class="wrap">
     <p class="eyebrow" data-i18n="ppl.eyebrow"></p>
     <h2 class="headline" data-i18n="ppl.title"></h2>
@@ -100,7 +126,7 @@
   </div>
 </section>
 
-<section class="sec sec--alt" id="timeline">
+<section class="sec" id="timeline">
   <div class="wrap">
     <p class="eyebrow" data-i18n="time.eyebrow"></p>
     <h2 class="headline" data-i18n="time.title"></h2>
