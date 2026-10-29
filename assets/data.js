@@ -1,0 +1,407 @@
+// All page content, in both languages. app.js renders from here.
+
+const T = {
+  zh: {
+    "nav.problems": "問題", "nav.arch": "架構", "nav.depth": "深度",
+    "nav.people": "人力", "nav.time": "時程", "nav.facts": "事實表", "nav.std": "標準化",
+    "hero.eyebrow": "GEMS Taiwan · iGEM 2027",
+    "hero.title": "一套系統。<br>五個交付物。",
+    "hero.sub": "2026 年花在找檔案、對數字、重做頁面的時間，2027 年還給研究。",
+    "stat.people": "人", "stat.streams": "條素材流", "stat.registers": "張登錄表", "stat.deadlines": "項 iGEM 交付",
+
+    "prob.eyebrow": "2026 回顧",
+    "prob.title": "今年的系統，<br>壞在哪裡。",
+    "prob.sub": "十二件事，全部來自今年的 wiki 原始碼、照片資料夾和工作紀錄。",
+
+    "arch.eyebrow": "架構",
+    "arch.title": "六條素材流，<br>流向五個交付物。",
+    "arch.sub": "素材只進一次登錄表。交付物只從登錄表取用，不複製。",
+    "arch.col.streams": "素材流", "arch.col.registers": "登錄表", "arch.col.deliverables": "交付物",
+    "lbl.intake": "入口", "lbl.steward": "負責", "lbl.fields": "欄位", "lbl.output": "輸出",
+    "lbl.rule": "規則", "lbl.feeds": "來源", "lbl.deadline": "截止",
+    "lbl.edit": "可編輯", "lbl.holds": "內容", "lbl.time": "每週",
+
+    "depth.eyebrow": "深度",
+    "depth.title": "三層空間，<br>四個狀態。",
+    "depth.sub": "工作區可以亂，圖書館必須準，交付物只引用。",
+    "depth.tree": "Google Drive 結構",
+    "depth.states": "每份文件只有一個狀態欄，檔名不寫版本。",
+
+    "ppl.eyebrow": "人力",
+    "ppl.title": "五十個人，<br>各顧一件事。",
+    "ppl.sub": "12 個學生管理員，每條素材流一位 advisor 導師。instructor 只做驗證和範本，其餘時間開發。",
+    "ppl.students": "學生", "ppl.advisors": "學生 advisor", "ppl.staff": "Instructor 與 Ops",
+    "ppl.note": "每週時數為估計值。30 個學生全部都是 page owner，各負責 1–2 頁 wiki。",
+
+    "time.eyebrow": "時程",
+    "time.title": "從截止日<br>往回排。",
+    "time.sub": "日期以 2026 年 iGEM 時程為參考，2027 年公布後更新。",
+    "lane.deadline": "iGEM 截止", "lane.gate": "素材到位", "lane.ritual": "固定節奏",
+
+    "facts.eyebrow": "事實表",
+    "facts.title": "每個事實，<br>只有一個家。",
+    "facts.sub": "wiki、影片、展板、簡報都連到同一張表，不抄數字。建置時由腳本檢查每一頁。",
+    "facts.lint": "建置檢查（示意）",
+
+    "std.eyebrow": "Wiki 標準化",
+    "std.title": "範本寫一次，<br>內容填一整年。",
+    "std.sub": "instructor 一次寫好範本、轉換器和檢查腳本。學生只填 Google Docs 和登錄表，頁面由程式產生。",
+    "std.now": "2026", "std.next": "2027",
+
+    "foot.line": "GEMS Taiwan iGEM · 2027 系統設計草案 · 依 2026 年的經驗整理"
+  },
+  en: {
+    "nav.problems": "Problems", "nav.arch": "Architecture", "nav.depth": "Depth",
+    "nav.people": "People", "nav.time": "Timeline", "nav.facts": "Facts", "nav.std": "Standards",
+    "hero.eyebrow": "GEMS Taiwan · iGEM 2027",
+    "hero.title": "One system.<br>Five deliverables.",
+    "hero.sub": "The hours 2026 spent finding files, checking numbers and rebuilding pages go back to research in 2027.",
+    "stat.people": "people", "stat.streams": "asset streams", "stat.registers": "registers", "stat.deadlines": "iGEM deliverables",
+
+    "prob.eyebrow": "2026 in review",
+    "prob.title": "Where this year’s<br>system broke.",
+    "prob.sub": "Twelve problems, each taken from this year’s wiki source, photo archive and work log.",
+
+    "arch.eyebrow": "Architecture",
+    "arch.title": "Six streams.<br>Five deliverables.",
+    "arch.sub": "Every asset enters a register once. Deliverables draw from the registers and never copy.",
+    "arch.col.streams": "Streams", "arch.col.registers": "Registers", "arch.col.deliverables": "Deliverables",
+    "lbl.intake": "Intake", "lbl.steward": "Owner", "lbl.fields": "Fields", "lbl.output": "Output",
+    "lbl.rule": "Rule", "lbl.feeds": "Draws on", "lbl.deadline": "Due",
+    "lbl.edit": "Edited by", "lbl.holds": "Holds", "lbl.time": "Per week",
+
+    "depth.eyebrow": "Depth",
+    "depth.title": "Three layers.<br>Four states.",
+    "depth.sub": "The workshop can be messy. The library must be right. Deliverables only point to it.",
+    "depth.tree": "Google Drive structure",
+    "depth.states": "Each document carries one status field. File names never carry a version.",
+
+    "ppl.eyebrow": "People",
+    "ppl.title": "Fifty people.<br>Each owns one thing.",
+    "ppl.sub": "Twelve student stewards and one advisor mentor per stream. Instructors verify and maintain templates, and spend the rest of their time on development.",
+    "ppl.students": "Students", "ppl.advisors": "Student advisors", "ppl.staff": "Instructors & Ops",
+    "ppl.note": "Weekly hours are estimates. All 30 students are page owners, each responsible for one or two wiki pages.",
+
+    "time.eyebrow": "Timeline",
+    "time.title": "Planned backwards<br>from the deadlines.",
+    "time.sub": "Dates follow the 2026 iGEM calendar and will be updated when 2027 is announced.",
+    "lane.deadline": "iGEM deadlines", "lane.gate": "Assets ready", "lane.ritual": "Routines",
+
+    "facts.eyebrow": "Fact sheet",
+    "facts.title": "Every fact<br>has one home.",
+    "facts.sub": "The wiki, the videos, the booth and the slides all link to one sheet and never copy a number. The build checks every page against it.",
+    "facts.lint": "Build check (illustration)",
+
+    "std.eyebrow": "Wiki standards",
+    "std.title": "Write the template once.<br>Fill it all year.",
+    "std.sub": "Instructors write the templates, converters and checks once. Students fill Google Docs and registers, and the pages are generated.",
+    "std.now": "2026", "std.next": "2027",
+
+    "foot.line": "GEMS Taiwan iGEM · 2027 system design draft · drawn from the 2026 season"
+  }
+};
+
+const PROBLEMS = [
+  { t: { zh: "找不到最新版", en: "Nobody knew which version was latest" },
+    d: { zh: "同一份內容有多份副本，學生的 docx 一版一版寄來。", en: "The same content lived in several copies; student drafts arrived as one docx after another." } },
+  { t: { zh: "資料夾依「誰做的」分", en: "Folders sorted by who made things" },
+    d: { zh: "其他組需要的東西，埋在別組的工作區裡。", en: "What one team needed was buried in another team’s workspace." } },
+  { t: { zh: "數字前後不一", en: "Numbers disagreed across pages" },
+    d: { zh: "同一個數字抄進好幾頁；freeze 當天還發現一張圖的單位差了 1000 倍。", en: "One number was copied into several pages; on freeze day a chart was still found 1000× off." } },
+  { t: { zh: "名稱沒有統一", en: "Names had no canon" },
+    d: { zh: "BoPEP4、BoPep4、Bopep4 在 wiki 裡分別出現 265、257、22 次。", en: "BoPEP4, BoPep4 and Bopep4 appear 265, 257 and 22 times across the wiki." } },
+  { t: { zh: "到十月才收斂", en: "Everything converged in October" },
+    d: { zh: "wiki 的形狀最後才出現。每交一版新 docx，頁面就重做一次，全年超過 20 次。", en: "The wiki’s shape appeared last. Each new docx meant rebuilding a page, more than 20 times this year." } },
+  { t: { zh: "每頁自己發明元件", en: "Every page invented its own parts" },
+    d: { zh: "超過 15 種 figure 寫法、約 15 種 CSS 組合、23 段頁內樣式。", en: "Over 15 figure markups, about 15 stylesheet mixes and 23 inline style blocks." } },
+  { t: { zh: "照片太少", en: "Too few photos" },
+    d: { zh: "30 人一整年只歸檔 610 張；分類規則在八月改過一次。", en: "Thirty people filed 610 photos all year, and the folder scheme changed in August." } },
+  { t: { zh: "圖沒有原檔", en: "Figures without masters" },
+    d: { zh: "定稿時，有些圖找不到高解析度原檔。", en: "At sign-off, some figures had no high-resolution original." } },
+  { t: { zh: "美術到位太晚", en: "Artwork arrived late" },
+    d: { zh: "頁面先用佔位圖，學生的畫到十月才換上。", en: "Pages ran on placeholders until the students’ drawings arrived in October." } },
+  { t: { zh: "影片腳本改到最後", en: "Video scripts changed to the end" },
+    d: { zh: "presentation video 截止前十天，還在替換腳本段落。", en: "Ten days before the presentation video was due, script blocks were still being replaced." } },
+  { t: { zh: "決策散在聊天裡", en: "Decisions lived in chat" },
+    d: { zh: "新舊規格文件互相矛盾，沒有人標記哪一份已被取代。", en: "Old and new spec documents contradicted each other, and none was marked superseded." } },
+  { t: { zh: "聊天紀錄難以保存", en: "Chat history was fragile" },
+    d: { zh: "分成兩個 Discord 伺服器；匯出靠第三方工具；所有權沒有交接機制。", en: "Two Discord servers, exports through a third-party tool, and no handover of ownership." } }
+];
+
+// Architecture graph. Columns: streams -> registers -> deliverables.
+const STREAMS = [
+  { id: "photos", color: "orange", to: ["media"],
+    name: { zh: "照片", en: "Photos" },
+    intake: { zh: "Discord #photo-drop 或 Google 表單。上傳時只寫一句：誰、在做什麼。", en: "Discord #photo-drop or a Google Form. One line on upload: who, doing what." },
+    steward: { zh: "照片管理員 ×2，每週 1 小時；Media advisor ×1", en: "Photo librarians ×2, 1 h a week; Media advisor ×1" },
+    rule: { zh: "每次活動指定一位攝影者。照片沒有肖像同意，不得用在任何交付物。", en: "Every session has a named photographer. No portrait consent, no use in any deliverable." } },
+  { id: "footage", color: "pink", to: ["media"],
+    name: { zh: "影片素材", en: "Footage" },
+    intake: { zh: "每月一份 shot list 和 B-roll 配額：全景、手部特寫、人臉、儀器。", en: "A monthly shot list and B-roll quota: wide, hands, faces, instruments." },
+    steward: { zh: "影片負責人 ×2，每週 2 小時", en: "Video leads ×2, 2 h a week" },
+    rule: { zh: "與照片共用同一張登錄表，類型欄寫 video。", en: "Shares the photo register, with type set to video." } },
+  { id: "figures", color: "blue", to: ["figreg"],
+    name: { zh: "圖表", en: "Figures" },
+    intake: { zh: "全隊共用一份 matplotlib／Prism 樣式。輸出 SVG 原檔與 300 dpi PNG。", en: "One shared matplotlib/Prism style. Export SVG masters and 300 dpi PNGs." },
+    steward: { zh: "圖表編輯 ×2（濕、乾各一），每週 1 小時", en: "Figure editors ×2 (wet and dry), 1 h a week" },
+    rule: { zh: "證據圖不得由 AI 生成。定稿前必須對照事實表。", en: "Evidentiary figures are never AI-made. Each is checked against the fact sheet before sign-off." } },
+  { id: "art", color: "purple", to: ["artreg"],
+    name: { zh: "美術", en: "Art" },
+    intake: { zh: "依美術需求清單作畫。手繪以 600 dpi 掃描，再向量化。", en: "Drawn to an art backlog. Hand drawings scanned at 600 dpi, then vectorised." },
+    steward: { zh: "美術與設計 ×2，每週 2 小時", en: "Art & design leads ×2, 2 h a week" },
+    rule: { zh: "品牌包與吉祥物設定稿在二月前完成。", en: "Brand kit and mascot sheet finished by February." } },
+  { id: "facts", color: "green", to: ["factsheet"],
+    name: { zh: "事實", en: "Facts" },
+    intake: { zh: "任何人都可以提案，但必須附上來源連結。", en: "Anyone may propose a fact, with a link to its source." },
+    steward: { zh: "事實管理員 ×1；advisor 初審，instructor 驗證", en: "Fact keeper ×1; advisor first review, instructor verifies" },
+    rule: { zh: "改一個已凍結的數字，要走審核並標記取代。", en: "Changing a frozen number goes through review and is marked superseded." } },
+  { id: "records", color: "teal", to: ["recidx", "parts"],
+    name: { zh: "紀錄", en: "Records" },
+    intake: { zh: "實驗、會議、硬體紀錄用固定範本。raw data 上傳後不可修改。", en: "Lab, meeting and hardware entries on fixed templates. Raw data is read-only once uploaded." },
+    steward: { zh: "各組 page owner；Registry 管理員 ×1", en: "Each team’s page owners; Registry steward ×1" },
+    rule: { zh: "只能新增，不能改寫過去的紀錄。", en: "Append only. Past entries are never rewritten." } }
+];
+
+const REGISTERS = [
+  { id: "media", to: ["promo", "wiki", "expo", "pres"],
+    name: { zh: "素材登錄表", en: "Media register" },
+    fields: { zh: "日期、組別、活動、人物、主題標籤、品質 1–3 星、肖像同意、適用交付物、攝影者", en: "Date, team, event, people, theme tags, quality 1–3, portrait consent, fit for, photographer" },
+    output: { zh: "篩選即是最新圖庫。GitHub 上的 gallery 直接讀這張表。", en: "A filter is the latest gallery. The GitHub gallery reads this sheet directly." } },
+  { id: "figreg", to: ["wiki", "expo", "registry", "pres"],
+    name: { zh: "圖表登錄表", en: "Figure register" },
+    fields: { zh: "圖 ID、原始資料、繪圖腳本、n 與統計、圖說、證據或示意、狀態、使用位置", en: "Figure ID, raw data, script, n and statistics, caption, evidence or illustration, status, used in" },
+    output: { zh: "wiki 的 figure 元件與圖說由這裡產生。", en: "Generates the wiki’s figure component and caption." } },
+  { id: "artreg", to: ["promo", "wiki", "expo", "pres"],
+    name: { zh: "美術登錄表", en: "Art register" },
+    fields: { zh: "作品 ID、作者、原檔、向量檔、用途、對應的需求項目", en: "Artwork ID, artist, scan, vector, use, backlog item" },
+    output: { zh: "Attributions Form 直接從這裡匯出。", en: "The Attributions Form exports straight from it." } },
+  { id: "factsheet", to: ["promo", "wiki", "expo", "registry", "pres"],
+    name: { zh: "事實表", en: "Fact sheet" },
+    fields: { zh: "ID、類型、陳述、數值、單位、條件、來源、驗證人、狀態、取代、使用位置", en: "ID, type, statement, value, unit, conditions, source, verifier, status, supersedes, used in" },
+    output: { zh: "建置時自動檢查每一頁的數字與名稱。", en: "The build checks every number and name on every page." } },
+  { id: "recidx", to: ["wiki", "registry"],
+    name: { zh: "紀錄索引", en: "Records index" },
+    fields: { zh: "日期、組別、實驗 ID、範本類型、raw data、相關圖 ID", en: "Date, team, experiment ID, template, raw data, related figures" },
+    output: { zh: "notebook 頁面由這裡自動匯出。", en: "Notebook pages export from it automatically." } },
+  { id: "parts", to: ["registry", "wiki"],
+    name: { zh: "Parts 工作表", en: "Parts sheet" },
+    fields: { zh: "BBa 編號、負責人、序列檔、圖 ID、發布狀態", en: "BBa ID, owner, sequence file, figure IDs, publication status" },
+    output: { zh: "Registry 是唯一來源；wiki 的 parts 表由 API 產生。", en: "The Registry is the source; the wiki parts table is generated from its API." } }
+];
+
+const DELIVERABLES = [
+  { id: "promo", due: "8/12",
+    name: { zh: "Promo Video", en: "Promo Video" },
+    rule: { zh: "腳本 master doc、分鏡、shot list，每個鏡頭連到素材登錄表。腳本 7/15 鎖定。", en: "Script master, storyboard and shot list, each shot linked to the media register. Script locked 15 Jul." } },
+  { id: "wiki", due: "10/21",
+    name: { zh: "Wiki", en: "Wiki" },
+    rule: { zh: "一頁一份 master doc，章節等於最終頁面的標題。頁面由範本產生。", en: "One master doc per page, sections equal to the final headings. Pages are generated from templates." } },
+  { id: "expo", due: "9/16",
+    name: { zh: "Expo Booth 與 Stage Talk", en: "Expo Booth & Stage Talk" },
+    rule: { zh: "主視覺與吉祥物 8/31 定稿。展板上的數字只取自事實表。", en: "Key visual and mascot final by 31 Aug. Every number on the booth comes from the fact sheet." } },
+  { id: "registry", due: "10/21",
+    name: { zh: "Parts Registry", en: "Parts Registry" },
+    rule: { zh: "共用的說明寫在 collection 文件，不在每個 part 重複。", en: "Shared documentation lives in the collection, not repeated on every part." } },
+  { id: "pres", due: "10/28",
+    name: { zh: "Presentation Video", en: "Presentation Video" },
+    rule: { zh: "腳本 10/7 鎖定，只使用已凍結的事實。", en: "Script locked 7 Oct, using frozen facts only." } }
+];
+
+// Drive tree. kids are folder names only.
+const DRIVE = [
+  { id: "d00", name: "00 Start Here", drive: "team",
+    holds: { zh: "新人手冊、Hub 總表、成員名錄、術語表", en: "Handbook, Hub sheet, roster, glossary" },
+    edit: { zh: "Ops", en: "Ops" },
+    rule: { zh: "新人第一週只讀這裡。", en: "A newcomer’s first week starts and ends here." } },
+  { id: "d01", name: "01 Registers", drive: "team",
+    kids: ["Hub", "Media", "Figures", "Art", "Facts", "Records index", "Parts", "Decisions"],
+    holds: { zh: "六張登錄表、Hub 總表、決策記錄", en: "The six registers, the Hub sheet, the decision log" },
+    edit: { zh: "各流管理員", en: "Stream stewards" },
+    rule: { zh: "沒進登錄表的東西，等於不存在。", en: "If it is not in a register, it does not exist." } },
+  { id: "d10", name: "10 Workshop", drive: "team",
+    kids: ["Wet", "Dry", "Hardware", "HP", "Design", "Media"],
+    holds: { zh: "各組的工作區", en: "Each team’s workspace" },
+    edit: { zh: "全隊", en: "Everyone" },
+    rule: { zh: "可以亂。確定的內容升級到 40 Library。", en: "May be messy. Settled content is promoted to 40 Library." } },
+  { id: "d20", name: "20 Records", drive: "team",
+    kids: ["Wet", "Dry", "Hardware", "HP", "Meetings"],
+    holds: { zh: "依組、依月的實驗與會議紀錄", en: "Lab and meeting records by team and month" },
+    edit: { zh: "全隊（只能新增）", en: "Everyone (append only)" },
+    rule: { zh: "固定範本。年底由腳本匯出成 notebook。", en: "Fixed templates. Exported to the notebooks at season’s end." } },
+  { id: "d30", name: "30 Data", drive: "team",
+    kids: ["Raw", "Processed"],
+    holds: { zh: "原始資料與處理後資料；程式碼連到 GitHub", en: "Raw and processed data; code links to GitHub" },
+    edit: { zh: "各組資料負責人", en: "Team data owners" },
+    rule: { zh: "Raw 上傳後不可修改。", en: "Raw is read-only once uploaded." } },
+  { id: "d40", name: "40 Library", drive: "team",
+    kids: ["Project", "Parts", "Protocols", "Hardware", "Model", "HP"],
+    holds: { zh: "依主題，每個主題一份 master doc", en: "By subject, one master doc each" },
+    edit: { zh: "主題負責人；advisor 審稿", en: "Subject owners; advisors review" },
+    rule: { zh: "其他組只需要看這一層。", en: "Other teams only ever need this layer." } },
+  { id: "d50", name: "50 Deliverables", drive: "team",
+    kids: ["Wiki", "Promo Video", "Presentation Video", "Expo & Stage", "Registry", "Safety", "Forms"],
+    holds: { zh: "每個交付物的 master doc 與素材清單", en: "Each deliverable’s master doc and asset list" },
+    edit: { zh: "交付物負責人", en: "Deliverable owners" },
+    rule: { zh: "只引用 40 Library 和登錄表，不複製。", en: "Points to 40 Library and the registers; never copies." } },
+  { id: "d60", name: "60 Media", drive: "team",
+    kids: ["Brand kit", "Figures", "Photos", "Footage", "Art"],
+    holds: { zh: "品牌包、圖原檔與輸出、照片、影片素材、美術", en: "Brand kit, figure masters and exports, photos, footage, art" },
+    edit: { zh: "各流管理員", en: "Stream stewards" },
+    rule: { zh: "資料夾只分日期，其他分類都寫在登錄表。", en: "Folders sort by date only; every other dimension lives in the register." } },
+  { id: "d90", name: "90 Archive", drive: "team",
+    holds: { zh: "凍結的 PDF 快照、往年資料", en: "Frozen PDF snapshots, past seasons" },
+    edit: { zh: "唯讀", en: "Read only" },
+    rule: { zh: "freeze 後每份 master doc 匯出一份，作為明年的範本。", en: "After freeze every master doc is exported here as next year’s template." } },
+  { id: "ops", name: "ReLEAF Ops", drive: "ops",
+    kids: ["Finance", "Consent forms", "Personal data", "Sponsors"],
+    holds: { zh: "財務、未成年同意書、個資、贊助合約", en: "Finance, minors’ consent forms, personal data, sponsor contracts" },
+    edit: { zh: "Instructor 與 Ops", en: "Instructors & Ops" },
+    rule: { zh: "獨立的共用雲端硬碟，學生看不到。", en: "A separate shared drive that students cannot see." } }
+];
+
+const LAYERS = [
+  { n: "10", name: { zh: "工作區", en: "Workshop" }, d: { zh: "各組自由使用，草稿與試錯。", en: "Free use by each team. Drafts and trial runs." } },
+  { n: "40", name: { zh: "圖書館", en: "Library" }, d: { zh: "依主題的定稿內容，全隊共同的依據。", en: "Settled content by subject. The team’s shared ground truth." } },
+  { n: "50", name: { zh: "交付物", en: "Deliverables" }, d: { zh: "依交付物組織，只引用圖書館與登錄表。", en: "Organised by deliverable. Points to the library and registers." } }
+];
+
+const STATES = [
+  { name: { zh: "草稿", en: "Draft" }, d: { zh: "任何人可改", en: "Anyone edits" } },
+  { name: { zh: "審稿", en: "Review" }, d: { zh: "advisor 審閱", en: "Advisor reviews" } },
+  { name: { zh: "定稿", en: "Canonical" }, d: { zh: "instructor 確認，可被引用", en: "Instructor signs off; citable" } },
+  { name: { zh: "凍結", en: "Frozen" }, d: { zh: "匯出 PDF 進 Archive", en: "Exported to Archive as PDF" } }
+];
+
+// People. tier: s = student, a = advisor, i = instructor/ops. count = seats.
+const ROLES = [
+  { id: "photo", tier: "s", count: 2, color: "orange", hrs: "1 h",
+    name: { zh: "照片管理員", en: "Photo librarian" },
+    d: { zh: "改檔名、歸檔、填素材登錄表、追肖像同意。", en: "Rename, file, fill the media register, chase portrait consent." } },
+  { id: "video", tier: "s", count: 2, color: "pink", hrs: "2 h",
+    name: { zh: "影片負責人", en: "Video lead" },
+    d: { zh: "每月 shot list、B-roll 配額、兩支影片的剪輯。", en: "Monthly shot list, B-roll quota, editing both videos." } },
+  { id: "figure", tier: "s", count: 2, color: "blue", hrs: "1 h",
+    name: { zh: "圖表編輯", en: "Figure editor" },
+    d: { zh: "維護樣式範本、給圖 ID、確認原檔與圖說。", en: "Keep the style template, assign IDs, check masters and captions." } },
+  { id: "art", tier: "s", count: 2, color: "purple", hrs: "2 h",
+    name: { zh: "美術與設計", en: "Art & design lead" },
+    d: { zh: "品牌包、吉祥物、美術需求清單、展板。", en: "Brand kit, mascot, art backlog, booth." } },
+  { id: "fact", tier: "s", count: 1, color: "green", hrs: "1 h",
+    name: { zh: "事實管理員", en: "Fact keeper" },
+    d: { zh: "收提案、追來源、送驗證、維護術語表。", en: "Collect proposals, chase sources, route to verification, keep the glossary." } },
+  { id: "registry", tier: "s", count: 1, color: "teal", hrs: "1–3 h",
+    name: { zh: "Registry 管理員", en: "Registry steward" },
+    d: { zh: "Parts 工作表、序列檔、九月起加重。", en: "Parts sheet and sequence files; heavier from September." } },
+  { id: "discord", tier: "s", count: 2, color: "indigo", hrs: "0.5 h",
+    name: { zh: "Discord 版主", en: "Discord moderator" },
+    d: { zh: "頻道秩序、每週匯出、決策轉進決策記錄。", en: "Channel order, weekly export, decisions copied to the decision log." } },
+  { id: "owner", tier: "s", count: 18, color: "gray", hrs: "1 h",
+    name: { zh: "Page owner", en: "Page owner" },
+    d: { zh: "每人負責 1–2 頁 wiki 的 master doc。管理員也同時是 page owner。", en: "Each owns one or two wiki master docs. Stewards are page owners too." } },
+  { id: "mentor", tier: "a", count: 6, color: "gold", hrs: "1 h",
+    name: { zh: "素材流導師", en: "Stream mentor" },
+    d: { zh: "每條素材流一位，帶管理員、做初審。", en: "One per stream: coach the stewards, do first review." } },
+  { id: "reviewer", tier: "a", count: 2, color: "gold2", hrs: "1 h",
+    name: { zh: "頁面審稿", en: "Page reviewer" },
+    d: { zh: "審 wiki master doc，人數依 advisor 多寡調整。", en: "Review wiki master docs; scales with advisor numbers." } },
+  { id: "verify", tier: "i", count: 3, color: "ink", hrs: "1 h",
+    name: { zh: "事實驗證", en: "Fact verification" },
+    d: { zh: "濕實驗、乾實驗、硬體各一位，簽核事實與證據圖。", en: "One each for wet lab, dry lab and hardware; sign off facts and evidentiary figures." } },
+  { id: "tmpl", tier: "i", count: 1, color: "ink", hrs: "2 h",
+    name: { zh: "範本與腳本", en: "Templates & scripts" },
+    d: { zh: "頁面範本、docs 轉 HTML、建置檢查。", en: "Page templates, Docs-to-HTML, build checks." } },
+  { id: "ops", tier: "i", count: 2, color: "ink", hrs: "1 h",
+    name: { zh: "Ops", en: "Ops" },
+    d: { zh: "Drive 與 Discord 所有權、同意書、財務。", en: "Drive and Discord ownership, consent forms, finance." } },
+  { id: "dev", tier: "i", count: 6, color: "ink2", hrs: "0 h",
+    name: { zh: "專心開發", en: "Development only" },
+    d: { zh: "不分配管理職責。這就是整套系統的目的。", en: "No management duties. This is what the system is for." } }
+];
+
+// Timeline. Dates are 2026–27 season positions, using the 2026 iGEM calendar.
+const TIMELINE = [
+  { date: "2026-12-13", lane: "gate", t: { zh: "開季", en: "Kick-off" },
+    d: { zh: "分派角色；Drive、Discord、六張登錄表建好。", en: "Roles assigned; Drive, Discord and the six registers set up." } },
+  { date: "2027-01-31", lane: "gate", t: { zh: "master doc 全部開好", en: "All master docs open" },
+    d: { zh: "每個交付物有骨架和評審標準；兩支影片各有一頁故事線。", en: "Every deliverable has a skeleton and its judging criteria; each video has a one-page story." } },
+  { date: "2027-02-28", lane: "gate", t: { zh: "品牌包與吉祥物", en: "Brand kit & mascot" },
+    d: { zh: "配色、字型、logo、吉祥物設定稿、插畫風格指南。", en: "Palette, type, logo, mascot sheet, illustration guide." } },
+  { date: "2027-06-15", lane: "gate", t: { zh: "事實表 v1", en: "Fact sheet v1" },
+    d: { zh: "專案描述定稿，核心事實已驗證。", en: "Project description final; core facts verified." } },
+  { date: "2027-06-24", lane: "deadline", t: { zh: "Village & Project Info", en: "Village & Project Info" },
+    d: { zh: "取自事實表 v1。", en: "Drawn from fact sheet v1." } },
+  { date: "2027-07-15", lane: "gate", t: { zh: "Promo 素材到位", en: "Promo assets in" },
+    d: { zh: "照片與 B-roll 達到配額，腳本鎖定；每頁 wiki 內容七成。", en: "Photo and B-roll quotas met, script locked; every wiki page 70% written." } },
+  { date: "2027-08-12", lane: "deadline", t: { zh: "Promo Video", en: "Promo Video" },
+    d: { zh: "", en: "" } },
+  { date: "2027-08-31", lane: "gate", t: { zh: "主視覺定稿", en: "Key visual final" },
+    d: { zh: "吉祥物、主視覺、展板版面。", en: "Mascot, key visual, booth layout." } },
+  { date: "2027-09-09", lane: "gate", t: { zh: "只修改，不新增", en: "Revise only" },
+    d: { zh: "freeze 前六週，不再開新章節。", en: "Six weeks before freeze; no new sections." } },
+  { date: "2027-09-16", lane: "deadline", t: { zh: "Expo Booth · Stage Talk", en: "Expo Booth · Stage Talk" },
+    d: { zh: "", en: "" } },
+  { date: "2027-09-30", lane: "gate", t: { zh: "圖定稿，事實凍結", en: "Figures final, facts frozen" },
+    d: { zh: "之後改數字要走審核。", en: "Any later change goes through review." } },
+  { date: "2027-10-07", lane: "deadline", t: { zh: "Safety Form", en: "Safety Form" },
+    d: { zh: "同日：presentation 腳本鎖定。", en: "Same day: presentation script locked." } },
+  { date: "2027-10-21", lane: "deadline", t: { zh: "Wiki freeze", en: "Wiki freeze" },
+    d: { zh: "Wiki、Registry、Software、Judging Form、Attributions。", en: "Wiki, Registry, Software, Judging Form, Attributions." } },
+  { date: "2027-10-28", lane: "deadline", t: { zh: "Presentation Video", en: "Presentation Video" },
+    d: { zh: "", en: "" } },
+  { date: "2027-11-01", lane: "gate", t: { zh: "歸檔與交接", en: "Archive & handover" },
+    d: { zh: "每份 master doc 匯出 PDF，作為下一屆的範本。", en: "Every master doc exported as PDF, next season’s template." } },
+  { date: "2027-11-13", lane: "deadline", t: { zh: "Judging Session", en: "Judging Session" },
+    d: { zh: "", en: "" } }
+];
+
+const RITUALS = [
+  { t: { zh: "每週日：照片歸檔、Discord 匯出", en: "Every Sunday: photos filed, Discord exported" } },
+  { t: { zh: "每月最後一個週六：wiki 日", en: "Last Saturday of each month: wiki day" } }
+];
+
+const FACT_TYPES = [
+  { t: { zh: "數據結果", en: "Results" }, ex: { zh: "ELISA 濃度、活性、生長曲線", en: "ELISA concentrations, activity, growth curves" },
+    l: { zh: "一張圖差了 1000 倍，一組數字修了兩次。", en: "One chart 1000× off; one set of digits fixed twice." } },
+  { t: { zh: "名稱與術語", en: "Names" }, ex: { zh: "BoPEP4、WB800、B. subtilis 斜體、ReLEAF", en: "BoPEP4, WB800, italic B. subtilis, ReLEAF" },
+    l: { zh: "同一個胜肽三種寫法。", en: "One peptide, three spellings." } },
+  { t: { zh: "規格", en: "Specs" }, ex: { zh: "感測器、反應器體積、pH 門檻", en: "Sensors, reactor volume, pH threshold" },
+    l: { zh: "新舊兩份規格文件互相矛盾。", en: "Two spec documents contradicted each other." } },
+  { t: { zh: "主張", en: "Claims" }, ex: { zh: "「已安裝，但未測試」「biostimulant，不是 protectant」", en: "“Fitted, never tested.” “A biostimulant, not a protectant.”" },
+    l: { zh: "最貴的一類：每一條都曾經要開會裁決。", en: "The costliest kind: each one once needed a meeting." } },
+  { t: { zh: "人與日期", en: "People & dates" }, ex: { zh: "合作夥伴、里程碑、誰做了什麼", en: "Partners, milestones, who did what" },
+    l: { zh: "Milestones 與 Attributions 要重新整理一次。", en: "Milestones and Attributions had to be rebuilt." } }
+];
+
+const LINT = [
+  { k: "bad", s: "engineering.html:212", m: { zh: "BoPep4 → BoPEP4", en: "BoPep4 → BoPEP4" } },
+  { k: "bad", s: "results.html:88", m: { zh: "3.2 µg/mL 不在事實表", en: "3.2 µg/mL not in the fact sheet" } },
+  { k: "bad", s: "hardware.html:40", m: { zh: "引用了已被取代的規格", en: "cites a superseded spec" } },
+  { k: "ok", s: "68 pages", m: { zh: "其餘事實引用全部相符", en: "every other fact reference matches" } }
+];
+
+const STANDARDS = [
+  { t: { zh: "頁面範本", en: "Page template" },
+    now: { zh: "24 頁在年中才收斂成 banner + abstract。", en: "24 pages converged on banner + abstract mid-season." },
+    next: { zh: "banner、abstract、章節、參考文獻、致謝，第一天固定。", en: "Banner, abstract, sections, references, thanks: fixed on day one." } },
+  { t: { zh: "Figure 元件", en: "Figure component" },
+    now: { zh: "超過 15 種寫法；圖說格式不一。", en: "Over 15 markups; captions in every style." },
+    next: { zh: "一個元件；「Figure N. 標題。說明（n、統計）」由登錄表產生。", en: "One component; “Figure N. Title. Detail (n, stats)” from the register." } },
+  { t: { zh: "設計系統", en: "Design system" },
+    now: { zh: "約 15 種 CSS 組合、23 段頁內樣式。", en: "About 15 stylesheet mixes, 23 inline styles." },
+    next: { zh: "一套 tokens 與元件，所有頁面載入同一組。", en: "One set of tokens and components on every page." } },
+  { t: { zh: "資料表", en: "Data tables" },
+    now: { zh: "Measurement 49 個、Engineering 30 個，全部手寫。", en: "49 on Measurement, 30 on Engineering, all hand-written." },
+    next: { zh: "Sheet 匯出 CSV，自動變成表格。Parts 頁已經這樣做。", en: "Sheets to CSV to table. The Parts page already works this way." } },
+  { t: { zh: "設計循環", en: "Engineering cycles" },
+    now: { zh: "4 條軌道、25 次迭代畫在一張板上。", en: "Four tracks, 25 iterations on one board." },
+    next: { zh: "一張循環登錄表，頁面由表產生。", en: "One cycle register; the page is generated." } },
+  { t: { zh: "筆記本", en: "Notebooks" },
+    now: { zh: "年底才從各種匯出整理成頁面。", en: "Assembled at season’s end from mixed exports." },
+    next: { zh: "固定範本，腳本直接產生 notebook 頁面。", en: "Fixed templates; a script builds the notebook pages." } },
+  { t: { zh: "參考文獻", en: "References" },
+    now: { zh: "只有少數幾頁格式一致。", en: "Consistent on only a few pages." },
+    next: { zh: "一個 Zotero 群組庫，一種引用格式。", en: "One Zotero group library, one citation style." } },
+  { t: { zh: "雙語", en: "Bilingual pages" },
+    now: { zh: "中英頁面是兩份手動同步的 HTML。", en: "Chinese and English pages were two hand-synced files." },
+    next: { zh: "同一個來源，翻譯寫在欄位裡。", en: "One source with translation fields." } }
+];
