@@ -15,6 +15,7 @@
     <a class="nav__brand" href="#top">GEMS iGEM System</a>
     <nav class="nav__links">
       <a href="#problems" data-i18n="nav.problems"></a>
+      <a href="#audit" data-i18n="nav.audit"></a>
       <a href="#architecture" data-i18n="nav.arch"></a>
       <a href="#depth" data-i18n="nav.depth"></a>
       <a href="#flow" data-i18n="nav.flow"></a>
@@ -37,8 +38,8 @@
   <p class="lede" data-i18n="hero.sub"></p>
   <div class="stats">
     <div><b>50</b><span data-i18n="stat.people"></span></div>
-    <div><b>6</b><span data-i18n="stat.streams"></span></div>
-    <div><b>6</b><span data-i18n="stat.registers"></span></div>
+    <div><b>5</b><span data-i18n="stat.streams"></span></div>
+    <div><b>1</b><span data-i18n="stat.registers"></span></div>
     <div><b>12</b><span data-i18n="stat.deadlines"></span></div>
   </div>
   <div class="hero__orbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -50,6 +51,21 @@
     <h2 class="headline" data-i18n="prob.title"></h2>
     <p class="lede" data-i18n="prob.sub"></p>
     <ol class="problems" id="problems-list"></ol>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="audit">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="audit.eyebrow"></p>
+    <h2 class="headline" data-i18n="audit.title"></h2>
+    <p class="lede" data-i18n="audit.sub"></p>
+    <div class="astats" id="astats"></div>
+    <div class="agrid">
+      <div class="acard acard--wide"><h3 data-i18n="audit.photos"></h3><div id="aphotos"></div></div>
+      <div class="acard"><h3 data-i18n="audit.size"></h3><div id="asize"></div></div>
+      <div class="acard"><h3 data-i18n="audit.hw"></h3><ul class="alist" id="ahw"></ul></div>
+      <div class="acard acard--wide"><h3 data-i18n="audit.keep"></h3><ul class="alist alist--ok" id="akeep"></ul></div>
+    </div>
   </div>
 </section>
 
@@ -76,6 +92,7 @@
     <h2 class="headline" data-i18n="depth.title"></h2>
     <p class="lede" data-i18n="depth.sub"></p>
     <div class="layers" id="layers"></div>
+    <div class="template"><h3 class="drive__h" data-i18n="depth.template"></h3><div class="template__row" id="template"></div></div>
     <div class="states">
       <ol id="states"></ol>
       <p class="note" data-i18n="depth.states"></p>

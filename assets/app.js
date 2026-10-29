@@ -11,7 +11,7 @@
   const t = k => T[lang][k] || "";
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-  const state = { node: "factsheet", hover: null, folder: "d01", role: null, mark: 0 };
+  const state = { node: "factsheet", hover: null, folder: "d33", role: null, mark: 0 };
 
   // ---------- language ----------
   function applyStatic() {
@@ -23,6 +23,7 @@
   function renderAll() {
     applyStatic();
     renderProblems();
+    renderAudit();
     renderGraph();
     renderDepth();
     renderFlow();
@@ -41,6 +42,22 @@
         <h4>${esc(L(p.t))}</h4>
         <p>${esc(L(p.d))}</p>
       </li>`).join("");
+  }
+
+  // ---------- audit ----------
+  function renderAudit() {
+    const nf = n => n.toLocaleString("en-US");
+    $("#astats").innerHTML = AUDIT.stats.map((s, i) => `
+      <div class="astat reveal" style="--d:${(i % 4) * 50}ms"><b>${esc(s.n)}</b><span>${esc(L(s.t))}</span></div>`).join("");
+    const max = Math.max(...AUDIT.photos.map(p => p.n)), total = AUDIT.photos.reduce((a, p) => a + p.n, 0);
+    $("#aphotos").innerHTML = AUDIT.photos.map(p => `
+      <div class="bar"><span class="bar__k">${esc(p.k)}</span><span class="bar__t"><i style="width:${p.n / max * 100}%"></i></span><span class="bar__n">${nf(p.n)}</span></div>`).join("") +
+      `<p class="acard__note"><b>${nf(total)}</b> ${esc(t("audit.photos.note"))}</p>`;
+    const gb = AUDIT.size.reduce((a, x) => a + x.gb, 0);
+    $("#asize").innerHTML = `<div class="stack">${AUDIT.size.map(x => `<i style="flex:${x.gb};background:var(--${x.c})"></i>`).join("")}</div>
+      <ul class="legend">${AUDIT.size.map(x => `<li><i style="background:var(--${x.c})"></i>${esc(L(x.k))}<b>${x.gb} GB</b></li>`).join("")}</ul>`;
+    $("#ahw").innerHTML = AUDIT.hw.map(h => `<li>${esc(h)}</li>`).join("");
+    $("#akeep").innerHTML = AUDIT.keep.map(k => `<li>${esc(L(k))}</li>`).join("");
   }
 
   // ---------- architecture graph ----------
@@ -133,6 +150,7 @@
     $("#layers").innerHTML = LAYERS.map((l, i) => `
       <div class="layer reveal" style="--i:${i};--d:${i * 90}ms"><span class="layer__n">${l.n}</span>
         <div><h4>${esc(L(l.name))}</h4><p>${esc(L(l.d))}</p></div></div>`).join("");
+    $("#template").innerHTML = TEAM_TEMPLATE.map(x => `<span>${esc(x)}</span>`).join("");
     $("#states").innerHTML = STATES.map(s => `<li><b>${esc(L(s.name))}</b><span>${esc(L(s.d))}</span></li>`).join("");
 
     const group = d => DRIVE.filter(f => f.drive === d).map(f => `
@@ -141,11 +159,13 @@
         <span>${esc(f.name)}</span></button>
         ${f.kids && f.id === state.folder ? `<ul class="tree__kids">${f.kids.map(k => `<li>${esc(k)}</li>`).join("")}</ul>` : ""}
       </li>`).join("");
-    $("#tree").innerHTML = `<li class="tree__drive">ReLEAF 2027</li>${group("team")}<li class="tree__drive tree__drive--ops">ReLEAF Ops</li>${group("ops")}`;
+    $("#tree").innerHTML = `<li class="tree__drive">GEMS iGEM 2027</li>${group("team")}<li class="tree__drive tree__drive--ops">ReLEAF Ops</li>${group("ops")}<li class="tree__drive tree__drive--ops">${lang === "zh" ? "Drive 以外" : "Outside Drive"}</li>${group("out")}`;
     $$("#tree .tree__f").forEach(b => b.addEventListener("click", () => { state.folder = b.dataset.folder; renderDepth(); }));
     const f = DRIVE.find(x => x.id === state.folder);
-    $("#tree-panel").innerHTML = `<div class="panel__head"><span class="panel__kind">${f.drive === "ops" ? "ReLEAF Ops" : "ReLEAF 2027"}</span><h3>${esc(f.name)}</h3></div>
-      <dl>${row(t("lbl.holds"), L(f.holds))}${row(t("lbl.edit"), L(f.edit))}${row(t("lbl.rule"), L(f.rule))}</dl>`;
+    const driveName = { team: "GEMS iGEM 2027", ops: "ReLEAF Ops", out: lang === "zh" ? "Drive 以外" : "Outside Drive" }[f.drive];
+    $("#tree-panel").innerHTML = `<div class="panel__head"><span class="panel__kind">${esc(driveName)}</span><h3>${esc(f.name)}</h3></div>
+      <dl>${row(t("lbl.holds"), L(f.holds))}${row(t("lbl.edit"), L(f.edit))}${row(t("lbl.rule"), L(f.rule))}</dl>
+      ${f.from ? `<div class="from"><span>${esc(t("lbl.from"))}</span><ul>${f.from.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>` : ""}`;
   }
 
   // ---------- flow ----------
@@ -162,7 +182,7 @@
     const board = $("#board");
     $$(".tile", board).forEach(n => n.remove());
     board.insertAdjacentHTML("beforeend", FLOW_TILES.map(tl => `
-      <div class="tile${tl.out ? " tile--out" : ""}${tl.wide ? " tile--wide" : ""}" data-tile="${tl.id}">
+      <div class="tile${tl.out ? " tile--out" : ""}" data-tile="${tl.id}"${tl.span ? ` style="--span:${tl.span}"` : ""}>
         <span class="tile__name">${esc(L(tl.name))}</span>
         ${tl.owners ? `<span class="tile__owners">${tl.owners.map(o => `<span class="chip" data-role="${o}" style="--c:var(--${roleById[o].color})"><i></i>${esc(L(roleById[o].name))}</span>`).join("")}</span>` : ""}
       </div>`).join(""));
