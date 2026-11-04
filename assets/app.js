@@ -28,6 +28,7 @@
     renderDepth();
     renderFlow();
     renderPeople();
+    renderAdvisor();
     renderTimeline();
     renderFacts();
     renderStandards();
@@ -302,9 +303,9 @@
       <div class="roles__tier"><h4>${esc(name)}</h4><div class="roles__grid">
       ${ROLES.filter(r => r.tier === tier).map(r => `
         <button class="role${state.role === r.id ? " is-sel" : ""}" data-role="${r.id}" style="--c:var(--${r.color})">
-          <span class="role__top"><span class="role__name">${esc(L(r.name))}</span><span class="role__n">×${r.count}</span></span>
+          <span class="role__top"><span class="role__name">${esc(L(r.name))}</span><span class="role__n">×${r.countLabel || r.count}</span></span>
           <span class="role__d">${esc(L(r.d))}</span>
-          <span class="role__h">${esc(t("lbl.time"))} ${r.hrs}</span>
+          <span class="role__h">${r.hrsLabel ? esc(L(r.hrsLabel)) : `${esc(t("lbl.time"))} ${r.hrs}`}</span>
         </button>`).join("")}</div></div>`).join("");
     $$("#roles .role").forEach(b => b.addEventListener("click", () => {
       state.role = state.role === b.dataset.role ? null : b.dataset.role;
@@ -320,7 +321,7 @@
   }
 
   // ---------- timeline ----------
-  const T0 = new Date("2026-12-01"), T1 = new Date("2027-12-01");
+  const T0 = new Date("2026-11-01"), T1 = new Date("2027-12-01");
   const pct = d => ((new Date(d) - T0) / (T1 - T0)) * 100;
   const fmt = d => {
     const x = new Date(d);
@@ -338,21 +339,33 @@
     return out;
   }
 
-  function renderTimeline() {
-    const months = Array.from({ length: 12 }, (_, i) => {
-      const d = new Date(2026, 11 + i, 1);
+  function monthsHTML() {
+    return Array.from({ length: 13 }, (_, i) => {
+      const d = new Date(2026, 10 + i, 1);
       const label = lang === "zh" ? `${d.getMonth() + 1}月` : d.toLocaleDateString("en-GB", { month: "short" });
       return `<span style="left:${pct(d)}%">${label}</span>`;
     }).join("");
+  }
+
+  function renderTimeline() {
+    const months = monthsHTML();
 
     const lanes = ["deadline", "gate"].map(lane => {
       const items = TIMELINE.map((m, i) => ({ ...m, i })).filter(m => m.lane === lane);
       return `<div class="tl__lane tl__lane--${lane}" style="--rows:1">
         <span class="tl__lname">${esc(t("lane." + lane))}</span>
         ${items.map(m => `<button class="tl__m${state.mark === m.i ? " is-sel" : ""}" data-mark="${m.i}" style="left:${pct(m.date)}%;--row:0">
-          <i></i><span><em>${fmt(m.date)}</em>${esc(L(m.t))}</span></button>`).join("")}
+          <i></i><span><em>${m.dl ? esc(L(m.dl)) : fmt(m.date)}</em>${esc(L(m.t))}</span></button>`).join("")}
       </div>`;
     }).join("");
+
+    const advItems = TIMELINE.map((m, i) => ({ ...m, i })).filter(m => m.lane === "adv");
+    const advLane = `<div class="tl__lane tl__lane--adv" style="--rows:1">
+      <span class="tl__lname">${esc(t("lane.adv"))}</span>
+      ${ADV_STAGES.map((s, i) => `<a class="tl__bar" href="#advisor" data-stage="${i}" style="left:${pct(s.start)}%;width:${pct(s.after || s.end) - pct(s.start)}%;--shade:${s.shade}">${s.id} ${esc(L(s.role))}</a>`).join("")}
+      ${advItems.map(m => `<button class="tl__m${state.mark === m.i ? " is-sel" : ""}" data-mark="${m.i}" style="left:${pct(m.date)}%;--row:0">
+        <i></i><span><em>${esc(L(m.dl))}</em>${esc(L(m.t))}</span></button>`).join("")}
+    </div>`;
 
     const ritual = `<div class="tl__lane tl__lane--ritual" style="--rows:1">
       <span class="tl__lname">${esc(t("lane.ritual"))}</span>
@@ -360,19 +373,20 @@
       <span class="tl__rtext">${RITUALS.map(r => esc(L(r.t))).join("　·　")}</span>
     </div>`;
 
-    $("#tl").innerHTML = `<div class="tl__in"><div class="tl__months">${months}</div>${lanes}${ritual}</div>`;
+    $("#tl").innerHTML = `<div class="tl__in"><div class="tl__months">${months}</div>${lanes}${advLane}${ritual}</div>`;
     layoutTimeline();
     $$("#tl .tl__m").forEach(b => b.addEventListener("click", () => {
       state.mark = +b.dataset.mark;
       $$("#tl .tl__m").forEach(x => x.classList.toggle("is-sel", x === b));
       renderMark();
     }));
+    $$("#tl .tl__bar").forEach(a => a.addEventListener("click", () => { adv.stage = +a.dataset.stage; renderAdvisor(); }));
     renderMark();
   }
 
   // Stack labels into rows by their measured width; labels near the right edge sit left of their dot.
   function layoutTimeline() {
-    $$("#tl .tl__lane--deadline, #tl .tl__lane--gate").forEach(lane => {
+    $$("#tl .tl__lane--deadline, #tl .tl__lane--gate, #tl .tl__lane--adv").forEach(lane => {
       const W = lane.clientWidth, gap = 14;
       const rows = [];
       $$(".tl__m", lane).forEach(b => {
@@ -396,8 +410,170 @@
     const lane = t("lane." + m.lane);
     const x = new Date(m.date);
     const year = x.getFullYear();
-    $("#tl-panel").innerHTML = `<div class="panel__head panel__head--${m.lane}"><span class="panel__kind">${esc(lane)} · ${fmt(m.date)} ${year}</span>
+    $("#tl-panel").innerHTML = `<div class="panel__head panel__head--${m.lane}"><span class="panel__kind">${esc(lane)} · ${m.dl ? esc(L(m.dl)) : `${fmt(m.date)} ${year}`}</span>
       <h3>${esc(L(m.t))}</h3></div>${L(m.d) ? `<p class="panel__p">${esc(L(m.d))}</p>` : ""}`;
+  }
+
+  // ---------- advisor ----------
+  const adv = { stage: 0, node: "review", view: "instructor", row: 0, n: 8 };
+  const tbdLabel = () => (lang === "zh" ? "待決定" : "TBD");
+  // Escaped text, with [T3] turned into a link to the decision list and newlines kept.
+  const tx = v => esc(L(v)).replace(/\[T(\d+)\]/g, (_, n) => `<a class="tbd" href="#adv-tbd">${tbdLabel()} ${n}</a>`).replace(/\n/g, "<br>");
+  const rowHTML = (label, html) => `<div class="kv"><dt>${esc(label)}</dt><dd>${html}</dd></div>`;
+  const zh = (a, b) => (lang === "zh" ? a : b);
+
+  function renderAdvisor() {
+    $("#adv-floor").innerHTML = ADV_FLOOR.map(f => `<div class="astat"><b>${esc(L(f.n))}</b><span>${esc(L(f.d))}</span></div>`).join("");
+    renderAdvStages();
+    renderAdvMap();
+    $("#adv-tree").textContent = ADV_TREE;
+    renderAdvState();
+    renderAdvMakeup();
+    renderAdvStrike();
+    renderAdvHub();
+    renderAdvSchema();
+    renderAdvVis();
+    renderAdvLoad();
+    $("#adv-tbd-list").innerHTML = ADV_TBD.map(x => `<li>${esc(L(x))}</li>`).join("");
+  }
+
+  function renderAdvStages() {
+    const marks = [
+      ...TIMELINE.filter(m => m.lane === "deadline" && ["Wiki freeze", "Judging Session"].includes(m.t.en)),
+      ...TIMELINE.filter(m => m.lane === "adv" && m.t.en === "Roster review")
+    ];
+    $("#adv-track").innerHTML = `<div class="advtrack__in">
+      <div class="tl__months">${monthsHTML()}</div>
+      <div class="advtrack__bars">${ADV_STAGES.map((s, i) => `
+        <button class="tl__bar${adv.stage === i ? " is-sel" : ""}" data-stage="${i}" style="left:${pct(s.start)}%;width:${pct(s.end) - pct(s.start)}%;--shade:${s.shade}">${s.id}</button>
+        ${s.after ? `<span class="tl__bar tl__bar--after" style="left:${pct(s.end)}%;width:${pct(s.after) - pct(s.end)}%;--shade:${s.shade}"></span>` : ""}`).join("")}</div>
+      <div class="advtrack__marks">${marks.map(m => `<span class="${pct(m.date) > 90 ? "is-flip" : ""}" style="left:${pct(m.date)}%"><i></i>${esc(L(m.t))}</span>`).join("")}</div>
+    </div>`;
+    $("#adv-stages").innerHTML = ADV_STAGES.map((s, i) => `
+      <button class="advstage${adv.stage === i ? " is-sel" : ""}" data-stage="${i}" style="--shade:${s.shade}">
+        <span class="advstage__d">${esc(L(s.dates))}</span>
+        <span class="advstage__n">${i + 1} ${esc(L(s.name))}</span>
+        <span class="advstage__r">${esc(L(s.role))}</span>
+      </button>`).join("");
+    $$("#adv-track [data-stage], #adv-stages [data-stage]").forEach(b => b.addEventListener("click", () => { adv.stage = +b.dataset.stage; renderAdvStages(); }));
+    const s = ADV_STAGES[adv.stage];
+    $("#adv-stage-panel").innerHTML = `<div class="panel__head" style="--c:var(--teal)">
+        <span class="panel__kind">${zh("階段", "Stage")} ${adv.stage + 1} · ${esc(L(s.dates))}</span>
+        <h3>${esc(L(s.name))} · ${esc(L(s.role))}</h3></div>
+      <dl>
+        ${rowHTML(zh("團隊在做什麼", "What the team does"), tx(s.team))}
+        ${rowHTML(zh("具名產出", "Named output"), tx(s.output))}
+        ${rowHTML(zh("通過標準", "Pass standard"), tx(s.pass))}
+        ${rowHTML(zh("補件期限", "Make-up due"), tx(s.makeup))}
+        ${rowHTML(zh("放哪裡", "Goes in"), `<code>60 Advisors/A01/${esc(s.folder)}</code>`)}
+        ${s.extra ? rowHTML(zh("另外", "Also"), tx(s.extra)) : ""}
+      </dl>`;
+  }
+
+  function renderAdvMap() {
+    const cols = [["duty", "duty"], ["loc", "loc"], ["file", "file"], ["tpl", "tpl"], ["who", "who"], ["ver", "ver"], ["due", "due"], ["row", "row"]];
+    const mono = { loc: 1, file: 1, row: 1 };
+    const cell = (r, k) => `<td data-label="${esc(t("adv.th." + k))}"${k === "duty" ? ' class="dm__duty"' : ""}>${mono[k] ? `<code>${tx(r[k])}</code>` : tx(r[k])}</td>`;
+    $("#adv-map").innerHTML = `<div class="dmwrap"><table class="dm"><thead><tr>${cols.map(([k]) => `<th>${esc(t("adv.th." + k))}</th>`).join("")}</tr></thead>
+      ${ADV_MAP_GROUPS.map(g => `<tbody><tr class="dm__g"><th colspan="${cols.length}">${esc(L(g.name))}</th></tr>
+        ${ADV_MAP.filter(r => r.g === g.id).map(r => `<tr>${cols.map(([k]) => cell(r, k)).join("")}</tr>`).join("")}</tbody>`).join("")}
+    </table></div>`;
+  }
+
+  function renderAdvState() {
+    const arrow = lbl => `<span class="fsm__arrow">${lbl ? `<em>${esc(L(lbl))}</em>` : ""}<svg viewBox="0 0 24 10" aria-hidden="true"><path d="M0 5h22M18 1l4 4-4 4"/></svg></span>`;
+    $("#adv-state").innerHTML = ADV_STATE_LANES.map(l => `<div class="fsm"><h4>${esc(L(l.name))}</h4><div class="fsm__row">
+      ${l.nodes.map((n, i) => `<button class="fsm__n${n.tbd ? " is-tbd" : ""}${n.end ? " is-end" : ""}${adv.node === n.id ? " is-sel" : ""}" data-node="${n.id}">${esc(L(n.t))}</button>${i < l.nodes.length - 1 ? arrow(n.to) : ""}`).join("")}
+    </div></div>`).join("");
+    $$("#adv-state [data-node]").forEach(b => b.addEventListener("click", () => { adv.node = b.dataset.node; renderAdvState(); }));
+    const node = ADV_STATE_LANES.flatMap(l => l.nodes).find(n => n.id === adv.node);
+    $("#adv-state-panel").innerHTML = `<div class="panel__head" style="--c:var(--accent)"><h3>${esc(L(node.t))}</h3></div><p class="panel__p">${tx(ADV_STATE_INFO[adv.node].d)}</p>`;
+  }
+
+  function renderAdvMakeup() {
+    const th = t("adv.makeup.th");
+    $("#adv-makeup").innerHTML = `<div class="dmwrap"><table class="dm dm--small"><thead><tr>${th.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>
+      ${ADV_MAKEUP.map(m => `<tr><td data-label="${esc(th[0])}" class="dm__duty">${m.s}</td><td data-label="${esc(th[1])}">${tx(m.end)}</td><td data-label="${esc(th[2])}">${tx(m.due)}</td><td data-label="${esc(th[3])}">${tx(m.s === "S5" ? ADV_MAKEUP_FAIL5 : ADV_MAKEUP_FAIL)}</td></tr>`).join("")}
+    </tbody></table></div>`;
+  }
+
+  function renderAdvStrike() {
+    const box = (k, cls) => `<div class="acard ${cls}"><h3>${esc(t("adv.strike." + k))}</h3><ul class="advlist">${ADV_STRIKE[k].map(x => `<li>${tx(x)}</li>`).join("")}</ul></div>`;
+    $("#adv-strike").innerHTML = box("on", "") + box("off", "") + box("how", "acard--wide");
+  }
+
+  const HUB_VIEWS = [["instructor", { zh: "Instructor", en: "Instructor" }], ["self", { zh: "Advisor A 本人", en: "Advisor A (self)" }], ["team", { zh: "2027 隊員", en: "2027 team" }]];
+
+  function renderAdvHub() {
+    $("#adv-hub-tabs").innerHTML = HUB_VIEWS.map(([id, n]) => `<button role="tab" data-view="${id}" aria-selected="${adv.view === id}">${esc(L(n))}</button>`).join("");
+    $$("#adv-hub-tabs button").forEach(b => b.addEventListener("click", () => {
+      adv.view = b.dataset.view;
+      if (adv.view === "self") adv.row = 0;
+      renderAdvHub();
+    }));
+    const th = t("adv.hub.th");
+    const full = adv.view !== "team";
+    const rows = ADV_SAMPLE.map((r, i) => ({ ...r, i })).filter(r => adv.view !== "self" || r.i === 0);
+    const glyph = { pass: ["✓", "is-pass"], now: ["●", "is-now"], fix: [zh("補", "M"), "is-fix"], fail: ["✗", "is-fail"], "": ["·", ""] };
+    const rep = r => ({ ok: zh("已確認", "Confirmed"), due: zh("待確認", "To confirm"), late: zh("逾期 6 天", "6 days late") }[r.rep]);
+    const head = [th.name, th.group, th.scope, ...(full ? [th.stages, th.hours, th.rate, th.report, th.strikes] : []), th.latest];
+    $("#adv-hub").innerHTML = `${adv.view === "instructor" ? `<p class="hub__queue">${esc(t("adv.hub.queue"))}</p>` : ""}
+      <div class="hubscroll"><table class="hubt"><thead><tr>${head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>
+      ${rows.map(r => `<tr class="${adv.row === r.i ? "is-sel" : ""}" data-row="${r.i}">
+        <td><button data-row="${r.i}">${esc(r.name)}</button>${full && r.sup ? `<small>Supporting list</small>` : ""}</td>
+        <td>${r.group}</td><td>${esc(L(r.scope))}</td>
+        ${full ? `<td class="hubt__st">${r.st.map(x => `<i class="${glyph[x][1]}">${glyph[x][0]}</i>`).join("")}</td>
+        <td class="${r.h < 8 ? "is-warn" : ""}">${r.h} / 8 h</td>
+        <td class="${r.rate < 50 ? "is-warn" : ""}">${r.rate}%</td>
+        <td class="${r.rep === "late" ? "is-warn" : ""}">${rep(r)}</td>
+        <td>${r.strikes} / 3</td>` : ""}
+        <td><code>${esc(r.latest.f)}</code> <small>${r.latest.d}</small></td>
+      </tr>`).join("")}
+      </tbody></table></div>
+      <p class="hub__note">${full ? esc(t("adv.hub.legend")) + "　" : ""}${esc(t("adv.hub.pick"))}</p>`;
+    $$("#adv-hub tr[data-row]").forEach(tr => tr.addEventListener("click", () => { adv.row = +tr.dataset.row; renderAdvHub(); }));
+    const r = ADV_SAMPLE[adv.row];
+    const check = (ok, label) => `<li class="${ok ? "is-ok" : "is-miss"}">${esc(label)}</li>`;
+    $("#adv-hub-panel").innerHTML = `<div class="panel__head" style="--c:var(--gold)"><span class="panel__kind">${zh("示範資料", "Sample data")} · ${zh("2027 年 5 月", "May 2027")}</span><h3>${esc(r.name)}</h3></div>
+      <dl>${rowHTML(th.scope, esc(L(r.scope)))}
+      ${rowHTML(th.latest, `<code>${esc(r.latest.f)}</code>`)}
+      ${full ? rowHTML(zh("本月底線", "Floor this month"), `<ul class="hubcheck">
+        ${check(r.h >= 8, zh(`實體 ${r.h} / 8 小時`, `On site ${r.h} / 8 hours`))}
+        ${check(r.sessions >= 2, zh(`組別會議 ${r.sessions} 次（至少 2）`, `Group meetings ${r.sessions} (at least 2)`))}
+        ${check(r.rate >= 50, zh(`累計出席率 ${r.rate}%（至少 50%）`, `Attendance to date ${r.rate}% (at least 50%)`))}
+        ${check(r.self, zh("自主會議紀錄", "Self-run meeting minutes"))}
+        ${check(r.meet, zh("Advisor 月會", "Advisor meeting"))}
+        ${check(r.rep !== "late", zh(`月報：${rep(r)}`, `Report: ${rep(r)}`))}
+      </ul>`) : rowHTML(zh("其他欄位", "Other columns"), esc(zh("隊員看不到狀態、時數與 strike。", "The team does not see status, hours or strikes.")))}
+      </dl>`;
+  }
+
+  function renderAdvSchema() {
+    $("#adv-schema").innerHTML = ADV_SCHEMA.map(x => `<div class="acard"><h3><code>${esc(x.t)}</code></h3><p class="acard__note">${esc(L(x.k))}</p><p class="advschema__c">${esc(x.c)}</p></div>`).join("");
+  }
+
+  function renderAdvVis() {
+    const mark = { y: "●", s: "○", w: zh("書面", "Written"), n: "–" };
+    $("#adv-vis").innerHTML = `<div class="hubscroll"><table class="hubt hubt--vis"><thead><tr><th></th>${ADV_VIS_COLS.map(c => `<th>${esc(L(c))}</th>`).join("")}</tr></thead><tbody>
+      ${ADV_VIS.map(r => `<tr><td>${esc(L(r.f))}</td>${[...r.v].map(c => `<td class="v-${c}">${mark[c]}</td>`).join("")}</tr>`).join("")}
+    </tbody></table></div>`;
+  }
+
+  function renderAdvLoad() {
+    $("#adv-load-tabs").innerHTML = [5, 8, 10].map(n => `<button role="tab" data-n="${n}" aria-selected="${adv.n === n}">${n} ${zh("位 advisor", "advisors")}</button>`).join("");
+    $$("#adv-load-tabs button").forEach(b => b.addEventListener("click", () => { adv.n = +b.dataset.n; renderAdvLoad(); }));
+    const th = t("adv.load.th");
+    const rows = ADV_LOAD.map(x => { const c = x.count(adv.n); return { t: x.t, c, min: x.min, h: c * x.min / 60 }; });
+    const total = rows.reduce((a, x) => a + x.h, 0);
+    const n1 = v => (Math.round(v * 10) / 10).toString();
+    $("#adv-load").innerHTML = `<div class="dmwrap"><table class="dm dm--small"><thead><tr>${th.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>
+      ${rows.map(r => `<tr><td data-label="${esc(th[0])}" class="dm__duty">${esc(L(r.t))}</td><td data-label="${esc(th[1])}">${r.c}</td><td data-label="${esc(th[2])}">${r.min} ${zh("分鐘", "min")}</td><td data-label="${esc(th[3])}">${n1(r.h)} h</td></tr>`).join("")}
+    </tbody></table></div>
+    <div class="advload">
+      <div class="astat"><b>${n1(total)} h</b><span>${esc(t("adv.load.total"))}</span></div>
+      <div class="astat"><b>${n1(total / 52 / 2)} h</b><span>${esc(t("adv.load.week"))}</span></div>
+      <div class="astat"><b>${n1(adv.n * 30 / 60)} h</b><span>${esc(t("adv.load.peak"))}</span></div>
+    </div>`;
   }
 
   // ---------- facts ----------
