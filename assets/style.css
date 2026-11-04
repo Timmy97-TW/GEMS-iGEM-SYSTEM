@@ -807,3 +807,10 @@ h4 { font-size: 19px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2
   .yr__links path { transition: none; }
   .fgate { animation: none; }
 }
+
+/* Twelve nav links need more room than the old 1024 cap. */
+.nav__in { max-width: 1120px; }
+@media (max-width: 1120px) {
+  .nav__links { display: none; }
+  .lang { margin-left: auto; }
+}
