@@ -30,6 +30,7 @@
     renderDepth();
     renderYear();
     renderFlow();
+    renderResearch();
     renderPhoto();
     renderPeople();
     if (window.Village) window.Village.render(lang);
@@ -674,6 +675,14 @@
       return `<section class="rcg"><h4 class="rcg__h" style="--c:var(--${PCOLOR[g]})"><i></i>${esc(groupName(g))}<small>${esc(blurb)}</small></h4><div class="rcg__grid">${rs.map(roleCard).join("")}</div></section>`;
     }).join("") : `<p class="note">${esc(t("ppl.none"))}</p>`;
     $$("#ppl-list [data-vg]").forEach(b => b.addEventListener("click", () => window.Village.focusRole(b.dataset.vg)));
+  }
+
+  // ---------- research: seven steps, three sheets, three rules ----------
+  function renderResearch() {
+    $("#res-steps").innerHTML = simpleTable(t("res.steps.th"), RESEARCH_STEPS.map(x => [x.step, x.what, x.min, x.who]));
+    $("#res-sheets").innerHTML = simpleTable(t("res.sheets.th"), RESEARCH_SHEETS.map(x => [x.sheet, x.reader, x.when, x.why]));
+    $("#res-rules").innerHTML = RESEARCH_RULES.map((x, i) => `<li><span class="sysrules__n">${i + 1}</span><div><h4>${esc(L(x.t))}</h4><p>${esc(L(x.d))}</p></div></li>`).join("");
+    $("#res-rights").innerHTML = RESEARCH_RIGHTS.map(x => `<li>${esc(L(x))}</li>`).join("");
   }
 
   // ---------- photo system ----------
