@@ -22,6 +22,7 @@
       <a href="#year" data-i18n="nav.year"></a>
       <a href="#flow" data-i18n="nav.flow"></a>
       <a href="#people" data-i18n="nav.people"></a>
+      <a href="#village" data-i18n="nav.village"></a>
       <a href="#advisor" data-i18n="nav.advisor"></a>
       <a href="#timeline" data-i18n="nav.time"></a>
       <a href="#facts" data-i18n="nav.facts"></a>
@@ -40,7 +41,7 @@
   <h1 class="display" data-i18n="hero.title"></h1>
   <p class="lede" data-i18n="hero.sub"></p>
   <div class="stats">
-    <div><b>≈28</b><span data-i18n="stat.people"></span></div>
+    <div><b>≈30</b><span data-i18n="stat.people"></span></div>
     <div><b>17</b><span data-i18n="stat.streams"></span></div>
     <div><b>3</b><span data-i18n="stat.registers"></span></div>
     <div><b>36</b><span data-i18n="stat.deadlines"></span></div>
@@ -198,14 +199,59 @@
   </div>
 </section>
 
-<section class="sec sec--alt" id="people">
+<section class="sec sec--alt" id="photo">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="ph.eyebrow"></p>
+    <h2 class="headline" data-i18n="ph.title"></h2>
+    <p class="lede" data-i18n="ph.sub"></p>
+    <h3 class="adv__h" data-i18n="ph.flow"></h3>
+    <ol class="ph__steps" id="ph-steps"></ol>
+    <h3 class="adv__h" data-i18n="ph.name"></h3>
+    <div id="ph-name"></div>
+    <div class="ph__grid">
+      <div class="acard"><h3 data-i18n="ph.home"></h3><dl class="ph__dl" id="ph-home"></dl></div>
+      <div class="acard"><h3 data-i18n="ph.duty"></h3><dl class="ph__dl" id="ph-duty"></dl></div>
+    </div>
+    <h3 class="adv__h" data-i18n="ph.rules"></h3>
+    <ul class="alist alist--ok" id="ph-rules"></ul>
+    <p class="note"><button class="rc__go" id="ph-village"></button></p>
+  </div>
+</section>
+
+<section class="sec" id="people">
   <div class="wrap">
     <p class="eyebrow" data-i18n="ppl.eyebrow"></p>
     <h2 class="headline" data-i18n="ppl.title"></h2>
     <p class="lede" data-i18n="ppl.sub"></p>
-    <div class="crowd" id="crowd"></div>
-    <div class="roles" id="roles"></div>
+    <p class="ptag" id="ppl-tag"></p>
+    <div class="crowd crowd--4" id="crowd"></div>
+    <div class="rules5" id="ppl-rules"></div>
+    <div class="pl">
+      <h3 class="adv__h" data-i18n="ppl.load"></h3>
+      <p class="adv__p" data-i18n="ppl.load.sub"></p>
+      <div class="pl__chart" id="ppl-load"></div>
+    </div>
+    <h3 class="adv__h" data-i18n="ppl.cat"></h3>
+    <div class="pp__bar">
+      <div class="pp__tabs" id="ppl-tabs"></div>
+      <input class="pp__q" id="ppl-q" type="search" autocomplete="off">
+    </div>
+    <div id="ppl-list"></div>
     <p class="note" data-i18n="ppl.note"></p>
+    <h3 class="adv__h" id="ppl-tbd-h" data-i18n="ppl.tbd"></h3>
+    <ol class="advtbd" id="ppl-tbd"></ol>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="village">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="vg.eyebrow"></p>
+    <h2 class="headline" data-i18n="vg.title"></h2>
+    <p class="lede" data-i18n="vg.sub"></p>
+    <p class="ptag" data-i18n="vg.tag"></p>
+  </div>
+  <div class="wrap wrap--wide wrap--vg">
+    <div class="vg" id="vg-root"></div>
   </div>
 </section>
 
@@ -314,6 +360,7 @@
 <footer class="foot"><p data-i18n="foot.line"></p></footer>
 
 <script src="assets/data.js"></script>
+<script src="assets/village.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

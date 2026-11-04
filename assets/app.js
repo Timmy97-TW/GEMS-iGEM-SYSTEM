@@ -30,7 +30,9 @@
     renderDepth();
     renderYear();
     renderFlow();
+    renderPhoto();
     renderPeople();
+    if (window.Village) window.Village.render(lang);
     renderAdvisor();
     renderTimeline();
     renderFacts();
@@ -448,6 +450,7 @@
         ${row(t("year.owner"), L(it.who))}${row(t("year.reader"), L(it.reads))}
         ${it.tpl ? rowHTML(t("year.tpl"), esc(L(it.tpl))) : ""}
         ${it.loc ? rowHTML(t("year.loc"), `<code>${esc(L(it.loc))}</code>`) : ""}
+        ${it.id === "photo" ? rowHTML(t("nav.flow"), `<a class="ylink ylink--a" href="#photo" style="--c:var(--pink)"><i></i>${esc(t("ph.see"))}</a>`) : ""}
         ${until ? row(t("year.until"), until) : ""}
         ${inn.length ? rowHTML(t("year.from"), `<div class="ylinks">${inn.map(link).join("")}</div>`) : ""}
         ${out.length ? rowHTML(t("year.to"), `<div class="ylinks">${out.map(link).join("")}</div>`) : ""}
@@ -560,6 +563,7 @@
       <p class="fpanel__act">${esc(L(cur.act))}</p>
       <div class="fpanel__who" style="--c:var(--${r.color})"><i></i><span><b>${esc(L(r.name))}</b><small>${esc(tierName[r.tier]())}</small></span></div>
       <div class="fpanel__kv"><span>${esc(t("flow.file"))}</span><code>${esc(cur.file)}</code></div>
+      ${cur.who === "photo" ? `<a class="ylink ylink--a" href="#photo" style="--c:var(--pink)"><i></i>${esc(t("ph.see"))}</a>` : ""}
       ${stateIx >= 0 ? `<div class="fpanel__kv"><span>${esc(t("flow.state"))}</span><span class="pills">${STATES.map((s, i) => `<em class="${i === stateIx ? "is-on" : i < stateIx ? "is-past" : ""}">${esc(L(s.name))}</em>`).join("")}</span></div>` : ""}
       <div class="sheet">
         <div class="sheet__name"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M1 6h14M1 11h14M6 1v14"/></svg>Hub / ${esc(L(sc.register))}</div>
@@ -597,34 +601,95 @@
   }
 
   // ---------- people ----------
+  const GROUPS = [
+    ["media"], ["wiki"], ["wet"], ["dry"], ["hw"], ["hp"], ["ops"], ["adv"], ["staff"]
+  ];
+  const PCOLOR = { wet: "teal", dry: "green", hw: "orange", hp: "indigo", wiki: "blue", media: "pink", ops: "ink", adv: "gold", staff: "ink" };
+  const groupName = g => g === "staff" ? t("ppl.staff") : L(VILLAGE_DISTRICTS.find(d => d.id === g).name);
+  const hoursRange = r => {
+    const on = r.hrs.filter(h => h > 0);
+    if (!on.length) return "—";
+    const lo = Math.min(...on), hi = Math.max(...on);
+    return lo === hi ? `${hi}` : `${lo}–${hi}`;
+  };
+  const pp = { group: "media", q: "" };
+
   function renderPeople() {
-    const tiers = [["s", t("ppl.students"), "≈28"], ["a", t("ppl.advisors"), "5–10"], ["i", t("ppl.staff"), "12"]];
-    $("#crowd").innerHTML = tiers.map(([tier, name, n]) => {
-      const dots = ROLES.filter(r => r.tier === tier).flatMap(r =>
-        Array.from({ length: r.count }, () => `<i data-role="${r.id}" style="--c:var(--${r.color})"></i>`)).join("");
-      return `<div class="crowd__g"><div class="crowd__dots">${dots}</div><p><b>${n}</b> ${esc(name)}</p></div>`;
+    $("#ppl-tag").textContent = t("ppl.tag");
+    const seatDots = (kind, cls) => PEOPLE.roles.filter(r => r.kind === kind).flatMap(r =>
+      Array.from({ length: kind === "s2" ? r.sec : r.seats }, () => `<i class="${cls}" data-role="${r.code}" style="--c:var(--${PCOLOR[r.group]})"></i>`)).join("");
+    const adults = Array.from({ length: 12 }, () => `<i class="seat seat--adult"></i>`).join("");
+    $("#crowd").innerHTML = `
+      <div class="crowd__g"><div class="crowd__dots">${seatDots("s", "seat")}</div><p><b>30</b> ${esc(t("ppl.primary"))}</p></div>
+      <div class="crowd__g"><div class="crowd__dots">${seatDots("s2", "seat seat--sec")}</div><p><b>22</b> ${esc(t("ppl.secondary"))}</p></div>
+      <div class="crowd__g"><div class="crowd__dots">${seatDots("a", "seat seat--adv")}</div><p><b>≈10</b> ${esc(t("ppl.adv"))}</p></div>
+      <div class="crowd__g"><div class="crowd__dots">${adults}</div><p><b>12</b> ${esc(t("ppl.adults"))}</p></div>`;
+    $("#ppl-rules").innerHTML = PEOPLE_RULES.map(x => `<div class="acard"><h3>${esc(L(x.t))}</h3><p class="acard__note">${esc(L(x.d))}</p></div>`).join("");
+    $("#ppl-load").innerHTML = PEOPLE.load.map((l, i) => {
+      const d = new Date(Date.UTC(2026, 10 + i, 1));
+      const label = lang === "zh" ? `${d.getUTCMonth() + 1}月` : d.toLocaleDateString("en-GB", { month: "short", timeZone: "UTC" });
+      return `<div class="pl__m${l.u >= .8 ? " is-hot" : ""}"><span class="pl__v">${Math.round(l.u * 100)}%</span><span class="pl__b"><i style="height:${Math.max(2, l.u * 100)}%"></i></span><span class="pl__k">${label}</span></div>`;
     }).join("");
-    $("#roles").innerHTML = tiers.map(([tier, name]) => `
-      <div class="roles__tier"><h4>${esc(name)}</h4><div class="roles__grid">
-      ${ROLES.filter(r => r.tier === tier).map(r => `
-        <button class="role${state.role === r.id ? " is-sel" : ""}" data-role="${r.id}" style="--c:var(--${r.color})">
-          <span class="role__top"><span class="role__name">${esc(L(r.name))}</span><span class="role__n">${typeof r.countLabel === "object" ? esc(L(r.countLabel)) : `×${r.countLabel || r.count}`}</span></span>
-          ${r.proposed ? `<span class="role__tag"><a href="#adv-tbd">${esc(t("proposed"))}</a></span>` : ""}
-          <span class="role__d">${esc(L(r.d))}</span>
-          <span class="role__h">${r.hrsLabel ? esc(L(r.hrsLabel)) : `${esc(t("lbl.time"))} ${r.hrs}`}</span>
-        </button>`).join("")}</div></div>`).join("");
-    $$("#roles .role").forEach(b => b.addEventListener("click", () => {
-      state.role = state.role === b.dataset.role ? null : b.dataset.role;
-      paintPeople();
-    }));
-    paintPeople();
+    $("#ppl-tabs").innerHTML = [`<button data-g="all" aria-pressed="${pp.group === "all"}">${esc(t("ppl.all"))}</button>`, ...GROUPS.map(([g]) => `<button data-g="${g}" aria-pressed="${pp.group === g}" style="--c:var(--${PCOLOR[g]})"><i></i>${esc(groupName(g))}</button>`)].join("");
+    $$("#ppl-tabs button").forEach(b => b.addEventListener("click", () => { pp.group = b.dataset.g; pp.q = ""; $("#ppl-q").value = ""; renderPeople(); }));
+    const q = $("#ppl-q"); q.placeholder = t("ppl.search"); q.setAttribute("aria-label", t("ppl.search"));
+    q.oninput = () => { pp.q = q.value; paintRoleList(); };
+    $("#ppl-tbd").innerHTML = PEOPLE_TBD.map(x => `<li>${esc(L(x))}</li>`).join("");
+    paintRoleList();
   }
 
-  function paintPeople() {
-    $("#crowd").classList.toggle("has-sel", !!state.role);
-    $$("#crowd i").forEach(d => d.classList.toggle("is-on", d.dataset.role === state.role));
-    $$("#roles .role").forEach(b => b.classList.toggle("is-sel", b.dataset.role === state.role));
+  function roleCard(r) {
+    const seat = r.kind === "s2" ? `${t("ppl.sec")} ×${r.sec}` : r.kind === "i" ? `${t("ppl.func")} ×${r.seats}` : r.code === "LAD" ? zh("可從缺", "may stay empty") : `×${r.seats}`;
+    const max = Math.max(5, ...r.hrs);
+    const spark = `<span class="spark" aria-hidden="true">${r.hrs.map(h => `<i style="height:${Math.max(h ? 12 : 3, h / max * 100)}%"></i>`).join("")}</span>`;
+    const files = [...r.tabs, ...r.folders];
+    const backup = typeof r.backup === "string" && PEOPLE.roles.some(x => x.code === r.backup) ? `<code>${esc(r.backup)}</code>` : esc(L(r.backup));
+    return `<article class="rc" style="--c:var(--${PCOLOR[r.group]})" data-rc="${r.code}">
+      <header class="rc__top"><code>${esc(r.code)}</code><h4>${esc(L(r.name))}</h4><span class="rc__n">${esc(seat)}</span></header>
+      <p class="rc__own">${esc(L(r.own))}</p>
+      <dl class="rc__d">
+        <div><dt>${esc(t("ppl.week"))}</dt><dd>${r.week.map(w => esc(L(w))).join(zh("；", "; "))}</dd></div>
+        <div><dt>${esc(t("ppl.time"))}</dt><dd class="rc__t">${spark}<span>${esc(hoursRange(r))} ${esc(t("ppl.h"))}</span></dd></div>
+        ${r.peak.length ? `<div><dt>${esc(t("ppl.peak"))}</dt><dd>${r.peak.map(p => esc(L(p))).join(zh("、", ", "))}</dd></div>` : ""}
+        <div><dt>${esc(t("ppl.backup"))}</dt><dd>${backup}</dd></div>
+        <div><dt>${esc(t("ppl.when"))}</dt><dd>${esc(L(r.when))}</dd></div>
+        ${files.length ? `<div><dt>${esc(t("ppl.file"))}</dt><dd class="rc__f">${files.slice(0, 4).map(f => `<code>${esc(f)}</code>`).join("")}${files.length > 4 ? `<small>+${files.length - 4}</small>` : ""}</dd></div>` : ""}
+      </dl>
+      ${r.note ? `<p class="rc__note">${esc(L(r.note))}</p>` : ""}
+      <button class="rc__go" data-vg="${r.code}">${esc(t("ppl.inv"))}</button>
+    </article>`;
   }
+
+  function paintRoleList() {
+    const needle = pp.q.trim().toLowerCase();
+    const list = PEOPLE.roles.filter(r => {
+      if (needle) return [r.code, r.name.zh, r.name.en, r.own.zh, r.own.en, ...r.week.flatMap(w => [w.zh, w.en]), ...r.fit.flatMap(w => [w.zh, w.en]), ...r.tabs, ...r.folders].join(" ").toLowerCase().includes(needle);
+      return pp.group === "all" || r.group === pp.group;
+    });
+    const groups = needle || pp.group === "all" ? GROUPS.map(g => g[0]) : [pp.group];
+    $("#ppl-list").innerHTML = list.length ? groups.map(g => {
+      const rs = list.filter(r => r.group === g);
+      if (!rs.length) return "";
+      const blurb = g === "staff" ? zh("功能，不是席位。一位成人可兼多項；未列姓名。", "Functions, not seats. One adult can hold several; no names.") : g === "adv" ? zh("具名範圍每階段與 instructor 確認。下面是容量估算，不是席位。五個階段見 Student Advisor。", "Named scope is agreed with an instructor each stage. These are capacity estimates, not seats. The five stages are under Student Advisor.") : L(VILLAGE_DISTRICTS.find(d => d.id === g).blurb);
+      return `<section class="rcg"><h4 class="rcg__h" style="--c:var(--${PCOLOR[g]})"><i></i>${esc(groupName(g))}<small>${esc(blurb)}</small></h4><div class="rcg__grid">${rs.map(roleCard).join("")}</div></section>`;
+    }).join("") : `<p class="note">${esc(t("ppl.none"))}</p>`;
+    $$("#ppl-list [data-vg]").forEach(b => b.addEventListener("click", () => window.Village.focusRole(b.dataset.vg)));
+  }
+
+  // ---------- photo system ----------
+  function renderPhoto() {
+    $("#ph-steps").innerHTML = PHOTO.steps.map((s, i) => `<li><span class="ph__n">${i + 1}</span><div><h4>${esc(L(s.t))}</h4><small>${esc(L(s.who))}</small><p>${esc(L(s.d))}</p></div></li>`).join("");
+    $("#ph-name").innerHTML = `<div class="ph__file" aria-label="20270513_WET_EPB_R0412_bench-setup_03_M0142_P007.jpg">${PHOTO.name.map((n, i) => `<button class="ph__seg" data-ph="${i}" aria-pressed="${i === ph.sel}">${esc(n.k)}</button>${i < PHOTO.name.length - 1 ? "<i>_</i>" : ""}`).join("")}<i>${esc(PHOTO.ext)}</i></div>
+      <p class="ph__mean"><code>${esc(PHOTO.name[ph.sel].k)}</code> ${esc(L(PHOTO.name[ph.sel].t))}</p>`;
+    $$("#ph-name [data-ph]").forEach(b => b.addEventListener("click", () => { ph.sel = +b.dataset.ph; renderPhoto(); }));
+    $("#ph-home").innerHTML = PHOTO.homes.map(h => `<div class="kv"><dt>${esc(L(h.k))}</dt><dd><code>${esc(h.v)}</code></dd></div>`).join("");
+    $("#ph-duty").innerHTML = PHOTO.duty.map(h => `<div class="kv"><dt>${esc(L(h.k))}</dt><dd>${esc(L(h.v))}</dd></div>`).join("");
+    $("#ph-rules").innerHTML = PHOTO.rules.map(x => `<li>${esc(L(x))}</li>`).join("");
+    const go = $("#ph-village");
+    go.textContent = t("ph.village");
+    go.onclick = () => window.Village.focusRole("PHO");
+  }
+  const ph = { sel: 2 };
 
   // ---------- timeline ----------
   const T0 = new Date("2026-11-01"), T1 = new Date("2027-12-01");
@@ -729,7 +794,7 @@
   }
 
   // ---------- advisor ----------
-  const adv = { stage: 0, node: "review", view: "instructor", row: 0, n: 8 };
+  const adv = { stage: 0, node: "review", view: "instructor", row: 0, n: 10 };
   const tbdLabel = () => (lang === "zh" ? "待決定" : "TBD");
   // Escaped text, with [T3] turned into a link to the decision list and newlines kept.
   const tx = v => esc(L(v)).replace(/\[T(\d+)\]/g, (_, n) => `<a class="tbd" href="#adv-tbd">${tbdLabel()} ${n}</a>`).replace(/\n/g, "<br>");
@@ -873,7 +938,7 @@
   }
 
   function renderAdvLoad() {
-    $("#adv-load-tabs").innerHTML = [5, 8, 10].map(n => `<button role="tab" data-n="${n}" aria-selected="${adv.n === n}">${n} ${zh("位 advisor", "advisors")}</button>`).join("");
+    $("#adv-load-tabs").innerHTML = [10].map(n => `<button role="tab" data-n="${n}" aria-selected="${adv.n === n}">${n} ${zh("位 advisor", "advisors")}</button>`).join("");
     $$("#adv-load-tabs button").forEach(b => b.addEventListener("click", () => { adv.n = +b.dataset.n; renderAdvLoad(); }));
     const th = t("adv.load.th");
     const rows = ADV_LOAD.map(x => { const c = x.count(adv.n); return { t: x.t, c, min: x.min, h: c * x.min / 60 }; });
