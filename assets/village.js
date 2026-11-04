@@ -436,7 +436,7 @@ window.Village = (() => {
   const LABELS = { wet: [214, 176], dry: [130, 428], hw: [470, 428], hp: [230, 742], wiki: [1250, 288], media: [840, 742], ops: [700, 176], adv: [1250, 146] };
 
   function chipSVG(x, y, s, c, big) {
-    const size = big ? 19 : 15, w = [...s].reduce((a, ch) => a + (ch.charCodeAt(0) > 255 ? size : size * .56), 0) + (big ? 36 : 20);
+    const size = big ? 19 : 15, w = [...s].reduce((a, ch) => a + (ch.charCodeAt(0) > 255 ? size : size * .5), 0) + (big ? 36 : 20);
     return `<g class="${big ? "dl" : "tag"}" transform="translate(${num(x - w / 2)},${num(y)})"><rect class="tagb" width="${num(w)}" height="${big ? 30 : 24}" rx="${big ? 15 : 12}"/>${big ? `<circle cx="16" cy="15" r="5" fill="${c}"/>` : ""}<text class="tagt" x="${big ? 27 : 10}" y="${big ? 21 : 17}" font-size="${size}">${esc(s)}</text></g>`;
   }
 
