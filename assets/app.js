@@ -516,6 +516,8 @@
 
     $$("#board .tile").forEach(el => {
       const id = el.dataset.tile;
+      const tl = FLOW_TILES.find(x => x.id === id);
+      el.hidden = sc.focus ? !steps.some(s => s.at === id) : !!tl.only;
       el.classList.toggle("is-now", id === cur.at);
       el.classList.toggle("is-past", id !== cur.at && visited.includes(id));
       el.classList.toggle("is-path", steps.some(s => s.at === id));
@@ -525,6 +527,7 @@
     });
 
     const board = $("#board");
+    board.classList.toggle("board--focus", !!sc.focus);
     board.style.setProperty("--sc", `var(--${sc.color})`);
     const pts = [];
     visited.forEach(id => { const p = tileCenter(id); const last = pts[pts.length - 1]; if (!last || last[0] !== p[0] || last[1] !== p[1]) pts.push(p); });
@@ -564,10 +567,12 @@
       <p class="fpanel__act">${esc(L(cur.act))}</p>
       <div class="fpanel__who" style="--c:var(--${r.color})"><i></i><span><b>${esc(L(r.name))}</b><small>${esc(tierName[r.tier]())}</small></span></div>
       <div class="fpanel__kv"><span>${esc(t("flow.file"))}</span><code>${esc(cur.file)}</code></div>
+      ${cur.cost ? `<div class="fpanel__kv"><span>${esc(t("flow.cost"))}</span><span>${esc(L(cur.cost))}</span></div>` : ""}
+      ${sc.id === "research" && flow.step === steps.length - 1 ? `<a class="ylink ylink--a" href="#research" style="--c:var(--purple)"><i></i>${esc(t("res.see"))}</a>` : ""}
       ${cur.who === "photo" ? `<a class="ylink ylink--a" href="#photo" style="--c:var(--pink)"><i></i>${esc(t("ph.see"))}</a>` : ""}
       ${stateIx >= 0 ? `<div class="fpanel__kv"><span>${esc(t("flow.state"))}</span><span class="pills">${STATES.map((s, i) => `<em class="${i === stateIx ? "is-on" : i < stateIx ? "is-past" : ""}">${esc(L(s.name))}</em>`).join("")}</span></div>` : ""}
       <div class="sheet">
-        <div class="sheet__name"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M1 6h14M1 11h14M6 1v14"/></svg>Hub / ${esc(L(sc.register))}</div>
+        <div class="sheet__name"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M1 6h14M1 11h14M6 1v14"/></svg>${esc(sc.book || "Hub")} / ${esc(L(sc.register))}</div>
         <div class="sheet__grid" style="--n:${cols.length}">
           ${cols.map(c => `<span class="sheet__h">${esc(c)}</span>`).join("")}
           ${cols.map((_, i) => `<span class="sheet__c${fresh[i] ? " is-new" : ""}">${cells[i] !== undefined ? esc(L(cells[i])) : ""}</span>`).join("")}
@@ -585,12 +590,28 @@
   }
   function playFlow() {
     flow.playing = true; $("#flow-play").classList.add("is-playing"); $("#flow-play").setAttribute("aria-label", t("flow.pause"));
-    clearInterval(flow.timer); flow.timer = setInterval(() => stepFlow(1), STEP_MS);
+    clearTimeout(flow.timer);
+    const tick = () => { flow.timer = setTimeout(() => { stepFlow(1); tick(); }, SCENARIOS[flow.sc].ms || STEP_MS); };
+    tick();
   }
   function stopFlow() {
     flow.playing = false; flow.seen = true; $("#flow-play").classList.remove("is-playing"); $("#flow-play").setAttribute("aria-label", t("flow.play"));
-    clearInterval(flow.timer);
+    clearTimeout(flow.timer);
   }
+  // #flow-research (or any scenario id) opens that tab at step 1, paused, so a presenter drives it.
+  function openFlowFromHash(smooth) {
+    const m = /^#flow-([a-z]+)$/.exec(location.hash);
+    const i = m ? SCENARIOS.findIndex(s => s.id === m[1]) : -1;
+    if (i < 0) return;
+    stopFlow(); goFlow(i, 0);
+    $(".flow__bar").scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "instant" });
+  }
+  addEventListener("hashchange", () => openFlowFromHash(true));
+  $$("[data-flow-jump]").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault();
+    history.pushState(null, "", a.getAttribute("href"));
+    openFlowFromHash(true);
+  }));
   $("#flow-play").addEventListener("click", () => (flow.playing ? stopFlow() : playFlow()));
   $("#flow-prev").addEventListener("click", () => { stopFlow(); stepFlow(-1); });
   $("#flow-next").addEventListener("click", () => { stopFlow(); stepFlow(1); });
@@ -635,6 +656,7 @@
     $$("#ppl-tabs button").forEach(b => b.addEventListener("click", () => { pp.group = b.dataset.g; pp.q = ""; $("#ppl-q").value = ""; renderPeople(); }));
     const q = $("#ppl-q"); q.placeholder = t("ppl.search"); q.setAttribute("aria-label", t("ppl.search"));
     q.oninput = () => { pp.q = q.value; paintRoleList(); };
+    $("#ppl-decided").innerHTML = PEOPLE_DECIDED.map(x => `<li>${esc(L(x))}</li>`).join("");
     $("#ppl-tbd").innerHTML = PEOPLE_TBD.map(x => `<li>${esc(L(x))}</li>`).join("");
     paintRoleList();
   }
@@ -677,10 +699,18 @@
     $$("#ppl-list [data-vg]").forEach(b => b.addEventListener("click", () => window.Village.focusRole(b.dataset.vg)));
   }
 
-  // ---------- research: seven steps, three sheets, three rules ----------
+  // ---------- research: why, structure, dates, who, time, leads ----------
   function renderResearch() {
+    $("#res-why").innerHTML = RESEARCH_WHY.map(x => `<div class="rs-stat"><b>${esc(L(x.n))}</b><h4>${esc(L(x.t))}</h4><p>${esc(L(x.d))}</p></div>`).join("");
+    $("#res-chain").innerHTML = RESEARCH_CHAIN.map(x => `<article class="rs-link"><span class="rs-link__id">${x.id}</span><h4>${esc(x.name)}</h4><code>${esc(x.loc)}</code><p>${esc(L(x.d))}</p><small><b>${esc(t("res.reader"))}</b> ${esc(L(x.r))}</small></article>`).join("");
+    $("#res-around").innerHTML = RESEARCH_AROUND.map(x => `<article class="rs-sat"><h4>${esc(L(x.name))}</h4><code>${esc(x.loc)}</code><p>${esc(L(x.d))}</p></article>`).join("");
+    $("#res-dates").innerHTML = RESEARCH_DATES.map((x, i) => `<article class="rs-date" style="--c:var(--${x.c})"><header><b>${esc(lang === "zh" ? x.n : (i ? "29 Nov" : "25 Nov"))}</b><span>${esc(x.k)} · ${esc(L(x.t))}</span></header><ul>${x.items.map(y => `<li>${esc(L(y))}</li>`).join("")}</ul>${i ? "" : `<p class="rs-date__warn">${esc(t("res.dates.warn"))}</p>`}</article>`).join("");
+    $("#res-miles").innerHTML = RESEARCH_MILES.map(x => `<li><b>${esc(L(x.d))}</b><span>${esc(x.n)}</span><p>${esc(L(x.t))}</p></li>`).join("");
+    $("#res-who").innerHTML = simpleTable(t("res.who.th"), RESEARCH_WHO.map(x => [x.who, x.what, x.when, x.min]));
+    $("#res-totals").innerHTML = RESEARCH_TOTALS.map(x => `<div><b>${esc(L(x.n))}</b><span>${esc(L(x.t))}</span></div>`).join("");
     $("#res-steps").innerHTML = simpleTable(t("res.steps.th"), RESEARCH_STEPS.map(x => [x.step, x.what, x.min, x.who]));
-    $("#res-sheets").innerHTML = simpleTable(t("res.sheets.th"), RESEARCH_SHEETS.map(x => [x.sheet, x.reader, x.when, x.why]));
+    $("#res-evidence").innerHTML = RESEARCH_EVIDENCE.map((x, i) => `<li><span class="sysrules__n">${i + 1}</span><div><h4>${esc(L(x.t))}</h4><p>${esc(L(x.d))}</p></div></li>`).join("");
+    $("#res-fair").innerHTML = RESEARCH_FAIR.map(x => `<li>${esc(L(x))}</li>`).join("");
     $("#res-rules").innerHTML = RESEARCH_RULES.map((x, i) => `<li><span class="sysrules__n">${i + 1}</span><div><h4>${esc(L(x.t))}</h4><p>${esc(L(x.d))}</p></div></li>`).join("");
     $("#res-rights").innerHTML = RESEARCH_RIGHTS.map(x => `<li>${esc(L(x))}</li>`).join("");
   }
@@ -1003,4 +1033,6 @@
   // Hero and section intros fade up too.
   $$(".hero > *, .sec .eyebrow, .sec .headline, .sec .lede").forEach(e => e.classList.add("reveal"));
   renderAll();
+  openFlowFromHash(false);
+  addEventListener("load", () => openFlowFromHash(false), { once: true });
 })();

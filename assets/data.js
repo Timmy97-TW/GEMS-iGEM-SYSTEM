@@ -20,14 +20,14 @@ const T = {
     "year.legend.hard": "硬關卡", "year.legend.node": "節點關卡", "year.legend.est": "? 推估",
     "year.owner": "誰產出", "year.reader": "誰讀", "year.rule": "規則", "year.tpl": "範本", "year.loc": "位置", "year.date": "誕生", "year.until": "持續到", "year.from": "來自", "year.to": "餵給", "year.gatek": "關卡", "year.id": "ID",
     "year.hint": "點時間軸上任何一份文件。", "year.nofeed": "下一年",
-    "year.gate.k": "沒有同意就不發布", "year.gate.f": "沒有來源就不進 wiki", "year.gate.file": "沒有檔案就不算紀錄", "year.gate.node": "節點關卡",
+    "year.gate.rq": "沒有 RQ 就沒有 L", "year.gate.lic": "沒有授權，原圖不上 wiki", "year.gate.k": "沒有同意就不發布", "year.gate.f": "沒有來源就不進 wiki", "year.gate.file": "沒有檔案就不算紀錄", "year.gate.node": "節點關卡",
     "flow.gate": "關卡", "flow.blocked": "擋下", "flow.passed": "通過",
     "time.owner": "負責", "time.ok": "驗收", "time.pass": "通過條件", "time.tbd": "時程上待決定", "time.tbd.sub": "時程表自己標出的衝突。不是定案，也不代替 PI 決定。", "lane.school": "學校與考試", "proposed": "提案",
     "nav.problems": "問題", "nav.audit": "健檢", "nav.arch": "架構", "nav.depth": "結構",
     "nav.people": "人力", "nav.advisor": "Advisor", "nav.time": "時程", "nav.facts": "事實表", "nav.std": "標準化", "nav.flow": "流程",
     "flow.eyebrow": "流程",
     "flow.title": "一筆紀錄的一生。",
-    "flow.sub": "五個例子：一筆 Run、一次互動、一個題目、一條序列、一份 Advisor 產出。每個例子都會撞到關卡一次，看它怎麼被擋下，又怎麼過關。ID、檔名和位置是提案。",
+    "flow.sub": "六個例子：一題研究、一筆 Run、一次互動、一個題目、一條序列、一份 Advisor 產出。每個例子都會撞到關卡一次，看它怎麼被擋下，又怎麼過關。ID、檔名和位置是提案。",
     "flow.step": "步驟", "flow.who": "經手", "flow.file": "檔案", "flow.state": "狀態",
     "flow.prev": "上一步", "flow.next": "下一步", "flow.play": "播放", "flow.pause": "暫停",
     "flow.owners": "管理",
@@ -138,14 +138,14 @@ const T = {
     "year.legend.hard": "Hard gate", "year.legend.node": "Node gate", "year.legend.est": "? estimate",
     "year.owner": "Produced by", "year.reader": "Read by", "year.rule": "Rule", "year.tpl": "Template", "year.loc": "Location", "year.date": "Born", "year.until": "Live until", "year.from": "Fed by", "year.to": "Feeds", "year.gatek": "Gate", "year.id": "ID",
     "year.hint": "Click any document on the timeline.", "year.nofeed": "Next year",
-    "year.gate.k": "No consent, no publishing", "year.gate.f": "No source, no wiki", "year.gate.file": "No file, no record", "year.gate.node": "Node gate",
+    "year.gate.rq": "No RQ, no L", "year.gate.lic": "No licence, no original figure on the wiki", "year.gate.k": "No consent, no publishing", "year.gate.f": "No source, no wiki", "year.gate.file": "No file, no record", "year.gate.node": "Node gate",
     "flow.gate": "Gate", "flow.blocked": "Stopped", "flow.passed": "Passed",
     "time.owner": "Owner", "time.ok": "Accepted by", "time.pass": "Passes when", "time.tbd": "Still to decide in the schedule", "time.tbd.sub": "Conflicts the schedule itself flags. None of this is settled, and nothing here decides for the PI.", "lane.school": "School & exams", "proposed": "Proposed",
     "nav.problems": "Problems", "nav.audit": "Audit", "nav.arch": "Architecture", "nav.depth": "Structure",
     "nav.people": "People", "nav.advisor": "Advisors", "nav.time": "Timeline", "nav.facts": "Facts", "nav.std": "Standards", "nav.flow": "Flow",
     "flow.eyebrow": "Flow",
     "flow.title": "The life of a record.",
-    "flow.sub": "Five examples: a Run, an interaction, a topic, a sequence and an advisor output. Each one hits a gate, so you can see it stopped and then let through. IDs, file names and locations are proposals.",
+    "flow.sub": "Six examples: a piece of research, a Run, an interaction, a topic, a sequence and an advisor output. Each one hits a gate, so you can see it stopped and then let through. IDs, file names and locations are proposals.",
     "flow.step": "Step", "flow.who": "Handled by", "flow.file": "File", "flow.state": "State",
     "flow.prev": "Previous step", "flow.next": "Next step", "flow.play": "Play", "flow.pause": "Pause",
     "flow.owners": "Owners",
@@ -389,8 +389,8 @@ const TEAM_TEMPLATE = ["SOP", "Meetings", "Projects / 2027 …"];
 
 const DRIVE = [
   { id: "d00", name: "00 Start Here", drive: "team", kind: "every",
-    kids: ["GEMS 2027 Hub", "GEMS 2027 Handbook", "File Rules", "Handover Checklist", "Literature Matrix", "Templates"],
-    holds: { zh: "新人手冊、Hub 表（所有分頁，含 Inventory 與 Advisor Deliverables）、File Rules、全隊一份的 Literature Matrix、下一年的資料夾範本", en: "Handbook, the Hub with all its tabs including Inventory and Advisor Deliverables, File Rules, the one team Literature Matrix, next year’s folder template" },
+    kids: ["GEMS 2027 Hub", "GEMS 2027 Handbook", "File Rules", "Handover Checklist", "Research", "Templates"],
+    holds: { zh: "新人手冊、Hub 表（所有分頁，含 Inventory 與 Advisor Deliverables）、File Rules、全隊一份的 Research 工作簿、下一年的資料夾範本", en: "Handbook, the Hub with all its tabs including Inventory and Advisor Deliverables, File Rules, the one team Research workbook, next year’s folder template" },
     edit: { zh: "Ops", en: "Ops" },
     rule: { zh: "頂層不放任何零散檔案。名單只有一份，其他表用下拉。", en: "No loose files at the top. There is one roster; every other sheet uses a dropdown." },
     from: ["10 12 meeting notes", "Attendance sheets ×2", "(new)"] },
@@ -400,6 +400,12 @@ const DRIVE = [
     edit: { zh: "Instructor；學生交作業", en: "Instructors; students hand in" },
     rule: { zh: "全部以 YYYYMMDD 開頭。2026 同一層混用兩種日期格式，不沿用。", en: "Everything starts with YYYYMMDD. 2026 mixed two date formats in one folder; that stops." },
     from: ["0. Class Material", "Class Recordings", "1. Wetlab / Homework Discussion"] },
+  { id: "d15", name: "15 Research", drive: "team", kind: "every",
+    kids: ["_README", "Reading Notes", "Question Briefs", "Open Library", "Topic Research"],
+    holds: { zh: "卡填不下的筆記（L###_slug）、問題的結論（RQ##_slug）、開放取用與灰色文獻（L###_<作者><年>.pdf）、N01–N04 的候選題目 brief。索引只在 Research 工作簿。", en: "Notes a card cannot hold (L###_slug), question conclusions (RQ##_slug), open-access and grey literature (L###_<author><year>.pdf), and N01–N04 candidate topic briefs. The index lives only in the Research workbook." },
+    edit: { zh: "全隊學生、老師、Advisors", en: "All students, instructors, advisors" },
+    rule: { zh: "出版商 PDF 不進 Drive。每個檔案都要被 Papers 的某一列連到，RSV 每月清一次。任務組階段不開第二套研究資料夾。", en: "Publisher PDFs never enter Drive. Every file must be linked from a Papers row, and RSV clears strays monthly. No second set of research folders in the task-group phase." },
+    from: ["(new)"] },
   { id: "d20", name: "20 Topic", drive: "team", kind: "every",
     kids: ["Topic Pipeline", "Topic Cards", "PK Records", "Decision Records"],
     holds: { zh: "11/29 到 1/30 的選題：線上研究、Topic Card、Case study、PK、Decision Record。老師評分放 Ops。", en: "Topic work from 29 Nov to 30 Jan: online research, Topic Cards, case studies, the PK, the Decision Record. Instructor scoring goes to Ops." },
@@ -410,7 +416,7 @@ const DRIVE = [
     kids: ["IDT Orders", "Lab Roster", "SOP", "Run Records / YYYY-MM", "Data / Raw · Labelled · Notebook Photos", "Sequences / <Level>", "Safety / Safety Register", "Meetings", "Projects / 2027 <topic>"],
     holds: { zh: "SOP、Run 紀錄與原始檔、序列與定序回傳、安全（事故與近失、化學品與 SDS、保養、廢棄物）、IDT 訂單、實驗室班表、週會紀錄", en: "SOPs, Run records and raw files, sequences and sequencing returns, safety (incidents and near misses, chemicals and SDS, maintenance, waste), IDT orders, the lab roster, weekly minutes" },
     edit: { zh: "Wetlab；Wet 組長顧資料夾，Lab lead 顧 Run Records 與 Data", en: "Wetlab; the Wet Lead keeps the folder, the Lab Lead keeps Run Records and Data" },
-    rule: { zh: "Safety 3/13 前就緒。Inventory 是 Hub 的分頁，不在這裡。Literature Matrix 併到 00 Start Here。會議一個資料夾，檔名 YYYYMMDD_Wet_Weekly。Sequences 依 Cloning Products 的 level 分層。", en: "Safety is ready by 13 Mar. Inventory is a Hub tab, not a folder here. The Literature Matrix moved to 00 Start Here. One Meetings folder, named YYYYMMDD_Wet_Weekly. Sequences keep the Cloning Products layering by level." },
+    rule: { zh: "Safety 3/13 前就緒。Inventory 是 Hub 的分頁，不在這裡。Literature Matrix 改名 Research，併到 00 Start Here。會議一個資料夾，檔名 YYYYMMDD_Wet_Weekly。Sequences 依 Cloning Products 的 level 分層。", en: "Safety is ready by 13 Mar. Inventory is a Hub tab, not a folder here. The Literature Matrix is now the Research workbook, in 00 Start Here. One Meetings folder, named YYYYMMDD_Wet_Weekly. Sequences keep the Cloning Products layering by level." },
     from: ["1. Wetlab", "Plasmid sequences", "2. Drylab / Sent Sequences", "Lab Reports / Electronic Lab Note", "Meeting folders ×3"] },
   { id: "d32", name: "32 Drylab", drive: "team", kind: "team",
     kids: ["SOP", "Meetings", "Projects / MD01 · SW01 / ProjectCard · RunLog"],
@@ -426,7 +432,7 @@ const DRIVE = [
     from: ["2. Drylab / CAD files", "1. Wetlab / device data", "*Research Integration / device notes"] },
   { id: "d34", name: "34 Human Practices", drive: "team", kind: "team",
     kids: ["IHP Storyline", "Survey Bank", "SOP", "Meetings", "Interactions / I<ID>_<YYYYMMDD>_<who>", "Consent", "Education", "Events / <YYYY-event>"],
-    holds: { zh: "一次互動一份文件、Consent 的請求信、教育線、活動 Dossier、Storyline 與問卷庫。簽名正本放 Ops。Past HP Cases 併入 Literature Matrix 的 HPCases 分頁。", en: "One document per interaction, consent request letters, education, event dossiers, the Storyline and Survey Bank. Signed originals stay in Ops. Past HP Cases merged into the Literature Matrix’s HPCases tab." },
+    holds: { zh: "一次互動一份文件、Consent 的請求信、教育線、活動 Dossier、Storyline 與問卷庫。簽名正本放 Ops。Past HP Cases 併入 Research 工作簿的 HPCases 分頁。", en: "One document per interaction, consent request letters, education, event dossiers, the Storyline and Survey Bank. Signed originals stay in Ops. Past HP Cases merged into the Research workbook’s HPCases tab." },
     edit: { zh: "HP 隊；HP 組長顧資料夾，同意紀錄員顧 Consent", en: "HP team; the HP Lead keeps the folder, the Consent Clerk keeps Consent" },
     rule: { zh: "沒有獨立的 Outreach 層：Outreach 和 IHP 並存會讓同一次互動留下好幾份。Consent 和互動紀錄同層。", en: "No separate Outreach layer: running it next to IHP leaves several copies of one interaction. Consent sits beside the interaction records." },
     from: ["3. Human Practice", "Outreach slides"] },
@@ -548,7 +554,12 @@ const FLOW_CAST = [
   { id: "hpstudent", tier: "s", color: "indigo", name: { zh: "HP 學生", en: "HP student" } },
   { id: "proposer", tier: "s", color: "orange", name: { zh: "提題的人", en: "Whoever proposed it" } },
   { id: "instr", tier: "i", color: "ink", name: { zh: "老師", en: "Instructor" } },
-  { id: "pi", tier: "i", color: "ink", name: { zh: "PI", en: "PI" } }
+  { id: "pi", tier: "i", color: "ink", name: { zh: "PI", en: "PI" } },
+  { id: "reader", tier: "s", color: "purple", name: { zh: "讀的學生", en: "The student reading" } },
+  { id: "rqowner", tier: "s", color: "purple", name: { zh: "RQ 負責人", en: "RQ owner" } },
+  { id: "rsl", tier: "i", color: "ink", name: { zh: "研究組長", en: "Research Lead" } },
+  { id: "rsv", tier: "s", color: "purple", name: { zh: "研究副組長", en: "Research Vice Lead" } },
+  { id: "scribe", tier: "s", color: "gray", name: { zh: "會議書記", en: "Meeting scribe" } }
 ];
 
 // Timeline: the year's nodes from the system spec v0.2, section 7, itself from the PI's 2027 schedule.
@@ -705,6 +716,9 @@ const GATES = [
 
 const ID_SYSTEM = [
   ["P", { zh: "人", en: "Person" }, { zh: "Ops", en: "Ops" }, "Roster"],
+  ["RQ", { zh: "研究問題", en: "Research question" }, { zh: "老師、研究組長", en: "Instructors, Research Lead" }, "Research / Questions"],
+  ["L", { zh: "文獻（Paper Card）", en: "Paper (Paper Card)" }, { zh: "讀者", en: "The reader" }, "Research / Papers"],
+  ["RI", { zh: "研究影響事件", en: "Research impact event" }, { zh: "當事人，老師確認", en: "The person concerned; instructors confirm" }, "Research / Impact"],
   ["N", { zh: "年度節點與關卡", en: "Node or gate" }, { zh: "PI", en: "PI" }, "Nodes"],
   ["T", { zh: "任務", en: "Task" }, { zh: "組長、老師", en: "Leads, instructors" }, "Tasks"],
   ["D", { zh: "決議", en: "Decision" }, { zh: "會議書記", en: "Meeting scribe" }, "Decisions"],
@@ -926,6 +940,10 @@ const YEAR_ITEMS = [
 // Flow board: the places a record passes through, and who looks after each.
 // owners are ROLES ids. out = reaches the outside. gate = a checkpoint. span = grid columns.
 const FLOW_TILES = [
+  { id: "r-lib", only: "research", name: { zh: "共用文獻庫", en: "Shared library" }, owners: ["reader", "rsv"] },
+  { id: "r-book", only: "research", name: { zh: "Research 工作簿", en: "Research workbook" }, owners: ["rsl", "reader", "instr"], span: 2 },
+  { id: "r-15", only: "research", name: { zh: "15 Research", en: "15 Research" }, owners: ["rqowner"] },
+  { id: "g-rq", only: "research", gate: true, name: { zh: "硬關卡：沒有 RQ 就沒有 L", en: "Hard gate: no RQ, no L" }, owners: ["rsl"] },
   { id: "discord", name: { zh: "Discord（討論）", en: "Discord (talk)" }, owners: ["discord"] },
   { id: "hub", name: { zh: "Hub（有 ID 的紀錄）", en: "Hub (everything with an ID)" }, owners: ["lead", "wikilead", "ops"], span: 2 },
   { id: "opshub", name: { zh: "Ops Hub", en: "Ops Hub" }, owners: ["ops"] },
@@ -933,6 +951,7 @@ const FLOW_TILES = [
   { id: "teams", name: { zh: "31–34 隊伍資料夾", en: "31–34 Team folders" }, owners: ["lead"], span: 2 },
   { id: "git", name: { zh: "團隊 GitHub", en: "Team GitHub" }, owners: ["figure"] },
   { id: "media", name: { zh: "40 Media", en: "40 Media" }, owners: ["photo", "art"] },
+  { id: "g-lic", only: "research", gate: true, name: { zh: "硬關卡：沒有授權，原圖不上 wiki", en: "Hard gate: no licence, no original figure" }, owners: ["instr"] },
   { id: "advisors", name: { zh: "60 Advisors", en: "60 Advisors" }, owners: ["advisor"] },
   { id: "deliv", name: { zh: "50 Deliverables", en: "50 Deliverables" }, owners: ["owner", "video", "wikilead"], span: 2 },
   { id: "g-k", gate: true, name: { zh: "硬關卡：沒有同意就不發布", en: "Hard gate: no consent, no publishing" }, owners: ["lead"] },
@@ -942,12 +961,49 @@ const FLOW_TILES = [
   { id: "o-wiki", out: true, name: { zh: "Wiki（freeze 10/6–13?）", en: "Wiki (freeze 6–13 Oct?)" } },
   { id: "o-order", out: true, name: { zh: "IDT 訂單（4/1 起）", en: "IDT order (from 1 Apr)" } },
   { id: "o-topic", out: true, name: { zh: "定題（1/30）", en: "Topic decided (30 Jan)" } },
-  { id: "o-roster", out: true, name: { zh: "Roster 審核（8/28）", en: "Roster review (28 Aug)" } }
+  { id: "o-roster", out: true, name: { zh: "Roster 審核（8/28）", en: "Roster review (28 Aug)" } },
+  { id: "o-refs", only: "research", out: true, span: 2, name: { zh: "每頁自動產生的參考文獻", en: "Each page’s generated references" } },
+  { id: "o-find", only: "research", out: true, span: 2, name: { zh: "30 秒內找回來", en: "Found again in 30 seconds" } }
 ];
 
-// Five journeys. Each step: where the record is, who acts, what happens, its ID or file name,
+// Six journeys. Each step: where the record is, who acts, what happens, its ID or file name,
 // and the Hub cells it fills. gate: { g: which gate, block: true if it stops here }.
 const SCENARIOS = [
+  { id: "research", color: "purple", focus: true, ms: 6500,
+    name: { zh: "一題研究", en: "Research" },
+    book: "Research",
+    register: { zh: "Questions · Papers · Impact", en: "Questions · Papers · Impact" },
+    cols: { zh: ["RQ", "L · 判斷", "D", "RI", "F · V", "W"], en: ["RQ", "L · call", "D", "RI", "F · V", "W"] },
+    steps: [
+      { at: "r-book", who: "instr", file: "Research / Questions / RQ03", cost: { zh: "11/25 前", en: "By 25 Nov" }, row: { 0: "RQ03" },
+        act: { zh: "PI 與老師種好 10 題 RQ。RQ03「我們要不要用方法 X？」要寫明會改變什麼決定，寫不出來就不立題。", en: "The PI and instructors seed 10 RQs. RQ03, “Should we use method X?”, must state which decision it would change; if nobody can say, it is not opened." } },
+      { at: "r-lib", who: "reader", file: "_Inbox → RQ03", cost: { zh: "找 2 分＋分流 2 分", en: "Find 2 min + triage 2 min" },
+        act: { zh: "11/29 起，學生找到一篇論文，存進共用文獻庫的 _Inbox。只看標題、摘要、圖，三選一：進讀、存參、丟到 _Rejected。這篇連得到 RQ03，進讀。", en: "From 29 Nov. A student finds a paper and saves it to the shared library’s _Inbox. Title, abstract and figures only, then one of three: read, keep for reference, or drop to _Rejected. This one ties to RQ03, so it is read." } },
+      { at: "g-rq", who: "reader", file: "Papers → RQ ?", gate: { g: "rq", block: true },
+        act: { zh: "擋下：另一篇想建卡，第 5 欄「研究問題」是空的。沒有 RQ 就不給 L。真的是通用背景才選 RQ00，否則留在文獻庫標「存參」。", en: "Stopped: another paper wants a card, but column 5, the research question, is empty. No RQ, no L. Genuinely general background may pick RQ00; otherwise it stays in the library, tagged for reference." } },
+      { at: "r-book", who: "reader", file: "Research / Papers / L012", cost: { zh: "讀 25 分＋卡 10 分＋路由 1 分", en: "Read 25 + card 10 + route 1 min" }, row: { 1: { zh: "L012 · 反對", en: "L012 · against" } },
+        act: { zh: "同一次坐下來填完：第 5 欄選 RQ03，Takeaway 是一句可以被反駁的話，判斷選「反對」，建議誰看選一個 P。圖只記位置 Fig 3。卡填不下才開 Reading Notes/L012_slug。", en: "Filled in one sitting: RQ03 in column 5, a takeaway that could be proved wrong, “against” as the call, a P for who should read it. Figures are only located: Fig 3. Reading Notes/L012_slug opens only if the card cannot hold it." } },
+      { at: "discord", who: "rsl", file: "08-research-digest → 選題-topic", cost: { zh: "週日，200 字內", en: "Sunday, 200 characters max" },
+        act: { zh: "AI 產生週日 digest，研究組長（3/10 前老師代行）看過親手貼到 Discord。L012 列在本週最值得讀的兩張卡。12/26 起，週會開頭 10 分鐘 journal club 也會輪到它。", en: "AI drafts the Sunday digest and the Research Lead (instructors until 10 Mar) posts it to Discord by hand. L012 is one of this week’s two cards most worth reading. From 26 Dec, the first 10 minutes of the weekly meeting can also feature it at journal club." } },
+      { at: "r-15", who: "rqowner", file: "15 Research/Question Briefs/RQ03_slug", cost: { zh: "200 字內", en: "200 characters max" }, row: { 0: { zh: "RQ03 不要做", en: "RQ03 don’t" } },
+        act: { zh: "證據進 Question Brief。結論類型是「不要做」，所以這份一定要寫：本來想做什麼、為什麼不做、什麼條件下重新考慮。", en: "The evidence enters a Question Brief. The conclusion is “don’t do this”, so the brief is required: what we meant to do, why not, and what would reopen it." } },
+      { at: "hub", who: "scribe", file: "Hub / Decisions / D0031 ← RQ03 · L012", cost: { zh: "0.5 分", en: "0.5 min" }, row: { 2: "D0031" },
+        act: { zh: "週會決議從做法 A 改成 B。書記在「依據（RQ／L）」填 RQ03 · L012。這一格就是研究變成決定的憑證。", en: "The weekly meeting moves from approach A to B. The scribe fills “Basis (RQ/L)” with RQ03 · L012. That cell is the proof that research became a decision." } },
+      { at: "r-book", who: "instr", file: "Research / Impact / RI004", cost: { zh: "週日確認，七天異議期", en: "Confirmed Sunday, 7 days to object" }, row: { 3: { zh: "RI004 避雷 ✓", en: "RI004 trap ✓" } },
+        act: { zh: "讀者開一列，類型「避雷」，和「採納」同權重：「因為 L012 指出 X，所以 D0031 從 A 改成 B」。老師確認後才算，七天內任何人可寫異議。", en: "The reader adds a row typed “avoided a trap”, equal in weight to “adopted”: “Because L012 shows X, D0031 moved from A to B.” It counts only once an instructor confirms, and anyone may object within seven days." } },
+      { at: "g-lic", who: "instr", file: "L012 Fig 3 → ?", gate: { g: "lic", block: true },
+        act: { zh: "擋下：有人想把出版商原圖 Fig 3 放上 wiki。卡上「圖的處置」是需重繪，沒有 CC-BY 也沒有書面授權，過不了 Figures 的老師簽。", en: "Stopped: someone wants the publisher’s Fig 3 on the wiki. The card’s figure field says “needs redraw”, with no CC-BY and no written permission, so it cannot pass the instructor’s signature in Figures." } },
+      { at: "media", who: "figure", file: "40 Media/Figures/Current/F0091.svg", row: { 4: "F0091 · V0231" },
+        act: { zh: "圖表編輯從「需重繪」檢視接手，重繪成 F0091，性質寫「重繪」，來源文獻填 L012。可用的數字在 Hub Facts 開 V0231，來源文獻也填 L012。", en: "The figure editor picks it up from the “needs redraw” view and redraws it as F0091, marked as a redraw and citing L012. The usable number becomes V0231 in Hub Facts, also citing L012." } },
+      { at: "g-lic", who: "instr", file: "F0091 ✓ · V0231 ✓", gate: { g: "lic" },
+        act: { zh: "通過：重繪圖標了出處，Cross-checker 核對，老師簽。", en: "Passed: the redraw credits its source, the cross-checker checks it, and the instructor signs." } },
+      { at: "deliv", who: "wikilead", file: "50 Deliverables/Wiki/W012 <page>/W012_<page>_Master", row: { 5: "W012" },
+        act: { zh: "Wiki master doc 引用 F0091 和 V0231。內文也引到這篇時，Wiki Lead 在 L012 的第 19 欄「引用頁面」填 W012。", en: "The wiki master doc cites F0091 and V0231. Where the text cites this paper too, the Wiki Lead puts W012 in L012’s column 19, “cited on page”." } },
+      { at: "o-refs", who: "rsv", file: "refs.py → references-W012.md · refs.bib · UNRESOLVED.txt", cost: { zh: "0 分，沒有人排清單", en: "0 min, nobody builds a list" },
+        act: { zh: "refs.py 從 Papers、Facts、Figures 和文獻庫快照產生這一頁的參考文獻，依 L 編號排序。對不上的印進 UNRESOLVED.txt。N30（9/29）要 refs.py --strict 回傳 0。", en: "refs.py builds this page’s references from Papers, Facts, Figures and a library snapshot, sorted by L number. Anything unmatched prints to UNRESOLVED.txt. N30 (29 Sep) requires refs.py --strict to return 0." } },
+      { at: "o-find", who: "instr", file: "07-research-qa · Ctrl+F · RQ03", cost: { zh: "30 秒", en: "30 seconds" },
+        act: { zh: "幾個月後有人問：我們為什麼不用方法 X？按 RQ 篩、按組別加類型篩，或 Ctrl+F 搜 Takeaway。也可問 AI：只用卡裡的內容，每句帶 L；卡裡沒有就回「卡裡沒有，建議開 RQ」。", en: "Months later someone asks why we did not use method X. Filter by RQ, filter by group and type, or Ctrl+F the takeaways. Or ask the AI: it answers only from the cards, with an L on every claim, and says “not in the cards, consider opening an RQ” otherwise." } }
+    ] },
   { id: "run", color: "teal",
     name: { zh: "一筆 Run", en: "A Run" },
     register: { zh: "Runs", en: "Runs" },
@@ -1338,7 +1394,7 @@ const ADV_TBD = [
   { zh: "每位 advisor 的主責 instructor 是誰；strike 的第二位簽署人；哪兩位擔任 Advisor 驗收；誰代表 GEMS 決定 Roster 名單。", en: "Each advisor’s lead instructor; the second strike signer; which two instructors take advisor verification; who decides the Roster list for GEMS." },
   { zh: "改善期限多長、誰定。申訴期限多長，申訴期間 strike 是否生效。", en: "How long an improvement period is and who sets it. How long an appeal may take, and whether a strike stands during it." },
   { zh: "第 3 階段隊員回饋：什麼形式、誰收、是否匿名、誰看得到。", en: "Stage 3 member feedback: what form, who collects it, whether it is anonymous, who sees it." },
-  { zh: "權限：Hub 怎麼依身分登入；60 Advisors 要如何做到每人只寫自己的資料夾，隊員看得到多少。「誰看得到什麼」表需要定案。", en: "Access: how the Hub knows who is viewing; how 60 Advisors lets each advisor write only their own folder, and how much the team can read. The “who sees what” table needs a decision." },
+  { zh: "權限：Hub 怎麼依身分登入；60 Advisors 要如何做到每人只寫自己的資料夾。已定：學生看得到 advisor 產出，考核結果只放 Ops；「誰看得到什麼」表其餘欄位待定案。", en: "Access: how the Hub knows who is viewing; how 60 Advisors lets each advisor write only their own folder. Decided: students can see advisor outputs and reviews stay in Ops only; the rest of the “who sees what” table still needs a decision." },
   { zh: "Advisor 人數。規模以約 10 位估算（學生約 30 位），依實際簽署為準。", en: "The number of advisors. The team is sized for about 10 (and about 30 students) until forms are signed." },
   { zh: "組別會議與 advisor 月會各多長；自主會議的出席者要有誰；這些會議與模擬 judging 能否計入實體時數。", en: "How long group and advisor meetings run; who must attend a self-run meeting; whether these and mock judging count toward on-site hours." },
   { zh: "「事先告知」要多早、用什麼形式才算，排除 strike 的考試或申請時段記在哪裡。", en: "How early and in what form “told in advance” must be, and where exempt exam or application periods are recorded." },
@@ -1359,7 +1415,7 @@ const PEOPLE = {
     {"code": "TL", "kind": "s", "group": "ops", "name": {"zh": "Team Lead", "en": "Team Lead"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "iGEM 官方送件與 Freeze 當天的頁面核對", "en": "Official iGEM submission and page cross-check on Freeze day"}, "week": [{"zh": "看 iGEM 官方截止與表單", "en": "Check official iGEM deadlines and forms"}, {"zh": "和 CAL 對下週節點", "en": "Check next week's nodes against CAL"}, {"zh": "送件前找老師看過", "en": "Get an instructor to review before submitting"}], "hrs": [0, 0, 0, 0, 1.5, 1.5, 1.5, 1.5, 2, 2.5, 3, 4.5, 1], "peak": [{"zh": "N08 週 3h", "en": "N08 week 3h"}, {"zh": "N19 週 4h", "en": "N19 week 4h"}, {"zh": "N31 週 5h", "en": "N31 week 5h"}], "nodes": {"2027-03": ["N08"], "2027-05": ["N13"], "2027-07": ["N19"], "2027-10": ["N31"]}, "tabs": [], "folders": ["50 Deliverables/Forms", "50 Deliverables/Jamboree/Booth and Materials"], "backup": "CAL", "fit": [{"zh": "英文閱讀好", "en": "Good at reading English"}, {"zh": "看到截止會先動", "en": "Acts early on deadlines"}, {"zh": "別人願意聽他講", "en": "Others listen to them"}], "rhythm": [{"day": {"zh": "週一", "en": "Mon"}, "min": 30, "duty": {"zh": "官方截止與表單", "en": "Official deadlines and forms"}}]},
     {"code": "CAL", "kind": "s", "group": "ops", "name": {"zh": "副 Team Lead 兼行事曆", "en": "Deputy Lead and Calendar"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "Hub Nodes 狀態與全隊行事曆", "en": "Hub Nodes status and everyone's calendar"}, "week": [{"zh": "週日前催節點 owner 更新狀態", "en": "Chase node owners to update status by Sun"}, {"zh": "維護全隊行事曆，日期以 Ops 為準", "en": "Maintain the team calendar; Ops dates take precedence"}, {"zh": "代理 TL", "en": "Acting TL"}], "hrs": [0, 0, 0, 0, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 2.5, 3, 1], "peak": [{"zh": "N24 週 3h", "en": "N24 week 3h"}, {"zh": "N31 週 3h", "en": "N31 week 3h"}], "nodes": {}, "tabs": ["Hub.Nodes"], "folders": [], "backup": "TL", "fit": [{"zh": "細心", "en": "Careful"}, {"zh": "不怕提醒別人", "en": "Not afraid to remind others"}, {"zh": "會用 Google 日曆", "en": "Can use Google Calendar"}], "rhythm": [{"day": {"zh": "週日", "en": "Sun"}, "min": 30, "duty": {"zh": "Nodes 掃一輪", "en": "Sweep Nodes"}}]},
     {"code": "WL", "kind": "s", "group": "wet", "name": {"zh": "Wet 組長", "en": "Wet Lead"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "Constructs、Wet 的 Tasks 與 SOP、序列審查節點", "en": "Constructs, Wet Tasks and SOPs, sequence review nodes"}, "week": [{"zh": "週會前看 Tasks、Constructs", "en": "Check Tasks and Constructs before the weekly meeting"}, {"zh": "週會開完確認決議有編號", "en": "After the weekly meeting, check decisions are numbered"}, {"zh": "追 SOP 狀態", "en": "Track SOP status"}], "hrs": [0, 0, 0, 0, 3, 2.5, 2.5, 2.5, 3, 3, 3, 1.5, 0.5], "peak": [{"zh": "N09 週 4h", "en": "N09 week 4h"}, {"zh": "N10 週 4h", "en": "N10 week 4h"}, {"zh": "N27 週 4h", "en": "N27 week 4h"}], "nodes": {"2027-03": ["N09"], "2027-04": ["N10"], "2027-09": ["N29"]}, "tabs": ["Hub.Constructs", "Hub.SOPs"], "folders": ["31 Wetlab", "31 Wetlab/SOP", "31 Wetlab/Projects", "31 Wetlab/Meetings"], "backup": "LAB", "fit": [{"zh": "實驗操作穩", "en": "Steady at bench work"}, {"zh": "願意帶人", "en": "Willing to guide others"}, {"zh": "會做取捨", "en": "Can make trade-offs"}], "rhythm": [{"day": {"zh": "週會前", "en": "Before weekly meeting"}, "min": 45, "duty": {"zh": "Tasks 與 Constructs", "en": "Tasks and Constructs"}}]},
-    {"code": "DL", "kind": "s", "group": "dry", "name": {"zh": "Dry 組長", "en": "Dry Lead"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "Dry 的 Tasks、SOP、RunLog 與 Literature Matrix", "en": "Dry Tasks, SOPs, RunLog and Literature Matrix"}, "week": [{"zh": "週會前看 Tasks", "en": "Check Tasks before the weekly meeting"}, {"zh": "週六看 RunLog", "en": "Check RunLog on Sat"}, {"zh": "程式與資料分開放好", "en": "Keep code and data stored separately"}], "hrs": [0, 0, 0, 0, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 3, 1.5, 0.5], "peak": [{"zh": "N09 週 3h", "en": "N09 week 3h"}, {"zh": "N27 週 3h", "en": "N27 week 3h"}], "nodes": {"2027-03": ["N09"]}, "tabs": ["RunLog.Runs", "LiteratureMatrix.Papers"], "folders": ["32 Drylab", "32 Drylab/SOP", "32 Drylab/Projects", "32 Drylab/Meetings"], "backup": "TSK", "fit": [{"zh": "會寫程式", "en": "Can code"}, {"zh": "能把模型講給 Wet 聽", "en": "Can explain the model to Wet"}], "rhythm": [{"day": {"zh": "週會前", "en": "Before weekly meeting"}, "min": 30, "duty": {"zh": "Tasks", "en": "Tasks"}}, {"day": {"zh": "週六", "en": "Sat"}, "min": 20, "duty": {"zh": "RunLog", "en": "RunLog"}}]},
+    {"code": "DL", "kind": "s", "group": "dry", "name": {"zh": "Dry 組長", "en": "Dry Lead"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "Dry 的 Tasks、SOP、RunLog 與 Research 工作簿", "en": "Dry Tasks, SOPs, RunLog and Research workbook"}, "week": [{"zh": "週會前看 Tasks", "en": "Check Tasks before the weekly meeting"}, {"zh": "週六看 RunLog", "en": "Check RunLog on Sat"}, {"zh": "程式與資料分開放好", "en": "Keep code and data stored separately"}], "hrs": [0, 0, 0, 0, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 3, 1.5, 0.5], "peak": [{"zh": "N09 週 3h", "en": "N09 week 3h"}, {"zh": "N27 週 3h", "en": "N27 week 3h"}], "nodes": {"2027-03": ["N09"]}, "tabs": ["RunLog.Runs", "Research.Papers"], "folders": ["32 Drylab", "32 Drylab/SOP", "32 Drylab/Projects", "32 Drylab/Meetings"], "backup": "TSK", "fit": [{"zh": "會寫程式", "en": "Can code"}, {"zh": "能把模型講給 Wet 聽", "en": "Can explain the model to Wet"}], "rhythm": [{"day": {"zh": "週會前", "en": "Before weekly meeting"}, "min": 30, "duty": {"zh": "Tasks", "en": "Tasks"}}, {"day": {"zh": "週六", "en": "Sat"}, "min": 20, "duty": {"zh": "RunLog", "en": "RunLog"}}]},
     {"code": "HWL", "kind": "s", "group": "hw", "name": {"zh": "Hardware 組長", "en": "Hardware Lead"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "Hardware 專案資料夾、Tasks、測試紀錄", "en": "Hardware project folder, Tasks, test records"}, "week": [{"zh": "週會前看 Tasks", "en": "Check Tasks before the weekly meeting"}, {"zh": "確認 CAD 與測試有放對", "en": "Check CAD and tests are filed correctly"}], "hrs": [0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2.5, 1.5, 0.5], "peak": [{"zh": "N27 週 3h", "en": "N27 week 3h"}], "nodes": {}, "tabs": [], "folders": ["33 Hardware", "33 Hardware/SOP", "33 Hardware/Projects"], "backup": "DL", "fit": [{"zh": "動手做", "en": "Hands-on"}, {"zh": "會 CAD 或電子", "en": "Knows CAD or electronics"}], "rhythm": [{"day": {"zh": "週會前", "en": "Before weekly meeting"}, "min": 30, "duty": {"zh": "Tasks", "en": "Tasks"}}]},
     {"code": "TSK", "kind": "s", "group": "dry", "name": {"zh": "Task lead", "en": "Task Lead"}, "seats": 3, "sec": 0, "when": {"zh": "任務期（N07 到 N27）", "en": "Task period (N07 to N27)"}, "own": {"zh": "一個 Task 的進度與工程照片證據鏈", "en": "Progress of one Task and its engineering photo evidence trail"}, "week": [{"zh": "更新自己 Task 的列", "en": "Update own Task rows"}, {"zh": "每月看 --trail 缺哪個 DBTL 階段", "en": "Monthly, check --trail for missing DBTL stages"}, {"zh": "開討論與求助", "en": "Open discussions and ask for help"}], "hrs": [0, 0, 0, 0, 2, 2, 2, 2, 2.5, 2.5, 2.5, 1, 0], "peak": [{"zh": "N12 週 3h", "en": "N12 week 3h"}, {"zh": "N27 週 3h", "en": "N27 week 3h"}], "nodes": {}, "tabs": ["Hub.Tasks"], "folders": [], "backup": "WL", "fit": [{"zh": "能把工作拆小", "en": "Can break work into small pieces"}, {"zh": "會主動問", "en": "Asks proactively"}], "rhythm": [{"day": {"zh": "週會前", "en": "Before weekly meeting"}, "min": 20, "duty": {"zh": "Tasks 自己的列", "en": "Own rows in Tasks"}}], "note": {"zh": "Task lead 選任方式待決定（H-03）。多於 3 個 Task 時，由組長或一般隊員兼任，不增加席位", "en": "Task lead selection to be decided (H-03). With more than 3 Tasks, a lead or regular member doubles up; no extra seats"}},
     {"code": "LAB", "kind": "s", "group": "wet", "name": {"zh": "Lab lead", "en": "Lab Lead"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "暑期 Run 結果率與實驗室當日秩序", "en": "Summer Run result rate and daily lab order"}, "week": [{"zh": "週六掃 Hub Runs 沒結果的列", "en": "Sat: sweep Hub Runs rows with no result"}, {"zh": "提醒班表", "en": "Remind about the roster"}, {"zh": "告訴老師現場狀況", "en": "Tell instructors the situation on site"}], "hrs": [0, 0, 0, 0, 2, 2, 2, 2, 3, 3, 2.5, 0.5, 0.5], "peak": [{"zh": "N18 每週 3h", "en": "N18 weekly 3h"}, {"zh": "N27 週 3h", "en": "N27 week 3h"}], "nodes": {"2027-07": ["N18"], "2027-08": ["N18"], "2027-09": ["N27"]}, "tabs": ["Hub.Runs", "LabRoster.Shifts"], "folders": ["31 Wetlab/Run Records", "31 Wetlab/Data"], "backup": "SFT", "fit": [{"zh": "常在實驗室", "en": "Often in the lab"}, {"zh": "守規矩也敢提醒人", "en": "Follows rules and dares to remind others"}], "rhythm": [{"day": {"zh": "週六", "en": "Sat"}, "min": 40, "duty": {"zh": "Runs 與班表", "en": "Runs and roster"}}]},
@@ -1378,7 +1434,7 @@ const PEOPLE = {
     {"code": "MDL", "kind": "s", "group": "media", "name": {"zh": "Media lead", "en": "Media Lead"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N02 起）", "en": "Year-round (from N02)"}, "own": {"zh": "40 Media 的規則、shot list、精選與 Milestones", "en": "40 Media rules, shot list, picks and Milestones"}, "week": [{"zh": "每月第一個週六 shot list", "en": "Shot list on the first Sat of each month"}, {"zh": "每月標精選", "en": "Mark picks monthly"}, {"zh": "每月底寫 Milestones Caption", "en": "Write Milestones Caption at the end of each month"}, {"zh": "抽查 5 張人臉 FALSE", "en": "Spot-check 5 face-FALSE photos"}], "hrs": [0, 1, 1, 1, 1, 1, 1, 1.5, 1, 1, 1.5, 1, 1], "peak": [{"zh": "N14 肖像 2h", "en": "N14 portraits 2h"}, {"zh": "N23 前精選 2h", "en": "Picks before N23 2h"}, {"zh": "N35 交接 2h", "en": "N35 handover 2h"}], "nodes": {"2027-11": ["N35"]}, "tabs": [], "folders": ["40 Media", "40 Media/Art and Brand"], "backup": "PHO", "fit": [{"zh": "有畫面感", "en": "Visual sense"}, {"zh": "會挑照片", "en": "Good at choosing photos"}, {"zh": "知道什麼不該放", "en": "Knows what not to post"}], "rhythm": [{"day": {"zh": "每月第一個週六", "en": "First Sat of each month"}, "min": 40, "duty": {"zh": "shot list 與精選", "en": "Shot list and picks"}}, {"day": {"zh": "每月最後週日", "en": "Last Sun of each month"}, "min": 30, "duty": {"zh": "Milestones", "en": "Milestones"}}]},
     {"code": "VID", "kind": "s", "group": "media", "name": {"zh": "Video lead", "en": "Video Lead"}, "seats": 1, "sec": 0, "when": {"zh": "季節（4 月到 N32）", "en": "Seasonal (Apr to N32)"}, "own": {"zh": "Promo 與 Presentation Video", "en": "Promo and Presentation Video"}, "week": [{"zh": "腳本與 shot list，每鏡頭寫 M", "en": "Script and shot list; write an M for every shot"}, {"zh": "排拍攝", "en": "Schedule filming"}, {"zh": "送出前查影像同意", "en": "Check video consent before release"}], "hrs": [0, 0, 0, 0, 0, 1, 1.5, 2, 4.5, 2, 3, 4.5, 0], "peak": [{"zh": "N20 拍攝兩週各 5h", "en": "N20 filming, two weeks, 5h each"}, {"zh": "N32 前兩週各 5h", "en": "Two weeks before N32, 5h each"}], "nodes": {"2027-07": ["N20"], "2027-10": ["N32"]}, "tabs": [], "folders": ["50 Deliverables/Promo Video", "50 Deliverables/Presentation Video"], "backup": "ART", "fit": [{"zh": "剪輯", "en": "Editing"}, {"zh": "說故事", "en": "Storytelling"}, {"zh": "能排程", "en": "Can schedule"}], "rhythm": [{"day": {"zh": "週六", "en": "Sat"}, "min": 60, "duty": {"zh": "腳本與拍攝", "en": "Script and filming"}}], "note": {"zh": "N20、N32 尖峰靠 ART 與 advisor 的 video script 範圍分擔", "en": "N20 and N32 peaks are shared with ART and the advisor's video script scope"}},
     {"code": "ART", "kind": "s", "group": "wiki", "name": {"zh": "美術與設計", "en": "Art and Design"}, "seats": 2, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "品牌、主視覺、美術需求、展板", "en": "Brand, key visual, art requests, display boards"}, "week": [{"zh": "排美術需求清單", "en": "Order the art request list"}, {"zh": "維護主視覺與色票", "en": "Maintain key visual and colour swatches"}, {"zh": "投票結果匯出成檔案", "en": "Export vote results to a file"}], "hrs": [0, 0, 0, 0, 2, 2, 2, 2, 2, 3, 2.5, 3, 1], "peak": [{"zh": "N22 週 4h", "en": "N22 week 4h"}, {"zh": "N34 前兩週各 4h", "en": "Two weeks before N34, 4h each"}], "nodes": {"2027-08": ["N22"], "2027-10": ["N34"], "2027-11": ["N34"]}, "tabs": [], "folders": ["40 Media/Art and Brand"], "backup": "ART", "fit": [{"zh": "設計工具", "en": "Design tools"}, {"zh": "願意依需求改", "en": "Willing to revise on request"}], "rhythm": [{"day": {"zh": "週六", "en": "Sat"}, "min": 60, "duty": {"zh": "美術需求", "en": "Art requests"}}]},
-    {"code": "HPL", "kind": "s", "group": "hp", "name": {"zh": "HP 組長", "en": "HP Lead"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "Interactions、同意確認與 IHP Storyline", "en": "Interactions, consent checking and IHP Storyline"}, "week": [{"zh": "週日讀 Interactions、Consent", "en": "Sun: read Interactions and Consent"}, {"zh": "確認同意證據（HP 組長確認欄）", "en": "Check consent evidence (HP lead confirmation column)"}, {"zh": "維護 Storyline", "en": "Maintain Storyline"}, {"zh": "管 Survey Bank", "en": "Manage Survey Bank"}], "hrs": [0, 0, 0, 0, 2.5, 2.5, 2.5, 2.5, 2.5, 3, 4, 1.5, 0.5], "peak": [{"zh": "N25 前兩週各 4h", "en": "Two weeks before N25, 4h each"}], "nodes": {"2027-09": ["N25"]}, "tabs": ["Hub.Interactions", "SurveyBank.Instruments", "LiteratureMatrix.HPCases"], "folders": ["34 Human Practices", "34 Human Practices/Interactions", "34 Human Practices/SOP", "34 Human Practices/Meetings"], "backup": "OUT", "fit": [{"zh": "敢跟陌生大人講話", "en": "Not shy of talking to unfamiliar adults"}, {"zh": "有條理", "en": "Organised"}, {"zh": "顧他人隱私", "en": "Protects others' privacy"}], "rhythm": [{"day": {"zh": "週日", "en": "Sun"}, "min": 45, "duty": {"zh": "Interactions、Consent", "en": "Interactions、Consent"}}]},
+    {"code": "HPL", "kind": "s", "group": "hp", "name": {"zh": "HP 組長", "en": "HP Lead"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "Interactions、同意確認與 IHP Storyline", "en": "Interactions, consent checking and IHP Storyline"}, "week": [{"zh": "週日讀 Interactions、Consent", "en": "Sun: read Interactions and Consent"}, {"zh": "確認同意證據（HP 組長確認欄）", "en": "Check consent evidence (HP lead confirmation column)"}, {"zh": "維護 Storyline", "en": "Maintain Storyline"}, {"zh": "管 Survey Bank", "en": "Manage Survey Bank"}], "hrs": [0, 0, 0, 0, 2.5, 2.5, 2.5, 2.5, 2.5, 3, 4, 1.5, 0.5], "peak": [{"zh": "N25 前兩週各 4h", "en": "Two weeks before N25, 4h each"}], "nodes": {"2027-09": ["N25"]}, "tabs": ["Hub.Interactions", "SurveyBank.Instruments", "Research.HPCases"], "folders": ["34 Human Practices", "34 Human Practices/Interactions", "34 Human Practices/SOP", "34 Human Practices/Meetings"], "backup": "OUT", "fit": [{"zh": "敢跟陌生大人講話", "en": "Not shy of talking to unfamiliar adults"}, {"zh": "有條理", "en": "Organised"}, {"zh": "顧他人隱私", "en": "Protects others' privacy"}], "rhythm": [{"day": {"zh": "週日", "en": "Sun"}, "min": 45, "duty": {"zh": "Interactions、Consent", "en": "Interactions、Consent"}}]},
     {"code": "KCO", "kind": "s", "group": "hp", "name": {"zh": "同意紀錄員", "en": "Consent Clerk"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "Hub Consent 的列與追蹤（確認在 HP 組長，簽在老師）", "en": "Hub Consent rows and tracking (HP lead confirms, instructors sign)"}, "week": [{"zh": "開 K 列、寄感謝與授權信草稿給老師看", "en": "Open K rows; draft thank-you and permission letters for instructors to review"}, {"zh": "週日追待 K", "en": "Sun: chase items awaiting K"}, {"zh": "照片待 K 清單接到對的 I", "en": "Link the photos-awaiting-K list to the right I"}], "hrs": [0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 3, 1, 0.5], "peak": [{"zh": "N25 前兩週各 3h", "en": "Two weeks before N25, 3h each"}], "nodes": {"2027-09": ["N25"]}, "tabs": ["Hub.Consent"], "folders": ["34 Human Practices/Consent"], "backup": "HPL", "fit": [{"zh": "仔細", "en": "Meticulous"}, {"zh": "守得住秘密", "en": "Keeps confidences"}, {"zh": "有禮貌", "en": "Polite"}], "rhythm": [{"day": {"zh": "週日", "en": "Sun"}, "min": 30, "duty": {"zh": "Consent 待辦", "en": "Consent to-dos"}}], "note": {"zh": "看不到 Minor Permissions；未成年許可由老師處理", "en": "Cannot see Minor Permissions; instructors handle minors' permissions"}},
     {"code": "EDU", "kind": "s", "group": "hp", "name": {"zh": "教育線", "en": "Education Lead"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "教案、邀課與 Education Impact", "en": "Lesson plans, class invitations and Education Impact"}, "week": [{"zh": "排場次", "en": "Schedule sessions"}, {"zh": "教案與邀課信草稿", "en": "Draft lesson plans and invitation letters"}, {"zh": "場次後寫 Impact", "en": "Write Impact after each session"}], "hrs": [0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 1.5, 0.5, 0.5], "peak": [{"zh": "場次前一週 3h", "en": "Week before a session 3h"}], "nodes": {}, "tabs": [], "folders": ["34 Human Practices/Education"], "backup": "OUT", "fit": [{"zh": "會教", "en": "Can teach"}, {"zh": "和小朋友相處自在", "en": "Comfortable with children"}], "rhythm": [{"day": {"zh": "週六", "en": "Sat"}, "min": 45, "duty": {"zh": "場次準備", "en": "Session preparation"}}], "note": {"zh": "校外未成年的照片與許可不經手，由老師與行政處理", "en": "Photos and permissions of outside minors are not handled here; instructors and admin deal with them"}},
     {"code": "OUT", "kind": "s", "group": "hp", "name": {"zh": "活動與外展", "en": "Outreach and Events"}, "seats": 1, "sec": 0, "when": {"zh": "全年（N07 起）", "en": "Year-round (from N07)"}, "own": {"zh": "活動 Dossier 與現場分工", "en": "Event Dossier and on-site roles"}, "week": [{"zh": "活動前 4 週開 Dossier", "en": "Open the Dossier 4 weeks before the event"}, {"zh": "排人、物料、攤位", "en": "Schedule people, materials, stalls"}, {"zh": "活動後 2 週結案", "en": "Close out within 2 weeks after the event"}], "hrs": [0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 1.5, 2, 1], "peak": [{"zh": "活動前一週 3h", "en": "Week before an event 3h"}, {"zh": "N34 攤位 3h", "en": "N34 stall 3h"}], "nodes": {"2027-10": ["N34"], "2027-11": ["N34"]}, "tabs": [], "folders": ["34 Human Practices/Events"], "backup": "EDU", "fit": [{"zh": "會安排", "en": "Good at organising"}, {"zh": "不怕臨場", "en": "Fine with live situations"}], "rhythm": [{"day": {"zh": "週六", "en": "Sat"}, "min": 45, "duty": {"zh": "當期活動", "en": "Current event"}}]},
@@ -1493,8 +1549,8 @@ const VILLAGE_BUILDINGS = [
     fn: { zh: "一個功能，不是席位。運算 Run 都記在這裡，程式碼在團隊 GitHub，Drive 只放連結。", en: "A function, not a seat. Compute Runs are logged here; code lives on the team GitHub and Drive holds links." },
     files: ["RunLog.Runs", "32 Drylab/Projects/<MD01 or SW01>/<ID>_RunLog"] },
   { id: "library", d: "dry", roles: ["DL"], heat: ["DL"], name: { zh: "文獻館", en: "Literature Library" },
-    fn: { zh: "全隊一份 Literature Matrix，HP 案例也在這裡的分頁。", en: "One Literature Matrix for the team; HP cases are a tab in it." },
-    files: ["LiteratureMatrix.Papers", "LiteratureMatrix.HPCases", "00 Start Here/Literature Matrix"] },
+    fn: { zh: "全隊一份 Research 工作簿，HP 案例也在這裡的分頁。", en: "One Research workbook for the team; HP cases are a tab in it." },
+    files: ["Research.Papers", "Research.HPCases", "00 Start Here/Research"] },
   { id: "tasks", d: "dry", roles: ["TSK"], name: { zh: "Task 工作檯", en: "Task Bench" } },
 
   { id: "hwhouse", d: "hw", roles: ["HWL"], name: { zh: "Hardware 工坊", en: "Hardware Workshop" } },
@@ -1587,34 +1643,107 @@ const VILLAGE_CAT = {
 };
 
 // The photo system, compact. Proposal: D-049 to D-053.
-// ---------- Research: one paper's seven steps, three sheets, three rules ----------
-// Process only. The reference manager is still to be decided; everything here says "the shared team library".
-const RESEARCH_STEPS = [
-  { step: { zh: "1 找到", en: "1 Find" }, what: { zh: "存進團隊共用文獻庫的收件匣，不存在自己電腦", en: "Into the shared team library’s inbox, never onto your own computer" }, min: { zh: "2 分", en: "2 min" }, who: { zh: "任何人", en: "Anyone" } },
-  { step: { zh: "2 分流", en: "2 Triage" }, what: { zh: "只看標題摘要與圖，三選一：進讀／存參／不收", en: "Title, abstract and figures only, then one of three: read, keep for reference, or decline" }, min: { zh: "2 分", en: "2 min" }, who: { zh: "加進來的人", en: "Whoever added it" } },
-  { step: { zh: "3 讀", en: "3 Read" }, what: { zh: "三遍法：先看圖與結論，再看結果，要照做才讀方法", en: "Three passes: figures and conclusions, then the results, and the methods only if you are going to follow them" }, min: { zh: "40 分（熟練後；前三篇約 75 分）", en: "40 min (once practised; about 75 for your first three)" }, who: { zh: "讀者", en: "The reader" } },
-  { step: { zh: "4 做卡", en: "4 Make the card" }, what: { zh: "同一次坐下來填完一列 Paper Card", en: "Fill one Paper Card row in the same sitting" }, min: { zh: "10 分", en: "10 min" }, who: { zh: "同一人", en: "The same person" } },
-  { step: { zh: "5 路由", en: "5 Route it" }, what: { zh: "標記建議誰看；有可用數字就開一筆事實（V）；要用的圖記下位置並標示重繪", en: "Flag who should see it; open a fact (V) for any number you can use; note where a figure sits and mark it for redrawing" }, min: { zh: "1 分", en: "1 min" }, who: { zh: "同一人", en: "The same person" } },
-  { step: { zh: "6 兌現", en: "6 Cash it in" }, what: { zh: "影響了會議決議時，在決議表的「依據」欄填上 RQ 或 L", en: "When it shapes a meeting decision, put the RQ or L in the Decisions sheet’s “basis” column" }, min: { zh: "0.5 分", en: "0.5 min" }, who: { zh: "會議書記", en: "Meeting scribe" } },
-  { step: { zh: "7 被引用", en: "7 Get cited" }, what: { zh: "不用做。Wiki 的參考文獻清單由腳本產生", en: "Nothing to do. The wiki’s reference lists are generated by a script" }, min: { zh: "0 分", en: "0 min" }, who: { zh: "腳本", en: "A script" } }
+// ---------- Research: why, structure, dates, who, time, how leads are chosen ----------
+// Every number comes from the lab's decisions/RESEARCH-SYSTEM.md. Process only: no project content, no names.
+const RESEARCH_WHY = [
+  { n: "0 / 5", t: { zh: "「這回答了哪個開放問題」", en: "“Which open question does this answer?”" }, d: { zh: "2026 研究範本裡這一欄 5 筆全空。「帶出什麼新問題」「還有誰該讀」也一樣。", en: "Blank in all 5 entries of the 2026 reading template. So were “what new question” and “who else should read this”." } },
+  { n: { zh: "1 筆", en: "1 entry" }, t: { zh: "「讀了什麼，改變了什麼」", en: "“What we read, and what it changed”" }, d: { zh: "全季只有一筆這樣的紀錄，而且在 HP，不在研究。定題也沒有決策紀錄。", en: "One record all season, and it was in HP, not research. The topic choice left no decision record either." } },
+  { n: { zh: "43 檔", en: "43 files" }, t: { zh: "傾倒一次就沒再開", en: "Dumped once, never reopened" }, d: { zh: "三個「一篇一夾」的文獻夾合計 43 個檔案，都是一次傳完。", en: "Three paper-per-folder libraries, 43 files between them, each uploaded in one go." } },
+  { n: { zh: "0 個", en: "0" }, t: { zh: "團隊文獻庫", en: "Team libraries" }, d: { zh: "3 月教過文獻管理工具，匯出裡卻找不到任何一個庫。有一堂課，沒有一個先存在的地方。", en: "A reference tool was taught in March, yet the export holds no library at all. There was a class, but no place already waiting." } }
 ];
 
-const RESEARCH_SHEETS = [
-  { sheet: { zh: "研究問題（RQ）", en: "Research questions (RQ)" }, reader: { zh: "研究組長與訓練主責老師", en: "Research Lead and the lead training instructor" }, when: { zh: "每週六會前 10 分鐘", en: "10 minutes before the Saturday meeting" }, why: { zh: "這週誰讀什麼、哪一題該結案", en: "Who reads what this week, and which question can be closed" } },
-  { sheet: { zh: "Paper Card（L）", en: "Paper Card (L)" }, reader: { zh: "各組組長與研究組長", en: "Group leads and the Research Lead" }, when: { zh: "週會前", en: "Before the weekly meeting" }, why: { zh: "下一個要查什麼、誰該看", en: "What to look up next, and who should read it" } },
-  { sheet: { zh: "影響紀錄（RI）", en: "Impact record (RI)" }, reader: TCH, when: { zh: "週日", en: "Sunday" }, why: { zh: "哪些研究影響已確認", en: "Which research impacts are confirmed" } }
+const RESEARCH_CHAIN = [
+  { id: "RQ", name: "Research Questions", loc: "Research / Questions", d: { zh: "開季前就存在。每題必填「會改變什麼決定」，寫不出來就不立題。", en: "Exists before the season opens. Each question must state which decision it would change; if nobody can say, it is not opened." }, r: { zh: "研究組長與訓練主責老師，週六會前 10 分鐘", en: "Research Lead and lead training instructor, 10 minutes before Saturday’s meeting" } },
+  { id: "L", name: "Paper Card", loc: "Research / Papers", d: { zh: "一篇一列，19 欄（學生填 18），10 分鐘。第 5 欄從下拉選 RQ：沒有 RQ 就沒有卡。", en: "One row per paper, 19 columns (students fill 18), 10 minutes. Column 5 picks an RQ from a dropdown: no RQ, no card." }, r: { zh: "各組組長，週會前", en: "Group leads, before the weekly meeting" } },
+  { id: "D", name: "Decision", loc: "Hub / Decisions", d: { zh: "新增一欄「依據（RQ／L）」。這一格就是研究變成決定的憑證。", en: "One new column, “Basis (RQ/L)”. That cell is the proof that research became a decision." }, r: { zh: "會議書記填，0.5 分鐘", en: "Filled by the meeting scribe, 0.5 minutes" } }
+];
+
+const RESEARCH_AROUND = [
+  { name: { zh: "共用文獻庫", en: "Shared library" }, loc: "_Inbox · _Rejected", d: { zh: "全隊只有一個庫，每篇先進 _Inbox。工具提案 Zotero 團隊群組，帳號與空間待 PI 確認。", en: "One library for the team; every paper enters _Inbox. Proposed tool: a Zotero team group, with account and storage awaiting the PI." } },
+  { name: "Reading Notes", loc: "15 Research/Reading Notes/L###_slug", d: { zh: "只在卡填不下時才開，卡上必須有連結。", en: "Opened only when a card cannot hold it, and the card must link to it." } },
+  { name: "Question Briefs", loc: "15 Research/Question Briefs/RQ##_slug", d: { zh: "一題的結論。結論是「不要做」時一定要寫，200 字內。", en: "A question’s conclusion. Required when the answer is “don’t do this”, in 200 characters or fewer." } },
+  { name: "Impact Log", loc: "Research / Impact (RI)", d: { zh: "一件事一列，必須連到一個 D，老師週日確認。提案：事件隊內可見，評價留在 Ops。", en: "One row per event, tied to a D, confirmed by instructors on Sunday. Proposed: events visible to the team, evaluation stays in Ops." } },
+  { name: { zh: "自動產生的參考文獻", en: "Generated reference list" }, loc: "refs.py → references-W###.md", d: { zh: "從 Papers、Facts、Figures 產生每頁清單。人不排清單。", en: "Built per page from Papers, Facts and Figures. Nobody assembles a list by hand." } }
+];
+
+const RESEARCH_DATES = [
+  { n: "11/25", k: "N00", t: { zh: "這天之前要好", en: "Must be ready before this" }, c: "orange", items: [
+    { zh: "10 題題目層 RQ 種進 Questions：PI 與老師寫，來不及先給 3 題", en: "10 topic-level RQs seeded in Questions, written by the PI and instructors; if time runs out, 3 first" },
+    { zh: "每題都寫好「會改變什麼決定」", en: "Each one states which decision it would change" },
+    { zh: "Research 工作簿已建", en: "The Research workbook is built" },
+    { zh: "共用文獻庫已開，擁有者是成人帳號", en: "The shared library is open, owned by an adult account" }
+  ] },
+  { n: "11/29", k: "N01", t: { zh: "這天開始", en: "Starts this day" }, c: "teal", items: [
+    { zh: "Discord 開啟，Online Topic Research 開始", en: "Discord opens and Online Topic Research begins" },
+    { zh: "分流三選一：當天用 Discord 語音講一次並錄下來", en: "Three-way triage explained once that day on Discord voice, and recorded" },
+    { zh: "每位學生第一週完成 1 張卡；第一張可讀綜述、政府報告或往年隊伍 wiki", en: "Each student finishes 1 card in week one; the first may be a review, a government report or a past team’s wiki" },
+    { zh: "週日 digest 開始，研究組長由老師代行", en: "Sunday digest begins, with instructors acting as Research Lead" },
+    { zh: "12/06 數三個數字：加入人數、完成卡數（目標 ≥ 名冊七成）、實際分鐘中位數", en: "On 6 Dec, count three things: who joined, cards finished (target at least 70% of the roster), and median real minutes" }
+  ] }
+];
+
+const RESEARCH_MILES = [
+  { d: { zh: "12/26", en: "26 Dec" }, n: "N02", t: { zh: "Journal club 開始：週會開頭 10 分鐘", en: "Journal club starts: first 10 minutes of the weekly meeting" } },
+  { d: { zh: "1/2–1/23", en: "2–23 Jan" }, n: "N03", t: { zh: "進 PK 的題目至少 3 張卡，至少 1 張法規倫理或方法", en: "Each PK topic has at least 3 cards, at least 1 on regulation, ethics or method" } },
+  { d: { zh: "1/30", en: "30 Jan" }, n: "N04", t: { zh: "Decision Record 的依據填 L 或 RQ", en: "The Decision Record’s basis cites an L or RQ" } },
+  { d: { zh: "3/10", en: "10 Mar" }, n: "N06", t: { zh: "依影響證據選研究組長", en: "Research Lead chosen from impact evidence" } },
+  { d: { zh: "6/15", en: "15 Jun" }, n: "N14", t: { zh: "refs.py 第一次試跑", en: "First trial run of refs.py" } },
+  { d: { zh: "8/28", en: "28 Aug" }, n: "N23", t: { zh: "Journal club 停辦", en: "Journal club stops" } },
+  { d: { zh: "9/15", en: "15 Sep" }, n: "N27", t: { zh: "RQ 停止新增，新問題走 Issues", en: "No new RQs; new questions go to Issues" } },
+  { d: { zh: "9/29", en: "29 Sep" }, n: "N30", t: { zh: "通過條件：refs.py --strict 回傳 0", en: "Pass rule: refs.py --strict returns 0" } }
+];
+
+const RESEARCH_WHO = [
+  { who: { zh: "一般學生", en: "Every student" }, what: { zh: "每週最多 1 張 Paper Card（上限，不是下限）；聽 journal club", en: "At most 1 Paper Card a week (a ceiling, not a floor); listens at journal club" }, when: { zh: "N01 起；N05–N07 與 N23 後不要求", en: "From N01; not required in N05–N07 or after N23" }, min: { zh: "前三張 75 分，之後 40–50 分；聽 10 分", en: "75 min for the first three, then 40–50; 10 to listen" } },
+  { who: { zh: "研究組長 RSL（3/10 前老師代行）", en: "Research Lead, RSL (instructors act until 10 Mar)" }, what: { zh: "RQ 分流、排 journal club、發週日 digest、看「進讀中」", en: "Triages RQs, schedules journal club, posts the Sunday digest, watches the “reading” view" }, when: { zh: "週六會前 10 分鐘；週日", en: "10 minutes before Saturday’s meeting; Sunday" }, min: { zh: "60–150 分", en: "60–150 min" } },
+  { who: { zh: "研究副組長 RSV", en: "Research Vice Lead, RSV" }, what: { zh: "清 _Inbox、去重、管 Open Library 命名；freeze 前跑 refs.py", en: "Clears _Inbox, removes duplicates, keeps Open Library names right; runs refs.py before freeze" }, when: { zh: "N01 起全年，尖峰 9 月", en: "From N01, all year, peak in September" }, min: { zh: "30–90 分", en: "30–90 min" } },
+  { who: { zh: "訓練主責老師", en: "Lead training instructor" }, what: { zh: "N01–N06 代行研究組長全部工作；N07 起只留 RQ 會前 10 分鐘", en: "N01–N06: does the whole Research Lead job. From N07: only the 10 minutes before the meeting" }, when: { zh: "N01–N06 共 15 週，之後每週六", en: "15 weeks across N01–N06, then Saturdays" }, min: { zh: "60–150 分，N07 起 10 分", en: "60–150 min, then 10 from N07" } },
+  { who: { zh: "老師", en: "Instructors" }, what: { zh: "確認 Impact：這個 D 真的因這張卡而改嗎", en: "Confirm Impact rows: did this D really change because of this card?" }, when: { zh: "週日", en: "Sunday" }, min: { zh: "10 分", en: "10 min" } },
+  { who: { zh: "會議書記", en: "Meeting scribe" }, what: { zh: "決議引用研究時，填「依據（RQ／L）」", en: "Fills “Basis (RQ/L)” when a decision draws on research" }, when: { zh: "有決議時", en: "When a decision is made" }, min: { zh: "每次 0.5 分", en: "0.5 min each" } },
+  { who: { zh: "圖表編輯、事實與術語（N07 前 RSV）", en: "Figure and fact editors (RSV before N07)" }, what: { zh: "看「需重繪」與「有可用數字」檢視，接成 F 和 V", en: "Work the “needs redraw” and “usable numbers” views into F and V" }, when: { zh: "有卡進來時", en: "When cards arrive" }, min: { zh: "算在各自角色內", en: "Within those roles" } },
+  { who: { zh: "Wiki Lead 或事實與術語", en: "Wiki Lead or fact editor" }, what: { zh: "寫 wiki 時填第 19 欄「引用頁面」，唯一事後回填的欄", en: "Fills column 19, “cited on page”, while drafting: the only column filled afterwards" }, when: { zh: "Wiki draft 時", en: "While drafting the wiki" }, min: { zh: "算在各自角色內", en: "Within those roles" } }
+];
+
+const RESEARCH_TOTALS = [
+  { n: { zh: "40.5 分", en: "40.5 min" }, t: { zh: "一篇論文走完七步", en: "One paper, all seven steps" } },
+  { n: { zh: "11 分", en: "11 min" }, t: { zh: "其中行政：做卡 10 ＋路由 1", en: "Admin within that: card 10 + routing 1" } },
+  { n: { zh: "75 分", en: "75 min" }, t: { zh: "前三張每張，含讀", en: "Each of your first three, reading included" } }
+];
+
+const RESEARCH_STEPS = [
+  { step: { zh: "1 找到", en: "1 Find" }, what: { zh: "存進共用文獻庫的 _Inbox，不存在自己電腦", en: "Save to the shared library’s _Inbox, never to your own computer" }, min: { zh: "2 分", en: "2 min" }, who: { zh: "任何人", en: "Anyone" } },
+  { step: { zh: "2 分流", en: "2 Triage" }, what: { zh: "只看標題摘要與圖，三選一：進讀（連到開放 RQ）／存參／丟（_Rejected）", en: "Title, abstract and figures only, then one of three: read (tied to an open RQ), keep for reference, or drop to _Rejected" }, min: { zh: "2 分", en: "2 min" }, who: { zh: "加進來的人", en: "Whoever added it" } },
+  { step: { zh: "3 讀", en: "3 Read" }, what: { zh: "三遍法：標題摘要圖表結論；圖與結果；要照做才讀方法", en: "Three passes: title, abstract, figures, conclusion; then figures and results; methods only if you will follow them" }, min: { zh: "25 分（第一次誠實估 60–90 分）", en: "25 min (honestly 60–90 the first time)" }, who: { zh: "讀者", en: "The reader" } },
+  { step: { zh: "4 做卡", en: "4 Card" }, what: { zh: "同一次坐下來填完 Papers 的一列", en: "Fill one Papers row in the same sitting" }, min: { zh: "10 分", en: "10 min" }, who: { zh: "同一人", en: "Same person" } },
+  { step: { zh: "5 路由", en: "5 Route" }, what: { zh: "填建議誰看；有可用數字開 V；要用的圖記位置並標「需重繪」", en: "Name who should read it; open a V for a usable number; note where a figure sits and mark it “needs redraw”" }, min: { zh: "1 分", en: "1 min" }, who: { zh: "同一人", en: "Same person" } },
+  { step: { zh: "6 兌現", en: "6 Cash in" }, what: { zh: "影響會議決議時，在 Hub Decisions 的「依據（RQ／L）」填上", en: "When it shapes a decision, fill “Basis (RQ/L)” in Hub Decisions" }, min: { zh: "0.5 分", en: "0.5 min" }, who: { zh: "會議書記", en: "Meeting scribe" } },
+  { step: { zh: "7 被引用", en: "7 Cited" }, what: { zh: "不用做。refs.py 產生每頁的參考文獻", en: "Nothing to do. refs.py generates each page’s references" }, min: { zh: "0 分", en: "0 min" }, who: { zh: "腳本", en: "A script" } }
+];
+
+const RESEARCH_EVIDENCE = [
+  { t: { zh: "相異 D 影響數", en: "Distinct Ds changed" }, d: { zh: "老師確認過的 Impact。算改變了幾個決定，不算讀了幾篇。", en: "Instructor-confirmed Impact. It counts decisions changed, not papers read." } },
+  { t: { zh: "RQ 結案率", en: "RQs closed" }, d: { zh: "負責的 RQ 有多少走到「已回答」或「不要做」，而不是擱置。", en: "How many RQs they own reach “answered” or “don’t do this” instead of being shelved." } },
+  { t: { zh: "別人用不用他的卡", en: "Whether others use their cards" }, d: { zh: "被「建議誰看」指到的人，有沒有真的開新卡或開 RQ。最難造假。", en: "Whether the people named under “who should read this” went on to open a card or an RQ. The hardest to fake." } }
+];
+
+const RESEARCH_FAIR = [
+  { zh: "算相異 D 數，不算列數。", en: "Count distinct Ds, not rows." },
+  { zh: "五類同權重：避雷和採納一樣算。", en: "Five types, equal weight: avoiding a trap counts the same as adopting a method." },
+  { zh: "只有老師確認的列才算。", en: "Only rows an instructor confirmed count." },
+  { zh: "七天異議期，由老師裁定。", en: "Seven days to object, and instructors rule." }
 ];
 
 const RESEARCH_RULES = [
-  { t: { zh: "分流先行", en: "Triage first" }, d: { zh: "只有連得到一個開放研究問題的論文才建卡。全部都建卡的表，三週後沒有人讀。", en: "Only a paper that connects to an open research question gets a card. A sheet where everything gets a card has no readers three weeks later." } },
-  { t: { zh: "卡是列，不是檔", en: "A card is a row, not a file" }, d: { zh: "一張表、固定表頭、多篇橫向比較。空白的格子要看得見才會被填。", en: "One sheet, fixed headers, papers compared side by side. A blank cell only gets filled when you can see it." } },
-  { t: { zh: "表有壽命", en: "Sheets have a lifespan" }, d: { zh: "每張表都寫明什麼時候停用。方法比較表在四月封存，journal club 在衝刺期停辦。", en: "Every sheet states when it retires. The methods comparison sheet is archived in April, and journal club stops during the crunch." } }
+  { t: { zh: "分流先行", en: "Triage first" }, d: { zh: "只有連得到開放 RQ 的論文才拿 L。不做分流，就會變成每週 20 張卡、沒人讀、三週後死掉。", en: "Only a paper tied to an open RQ gets an L. Without triage you get 20 cards a week, no readers, and a dead sheet in three weeks." } },
+  { t: { zh: "卡是列，不是檔", en: "A card is a row, not a file" }, d: { zh: "2026 活過一季的只有這種形狀：一份文件、固定表頭、多篇橫向比較。空白的格子要看得見才會被填。", en: "The one shape that lasted a season in 2026: one document, fixed headers, papers side by side. A blank cell only gets filled when it can be seen." } },
+  { t: { zh: "表有壽命", en: "Sheets have a lifespan" }, d: { zh: "MethodCompare 在 N10 封存，journal club 在 N23 停辦，RQ 在 N27 後只讀不寫。", en: "MethodCompare is archived at N10, journal club stops at N23, and RQs are read-only after N27." } }
 ];
 
 const RESEARCH_RIGHTS = [
-  { zh: "第三方全文只在封閉的團隊文獻庫內閱讀。", en: "Third-party full texts are read only inside the closed team library." },
-  { zh: "論文裡的圖不下載、不截圖；卡上只記位置，要用就重繪。", en: "Figures in a paper are never downloaded or screenshotted; the card notes where one sits, and anything you need is redrawn." },
-  { zh: "重繪的圖走圖表編號（F），數字走事實編號（V）；沒有編號不進 wiki。", en: "A redrawn figure goes through a figure number (F) and a number through a fact number (V); without one, it does not enter the wiki." }
+  { zh: "付費全文只有在開放取用，或上傳者有合法取用權時，才放進封閉的文獻庫。Drive 與 wiki 永不放出版商 PDF 與原圖。", en: "A paywalled full text enters the closed library only if it is open access or the uploader has lawful access. Publisher PDFs and original figures never go on Drive or the wiki." },
+  { zh: "論文的圖不下載、不截圖：卡上只記位置（Fig 3），要用就重繪。", en: "Paper figures are never downloaded or screenshotted: the card records the location (Fig 3), and anything needed is redrawn." },
+  { zh: "原圖上 wiki 只限已確認 CC-BY 等開放授權或書面授權；否則過不了 Figures 的老師簽。", en: "An original figure reaches the wiki only with a confirmed open licence such as CC-BY or written permission; otherwise it stops at the instructor’s signature in Figures." },
+  { zh: "重繪走 F，數字走 V，來源文獻都填 L。", en: "Redraws go through F and numbers through V, each citing its L." }
 ];
 
 const PHOTO = {
@@ -1657,6 +1786,14 @@ const PHOTO = {
 };
 
 // To be decided, added with the role catalogue and the photo system. Earlier lists stay where they were.
+const PEOPLE_DECIDED = [
+  { zh: "Drive：方向定為搬到 GEMS Workspace 的 Shared Drive，解決配額與交接風險。尚未搬遷，確認帳號後由 PI 執行。", en: "Drive: the direction is a GEMS Workspace Shared Drive, to settle quota and handover risk. Not migrated yet; the PI will do it once the account is confirmed." },
+  { zh: "Advisor 產出：學生看得到，考核結果只放 Ops。", en: "Advisor outputs: students can see them; reviews stay in Ops only." },
+  { zh: "第一批 10 題 RQ：PI 與老師在 11/25 前寫，來不及先給 3 題。", en: "First 10 RQs: written by the PI and instructors before 25 Nov; if time runs out, 3 first." },
+  { zh: "衝刺期老師減負：採選項 A＋C，Consent 不放寬。細節待寫入規格。", en: "Lighter load for instructors in the crunch: options A and C, with no relaxation on Consent. Details are still to be written into the spec." },
+  { zh: "研究組長：老師代行到 N06（3/10），再依 Impact Log 選。", en: "Research Lead: instructors act until N06 (10 Mar), then the lead is chosen from the Impact Log." }
+];
+
 const PEOPLE_TBD = [
   { zh: "這份角色清單與時數上限（H-01、H-04）。席位不是指派。", en: "This role list and the time caps (H-01, H-04). Seats are not assignments." },
   { zh: "Task lead 怎麼選（H-03）；每個角色怎麼選人、何時公布。建議 N06 公布、N07 上任，Photo Steward 與 Media lead 從 N02 先試跑。", en: "How Task Leads are chosen (H-03); how and when each role is filled. Suggested: announce at N06, start at N07, with Photo Stewards and the Media Lead trying it from N02." },
@@ -1668,11 +1805,10 @@ const PEOPLE_TBD = [
   { zh: "隊員肖像（H-17）：入隊文件是否涵蓋 wiki 與影片，要不要做全隊 K。未定前隊員人臉不可發布。", en: "Member portraits (H-17): whether joining documents cover the wiki and videos, and whether to use one team K. Until then, member faces cannot be published." },
   { zh: "校外未成年的影像路徑、由哪位成人現場拍攝（待審）。", en: "The route for images of outside minors, and which adult shoots on site (under review)." },
   { zh: "Discord 實際上傳上限、單則附件數、是否保留定位資料，上線前要實測；設計不依賴這些。", en: "Discord’s real upload limit, attachments per post and whether location data survives need testing before launch; the design does not rely on them." },
-  { zh: "Drive 配額與是否搬到 Shared Drive（S13-1）；照片與影片一年估算會超過個人免費額度。", en: "Drive quota and whether to move to a Shared Drive (S13-1); a year of photos and video is estimated to exceed a free personal quota." },
   { zh: "資料保存期限與撤回後刪檔（H-10）。", en: "Retention periods and deleting files after withdrawal (H-10)." },
   { zh: "實測：學生手機發文 30 秒、Steward 一輪 47 分、各角色時數。第一次衝刺站立會後回報一次。", en: "Measure it: 30 seconds to post, 47 minutes for a filing round, and each role’s hours, reported after the first crunch stand-up." },
   { zh: "Wiki 資料夾：D-047 用 Wiki/W### 頁名，Drive 規格與 File Rules 第 12 節還寫 Wiki/Pages，要改成同一種說法。40 Media 新權限也只在規格，尚未執行。", en: "Wiki folders: D-047 uses Wiki/W### page while the Drive spec and File Rules section 12 still say Wiki/Pages, and they must match. The new 40 Media permissions are also spec only, not yet applied." },
-  { zh: "圖與事實老師全審在 9 月的容量（SCH-4）；N11 學生暑期不在日期的回報管道（SCH-5）。", en: "Instructors checking every figure and fact in September: is there capacity (SCH-4)? How students report summer absences at N11 (SCH-5)." },
+  { zh: "N11 學生暑期不在日期的回報管道（SCH-5）。", en: "How students report summer absences at N11 (SCH-5)." },
   { zh: "Handbook 待定：分組規則（H-02）、評量量表（H-05）、遲交與缺席定義（H-06）、實驗室規則（H-07）、採購門檻（H-08）、學生 AI 使用（H-09）、衝刺期週會是否縮短（H-11）、題目評分（H-12）、Run 結果率目標（H-13）、PK 規則（H-15）、化學品與廢棄物分類（H-16）。", en: "Handbook items: group rules (H-02), assessment scale (H-05), lateness and absence definitions (H-06), lab rules (H-07), purchase thresholds (H-08), student AI use (H-09), shorter crunch meetings (H-11), topic scoring (H-12), Run result target (H-13), PK rules (H-15), chemical and waste classes (H-16)." }
 ];
 
@@ -1706,14 +1842,23 @@ Object.assign(T.zh, {
   "vg.skip": "跳過村莊地圖，看清單", "vg.listsub": "同樣的內容，沒有動畫。", "vg.events": "這一年的日子", "vg.jump": "跳到", "vg.th": ["區", "房子", "角色", "這個月"], "vg.mapl": "iGEM 村莊地圖，可用方向鍵在房子之間移動",
   "ph.eyebrow": "照片系統", "ph.title": "一張照片，<br>一個位置。", "ph.sub": "從手機到 Drive：學生只發一篇，兩位 Photo Steward 每週日歸檔，找照片靠 Hub 和檔名。提案，待 PI 確認。",
   "nav.research": "研究",
-  "res.eyebrow": "研究系統", "res.title": "一篇論文，<br>走完七步。",
-  "res.sub": "研究的產物不是「讀過的論文」，是被引用的卡（L）、被回答的問題（RQ）、被改變的決定（D）。",
-  "res.steps": "一篇論文的七步", "res.steps.th": ["步驟", "做什麼", "分鐘", "誰"],
-  "res.sheets": "三張表", "res.sheets.sub": "每張都有固定的讀者，與每週要做的決定。", "res.sheets.th": ["表", "誰讀", "哪一天", "靠它決定什麼"],
+  "res.eyebrow": "2027 研究系統", "res.title": "讀過不算，<br>改變決定才算。",
+  "res.sub": "研究的產物不是「讀過的論文」，是被引用的卡（L）、被回答的問題（RQ）、被改變的決定（D）。11/29 開始，是整個系統第一個真的被用到的部分。",
+  "res.jump": "看一題研究的流程", "res.status": "提案 v1.0；RQ 種子與研究組長代行已由 PI 確認。",
+  "res.why": "2026 卡在哪", "res.why.lesson": "所以 2027 不再要學生發明答案：問題先存在，欄位是下拉，卡是表上的一列。",
+  "res.structure": "結構：一條線，五個支援", "res.reader": "誰讀",
+  "res.around": "線的周圍",
+  "res.dates": "11/25 要好，11/29 開始", "res.dates.warn": "沒有這 10 題，第 5 欄會重演 2026 的 0%。", "res.miles": "接下來",
+  "res.who": "誰做什麼、什麼時候", "res.who.th": ["誰", "做什麼", "什麼時候", "每週時間"],
+  "res.who.note": "最可能先斷的是老師，不是學生：11/29 到 3/10 代行研究組長的 15 週，同時要跑課程與訓練。分鐘數都是估算，用 11/29 第一週的真人校正。",
+  "res.steps": "一篇論文七步，每步多久", "res.steps.th": ["步驟", "做什麼", "時間", "誰"],
+  "res.leads": "研究組長怎麼選", "res.leads.sub": "11/29 到 3/10 由老師代行。3/10（N06）老師看三項影響證據，由 PI 與老師決定，不看讀了幾篇。副組長看後兩項，加文獻庫整潔度。",
+  "res.fair": "證據怎麼防灌水", "res.fair.note": "學生看得到事件，看不到排名或分數。本系統不指派任何人。",
   "res.rules": "三條規則",
   "res.refs": "參考文獻清單自動產生",
-  "res.refs.p": "Wiki 頁引用的數字與圖各自帶著文獻編號，所以每一頁的參考文獻清單由腳本從同一份索引產生。人要做的只有一件事：寫 wiki 時把頁面編號填回索引。沒有人需要在凍結前回頭重排清單。",
-  "res.rights": "圖與版權",
+  "res.refs.p": "refs.py 從 Papers、Facts、Figures 與文獻庫快照產生每頁清單，對不上的印進 UNRESOLVED.txt。人要做的只有一件事：寫 wiki 時把頁面編號填回第 19 欄。沒有人需要在 freeze 前重排清單。",
+  "res.rights": "圖與版權", "res.see": "看研究系統", "flow.cost": "時間",
+  "ppl.decided": "PI 已確認",
   "ph.flow": "流程", "ph.name": "檔名，工具產生", "ph.home": "放哪裡", "ph.duty": "Photo Steward 的工作", "ph.rules": "三條不能退的", "ph.see": "看照片系統", "ph.village": "在村子裡看暗房"
 });
 Object.assign(T.en, {
@@ -1738,13 +1883,22 @@ Object.assign(T.en, {
   "vg.skip": "Skip the village map and use the list", "vg.listsub": "The same content, with no animation.", "vg.events": "Dates in the year", "vg.jump": "Jump to", "vg.th": ["District", "Building", "Roles", "This month"], "vg.mapl": "iGEM Village map. Arrow keys move between buildings",
   "ph.eyebrow": "Photo system", "ph.title": "One photo,<br>one place.", "ph.sub": "From phone to Drive: students post once, two Photo Stewards file on Sundays, and photos are found through the Hub and the file name. A proposal, awaiting the PI.",
   "nav.research": "Research",
-  "res.eyebrow": "Research system", "res.title": "One paper,<br>seven steps.",
-  "res.sub": "What research produces is not papers read. It is cards that get cited (L), questions that get answered (RQ) and decisions that change (D).",
-  "res.steps": "Seven steps for one paper", "res.steps.th": ["Step", "What you do", "Minutes", "Who"],
-  "res.sheets": "Three sheets", "res.sheets.sub": "Each has a fixed reader, and a decision it is read for each week.", "res.sheets.th": ["Sheet", "Reader", "When", "Decides"],
+  "res.eyebrow": "2027 research system", "res.title": "Reading doesn’t count.<br>Changing a decision does.",
+  "res.sub": "What research produces is not papers read. It is cards that get cited (L), questions that get answered (RQ) and decisions that change (D). It starts on 29 Nov, the first part of the whole system to be used for real.",
+  "res.jump": "Watch one research record", "res.status": "Proposal v1.0. The seed questions and the acting Research Lead are confirmed by the PI.",
+  "res.why": "Where 2026 got stuck", "res.why.lesson": "So in 2027 students no longer invent the answer: the questions already exist, the field is a dropdown, and a card is one row in a table.",
+  "res.structure": "The structure: one line, five supports", "res.reader": "Reader",
+  "res.around": "Around the line",
+  "res.dates": "Ready by 25 Nov, starts 29 Nov", "res.dates.warn": "Without these 10 questions, column 5 repeats 2026’s 0%.", "res.miles": "What follows",
+  "res.who": "Who does what, and when", "res.who.th": ["Who", "What", "When", "Per week"],
+  "res.who.note": "The likeliest point of failure is an instructor, not a student: 15 weeks acting as Research Lead from 29 Nov to 10 Mar while also running classes and training. All minutes are estimates, to be calibrated against real people in the first week.",
+  "res.steps": "Seven steps for one paper, and how long each takes", "res.steps.th": ["Step", "What", "Time", "Who"],
+  "res.leads": "How the Research Lead is chosen", "res.leads.sub": "Instructors act from 29 Nov to 10 Mar. At N06 (10 Mar) instructors review three kinds of impact evidence, and the PI and instructors decide. Papers read is not one of them. The Vice Lead is judged on the last two, plus how tidy the library is.",
+  "res.fair": "How the evidence resists padding", "res.fair.note": "Students see events, never rankings or scores. This system appoints nobody.",
   "res.rules": "Three rules",
   "res.refs": "Reference lists generate themselves",
-  "res.refs.p": "Every number and figure a wiki page cites carries its own reference number, so each page’s reference list is generated by a script from one shared index. People have exactly one job: when writing the wiki, put the page number back into the index. Nobody has to go back and re-order a list before the freeze.",
-  "res.rights": "Figures and copyright",
+  "res.refs.p": "refs.py builds each page’s list from Papers, Facts, Figures and a library snapshot, and prints anything unmatched to UNRESOLVED.txt. People have one job: while writing the wiki, put the page number in column 19. Nobody re-orders a list before freeze.",
+  "res.rights": "Figures and copyright", "res.see": "See the research system", "flow.cost": "Time",
+  "ppl.decided": "Confirmed by the PI",
   "ph.flow": "The flow", "ph.name": "The file name, made by a tool", "ph.home": "Where things live", "ph.duty": "The Photo Steward’s job", "ph.rules": "Three things that do not bend", "ph.see": "See the photo system", "ph.village": "See the darkroom in the village"
 });
