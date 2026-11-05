@@ -11,7 +11,7 @@ window.SITE = (() => {
     "title.home": "GEMS iGEM 2027", "title.system": "系統全貌", "title.time": "時程", "title.people": "角色", "title.advisors": "Advisor 計畫", "title.research": "Research", "title.updates": "更新紀錄",
     "home.intro": "GEMS Taiwan 2027 iGEM 隊的工作系統：誰，在什麼時候，把什麼放在哪裡。",
     "home.proposal": "提案，待 PI 確認。",
-    "home.d": "天", "home.next": "下一個節點", "home.days": "天後", "home.today": "今天", "home.after": "接著", "home.allnodes": "看完整時程",
+    "home.d": "天", "home.cta": "看系統全貌（約 10 分鐘）", "home.cta2": "看全年時程", "home.next": "下一個節點", "home.days": "天後", "home.today": "今天", "home.after": "接著", "home.allnodes": "看完整時程",
     "home.phase": "目前階段", "home.phase.build": "系統建置", "home.phase.gap": "階段之間", "home.phase.end": "賽季結束",
     "home.none": "這一季的節點都走完了。",
     "home.pass": "通過條件",
@@ -68,7 +68,7 @@ window.SITE = (() => {
     "title.home": "GEMS iGEM 2027", "title.system": "The system", "title.time": "Schedule", "title.people": "Roles", "title.advisors": "Advisor programme", "title.research": "Research", "title.updates": "Updates",
     "home.intro": "How the GEMS Taiwan 2027 iGEM team works: who puts what where, and when.",
     "home.proposal": "A proposal, awaiting the PI.",
-    "home.d": "d", "home.next": "Next node", "home.days": "days", "home.today": "Today", "home.after": "Then", "home.allnodes": "See the full schedule",
+    "home.d": "d", "home.cta": "See the whole system (about 10 min)", "home.cta2": "See the year’s schedule", "home.next": "Next node", "home.days": "days", "home.today": "Today", "home.after": "Then", "home.allnodes": "See the full schedule",
     "home.phase": "Current phase", "home.phase.build": "Building the system", "home.phase.gap": "Between phases", "home.phase.end": "Season over",
     "home.none": "Every node this season has passed.",
     "home.pass": "To pass",
@@ -183,13 +183,13 @@ window.SITE = (() => {
       $("#today-next").innerHTML = `
         <p class="today__label">${esc(t("home.next"))} · ${esc(next.n)}</p>
         <div class="today__count">${n === 0 ? `<b>${esc(t("home.today"))}</b>` : `<b>${n}</b><span>${esc(t("home.days"))}</span>`}</div>
-        <h1 class="today__title">${esc(L(next.t))}</h1>
+        <h2 class="today__title">${esc(L(next.t))}</h2>
         <p class="today__date2">${esc(nodeDate(next))}${next.pass ? `　·　${esc(t("home.pass"))}：${esc(L(next.pass))}` : ""}</p>`;
       $("#today-after").innerHTML = `<h2 class="today__label">${esc(t("home.after"))}</h2><ol class="after">${up.slice(1, 6).map(m => `
         <li class="after__i after__i--${m.lane}"><a href="timeline.html#n-${esc(m.n)}"><time>${esc(nodeDate(m))}</time><span>${esc(L(m.t))}</span><small>${diff(TODAY, m.date)} ${esc(t("home.d"))}</small></a></li>`).join("")}</ol>
         <a class="more" href="timeline.html">${esc(t("home.allnodes"))} <span aria-hidden="true">→</span></a>`;
     } else {
-      $("#today-next").innerHTML = `<h1 class="today__title">${esc(t("home.none"))}</h1>`;
+      $("#today-next").innerHTML = `<h2 class="today__title">${esc(t("home.none"))}</h2>`;
       $("#today-after").innerHTML = "";
     }
     renderRibbon();
@@ -276,8 +276,8 @@ window.SITE = (() => {
     $("#sys-stats").innerHTML = [
       ["≈30", t("stat.people")], [ID_SYSTEM.length, t("stat.streams")], [GATES.length, t("stat.registers")], [NODES.length, t("stat.deadlines")]
     ].map(([n, l]) => `<div><b>${esc(n)}</b><span>${esc(l)}</span></div>`).join("");
-    const items = [["problems", "sub.why", "brief.why"], ["system", "sub.rules", "brief.rules"], ["architecture", "sub.arch", "brief.arch"], ["depth", "sub.drive", "brief.drive"],
-      ["flow", "sub.flow", "brief.flow"], ["year", "sub.year", "brief.year"], ["photo", "sub.std", "brief.std"], ["village", "sub.village", "brief.village"]];
+    const items = [["architecture", "sub.arch", "brief.arch"], ["flow", "sub.flow", "brief.flow"], ["depth", "sub.drive", "brief.drive"], ["year", "sub.year", "brief.year"],
+      ["village", "sub.village", "brief.village"], ["system", "sub.rules", "brief.rules"], ["problems", "sub.why", "brief.why"], ["photo", "sub.std", "brief.std"]];
     $("#brief-list").innerHTML = items.map(([id, n, d], i) => `<li><a href="#${id}"><span class="brief__n">${i + 1}</span><b>${esc(t(n))}</b><p>${esc(t(d))}</p></a></li>`).join("");
   }
   function renderAdvGlance() {

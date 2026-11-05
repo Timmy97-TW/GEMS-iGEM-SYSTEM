@@ -193,3 +193,17 @@ html:has(.subnav) { scroll-padding-top: calc(var(--nav-h) + var(--sub-h) + 12px)
 /* The home page lines the village heading up with the sections above it. */
 body[data-page="home"] #village .wrap:not(.wrap--vg) { max-width: 1160px; }
 body[data-page="home"] #village { padding-top: 88px; }
+
+/* ---------- home: lead ---------- */
+.lead { padding: 72px 0 56px; }
+.lead__eyebrow { font-size: 15px; font-weight: 600; color: var(--ink-2); }
+.lead__h { margin-top: 8px; font-size: clamp(44px, 7.4vw, 88px); line-height: 1.04; font-weight: 700; letter-spacing: -.04em; }
+.lead__p { margin-top: 20px; max-width: 640px; font-size: clamp(18px, 2vw, 22px); line-height: 1.42; font-weight: 500; letter-spacing: -.02em; }
+.lead__p em { display: inline-block; font-style: normal; color: var(--ink-2); }
+.lead__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: 32px; }
+.lead__cta .more { margin-top: 0; font-size: 17px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 17px; font-weight: 600; letter-spacing: -.01em; transition: background .2s, transform .25s var(--ease); }
+.btn:hover { background: var(--accent); }
+.btn:active { transform: scale(.98); }
+.homesec--ideas + .today { padding-top: 64px; }
+@media (max-width: 860px) { .lead { padding: 40px 0 44px; } }
