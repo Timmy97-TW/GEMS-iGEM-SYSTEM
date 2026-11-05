@@ -12,7 +12,7 @@
 <body data-page="research">
 
 <header class="nav" id="nav"></header>
-<nav class="subnav" aria-label="On this page"><div class="subnav__in"><a href="#res-top" data-i18n="sub.res.why"></a><a href="#res-structure" data-i18n="sub.res.structure"></a><a href="#flow" data-i18n="sub.res.flow"></a><a href="#res-docs" data-i18n="sub.res.docs"></a><a href="#res-when" data-i18n="sub.res.when"></a><a href="#res-policy" data-i18n="sub.res.rules"></a></div></nav>
+<nav class="subnav" aria-label="On this page"><div class="subnav__in"><a href="#res-top" data-i18n="sub.res.why"></a><a href="#res-structure" data-i18n="sub.res.structure"></a><a href="#flow" data-i18n="sub.res.flow"></a><a href="#res-docs" data-i18n="sub.res.docs"></a><a href="#res-when" data-i18n="sub.res.when"></a><a href="#res-policy" data-i18n="sub.res.rules"></a><a href="#res-case" data-i18n="sub.res.case"></a></div></nav>
 
 <main id="top">
 
@@ -61,7 +61,7 @@
 
 </section>
 
-<section class="sec sec--alt" id="res-docs">
+<section class="sec" id="res-docs">
   <div class="wrap">
     <h2 class="headline headline--s" data-i18n="res.docs.h"></h2>
     <p class="lede" data-i18n="res.docs.sub"></p>
@@ -75,7 +75,7 @@
   </div>
 </section>
 
-<section class="sec" id="year">
+<section class="sec sec--alt" id="year">
   <div class="wrap">
     <h2 class="headline headline--s" data-i18n="res.year.h"></h2>
     <p class="lede" data-i18n="res.year.sub"></p>
@@ -103,7 +103,7 @@
 
 </section>
 
-<section class="sec sec--alt" id="res-when">
+<section class="sec" id="res-when">
   <div class="wrap">
     <h3 class="adv__h adv__h--first" data-i18n="res.dates"></h3>
     <div class="rs-dates" id="res-dates"></div>
@@ -120,7 +120,7 @@
   </div>
 </section>
 
-<section class="sec" id="res-policy">
+<section class="sec sec--alt" id="res-policy">
   <div class="wrap">
     <h3 class="adv__h adv__h--first" data-i18n="res.leads"></h3>
     <p class="adv__p" data-i18n="res.leads.sub"></p>
@@ -137,6 +137,63 @@
 
     <h3 class="adv__h" data-i18n="res.rights"></h3>
     <ul class="alist alist--ok" id="res-rights"></ul>
+  </div>
+</section>
+
+<section class="sec" id="res-case">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="res.case.eyebrow"></p>
+    <h2 class="headline headline--s" data-i18n="res.case.h"></h2>
+    <p class="lede" data-i18n="res.case.sub"></p>
+    <div class="rc-paper" id="rc-paper"></div>
+
+    <div class="rc-vs">
+      <div>
+        <h3 class="adv__h adv__h--first" data-i18n="res.case.then"></h3>
+        <ul class="rc-then" id="rc-then"></ul>
+        <p class="rs-date__warn" id="rc-thenmiss"></p>
+      </div>
+      <div>
+        <h3 class="adv__h adv__h--first" data-i18n="res.case.now"></h3>
+        <div class="rc-now" id="rc-now"></div>
+      </div>
+    </div>
+
+    <h3 class="adv__h" data-i18n="res.case.takes"></h3>
+    <div class="rc-takes" id="rc-takes"></div>
+
+    <h3 class="adv__h" data-i18n="res.case.rq"></h3>
+    <dl class="rc-rq" id="rc-rq"></dl>
+
+    <h3 class="adv__h" data-i18n="res.case.doc"></h3>
+    <p class="adv__p" data-i18n="res.case.doc.sub"></p>
+    <div class="rc-doc" id="rc-doc"></div>
+    <p class="rs-note" id="rc-docnote"></p>
+
+    <h3 class="adv__h" data-i18n="res.case.card"></h3>
+    <p class="adv__p" data-i18n="res.case.card.sub"></p>
+    <div class="rc-legend" id="rc-legend"></div>
+    <ol class="rc-card" id="rc-card"></ol>
+
+    <h3 class="adv__h" data-i18n="res.case.mc"></h3>
+    <dl class="rc-rq rc-rq--mc" id="rc-mc"></dl>
+    <p class="rs-note" data-i18n="res.case.mcnote"></p>
+
+    <h3 class="adv__h" data-i18n="res.case.chain"></h3>
+    <h4 class="rs-sub" data-i18n="res.case.v"></h4>
+    <div id="rc-v"></div>
+    <h4 class="rs-sub" data-i18n="res.case.d"></h4>
+    <ul class="rc-rows" id="rc-d"></ul>
+    <h4 class="rs-sub" data-i18n="res.case.ri"></h4>
+    <ul class="rc-rows" id="rc-ri"></ul>
+    <p class="rs-note" id="rc-rinote"></p>
+    <h4 class="rs-sub" data-i18n="res.case.f"></h4>
+    <ul class="rc-rows" id="rc-f"></ul>
+    <h4 class="rs-sub" data-i18n="res.case.refs"></h4>
+    <div class="rc-refs" id="rc-refs"></div>
+
+    <h3 class="adv__h" data-i18n="res.case.breaks"></h3>
+    <ol class="sysrules" id="rc-breaks"></ol>
   </div>
 </section>
 

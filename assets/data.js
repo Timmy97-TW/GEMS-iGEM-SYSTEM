@@ -1618,6 +1618,189 @@ const RESEARCH_RIGHTS = [
   { zh: "重繪走 F，數字走 V，來源文獻都填 L。", en: "Redraws go through F and numbers through V, each citing its L." }
 ];
 
+// ---------- Worked example: the canonical ReLEAF paper through the new system ----------
+// Real paper, real extraction. Numbers and figure numbers verified against the PMC full text
+// (PMC6629627). What ReLEAF took and changed is from Timmy, 2026-11-05.
+const RESEARCH_CASE = {
+  paper: {
+    key: "CastilloHair2019",
+    title: "Optogenetic control of Bacillus subtilis gene expression",
+    cite: "Castillo-Hair, S. M., Baerman, E. A., Fujita, M., Igoshin, O. A., & Tabor, J. J. (2019). Nature Communications, 10, 3099.",
+    doi: "10.1038/s41467-019-10906-6",
+    url: "https://doi.org/10.1038/s41467-019-10906-6",
+    lic: "CC BY 4.0",
+    licd: { zh: "開放取用，已在 PMC 頁面確認。原圖可以上 wiki，但要附出處、授權連結，並註明有修改。", en: "Open access, confirmed on the PMC page. The original figures may go on the wiki, with credit, a licence link and a note that they were changed." },
+    why: { zh: "ReLEAF 的光控制整條線都從這一篇長出來：裝置怎麼切模組、LPA 怎麼做、動力學怎麼建模、密碼子怎麼看。一篇論文，四個取用，落在四個不同的地方。", en: "ReLEAF’s whole light-control line grew out of this one paper: how the device splits into modules, how the LPA was built, how the kinetics were modelled, how codons were read. One paper, four extractions, landing in four different places." }
+  },
+
+  // From the 2026 Drive audit (research/audit-drylab.md, audit-wetlab-process.md, R8).
+  then: [
+    { loc: "2. Drylab/LPA/", d: { zh: "249 檔、190 MB，其中第三方 245 檔，Iris 155 檔。論文、影片、別人的 Supplementary 混在一起。", en: "249 files, 190 MB; 245 of them third-party, 155 of them Iris. The paper, videos and somebody else’s supplementary all in one pile." } },
+    { loc: "2. Drylab/LPA/LPA Data.docx", d: { zh: "6 張表、308 字、1 則評論。全隊唯一寫下來的光硬體測試紀錄。", en: "6 tables, 308 words, 1 comment. The team’s only written record of testing the light hardware." } },
+    { loc: "2. Drylab/CAD files/", d: { zh: "LPA 的 7 個 CAD 檔，和 Bioreactor 的 65 檔、Photometer 的 21 檔放在同一層。", en: "7 LPA CAD files, in the same folder as 65 bioreactor and 21 photometer files." } },
+    { loc: "1. Wetlab/Protocol/Optogenetic LPA", d: { zh: "題目專屬協定，散在 Protocol 根目錄的 10 個散檔之中。", en: "A topic-specific protocol, loose among 10 stray files in the Protocol root." } },
+    { loc: "Wiki Pages/Wiki/Citations.docx", d: { zh: "最後修改 10/18，就在 10/20–10/21 兩天 378 列 fix log 之前。參考文獻是手工重建的。", en: "Last edited 18 Oct, two days before the 378-row fix log of 20–21 Oct. The reference list was rebuilt by hand." } }
+  ],
+  thenmiss: { zh: "五個位置，沒有索引，沒有一句 takeaway，也沒有一行寫「這篇改變了什麼決定」。2026 的研究範本裡，「這回答了哪個開放問題」5 筆全空。", en: "Five locations, no index, not one takeaway sentence, and no line saying which decision this paper changed. In the 2026 reading template, “which open question does this answer?” was blank in all five entries." },
+
+  now: [
+    { n: "1", t: { zh: "列 L（Papers）", en: "row L (Papers)" } },
+    { n: "1 + 4", t: { zh: "題 RQ：1 題種子，4 題衍生", en: "RQs: 1 seeded, 4 spawned" } },
+    { n: "1", t: { zh: "列 MethodCompare", en: "MethodCompare row" } },
+    { n: "7", t: { zh: "個 V（Hub.Facts）", en: "V numbers (Hub.Facts)" } },
+    { n: "4", t: { zh: "個 D，每個都填了依據", en: "Ds, each with a basis" } },
+    { n: "4", t: { zh: "列 RI，只算 3 個相異 D", en: "RI rows, counting 3 distinct Ds" } },
+    { n: "1", t: { zh: "個 F（改作，附授權）", en: "F (an adaptation, with licence)" } },
+    { n: "0", t: { zh: "人手排參考文獻", en: "reference lists built by hand" } }
+  ],
+
+  // The four things ReLEAF actually took, and what we changed.
+  takes: [
+    { id: "1", c: "purple", fig: "Fig 1a–d",
+      t: { zh: "裝置圖：三模組的切法", en: "The device schematic: a three-module split" },
+      took: { zh: "B. subtilis CcaSR v0.1 的架構：PCB 生產模組（a）、光感應模組（b）、轉錄輸出模組（c），系統活性用 sfGFP 讀（d）。", en: "The architecture of B. subtilis CcaSR v0.1: a PCB production module (a), a light-sensing module (b), a transcriptional output module (c), with system activity read out by sfGFP (d)." },
+      chg: { zh: "兩個誘導型啟動子（ccaS 的木糖、ccaR 的 IPTG）換成組成型，所以不用加任何化學誘導物。輸出卡匣從 sfgfp 換成植物逆境保護劑。", en: "Both inducible promoters (xylose for ccaS, IPTG for ccaR) swapped for constitutive ones, so no chemical inducer is needed at all. The output cassette swapped from sfgfp to plant stress protectants." },
+      land: { zh: "D0007 · F0001（改作）· RQ08", en: "D0007 · F0001 (adaptation) · RQ08" } },
+    { id: "2", c: "orange", fig: "Fig 6b",
+      t: { zh: "LPA：整體設計，簡化版", en: "The LPA: the general design, simplified" },
+      took: { zh: "24 孔 Light Plate Apparatus 的整體設計：綠光與紅光 LED、每孔獨立的光程式、把光強校正成 μmol m⁻² s⁻¹ 再談生物學。", en: "The general design of the 24-well Light Plate Apparatus: green and red LEDs, an independent light program per well, and calibrating intensity in μmol m⁻² s⁻¹ before talking about biology." },
+      chg: { zh: "不接 Iris。綠光紅光各只用三段光強，不做連續掃描——因為 Fig 6b 的半活化光強是 4.66 ± 0.63 μmol m⁻² s⁻¹，三段就跨得過那條曲線。", en: "No Iris. Three light levels each for green and red instead of a continuous sweep — because the half-activation intensity in Fig 6b is 4.66 ± 0.63 μmol m⁻² s⁻¹, and three levels already straddle that curve." },
+      land: { zh: "D0012 · V0106 · RQ07", en: "D0012 · V0106 · RQ07" } },
+    { id: "3", c: "teal", fig: "Fig 6c–d",
+      t: { zh: "動力學：建模的框架", en: "The kinetics: a framework for modelling" },
+      took: { zh: "三態加延遲的常微分方程框架：產生速率、未成熟蛋白、成熟蛋白，加一個延遲 τ。紅轉綠與綠轉紅的 t½ 是 105.1 ± 1.5 與 74.97 ± 0.39 分。", en: "The three-state ODE framework with a delay: production rate, immature protein, mature protein, plus a delay τ. Half-times are 105.1 ± 1.5 min red-to-green and 74.97 ± 0.39 min green-to-red." },
+      chg: { zh: "框架照用，參數不照用。原文的 t½ 裡混了 sfGFP 的成熟速率（作者自己寫了這件事），我們的輸出不是螢光蛋白，所以要重新擬合。", en: "The framework carries over; the parameters do not. The paper’s half-times fold in sfGFP maturation — the authors say so themselves — and our output is not a fluorescent protein, so it has to be refitted." },
+      land: { zh: "D0024 · V0105 · RQ09", en: "D0024 · V0105 · RQ09" } },
+    { id: "4", c: "indigo", fig: { zh: "Supplementary", en: "Supplementary" },
+      t: { zh: "密碼子最佳化：同一個分析視角", en: "Codon optimisation: the same analytical lens" },
+      took: { zh: "只改前 15 個密碼子，為的是打散 RBS 附近的 mRNA 二級結構。原文靠這一招把 Cph1(Y176H)-sfGFP 從 113 ± 27 推到 20,100 ± 1,600 MEFL。", en: "Recode only the first 15 codons, to break up mRNA secondary structure near the RBS. In the paper this alone took Cph1(Y176H)-sfGFP from 113 ± 27 to 20,100 ± 1,600 MEFL." },
+      chg: { zh: "算自由能的軟體換成 ViennaRNA，不是原文的 NUPACK。視角一樣，工具不一樣——所以 D0019 要寫清楚換了什麼，明年才不會以為我們跑的是 NUPACK。", en: "ViennaRNA for the free-energy calculation instead of the paper’s NUPACK. Same lens, different tool — so D0019 has to say which, or next year will assume we ran NUPACK." },
+      land: { zh: "D0019 · V0104 · RQ10", en: "D0019 · V0104 · RQ10" } }
+  ],
+
+  // The seed question. Written by instructors before 11/25 (N00).
+  rq: [
+    { k: { zh: "問題 ID", en: "Question ID" }, v: "RQ02" },
+    { k: { zh: "層級", en: "Level" }, v: { zh: "題目層（N01–N04）", en: "Topic level (N01–N04)" } },
+    { k: { zh: "問題", en: "Question" }, v: { zh: "protectant 要不要用光控制表達，而不是加化學誘導物？", en: "Should the protectant be expressed under light control instead of a chemical inducer?" } },
+    { k: { zh: "會改變什麼決定", en: "Which decision it would change" }, v: { zh: "要不要自建 LPA、輸出卡匣用哪種啟動子、Hardware 組這一年做什麼。", en: "Whether we build an LPA at all, which promoter drives the output cassette, and what Hardware works on all year." } },
+    { k: { zh: "負責人", en: "Owner" }, v: { zh: "訓練主責老師（N01–N06 代行研究組長）", en: "Lead training instructor (acting Research Lead, N01–N06)" } },
+    { k: { zh: "答案", en: "Answer" }, v: { zh: "要做，但不能照原設計做：PCB 供應、ccaS 表現、輸出啟動子三處都得先改。", en: "Yes, but not as published: PCB supply, ccaS expression and the output promoter all have to be changed first." } },
+    { k: { zh: "結論類型", en: "Conclusion" }, v: { zh: "支持", en: "Supported" } },
+    { k: { zh: "依據文獻 / 產生的決議", en: "Basis / Decisions produced" }, v: "L001 · D0007 D0012 D0019 D0024" }
+  ],
+
+  // All 19 columns, filled. kind: a = dropdown or automatic, c = copied, k = needs thinking,
+  // r = routing, l = filled in later. Matches the 10-minute breakdown in RESEARCH-SYSTEM.md 3.
+  cardkinds: {
+    a: { zh: "下拉或自動", en: "Dropdown or automatic" },
+    c: { zh: "抄的", en: "Copied" },
+    k: { zh: "要想（90 秒）", en: "Needs thinking (90 s)" },
+    r: { zh: "路由", en: "Routing" },
+    l: { zh: "之後才填", en: "Filled in later" }
+  },
+  card: [
+    { n: 1, k: "a", f: { zh: "文獻 ID", en: "Paper ID" }, v: "L001", d: { zh: "新工作簿的第一列，就是專案站在上面的那一篇。", en: "The first row of the new workbook is the paper the project stands on." } },
+    { n: 2, k: "a", f: { zh: "狀態", en: "Status" }, v: { zh: "已完成", en: "Done" } },
+    { n: 3, k: "a", f: { zh: "類型", en: "Type" }, v: { zh: "方法", en: "Method" }, d: { zh: "它同時也是「工具軟體」，但一列只能選一個。工具那一面只能從第 15 欄離開。", en: "It is also a software/tool paper, but the column takes one value. The tool side has to leave through column 15." } },
+    { n: 4, k: "a", f: { zh: "組別", en: "Group" }, v: { zh: "全隊", en: "Whole team" }, d: { zh: "Wet、Dry、Hardware 三組都動到。", en: "It touches Wet, Dry and Hardware." } },
+    { n: 5, k: "a", f: { zh: "研究問題", en: "Research question" }, v: "RQ02", d: { zh: "11/25 就種好了，所以這一格是下拉，不是打字。", en: "Seeded by 25 Nov, so this cell is a dropdown, not typing." } },
+    { n: 6, k: "c", f: { zh: "引用名稱", en: "Citation key" }, v: "CastilloHair2019" },
+    { n: 7, k: "c", f: { zh: "DOI 或連結", en: "DOI or link" }, v: "10.1038/s41467-019-10906-6", d: { zh: "refs.py 靠這一格把作者、年、期刊從文獻庫快照併進來。沒有任何欄位要重打書目。", en: "refs.py uses this cell to pull authors, year and journal from the library snapshot. No column asks anyone to retype bibliographic data." } },
+    { n: 8, k: "k", f: { zh: "一句 Takeaway", en: "One-line takeaway" }, v: { zh: "CcaSR 搬到 B. subtilis 不會自己亮：PCB、ccaS、輸出啟動子三處都得先修。", en: "CcaSR does not light up on arrival in B. subtilis: PCB supply, ccaS expression and the output promoter all have to be fixed first." }, d: { zh: "可以被反駁的陳述。不是「本文探討了光控制」。", en: "A statement that could be proved wrong. Not “this paper explores light control”." } },
+    { n: 9, k: "k", f: { zh: "可用數字", en: "Usable numbers" }, v: "V0101–V0107", d: { zh: "數字本身寫在 Hub.Facts，不寫在這裡。", en: "The numbers themselves live in Hub.Facts, not here." } },
+    { n: 10, k: "k", f: { zh: "關鍵圖位置", en: "Key figure location" }, v: "Fig 1a–d · Fig 2 · Fig 4b · Fig 6b–d", d: { zh: "只記位置。不下載、不截圖。", en: "The location only. Nothing downloaded, nothing screenshotted." } },
+    { n: 11, k: "a", f: { zh: "圖的處置", en: "Figure handling" }, v: { zh: "已確認 CC-BY", en: "Confirmed CC-BY" }, d: { zh: "罕見的一格。這篇是 CC BY 4.0，所以原圖真的上得了 wiki——附出處、授權連結，並註明有修改。團隊大部分論文不是這樣。", en: "A rare cell. This paper is CC BY 4.0, so the original figure really can go on the wiki — with credit, a licence link and a note that it was changed. Most of the team’s papers are not like this." } },
+    { n: 12, k: "k", f: { zh: "方法限制", en: "Method limits" }, v: { zh: "流式細胞儀與 MEFL／MEAP 校正珠我們沒有；PCB 要從螺旋藻甲醇裂解自製；基因體整合要 1.5 kb 同源臂與 PY79 轉形。而且兩個誘導型啟動子一換掉，原文 48／96 格的誘導矩陣對我們就不成立。", en: "We have no flow cytometer and no MEFL/MEAP calibration beads; PCB has to be made by methanolysis of Spirulina; genomic integration needs 1.5 kb homology arms and competent PY79. And once both inducible promoters are swapped out, the paper’s 48- and 96-condition induction matrix no longer applies to us." }, d: { zh: "高中隊最該填的一欄。它直接長出 RQ08。", en: "The column that matters most for a high-school team. RQ08 grows straight out of it." } },
+    { n: 13, k: "a", f: { zh: "判斷", en: "The call" }, v: { zh: "要換做法", en: "Change the approach" }, d: { zh: "不是「支持」也不是「反對」。架構照用，兩個啟動子和輸出都換掉。", en: "Neither “supports” nor “against”. Keep the architecture, replace both promoters and the output." } },
+    { n: 14, k: "k", f: { zh: "對專案的意義", en: "What it means for us" }, v: { zh: "照 v0.1 的三模組切法做，但兩個誘導型啟動子換成組成型、輸出換成 protectant，並用 Fig 6b 的劑量曲線決定要幾段光強。", en: "Keep the three-module split of v0.1, swap both inducible promoters for constitutive ones, swap the output for the protectant, and use the Fig 6b dose curve to decide how many light levels we need." } },
+    { n: 15, k: "r", f: { zh: "帶出的新問題", en: "New questions raised" }, v: "RQ07 · RQ08 · RQ09 · RQ10", d: { zh: "四個取用裡有三個從這一格離開。設計文件自己預期這是填寫率最低的一欄——所以這張卡由老師先填。", en: "Three of the four extractions leave through this cell. The design document itself expects this to be the least-filled column — which is why an instructor fills this card first." } },
+    { n: 16, k: "a", f: { zh: "建議誰看", en: "Who should read it" }, v: { zh: "Hardware 組長的 P", en: "The Hardware lead’s P" }, d: { zh: "一列只能指一個人。Dry 與建模要靠 RQ09、RQ10 的負責人接。", en: "One row can name one person. Dry and modelling have to be picked up by the owners of RQ09 and RQ10." } },
+    { n: 17, k: "r", f: { zh: "讀者", en: "Reader" }, v: { zh: "訓練主責老師", en: "Lead training instructor" }, d: { zh: "11/29 之前學生還沒進來，所以這一張是老師讀的。", en: "Students have not arrived before 29 Nov, so an instructor is the reader of this one." } },
+    { n: 18, k: "c", f: { zh: "完成日", en: "Date finished" }, v: "2026-11-25", d: { zh: "N00。全隊唯一一張在開季前就存在的卡。", en: "N00. The only card that exists before the season opens." } },
+    { n: 19, k: "l", f: { zh: "引用頁面", en: "Cited on page" }, v: { zh: "（空白，N14 起由 Wiki Lead 填）Engineering · Hardware · Model · Parts", en: "(blank; filled by the Wiki Lead from N14) Engineering · Hardware · Model · Parts" }, d: { zh: "讀者不填。唯一事後回填的一欄，空白會被 refs.py 叫出來。", en: "Not the reader’s job. The only column filled afterwards, and refs.py shouts when it is blank." } }
+  ],
+
+  // The card as it really looks: one Google Doc per theme, one tab per paper.
+  // Body text is pulled from `card` by column number, so nothing is written twice.
+  doc: {
+    file: { zh: "15 Research / Research — 光控制 Light control", en: "15 Research / Research — Light control" },
+    tabs: [
+      { n: "Tab 0", t: { zh: "怎麼用這份文件 · 範本", en: "How to use this doc · template" } },
+      { n: "Tab 1", t: "L001 · CastilloHair2019 · RQ02", on: true },
+      { n: "Tab 2", t: { zh: "（下一篇）", en: "(next paper)" }, ghost: true },
+      { n: "Tab 3", t: { zh: "（下一篇）", en: "(next paper)" }, ghost: true }
+    ],
+    head: { zh: "L001 · CastilloHair2019 · RQ02 · 要換做法", en: "L001 · CastilloHair2019 · RQ02 · change the approach" },
+    // Fig 1 and Fig 6b are the real figures, reproduced under CC BY 4.0 with the credit line
+    // the licence requires. Cropped from the article PDF; nothing else about them was changed.
+    credit: { zh: "取自 Castillo-Hair 等人 2019（CC BY 4.0），裁切自原圖，內容未改。", en: "From Castillo-Hair et al. 2019 (CC BY 4.0), cropped from the original; nothing else changed." },
+    figs: [
+      { ok: true, src: "assets/img/L001-fig1.png", wide: true,
+        cap: { zh: "Fig 1a–d · B. subtilis CcaSR v0.1 裝置圖", en: "Fig 1a–d · the B. subtilis CcaSR v0.1 device schematic" },
+        note: { zh: "我們拿走的就是這張圖的切法：a PCB 生產、b 光感應、c 轉錄輸出、d 用 sfGFP 讀。注意 b 的 P_xylA 要加木糖、c 的 P_hy-spank 要加 IPTG——我們把這兩個換成組成型，d 的 sfgfp 換成 protectant。", en: "What we took is exactly this figure’s split: a PCB production, b light sensing, c transcriptional output, d read out by sfGFP. Note that b’s P_xylA needs xylose and c’s P_hy-spank needs IPTG — those two are what we swap for constitutive promoters, and d’s sfgfp is what we swap for the protectant." } },
+      { ok: true, src: "assets/img/L001-fig6b.png",
+        cap: { zh: "Fig 6b · 穩態轉移函數（V0106 的出處）", en: "Fig 6b · the steady-state transfer function (where V0106 comes from)" },
+        note: { zh: "曲線在 0.1 到 10 μmol m⁻² s⁻¹ 之間走完，半活化在 4.66。三段光強——曲線底、半活化附近、飽和——就夠描述它。這張圖就是我們不做連續掃描、也不接 Iris 的理由。", en: "The curve does its whole run between 0.1 and 10 μmol m⁻² s⁻¹, with half-activation at 4.66. Three levels — foot of the curve, near half-activation, saturated — are enough to describe it. This figure is the reason we neither sweep continuously nor wire up Iris." } },
+      { cap: { zh: "F0001 · 我們的版本（改作自 Fig 1a–d）", en: "F0001 · our version, adapted from Fig 1a–d" },
+        note: { zh: "還沒畫。兩個誘導型啟動子要畫成組成型，輸出從 sfgfp 換成 protectant。畫一次，Hub.Figures 開 F0001，wiki 的 Engineering 和 Parts 直接用。", en: "Not drawn yet. Both inducible promoters become constitutive and the output goes from sfgfp to the protectant. Drawn once, filed as F0001 in Hub.Figures, reused on the wiki’s Engineering and Parts pages." } }
+    ],
+    // Which of the 19 columns make up the admin strip at the foot of the tab.
+    admin: [2, 3, 4, 5, 6, 7, 11, 13, 16, 17, 18, 19],
+    note: { zh: "行政列那 12 格，就是 Papers 索引列要有的欄位。其餘 7 格只住在這個 tab 裡。同一個欄位不要兩邊都填。", en: "Those 12 admin cells are exactly the columns the Papers index row needs. The other seven live only in this tab. No field is filled in both places." }
+  },
+
+  // MethodCompare, because column 3 is "method". Archived at N10 (1 Apr).
+  mc: [
+    { k: { zh: "目的", en: "Purpose" }, v: { zh: "不加化學誘導物就能控制 protectant 的表達", en: "Control protectant expression without adding a chemical inducer" } },
+    { k: { zh: "方法概要", en: "Method in brief" }, v: { zh: "綠／紅光可逆的雙組分系統（CcaS–CcaR）＋自製 PCB（ho1–pcyA 融合）＋嵌合的 PcpcG2 輸出啟動子", en: "A green/red photoreversible two-component system (CcaS–CcaR) + home-made PCB (an ho1–pcyA fusion) + a chimeric PcpcG2 output promoter" } },
+    { k: { zh: "條件", en: "Conditions" }, v: { zh: "B. subtilis PY79；M9＋甘油（不能用葡萄糖）；要加 FeCl₃；37 °C、250 RPM；OD₆₀₀ 0.08–0.15", en: "B. subtilis PY79; M9 with glycerol (not glucose); FeCl₃ required; 37 °C, 250 RPM; OD₆₀₀ 0.08–0.15" } },
+    { k: { zh: "測試階段", en: "Stage tested" }, v: { zh: "原文做到單株特性化（v1.0），沒有做到應用輸出", en: "The paper reaches strain characterisation (v1.0); it never drives an applied output" } },
+    { k: { zh: "讀出方式", en: "Readout" }, v: { zh: "流式細胞儀，校正成 MEFL／MEAP，每次 3 重複、不同天", en: "Flow cytometry calibrated to MEFL/MEAP, three replicates on different days" } },
+    { k: { zh: "優缺點", en: "Pros and cons" }, v: { zh: "優：>70 倍動態範圍、可逆、不耗試劑。缺：PCB 要自製、要光硬體、t½ 約 1–2 小時。", en: "For: over 70-fold dynamic range, reversible, consumes no reagent. Against: PCB has to be made, light hardware is required, half-times are 1–2 hours." } },
+    { k: { zh: "我們能不能做", en: "Can we do it?" }, v: { zh: "改過能", en: "Yes, modified" } }
+  ],
+
+  v: [
+    { id: "V0101", n: { zh: "71 ± 12 倍", en: "71 ± 12-fold" }, t: { zh: "B. subtilis CcaSR v1.0（ccaSm3）綠／紅光動態範圍", en: "Dynamic range of B. subtilis CcaSR v1.0 (ccaSm3), green vs red" }, f: "Fig 5" },
+    { id: "V0102", n: { zh: "80 倍", en: "80-fold" }, t: { zh: "ho1–pcyA translational fusion 提升 PCB：25.7 ± 6.2 → 2070 ± 130 MEAP", en: "An ho1–pcyA translational fusion raises PCB: 25.7 ± 6.2 → 2070 ± 130 MEAP" }, f: "Fig 2" },
+    { id: "V0103", n: { zh: "44 倍", en: "44-fold" }, t: { zh: "嵌合輸出啟動子：PcpcG2-172 的 555 ± 65 → 64,000 ± 7600 MEFL", en: "A chimeric output promoter: 555 ± 65 → 64,000 ± 7600 MEFL against PcpcG2-172" }, f: "Fig 4" },
+    { id: "V0104", n: { zh: "約 200 倍", en: "~200-fold" }, t: { zh: "只重編碼前 15 個密碼子：113 ± 27 → 20,100 ± 1,600 MEFL", en: "Recoding only the first 15 codons: 113 ± 27 → 20,100 ± 1,600 MEFL" }, f: { zh: "Supplementary", en: "Supplementary" } },
+    { id: "V0105", n: { zh: "105 / 75 分", en: "105 / 75 min" }, t: { zh: "t½ 開（紅→綠）105.1 ± 1.5 分、關（綠→紅）74.97 ± 0.39 分", en: "Half-times: 105.1 ± 1.5 min ON (red→green), 74.97 ± 0.39 min OFF" }, f: "Fig 6c–d" },
+    { id: "V0106", n: { zh: "4.66 μmol", en: "4.66 μmol" }, t: { zh: "半活化光強 4.66 ± 0.63 μmol m⁻² s⁻¹，Hill 係數 1.88 ± 0.16", en: "Half-activation intensity 4.66 ± 0.63 μmol m⁻² s⁻¹, Hill coefficient 1.88 ± 0.16" }, f: "Fig 6b" },
+    { id: "V0107", n: { zh: "21 / 11 倍", en: "21 / 11-fold" }, t: { zh: "卡匣末端加一個終止子做絕緣的增益（xyl 位點 21 倍、amyE 位點 11 倍）", en: "The gain from one terminator insulating a cassette (21-fold at the xyl locus, 11-fold at amyE)" }, f: { zh: "Supplementary", en: "Supplementary" } }
+  ],
+
+  d: [
+    { id: "D0007", b: "RQ02 · L001", t: { zh: "輸出用光控制，不用化學誘導。ccaS 與 ccaR 的誘導型啟動子換成組成型，輸出卡匣從 sfgfp 換成 protectant。", en: "Light control for the output, no chemical induction. The inducible promoters on ccaS and ccaR become constitutive, and the output cassette goes from sfgfp to the protectant." } },
+    { id: "D0012", b: "RQ07 · L001 · V0106", t: { zh: "LPA 自建並簡化：不接 Iris，綠紅各三段光強。", en: "Build the LPA ourselves and simplify it: no Iris, three light levels each for green and red." } },
+    { id: "D0019", b: "RQ10 · L001 · V0104", t: { zh: "密碼子最佳化只動前 15 個，自由能用 ViennaRNA（不是原文的 NUPACK）。", en: "Codon optimisation touches only the first 15, with free energy from ViennaRNA (not the paper’s NUPACK)." } },
+    { id: "D0024", b: "RQ09 · L001 · V0105", t: { zh: "模型沿用三態加延遲的動力學框架，但輸出換成 protectant 後重新擬合參數。", en: "The model keeps the three-state-plus-delay kinetic framework, but refits its parameters once the output is the protectant." } }
+  ],
+
+  ri: [
+    { id: "RI001", k: { zh: "採納", en: "Adopted" }, d: "D0007", t: { zh: "因為 L001 把裝置切成三個模組，D0007 才決定分 PPM／LSM／TOM 三段分別驗，不是一次做完再找哪裡壞。", en: "Because L001 splits the device into three modules, D0007 tests PPM, LSM and TOM separately instead of building it all and then hunting for the break." } },
+    { id: "RI002", k: { zh: "避雷", en: "Trap avoided" }, d: "D0007", t: { zh: "因為 L001 說 v0.1 完全不亮，我們沒有照原圖直接做下去。和「採納」同權重。", en: "Because L001 says v0.1 does not respond to light at all, we did not simply build the published design. Equal in weight to “adopted”." } },
+    { id: "RI003", k: { zh: "工具", en: "Tool" }, d: "D0012", t: { zh: "因為 V0106 的半活化是 4.66 μmol m⁻² s⁻¹，LPA 只做三段光強就跨得過曲線，省掉連續掃描的硬體。", en: "Because V0106 puts half-activation at 4.66 μmol m⁻² s⁻¹, three light levels straddle the curve and the LPA needs no continuous sweep." } },
+    { id: "RI004", k: { zh: "工具", en: "Tool" }, d: "D0019", t: { zh: "ViennaRNA 換掉 NUPACK，分析視角不變。換了工具就要有一列，否則明年會以為我們跑的是 NUPACK。", en: "ViennaRNA replaces NUPACK with the lens unchanged. A tool swap needs its own row, or next year will assume we ran NUPACK." } }
+  ],
+  rinote: { zh: "四列，但只算三個相異 D（RI001 與 RI002 都指向 D0007）。這就是反灌水第一條：算相異 D 數，不算列數。每一列都要老師確認，七天異議期。", en: "Four rows, but only three distinct Ds — RI001 and RI002 both point at D0007. That is anti-padding rule one: count distinct Ds, not rows. Every row needs an instructor’s confirmation and carries a seven-day objection window." },
+
+  f: { id: "F0001", kind: { zh: "改作", en: "Adaptation" }, src: "L001 · Fig 1a–d",
+    t: { zh: "我們的裝置圖：兩個誘導型啟動子畫成組成型，TOM 的輸出從 sfgfp 換成 protectant。因為原文是 CC BY 4.0，這是少數可以站在原圖上改、而不必整張重繪的情況——條件是附出處、授權連結，並註明修改。", en: "Our device schematic: both inducible promoters drawn as constitutive, and the TOM output changed from sfgfp to the protectant. Because the paper is CC BY 4.0, this is one of the few cases where we may build on the original rather than redraw it from scratch — provided we credit the source, link the licence and say it was changed." } },
+
+  refs: { out: "references-W###.md", bib: "refs.bib",
+    line: "Castillo-Hair, S. M., Baerman, E. A., Fujita, M., Igoshin, O. A., & Tabor, J. J. (2019). Optogenetic control of Bacillus subtilis gene expression. Nature Communications, 10, 3099.",
+    t: { zh: "沒有人打這一行。refs.py 從第 7 欄的 DOI 對上文獻庫快照，從第 19 欄知道它該出現在哪幾頁，依 L 編號排序。對不上就印進 UNRESOLVED.txt。", en: "Nobody types this line. refs.py matches the DOI in column 7 against the library snapshot, learns from column 19 which pages it belongs on, and sorts by L number. Anything unmatched prints to UNRESOLVED.txt." } },
+
+  breaks: [
+    { t: { zh: "一篇論文，四個組，一個讀者", en: "One paper, four groups, one reader" }, d: { zh: "卡只有一個「組別」和一個「建議誰看」。這篇同時影響 Wet、Dry、Hardware 與建模，所以四個取用裡有三個只能從第 15 欄「帶出的新問題」離開——而設計文件自己標記這一欄的填寫率最低（§5.2 的 ⚠️）。", en: "A card has one group and one “who should read this”. This paper hits Wet, Dry, Hardware and modelling at once, so three of the four extractions can only leave through column 15, “new questions raised” — the very column the design document flags as the least likely to be filled." } },
+    { t: { zh: "對策：這張卡由老師在 N00 先填好", en: "The fix: an instructor fills this card at N00" }, d: { zh: "L001 連同 RQ02 與 RQ07–RQ10 在 11/25 前一起寫好。學生 11/29 進來看到的第一張卡是填滿的，而且它正好就是 PaperCardRules.html 需要的「合格 Takeaway」範例。代價：老師多 10 分鐘，加四題 RQ。", en: "L001 is written before 25 Nov together with RQ02 and RQ07–RQ10. The first card a student sees on 29 Nov is already full, and it doubles as the worked “acceptable takeaway” that PaperCardRules.html needs. Cost: ten more minutes of instructor time, plus four RQs." } },
+    { t: { zh: "別讓學生從這張卡學到「圖可以直接用」", en: "Do not let students learn “figures are reusable” from this card" }, d: { zh: "第 11 欄這裡填「已確認 CC-BY」，是因為這一篇真的是 CC BY 4.0。團隊大部分論文不是。範例卡上要寫一句：這一格的預設值是「需重繪」，CC-BY 要逐篇確認過才能選。", en: "Column 11 says “confirmed CC-BY” here only because this paper really is CC BY 4.0. Most of the team’s papers are not. The example card needs a line on it: the default for this cell is “needs redraw”, and CC-BY may be chosen only after checking that particular paper." } },
+    { t: { zh: "參數和框架要分開記", en: "Keep the framework and its parameters apart" }, d: { zh: "V0105 的 t½ 混了 sfGFP 的成熟速率，作者自己寫了。那個數字進了 Hub.Facts，就有人會在 wiki 上當成我們的反應時間引用。V 的說明欄必須寫明「原文條件下」。", en: "The half-times in V0105 fold in sfGFP maturation, as the authors say. Once that number is in Hub.Facts, somebody will cite it on the wiki as our response time. The V row’s note has to say “under the paper’s conditions”." } }
+  ]
+};
+
 const PHOTO = {
   steps: [
     { t: { zh: "拍", en: "Shoot" }, who: { zh: "任何人", en: "Anyone" }, d: { zh: "記錄過程：裝置怎麼接、白板怎麼想、失敗長什麼樣。算得出數字的圖是數據，放 Data 並開 R，不走這裡。", en: "The look of the process: how it was set up, the whiteboard, what failure looked like. An image that yields a number is data and goes to Data with an R." } },
@@ -1729,6 +1912,22 @@ Object.assign(T.zh, {
   "res.rules": "三條規則",
   "res.refs": "參考文獻清單自動產生",
   "res.refs.p": "refs.py 從 Papers、Facts、Figures 與文獻庫快照產生每頁清單，對不上的印進 UNRESOLVED.txt。人要做的只有一件事：寫 wiki 時把頁面編號填回第 19 欄。沒有人需要在 freeze 前重排清單。",
+  "res.case.eyebrow": "實例", "res.case.h": "一篇論文，四個取用。",
+  "res.case.sub": "ReLEAF 的定錨論文走一次新系統。不是示範用的假例子：下面每一格都是這篇真的被我們拿走的東西，以及我們改掉的地方。",
+  "res.case.paper": "定錨論文", "res.case.lic": "授權",
+  "res.case.then": "2026：這篇住在五個地方", "res.case.now": "2027：它變成什麼",
+  "res.case.takes": "我們真正拿走的四件事", "res.case.took": "拿走", "res.case.chg": "我們改了什麼", "res.case.land": "落在哪",
+  "res.case.rq": "種子問題：RQ02（11/25 前由老師寫）",
+  "res.case.doc": "這張卡長什麼樣", "res.case.doc.sub": "一份主題文件，一個 tab 一篇論文。Takeaway 和數字在最上面，行政欄位在最下面——這份是給三個月後想知道「我們為什麼這樣做」的人讀的。",
+  "res.case.docfile": "檔案", "res.case.figph": "圖貼這裡",
+  "res.case.t.take": "TAKEAWAY（一句，可以被反駁）", "res.case.t.so": "所以我們應該", "res.case.t.num": "結果：可以拿來用的數字",
+  "res.case.t.fig": "關鍵圖／示意圖", "res.case.t.took": "我們拿走什麼、改了什麼", "res.case.t.lim": "方法限制：為什麼不能照抄",
+  "res.case.t.new": "帶出的新問題", "res.case.t.adm": "行政列",
+  "res.case.card": "這 19 格分別住在哪裡", "res.case.card.sub": "只有 5 欄要想，每欄 90 秒。其餘是下拉、抄來的、路由，或之後才填。",
+  "res.case.mc": "MethodCompare 的那一列（第 3 欄是「方法」，所以要填）", "res.case.mcnote": "N10（4/1 開始下單）後整張分頁封存到 90 Archive。",
+  "res.case.chain": "這張卡兌現成什麼", "res.case.v": "可用數字 → Hub.Facts", "res.case.d": "改變的決定 → Hub.Decisions",
+  "res.case.ri": "影響紀錄 → Research.Impact", "res.case.f": "圖 → Hub.Figures", "res.case.refs": "參考文獻 → refs.py",
+  "res.case.breaks": "這篇壓到系統哪裡", "res.case.vth": ["V", "數字", "說明", "出處"],
   "res.rights": "圖與版權", "res.see": "看研究系統", "flow.cost": "時間",
   "ppl.decided": "PI 已確認",
   "ph.flow": "流程", "ph.name": "檔名，工具產生", "ph.home": "放哪裡", "ph.duty": "Photo Steward 的工作", "ph.rules": "三條不能退的", "ph.see": "看照片系統", "ph.village": "在村子裡看暗房"
@@ -1770,6 +1969,22 @@ Object.assign(T.en, {
   "res.rules": "Three rules",
   "res.refs": "Reference lists generate themselves",
   "res.refs.p": "refs.py builds each page’s list from Papers, Facts, Figures and a library snapshot, and prints anything unmatched to UNRESOLVED.txt. People have one job: while writing the wiki, put the page number in column 19. Nobody re-orders a list before freeze.",
+  "res.case.eyebrow": "Worked example", "res.case.h": "One paper, four extractions.",
+  "res.case.sub": "ReLEAF’s anchor paper, run once through the new system. Not an invented demonstration: every cell below is something we really took from this paper, or something we changed.",
+  "res.case.paper": "Anchor paper", "res.case.lic": "Licence",
+  "res.case.then": "2026: this paper lived in five places", "res.case.now": "2027: what it becomes",
+  "res.case.takes": "The four things we actually took", "res.case.took": "Taken", "res.case.chg": "What we changed", "res.case.land": "Where it lands",
+  "res.case.rq": "The seed question: RQ02, written by instructors before 25 Nov",
+  "res.case.doc": "What the card looks like", "res.case.doc.sub": "One document per theme, one tab per paper. Takeaway and numbers at the top, admin at the foot — this is written for whoever asks, three months from now, why we did it this way.",
+  "res.case.docfile": "File", "res.case.figph": "Figure goes here",
+  "res.case.t.take": "TAKEAWAY (one sentence, and it could be wrong)", "res.case.t.so": "So we should", "res.case.t.num": "Results: numbers we can use",
+  "res.case.t.fig": "Key figures and schematics", "res.case.t.took": "What we took, and what we changed", "res.case.t.lim": "Method limits: why we cannot copy it",
+  "res.case.t.new": "New questions raised", "res.case.t.adm": "Admin",
+  "res.case.card": "Where each of the 19 fields lives", "res.case.card.sub": "Only five columns need thinking, at 90 seconds each. The rest are dropdowns, copies, routing, or filled in later.",
+  "res.case.mc": "Its MethodCompare row — required, because column 3 says “method”", "res.case.mcnote": "The whole tab is archived to 90 Archive after N10 (1 Apr), when ordering starts.",
+  "res.case.chain": "What the card cashes in for", "res.case.v": "Usable numbers → Hub.Facts", "res.case.d": "Decisions changed → Hub.Decisions",
+  "res.case.ri": "Impact → Research.Impact", "res.case.f": "Figures → Hub.Figures", "res.case.refs": "References → refs.py",
+  "res.case.breaks": "Where this paper presses on the system", "res.case.vth": ["V", "Number", "What it says", "From"],
   "res.rights": "Figures and copyright", "res.see": "See the research system", "flow.cost": "Time",
   "ppl.decided": "Confirmed by the PI",
   "ph.flow": "The flow", "ph.name": "The file name, made by a tool", "ph.home": "Where things live", "ph.duty": "The Photo Steward’s job", "ph.rules": "Three things that do not bend", "ph.see": "See the photo system", "ph.village": "See the darkroom in the village"

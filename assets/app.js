@@ -742,6 +742,92 @@
     $("#res-fair").innerHTML = RESEARCH_FAIR.map(x => `<li>${esc(L(x))}</li>`).join("");
     $("#res-rules").innerHTML = RESEARCH_RULES.map((x, i) => `<li><span class="sysrules__n">${i + 1}</span><div><h4>${esc(L(x.t))}</h4><p>${esc(L(x.d))}</p></div></li>`).join("");
     $("#res-rights").innerHTML = RESEARCH_RIGHTS.map(x => `<li>${esc(L(x))}</li>`).join("");
+    renderResearchCase();
+  }
+
+  // ---------- research: the worked example (ReLEAF's anchor paper) ----------
+  function renderResearchCase() {
+    if (!$("#rc-paper")) return;
+    const C = RESEARCH_CASE, p = C.paper;
+    $("#rc-paper").innerHTML = `<p class="rc-paper__tag">${esc(t("res.case.paper"))}</p>
+      <h4>${esc(p.title)}</h4>
+      <p class="rc-paper__cite">${esc(p.cite)}</p>
+      <p class="rc-paper__meta"><a href="${esc(p.url)}" target="_blank" rel="noopener"><code>${esc(p.doi)}</code></a>
+        <span class="rc-lic">${esc(t("res.case.lic"))} · ${esc(p.lic)}</span>
+        <span class="rc-paper__key"><code>${esc(p.key)}</code></span></p>
+      <p class="rc-paper__licd">${esc(L(p.licd))}</p>
+      <p class="rc-paper__why">${esc(L(p.why))}</p>`;
+
+    $("#rc-then").innerHTML = C.then.map(x => `<li><code>${esc(x.loc)}</code><p>${esc(L(x.d))}</p></li>`).join("");
+    $("#rc-thenmiss").textContent = L(C.thenmiss);
+    $("#rc-now").innerHTML = C.now.map(x => `<div><b>${esc(x.n)}</b><span>${esc(L(x.t))}</span></div>`).join("");
+
+    $("#rc-takes").innerHTML = C.takes.map(x => `<article class="rc-take" style="--c:var(--${x.c})">
+      <header><span class="rc-take__n">${esc(x.id)}</span><h4>${esc(L(x.t))}</h4><code>${esc(L(x.fig))}</code></header>
+      <dl><dt>${esc(t("res.case.took"))}</dt><dd>${esc(L(x.took))}</dd>
+        <dt class="rc-take__chg">${esc(t("res.case.chg"))}</dt><dd class="rc-take__chg">${esc(L(x.chg))}</dd>
+        <dt>${esc(t("res.case.land"))}</dt><dd><code>${esc(L(x.land))}</code></dd></dl></article>`).join("");
+
+    $("#rc-rq").innerHTML = C.rq.map(x => `<div><dt>${esc(L(x.k))}</dt><dd>${esc(L(x.v))}</dd></div>`).join("");
+    $("#rc-mc").innerHTML = C.mc.map(x => `<div><dt>${esc(L(x.k))}</dt><dd>${esc(L(x.v))}</dd></div>`).join("");
+
+    // the card itself, drawn as the Doc tab it really is
+    const col = n => C.card.find(c => c.n === n), D = C.doc;
+    const vrows = C.v.map(x => `<tr><td><code>${esc(x.id)}</code></td><td><b>${esc(L(x.n))}</b></td><td>${esc(L(x.t))}</td><td><code>${esc(L(x.f))}</code></td></tr>`).join("");
+    $("#rc-doc").innerHTML = `<div class="rc-doc__rail">
+        <p class="rc-doc__file"><span>${esc(t("res.case.docfile"))}</span><code>${esc(L(D.file))}</code></p>
+        <ul>${D.tabs.map(x => `<li class="${x.on ? "on" : ""}${x.ghost ? " ghost" : ""}"><b>${esc(x.n)}</b><span>${esc(L(x.t))}</span></li>`).join("")}</ul>
+      </div>
+      <article class="rc-doc__page">
+        <p class="rc-doc__id">${esc(L(D.head))}</p>
+        <h4>${esc(C.paper.title)}</h4>
+        <p class="rc-doc__cite">${esc(C.paper.cite)}<br><code>${esc(C.paper.doi)}</code> <span class="rc-lic">${esc(C.paper.lic)}</span></p>
+
+        <h5 class="rc-doc__h rc-doc__h--big">${esc(t("res.case.t.take"))}</h5>
+        <p class="rc-doc__big">${esc(L(col(8).v))}</p>
+        <h5 class="rc-doc__h rc-doc__h--big">${esc(t("res.case.t.so"))}</h5>
+        <p class="rc-doc__big">${esc(L(col(14).v))}</p>
+
+        <h5 class="rc-doc__h">${esc(t("res.case.t.num"))}</h5>
+        <div class="dmwrap"><table class="dm dm--small rc-doc__v"><thead><tr>${t("res.case.vth").map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${vrows}</tbody></table></div>
+
+        <h5 class="rc-doc__h">${esc(t("res.case.t.fig"))}</h5>
+        <div class="rc-doc__figs">${D.figs.map(f => `<figure class="${f.ok ? "ok" : ""}${f.wide ? " wide" : ""}">
+          ${f.src ? `<img src="${esc(f.src)}" alt="${esc(L(f.cap))}" loading="lazy">` : `<div class="rc-doc__ph">${esc(t("res.case.figph"))}</div>`}
+          <figcaption><b>${esc(L(f.cap))}</b><span>${esc(L(f.note))}</span>${f.src ? `<small class="rc-doc__cr">${esc(L(D.credit))} <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> · <a href="${esc(C.paper.url)}" target="_blank" rel="noopener">${esc(C.paper.doi)}</a></small>` : ""}</figcaption></figure>`).join("")}</div>
+
+        <h5 class="rc-doc__h">${esc(t("res.case.t.took"))}</h5>
+        <ol class="rc-doc__took">${C.takes.map(x => `<li style="--c:var(--${x.c})"><b>${esc(L(x.t))}</b>
+          <p><i>${esc(t("res.case.took"))}</i> ${esc(L(x.took))}</p>
+          <p><i>${esc(t("res.case.chg"))}</i> ${esc(L(x.chg))}</p>
+          <p class="rc-doc__land"><i>${esc(t("res.case.land"))}</i> <code>${esc(L(x.land))}</code></p></li>`).join("")}</ol>
+
+        <h5 class="rc-doc__h">${esc(t("res.case.t.lim"))}</h5>
+        <p>${esc(L(col(12).v))}</p>
+
+        <h5 class="rc-doc__h">${esc(t("res.case.t.new"))}</h5>
+        <p><code>${esc(L(col(15).v))}</code></p>
+
+        <h5 class="rc-doc__h rc-doc__h--adm">${esc(t("res.case.t.adm"))}</h5>
+        <div class="rc-doc__adm">${D.admin.map(n => { const c = col(n); return `<div><dt>${esc(L(c.f))}</dt><dd>${esc(L(c.v))}</dd></div>`; }).join("")}</div>
+      </article>`;
+    $("#rc-docnote").textContent = L(D.note);
+
+    $("#rc-legend").innerHTML = Object.keys(C.cardkinds).map(k =>
+      `<span class="rc-k rc-k--${k}">${esc(L(C.cardkinds[k]))} · ${C.card.filter(c => c.k === k).length}</span>`).join("");
+    $("#rc-card").innerHTML = C.card.map(x => `<li class="rc-row rc-row--${x.k}">
+      <span class="rc-row__n">${x.n}</span>
+      <div class="rc-row__f"><b>${esc(L(x.f))}</b><span class="rc-k rc-k--${x.k}">${esc(L(C.cardkinds[x.k]))}</span></div>
+      <div class="rc-row__v"><p>${esc(L(x.v))}</p>${x.d ? `<small>${esc(L(x.d))}</small>` : ""}</div></li>`).join("");
+
+    $("#rc-v").innerHTML = simpleTable(t("res.case.vth"), C.v.map(x => [x.id, x.n, x.t, x.f]), true);
+    $("#rc-d").innerHTML = C.d.map(x => `<li><span class="rc-id">${esc(x.id)}</span><div><p>${esc(L(x.t))}</p><small><code>${esc(x.b)}</code></small></div></li>`).join("");
+    $("#rc-ri").innerHTML = C.ri.map(x => `<li><span class="rc-id">${esc(x.id)}</span><div><p>${esc(L(x.t))}</p><small>${esc(L(x.k))} · <code>${esc(x.d)}</code></small></div></li>`).join("");
+    $("#rc-rinote").textContent = L(C.rinote);
+    $("#rc-f").innerHTML = `<li><span class="rc-id">${esc(C.f.id)}</span><div><p>${esc(L(C.f.t))}</p><small>${esc(L(C.f.kind))} · <code>${esc(C.f.src)}</code></small></div></li>`;
+    $("#rc-refs").innerHTML = `<p class="rc-refs__out"><code>${esc(C.refs.out)}</code> <code>${esc(C.refs.bib)}</code></p>
+      <blockquote>${esc(C.refs.line)}</blockquote><p>${esc(L(C.refs.t))}</p>`;
+    $("#rc-breaks").innerHTML = C.breaks.map((x, i) => `<li><span class="sysrules__n">${i + 1}</span><div><h4>${esc(L(x.t))}</h4><p>${esc(L(x.d))}</p></div></li>`).join("");
   }
 
   // ---------- photo system ----------
