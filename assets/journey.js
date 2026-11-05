@@ -52,7 +52,7 @@ window.JOURNEY = (() => {
     "jy.who.sub": "學生都是未成年人，所以每一類紀錄都事先訂好誰能看。本頁是虛構範例；真實的歷程與年鑑放在隊內，不會放上這個公開網站。",
     "jy.who.th": ["內容", "學生本人", "家長", "全隊與其他家長", "老師"],
     "jy.who.yes": "看得到", "jy.who.no": "—",
-    "jy.who.note": "這張表是提案。公開給其他家長的範圍、肖像是否進年鑑，要由 PI 定案，並在入隊時告知學生與家長。"
+    "jy.who.note": "出席率與 Lab 時數進全隊年鑑，其他家長也看得到，這一點已由 PI 確認。肖像是否進年鑑還沒定。範圍會在入隊時告知學生與家長。"
   });
   Object.assign(T.en, {
     "site.students": "Journeys", "title.students": "Student journeys",
@@ -103,7 +103,7 @@ window.JOURNEY = (() => {
     "jy.who.sub": "Students are minors, so who can see each kind of record is set in advance. This page is an invented example; real journeys and yearbooks stay inside the team and never appear on this public site.",
     "jy.who.th": ["Content", "Student", "Family", "Team and other families", "Instructors"],
     "jy.who.yes": "Yes", "jy.who.no": "—",
-    "jy.who.note": "This table is a proposal. What other families can see, and whether portraits go in the yearbook, are for the PI to settle and to tell students and families when they join."
+    "jy.who.note": "Attendance and lab hours go in the team yearbook, where other families can see them; the PI has confirmed this. Whether portraits go in is still open. Students and families are told the scope when they join."
   });
 
   const DIMS = [
