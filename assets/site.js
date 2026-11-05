@@ -11,7 +11,7 @@ window.SITE = (() => {
     "title.home": "GEMS iGEM 2027", "title.system": "系統全貌", "title.time": "時程", "title.people": "角色", "title.advisors": "Advisor 計畫", "title.research": "Research", "title.updates": "更新紀錄",
     "home.intro": "GEMS Taiwan 2027 iGEM 隊的工作系統：誰，在什麼時候，把什麼放在哪裡。",
     "home.proposal": "提案，待 PI 確認。",
-    "home.d": "天", "home.cta": "看系統全貌（約 10 分鐘）", "home.cta2": "看全年時程", "home.next": "下一個節點", "home.days": "天後", "home.today": "今天", "home.after": "接著", "home.allnodes": "看完整時程",
+    "site.students": "學生歷程", "title.students": "學生歷程", "door.students": "學生歷程", "door.students.who": "學生、家長與老師", "door.count.dims": "個面向", "door.students.d": "每位學生一整年的貢獻、付出與成長怎麼被記下來，最後成為家長和學生都看得到的年鑑。", "home.d": "天", "home.cta": "看系統全貌（約 10 分鐘）", "home.cta2": "看全年時程", "home.next": "下一個節點", "home.days": "天後", "home.today": "今天", "home.after": "接著", "home.allnodes": "看完整時程",
     "home.phase": "目前階段", "home.phase.build": "系統建置", "home.phase.gap": "階段之間", "home.phase.end": "賽季結束",
     "home.none": "這一季的節點都走完了。",
     "home.pass": "通過條件",
@@ -68,7 +68,7 @@ window.SITE = (() => {
     "title.home": "GEMS iGEM 2027", "title.system": "The system", "title.time": "Schedule", "title.people": "Roles", "title.advisors": "Advisor programme", "title.research": "Research", "title.updates": "Updates",
     "home.intro": "How the GEMS Taiwan 2027 iGEM team works: who puts what where, and when.",
     "home.proposal": "A proposal, awaiting the PI.",
-    "home.d": "d", "home.cta": "See the whole system (about 10 min)", "home.cta2": "See the year’s schedule", "home.next": "Next node", "home.days": "days", "home.today": "Today", "home.after": "Then", "home.allnodes": "See the full schedule",
+    "site.students": "Journeys", "title.students": "Student journeys", "door.students": "Student journeys", "door.students.who": "Students, families and instructors", "door.count.dims": "areas", "door.students.d": "How each student's contribution, effort and growth are recorded across the year, and become a yearbook families and students can read.", "home.d": "d", "home.cta": "See the whole system (about 10 min)", "home.cta2": "See the year’s schedule", "home.next": "Next node", "home.days": "days", "home.today": "Today", "home.after": "Then", "home.allnodes": "See the full schedule",
     "home.phase": "Current phase", "home.phase.build": "Building the system", "home.phase.gap": "Between phases", "home.phase.end": "Season over",
     "home.none": "Every node this season has passed.",
     "home.pass": "To pass",
@@ -123,7 +123,7 @@ window.SITE = (() => {
 
   // ---------- shell ----------
   const NAV = [
-    ["home", "index.html"], ["system", "system.html"], ["time", "timeline.html"], ["people", "people.html"],
+    ["home", "index.html"], ["system", "system.html"], ["time", "timeline.html"], ["people", "people.html"], ["students", "students.html"],
     ["advisors", "advisors.html"], ["research", "research.html"], ["updates", "updates.html"]
   ];
   const MARK = `<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1d1d1f"/><circle cx="11" cy="16" r="3" fill="#ff9500"/><circle cx="21" cy="10" r="3" fill="#0071e3"/><circle cx="21" cy="22" r="3" fill="#34c759"/></svg>`;
@@ -207,6 +207,7 @@ window.SITE = (() => {
     { k: "system", href: "system.html", c: "blue", n: DRIVE.length, unit: "door.count.folders" },
     { k: "time", href: "timeline.html", c: "orange", n: NODES.length, unit: "door.count.nodes" },
     { k: "people", href: "people.html", c: "green", n: PEOPLE.roles.length, unit: "door.count.roles" },
+    { k: "students", href: "students.html", c: "pink", n: 9, unit: "door.count.dims" }, // 9 = DIMS in journey.js
     { k: "advisors", href: "advisors.html", c: "gold", n: ADV_STAGES.length, unit: "door.count.stages" },
     { k: "research", href: "research.html", c: "purple", n: RESEARCH_RULES.length, unit: "door.count.rules" }
   ];
@@ -316,6 +317,7 @@ window.SITE = (() => {
     if ($("#node-list")) renderNodes();
     if ($("#sys-stats")) renderSystemBrief();
     if ($("#adv-glance")) renderAdvGlance();
+    if (window.JOURNEY) window.JOURNEY.render(l);
   }
 
   spy();

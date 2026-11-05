@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>學生歷程 · GEMS iGEM 2027</title>
+<meta name="description" content="How the GEMS iGEM 2027 team records each student's contribution, effort and growth across the year, with an invented worked example and yearbook.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231d1d1f'/%3E%3Ccircle cx='11' cy='16' r='3' fill='%23ff9500'/%3E%3Ccircle cx='21' cy='10' r='3' fill='%230071e3'/%3E%3Ccircle cx='21' cy='22' r='3' fill='%2334c759'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pages.css">
+<link rel="stylesheet" href="assets/journey.css">
+</head>
+<body data-page="students">
+
+<header class="nav" id="nav"></header>
+<nav class="subnav" aria-label="On this page"><div class="subnav__in"><a href="#jy-top" data-i18n="sub.jy.top"></a><a href="#jy-what" data-i18n="sub.jy.what"></a><a href="#jy-how" data-i18n="sub.jy.how"></a><a href="#jy-case" data-i18n="sub.jy.case"></a><a href="#jy-book-sec" data-i18n="sub.jy.book"></a><a href="#jy-who-sec" data-i18n="sub.jy.who"></a></div></nav>
+
+<main id="top">
+
+<section class="phead" id="jy-top">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="jy.eyebrow"></p>
+    <h1 class="display" data-i18n="jy.h1"></h1>
+    <p class="lede" data-i18n="jy.lede"></p>
+    <p class="ptag" data-i18n="jy.tag"></p>
+    <p class="jy-cta"><a class="btn" href="#jy-case"><span data-i18n="jy.cta"></span> <span aria-hidden="true">↓</span></a></p>
+    <div class="jy-facts" id="jy-facts"></div>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="jy-what">
+  <div class="wrap wrap--flush">
+    <p class="eyebrow" data-i18n="jy.what.eyebrow"></p>
+    <h2 class="headline headline--s" data-i18n="jy.what.h"></h2>
+    <p class="lede" data-i18n="jy.what.sub"></p>
+    <div id="jy-dims" class="jy-block"></div>
+    <div class="jy-two">
+      <div>
+        <h3 class="adv__h" data-i18n="jy.collab.h"></h3>
+        <p class="adv__p" data-i18n="jy.collab.p"></p>
+        <ol class="jy-collab" id="jy-collab"></ol>
+      </div>
+      <div>
+        <h3 class="adv__h" data-i18n="jy.not.h"></h3>
+        <ul class="alist" id="jy-not"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="jy-how">
+  <div class="wrap wrap--flush">
+    <p class="eyebrow" data-i18n="jy.how.eyebrow"></p>
+    <h2 class="headline headline--s" data-i18n="jy.how.h"></h2>
+    <p class="lede" data-i18n="jy.how.sub"></p>
+    <ol class="jy-steps" id="jy-steps"></ol>
+    <h3 class="adv__h" data-i18n="jy.rules.h"></h3>
+    <ul class="alist alist--ok" id="jy-trust"></ul>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="jy-case">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="jy.case.eyebrow"></p>
+    <h2 class="headline headline--s" data-i18n="jy.case.h"></h2>
+    <p class="lede" data-i18n="jy.case.sub"></p>
+  </div>
+  <div class="wrap wrap--wide">
+    <div class="jy-player">
+      <div class="jy-bar">
+        <button class="jy-play" id="jy-play" type="button"></button>
+        <div class="jy-now"><b id="jy-date"></b><span id="jy-stage"></span></div>
+        <input type="range" id="jy-range" min="0" step="1" value="0">
+      </div>
+      <div class="jy-counters" id="jy-counters" aria-live="off"></div>
+      <div class="jy-chart" id="jy-chart"></div>
+      <div class="jy-legend" id="jy-legend"></div>
+    </div>
+    <div class="jy-detail" id="jy-detail" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="sec" id="jy-book-sec">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="jy.book.eyebrow"></p>
+    <h2 class="headline headline--s" data-i18n="jy.book.h"></h2>
+    <p class="lede" data-i18n="jy.book.sub"></p>
+    <div class="jy-bookbar">
+      <div class="seg" id="jy-views" role="tablist"></div>
+      <button class="jy-print" id="jy-print" type="button"></button>
+    </div>
+    <article class="yb" id="jy-book"></article>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="jy-who-sec">
+  <div class="wrap wrap--flush">
+    <p class="eyebrow" data-i18n="jy.who.eyebrow"></p>
+    <h2 class="headline headline--s" data-i18n="jy.who.h"></h2>
+    <p class="lede" data-i18n="jy.who.sub"></p>
+    <div id="jy-who" class="jy-block"></div>
+    <p class="note" data-i18n="jy.who.note"></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="foot"></footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/updates.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/journey.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
