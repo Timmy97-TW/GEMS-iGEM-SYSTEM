@@ -4,6 +4,7 @@
 // progress, reviews, fees, discipline, research strategy, Drive links or Discord invites.
 // The home page shows the first few entries; updates.html shows them all.
 const UPDATES = [
+  { d: "2026-11-05", tag: "system", t: { zh: "學生歷程頁重新設計：從 2026 學生的感言整理出八種成長，區分承擔與幫忙，並有 Wet、Dry、HP 三位虛構學生的一年與年鑑。", en: "Student journeys redesigned: eight kinds of growth drawn from 2026 students' words, owning versus helping, and three invented years and yearbooks for Wet, Dry and HP." } },
   { d: "2026-11-05", tag: "system", t: { zh: "新增學生歷程頁：能記下哪些貢獻與成長、怎麼記、一位虛構學生的一年，以及年鑑的樣子。", en: "Added the student journeys page: what can be recorded, how, one invented student's year, and what the yearbook looks like." } },
   { d: "2026-11-05", tag: "system", t: { zh: "系統正在收斂成「核心＋分階段啟用」：上線先開少數幾張表，隨學生的能力逐步開啟。本站的細節會陸續跟著更新。", en: "The system is being narrowed to a core with staged activation: a few sheets at launch, more as students grow into them. Details on this site will follow." } },
   { d: "2026-11-05", tag: "site", t: { zh: "首頁與系統頁重新排序：重點、架構、流程、Drive、文件年表與村莊提前。", en: "Home and System pages reordered: key points, architecture, flow, Drive, document year and village now come first." } },

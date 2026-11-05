@@ -12,7 +12,7 @@ The 2027 operating system for the GEMS Taiwan iGEM team, drawn from the 2026 sea
 | `system.html` | Anyone seeing the whole system | Why, rules, architecture, Drive, flow, document year, standards, village |
 | `timeline.html` | The team, weekly | The year chart and every node with its pass condition |
 | `people.html` | Students and instructors | Seats, weekly work and estimated hours |
-| `students.html` | Students, families, instructors | What is recorded about each student, how, one invented year (animated), the yearbook and who sees what |
+| `students.html` | Students, families, instructors | What each student did and who they became, how it is recorded, three invented years (Wet, Dry, HP, animated), the yearbook and who sees what |
 | `advisors.html` | Advisors and instructors | Stages, monthly floor, one output's path, documents, roles |
 | `research.html` | Anyone doing research | The process, its flow and its place in the documents |
 | `updates.html` | Everyone | Dated log of changes |
@@ -23,7 +23,7 @@ The 2027 operating system for the GEMS Taiwan iGEM team, drawn from the 2026 sea
 - `assets/updates.js`: the daily log. **To post an update, add one line at the top of this file.** Today's date, the next node and the countdown are computed in the browser, so they need no daily edit.
 - `assets/site.js`: the shared nav and footer, page strings, and everything that depends on today's date. Add or rename a page here.
 - `assets/app.js`: section rendering. A renderer runs only when its root element is on the page.
-- `assets/journey.js`, `assets/journey.css`: the student journeys page. Its student is invented; real records never go on this site.
+- `assets/journey.js`, `assets/journey.css`: the student journeys page. Its students are invented; real records never go on this site.
 - `assets/village.js`: the iGEM Village, drawn in inline SVG.
 - `assets/style.css`: section styles. `assets/pages.css`: page shell and home page.
 
