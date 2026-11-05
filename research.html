@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research · GEMS iGEM 2027</title>
+<meta name="description" content="The GEMS iGEM 2027 research process: how a question becomes a decision, and where its documents live.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231d1d1f'/%3E%3Ccircle cx='11' cy='16' r='3' fill='%23ff9500'/%3E%3Ccircle cx='21' cy='10' r='3' fill='%230071e3'/%3E%3Ccircle cx='21' cy='22' r='3' fill='%2334c759'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body data-page="research">
+
+<header class="nav" id="nav"></header>
+<nav class="subnav" aria-label="On this page"><div class="subnav__in"><a href="#res-top" data-i18n="sub.res.why"></a><a href="#res-structure" data-i18n="sub.res.structure"></a><a href="#flow" data-i18n="sub.res.flow"></a><a href="#res-docs" data-i18n="sub.res.docs"></a><a href="#res-when" data-i18n="sub.res.when"></a><a href="#res-policy" data-i18n="sub.res.rules"></a></div></nav>
+
+<main id="top">
+
+<section class="phead" id="res-top">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="res.eyebrow"></p>
+    <h1 class="display" data-i18n="res.h1"></h1>
+    <p class="lede" data-i18n="res.sub"></p>
+    <p class="rs-cta"><a class="rs-jump" href="#flow-research" data-flow-jump="research"><span data-i18n="res.jump"></span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><small data-i18n="res.status"></small></p>
+    <h3 class="adv__h" data-i18n="res.why"></h3>
+    <div class="rs-why" id="res-why"></div>
+    <p class="rs-lesson" data-i18n="res.why.lesson"></p>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="res-structure">
+  <div class="wrap">
+    <h3 class="adv__h adv__h--first" data-i18n="res.structure"></h3>
+    <div class="rs-chain" id="res-chain"></div>
+    <div class="rs-around" id="res-around"></div>
+  </div>
+</section>
+
+<section class="sec" id="flow">
+  <div class="wrap">
+    <h2 class="headline headline--s" data-i18n="res.flow.h"></h2>
+    <p class="lede" data-i18n="res.flow.sub"></p>
+  </div>
+  <div class="wrap wrap--wide">
+    <div class="flow__bar">
+      <div class="seg" id="flow-tabs" data-only="research topic run" role="tablist"></div>
+      <div class="flow__ctl">
+        <button id="flow-prev" class="ctl"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+        <button id="flow-play" class="ctl ctl--main"><svg viewBox="0 0 16 16" class="i-play"><path d="M5 3v10l8-5z"/></svg><svg viewBox="0 0 16 16" class="i-pause"><path d="M5 3v10M11 3v10"/></svg></button>
+        <button id="flow-next" class="ctl"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
+      </div>
+    </div>
+    <div class="flow">
+      <div class="board" id="board">
+        <svg class="board__trail" id="board-trail" aria-hidden="true"></svg>
+        <div class="board__token" id="token"></div>
+      </div>
+      <div class="fpanel" id="fpanel" aria-live="polite"></div>
+    </div>
+  </div>
+
+</section>
+
+<section class="sec sec--alt" id="res-docs">
+  <div class="wrap">
+    <h2 class="headline headline--s" data-i18n="res.docs.h"></h2>
+    <p class="lede" data-i18n="res.docs.sub"></p>
+    <div class="drive">
+      <h3 class="drive__h" data-i18n="depth.tree"></h3>
+      <div class="drive__grid">
+        <ul class="tree" id="tree" data-folder="d15"></ul>
+        <div class="panel panel--side" id="tree-panel" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="year">
+  <div class="wrap">
+    <h2 class="headline headline--s" data-i18n="res.year.h"></h2>
+    <p class="lede" data-i18n="res.year.sub"></p>
+  </div>
+  <div class="wrap wrap--wide wrap--xl">
+    <div class="yr" id="yr">
+      <div class="yr__bar">
+        <div class="flow__ctl">
+          <button id="yr-prev" class="ctl"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+          <button id="yr-play" class="ctl ctl--main"><svg viewBox="0 0 16 16" class="i-play"><path d="M5 3v10l8-5z"/></svg><svg viewBox="0 0 16 16" class="i-pause"><path d="M5 3v10M11 3v10"/></svg></button>
+          <button id="yr-next" class="ctl"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
+        </div>
+        <div class="yr__now" id="yr-now"></div>
+      </div>
+      <div class="yr__scrub">
+        <div class="yr__mini" id="yr-mini" aria-hidden="true"></div>
+        <input type="range" id="yr-range" min="0" max="394" step="1" value="0">
+      </div>
+      <div class="yr__scroll" id="yr-scroll"><div class="yr__in" id="yr-in"></div></div>
+      <div class="yr__legend" id="yr-legend"></div>
+    </div>
+    <div class="panel" id="yr-panel" aria-live="polite"></div>
+    <p class="note" data-i18n="year.note"></p>
+  </div>
+
+</section>
+
+<section class="sec sec--alt" id="res-when">
+  <div class="wrap">
+    <h3 class="adv__h adv__h--first" data-i18n="res.dates"></h3>
+    <div class="rs-dates" id="res-dates"></div>
+    <h4 class="rs-sub" data-i18n="res.miles"></h4>
+    <ol class="rs-miles" id="res-miles"></ol>
+
+    <h3 class="adv__h" data-i18n="res.who"></h3>
+    <div id="res-who"></div>
+    <p class="rs-note" data-i18n="res.who.note"></p>
+
+    <h3 class="adv__h" data-i18n="res.steps"></h3>
+    <div class="rs-totals" id="res-totals"></div>
+    <div id="res-steps"></div>
+  </div>
+</section>
+
+<section class="sec" id="res-policy">
+  <div class="wrap">
+    <h3 class="adv__h adv__h--first" data-i18n="res.leads"></h3>
+    <p class="adv__p" data-i18n="res.leads.sub"></p>
+    <ol class="rs-evidence" id="res-evidence"></ol>
+    <h4 class="rs-sub" data-i18n="res.fair"></h4>
+    <ul class="alist alist--ok" id="res-fair"></ul>
+    <p class="rs-note" data-i18n="res.fair.note"></p>
+
+    <h3 class="adv__h" data-i18n="res.rules"></h3>
+    <ol class="sysrules" id="res-rules"></ol>
+
+    <h3 class="adv__h" data-i18n="res.refs"></h3>
+    <p class="adv__p" data-i18n="res.refs.p"></p>
+
+    <h3 class="adv__h" data-i18n="res.rights"></h3>
+    <ul class="alist alist--ok" id="res-rights"></ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="foot"></footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/updates.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

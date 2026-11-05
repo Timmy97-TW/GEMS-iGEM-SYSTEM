@@ -11,7 +11,7 @@
   const t = k => T[lang][k] || "";
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-  const state = { node: "t-facts", hover: null, folder: "d31", role: null, mark: Math.max(0, TIMELINE.findIndex(m => m.key === "freeze")) };
+  const state = { node: "t-facts", hover: null, folder: (document.querySelector("#tree") && document.querySelector("#tree").dataset.folder) || "d31", role: null, mark: Math.max(0, TIMELINE.findIndex(m => m.key === "freeze")) };
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ---------- language ----------
@@ -21,25 +21,40 @@
     $$(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
   }
 
+  // Each page holds only some sections; a renderer runs when its root is on the page.
   function renderAll() {
     applyStatic();
-    renderProblems();
-    renderAudit();
-    renderSystem();
-    renderGraph();
-    renderDepth();
-    renderYear();
-    renderFlow();
-    renderResearch();
-    renderPhoto();
-    renderPeople();
-    if (window.Village) window.Village.render(lang);
-    renderAdvisor();
-    renderTimeline();
-    renderFacts();
-    renderStandards();
+    if (window.SITE) window.SITE.render(lang);
+    [["#problems-list", renderProblems], ["#astats", renderAudit], ["#sys-lessons", renderSystem], ["#graph", renderGraph],
+     ["#tree", renderDepth], ["#yr", renderYear], ["#board", renderFlow], ["#res-why", renderResearch], ["#ph-steps", renderPhoto],
+     ["#ppl-list", renderPeople], ["#adv-roles", renderAdvRoles], ["#adv-floor", renderAdvisor], ["#tl", renderTimeline],
+     ["#facttypes", renderFacts], ["#stds", renderStandards]].forEach(([root, fn]) => { if ($(root)) fn(); });
+    renderVillage();
     observeReveal();
   }
+
+  // The village is heavy, so it waits until the reader is close to it.
+  let villageOn = false;
+  function renderVillage() {
+    const root = $("#vg-root");
+    if (!root || !window.Village) return;
+    if (villageOn) return window.Village.render(lang);
+    const start = () => {
+      if (villageOn) return;
+      villageOn = true;
+      window.Village.render(lang);
+      const role = new URLSearchParams(location.search).get("role");
+      if (role) window.Village.focusRole(role);
+    };
+    if (!("IntersectionObserver" in window) || location.search.includes("role=") || location.hash === "#village") return start();
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); start(); } }, { rootMargin: "800px 0px" });
+    io.observe(root);
+  }
+  // Roles are drawn on the village, which lives on another page when this one has none.
+  const goVillage = code => {
+    if (window.Village && $("#vg-root")) return window.Village.focusRole(code);
+    location.href = `system.html?role=${encodeURIComponent(code)}#village`;
+  };
 
   // ---------- problems ----------
   function renderProblems() {
@@ -173,11 +188,13 @@
 
   // ---------- depth ----------
   function renderDepth() {
+    if ($("#layers")) {
     $("#layers").innerHTML = LAYERS.map((l, i) => `
       <div class="layer reveal" style="--i:${i};--d:${i * 90}ms"><span class="layer__n">${l.n}</span>
         <div><h4>${esc(L(l.name))}</h4><p>${esc(L(l.d))}</p></div></div>`).join("");
     $("#template").innerHTML = TEAM_TEMPLATE.map(x => `<span>${esc(x)}</span>`).join("");
     $("#states").innerHTML = STATES.map(s => `<li><b>${esc(L(s.name))}</b><span>${esc(L(s.d))}</span></li>`).join("");
+    }
 
     const group = d => DRIVE.filter(f => f.drive === d).map(f => `
       <li><button class="tree__f${f.id === state.folder ? " is-sel" : ""}" data-folder="${f.id}">
@@ -197,7 +214,11 @@
   // ---------- the year of documents ----------
   const DAY = 864e5, Y0 = Date.UTC(2026, 10, 1), YSPAN = 394;
   const yday = d => (Date.parse(d + "T00:00:00Z") - Y0) / DAY;
-  const YITEMS = YEAR_ITEMS.map(i => ({ ...i, day: yday(i.d), endDay: (i.end || i.e) ? yday(i.end || i.e) : null })).sort((a, b) => a.day - b.day);
+  // <div id="yr" data-lanes="adv"> narrows the chart to those lanes, keeping the iGEM and gate strips.
+  const YLANES = ($("#yr") && $("#yr").dataset.lanes || "").split(" ").filter(Boolean);
+  const YKEEP = i => !YLANES.length || i.lane === "igem" || i.lane === "gate" || YLANES.includes(i.lane);
+  const YSHOWN = new Set(YEAR_ITEMS.filter(YKEEP).map(i => i.id));
+  const YITEMS = YEAR_ITEMS.filter(YKEEP).map(i => ({ ...i, feeds: (i.feeds || []).filter(f => YSHOWN.has(f)), day: yday(i.d), endDay: (i.end || i.e) ? yday(i.end || i.e) : null })).sort((a, b) => a.day - b.day);
   const YBY = Object.fromEntries(YITEMS.map(i => [i.id, i]));
   const YIN = {}; YITEMS.forEach(i => (i.feeds || []).forEach(f => (YIN[f] = YIN[f] || []).push(i.id)));
   const YEDGES = YITEMS.flatMap(i => (i.feeds || []).map(f => [i.id, f]));
@@ -255,7 +276,7 @@
         YEAR_TICKS.map(k => `<span class="ytick${k.n === "SAT" ? "" : " ytick--h"}" style="left:${yx(yday(k.d))}px"><em>${esc(L(k.n))}</em></span>`).join(""))}
       ${stripLane("igem", t("year.igem"), docs("igem").map(i => yTail(i) + yChip(i)).join(""))}
       ${stripLane("gate", t("year.gate"), docs("gate").map(i => yTail(i) + yChip(i)).join(""))}
-      ${YEAR_LANES.map(l => `<div class="yl yl--${l.id}" style="--c:var(--${l.c})"><span class="yl__name">${esc(L(l.name))}</span>${docs(l.id).map(i => yTail(i) + yChip(i)).join("")}</div>`).join("")}
+      ${YEAR_LANES.filter(l => !YLANES.length || YLANES.includes(l.id)).map(l => `<div class="yl yl--${l.id}" style="--c:var(--${l.c})"><span class="yl__name">${esc(L(l.name))}</span>${docs(l.id).map(i => yTail(i) + yChip(i)).join("")}</div>`).join("")}
       <div class="yr__line" id="yr-line"></div>`;
 
     const pm = (kind, b) => `<i class="ymini--${kind}" style="left:${yday(b.s) / YSPAN * 100}%;width:${(yday(b.e) - yday(b.s)) / YSPAN * 100}%"></i>`;
@@ -451,7 +472,7 @@
         ${row(t("year.owner"), L(it.who))}${row(t("year.reader"), L(it.reads))}
         ${it.tpl ? rowHTML(t("year.tpl"), esc(L(it.tpl))) : ""}
         ${it.loc ? rowHTML(t("year.loc"), `<code>${esc(L(it.loc))}</code>`) : ""}
-        ${it.id === "photo" ? rowHTML(t("nav.flow"), `<a class="ylink ylink--a" href="#photo" style="--c:var(--pink)"><i></i>${esc(t("ph.see"))}</a>`) : ""}
+        ${it.id === "photo" ? rowHTML(t("nav.flow"), `<a class="ylink ylink--a" href="system.html#photo" style="--c:var(--pink)"><i></i>${esc(t("ph.see"))}</a>`) : ""}
         ${until ? row(t("year.until"), until) : ""}
         ${inn.length ? rowHTML(t("year.from"), `<div class="ylinks">${inn.map(link).join("")}</div>`) : ""}
         ${out.length ? rowHTML(t("year.to"), `<div class="ylinks">${out.map(link).join("")}</div>`) : ""}
@@ -459,6 +480,7 @@
     $$("[data-go]", p).forEach(b => b.addEventListener("click", () => ySelect(b.dataset.go, true)));
   }
 
+  if ($("#yr")) {
   $("#yr-play").addEventListener("click", () => (yr.playing ? stopYear() : playYear()));
   $("#yr-prev").addEventListener("click", () => { stopYear(); yr.seen = true; ySet(yMonthStart(yr.t, -1), true); });
   $("#yr-next").addEventListener("click", () => { stopYear(); yr.seen = true; ySet(Math.min(YSPAN, yMonthStart(yr.t, 1)), true); });
@@ -472,16 +494,20 @@
       if (!e.isIntersecting && yr.playing) stopYear();
     }), { threshold: 0.25 }).observe($("#yr-scroll"));
   }
+  }
 
   // ---------- flow ----------
   const roleById = Object.fromEntries([...ROLES, ...FLOW_CAST].map(r => [r.id, r]));
   const tierName = { s: () => t("ppl.students"), a: () => t("ppl.advisors"), i: () => t("ppl.staff") };
-  const flow = { sc: 0, step: 0, playing: false, seen: false, timer: null };
+  // <div id="flow-tabs" data-only="research run"> limits the tabs to those scenarios.
+  const FLOW_ONLY = ($("#flow-tabs") && $("#flow-tabs").dataset.only || "").split(" ").filter(Boolean);
+  const FLOW_SET = SCENARIOS.map((s, i) => i).filter(i => !FLOW_ONLY.length || FLOW_ONLY.includes(SCENARIOS[i].id));
+  const flow = { sc: FLOW_SET[0], step: 0, playing: false, seen: false, timer: null };
   const STEP_MS = 3800;
 
   function renderFlow() {
-    $("#flow-tabs").innerHTML = SCENARIOS.map((s, i) => `
-      <button role="tab" data-sc="${i}" aria-selected="${i === flow.sc}" style="--c:var(--${s.color})"><i></i>${esc(L(s.name))}</button>`).join("");
+    $("#flow-tabs").innerHTML = FLOW_SET.map(i => { const s = SCENARIOS[i]; return `
+      <button role="tab" data-sc="${i}" aria-selected="${i === flow.sc}" style="--c:var(--${s.color})"><i></i>${esc(L(s.name))}</button>`; }).join("");
     $$("#flow-tabs button").forEach(b => b.addEventListener("click", () => { stopFlow(); goFlow(+b.dataset.sc, 0); }));
 
     const board = $("#board");
@@ -568,8 +594,8 @@
       <div class="fpanel__who" style="--c:var(--${r.color})"><i></i><span><b>${esc(L(r.name))}</b><small>${esc(tierName[r.tier]())}</small></span></div>
       <div class="fpanel__kv"><span>${esc(t("flow.file"))}</span><code>${esc(cur.file)}</code></div>
       ${cur.cost ? `<div class="fpanel__kv"><span>${esc(t("flow.cost"))}</span><span>${esc(L(cur.cost))}</span></div>` : ""}
-      ${sc.id === "research" && flow.step === steps.length - 1 ? `<a class="ylink ylink--a" href="#research" style="--c:var(--purple)"><i></i>${esc(t("res.see"))}</a>` : ""}
-      ${cur.who === "photo" ? `<a class="ylink ylink--a" href="#photo" style="--c:var(--pink)"><i></i>${esc(t("ph.see"))}</a>` : ""}
+      ${sc.id === "research" && flow.step === steps.length - 1 ? `<a class="ylink ylink--a" href="research.html" style="--c:var(--purple)"><i></i>${esc(t("res.see"))}</a>` : ""}
+      ${cur.who === "photo" ? `<a class="ylink ylink--a" href="system.html#photo" style="--c:var(--pink)"><i></i>${esc(t("ph.see"))}</a>` : ""}
       ${stateIx >= 0 ? `<div class="fpanel__kv"><span>${esc(t("flow.state"))}</span><span class="pills">${STATES.map((s, i) => `<em class="${i === stateIx ? "is-on" : i < stateIx ? "is-past" : ""}">${esc(L(s.name))}</em>`).join("")}</span></div>` : ""}
       <div class="sheet">
         <div class="sheet__name"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M1 6h14M1 11h14M6 1v14"/></svg>${esc(sc.book || "Hub")} / ${esc(L(sc.register))}</div>
@@ -584,8 +610,9 @@
   function stepFlow(d) {
     const n = SCENARIOS[flow.sc].steps.length;
     let s = flow.step + d, sc = flow.sc;
-    if (s >= n) { sc = (sc + 1) % SCENARIOS.length; s = 0; }
-    if (s < 0) { sc = (sc - 1 + SCENARIOS.length) % SCENARIOS.length; s = SCENARIOS[sc].steps.length - 1; }
+    const at = FLOW_SET.indexOf(sc), len = FLOW_SET.length;
+    if (s >= n) { sc = FLOW_SET[(at + 1) % len]; s = 0; }
+    if (s < 0) { sc = FLOW_SET[(at - 1 + len) % len]; s = SCENARIOS[sc].steps.length - 1; }
     goFlow(sc, s);
   }
   function playFlow() {
@@ -602,11 +629,12 @@
   function openFlowFromHash(smooth) {
     const m = /^#flow-([a-z]+)$/.exec(location.hash);
     const i = m ? SCENARIOS.findIndex(s => s.id === m[1]) : -1;
-    if (i < 0) return;
+    if (i < 0 || !$("#board") || !FLOW_SET.includes(i)) return;
     stopFlow(); goFlow(i, 0);
     $(".flow__bar").scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "instant" });
   }
   addEventListener("hashchange", () => openFlowFromHash(true));
+  if ($("#board")) {
   $$("[data-flow-jump]").forEach(a => a.addEventListener("click", e => {
     e.preventDefault();
     history.pushState(null, "", a.getAttribute("href"));
@@ -620,6 +648,7 @@
       if (e.isIntersecting && !flow.seen && !reduce) { flow.seen = true; playFlow(); }
       if (!e.isIntersecting && flow.playing) stopFlow();
     }), { threshold: 0.35 }).observe($("#board"));
+  }
   }
 
   // ---------- people ----------
@@ -696,7 +725,7 @@
       const blurb = g === "staff" ? zh("功能，不是席位。一位成人可兼多項；未列姓名。", "Functions, not seats. One adult can hold several; no names.") : g === "adv" ? zh("具名範圍每階段與 instructor 確認。下面是容量估算，不是席位。五個階段見 Student Advisor。", "Named scope is agreed with an instructor each stage. These are capacity estimates, not seats. The five stages are under Student Advisor.") : L(VILLAGE_DISTRICTS.find(d => d.id === g).blurb);
       return `<section class="rcg"><h4 class="rcg__h" style="--c:var(--${PCOLOR[g]})"><i></i>${esc(groupName(g))}<small>${esc(blurb)}</small></h4><div class="rcg__grid">${rs.map(roleCard).join("")}</div></section>`;
     }).join("") : `<p class="note">${esc(t("ppl.none"))}</p>`;
-    $$("#ppl-list [data-vg]").forEach(b => b.addEventListener("click", () => window.Village.focusRole(b.dataset.vg)));
+    $$("#ppl-list [data-vg]").forEach(b => b.addEventListener("click", () => goVillage(b.dataset.vg)));
   }
 
   // ---------- research: why, structure, dates, who, time, leads ----------
@@ -726,7 +755,7 @@
     $("#ph-rules").innerHTML = PHOTO.rules.map(x => `<li>${esc(L(x))}</li>`).join("");
     const go = $("#ph-village");
     go.textContent = t("ph.village");
-    go.onclick = () => window.Village.focusRole("PHO");
+    go.onclick = () => goVillage("PHO");
   }
   const ph = { sel: 2 };
 
@@ -772,7 +801,7 @@
     const advItems = TIMELINE.map((m, i) => ({ ...m, i })).filter(m => m.lane === "adv");
     const advLane = `<div class="tl__lane tl__lane--adv" style="--rows:1">
       <span class="tl__lname">${esc(t("lane.adv"))}</span>
-      ${ADV_STAGES.map((s, i) => `<a class="tl__bar" href="#advisor" data-stage="${i}" style="left:${pct(s.start)}%;width:${pct(s.after || s.end) - pct(s.start)}%;--shade:${s.shade}">${s.id} ${esc(L(s.role))}</a>`).join("")}
+      ${ADV_STAGES.map((s, i) => `<a class="tl__bar" href="advisors.html" data-stage="${i}" style="left:${pct(s.start)}%;width:${pct(s.after || s.end) - pct(s.start)}%;--shade:${s.shade}">${s.id} ${esc(L(s.role))}</a>`).join("")}
       ${advItems.map(m => `<button class="tl__m${state.mark === m.i ? " is-sel" : ""}" data-mark="${m.i}" style="left:${pct(m.date)}%;--row:0">
         <i></i><span><em>${esc(L(m.dl))}</em>${esc(L(m.t))}</span></button>`).join("")}
     </div>`;
@@ -797,7 +826,6 @@
       $$("#tl .tl__m").forEach(x => x.classList.toggle("is-sel", x === b));
       renderMark();
     }));
-    $$("#tl .tl__bar").forEach(a => a.addEventListener("click", () => { adv.stage = +a.dataset.stage; renderAdvisor(); }));
     renderMark();
   }
 
@@ -836,7 +864,7 @@
   const adv = { stage: 0, node: "review", view: "instructor", row: 0, n: 10 };
   const tbdLabel = () => (lang === "zh" ? "待決定" : "TBD");
   // Escaped text, with [T3] turned into a link to the decision list and newlines kept.
-  const tx = v => esc(L(v)).replace(/\[T(\d+)\]/g, (_, n) => `<a class="tbd" href="#adv-tbd">${tbdLabel()} ${n}</a>`).replace(/\n/g, "<br>");
+  const tx = v => esc(L(v)).replace(/\[T(\d+)\]/g, (_, n) => `<a class="tbd" href="advisors.html#adv-tbd">${tbdLabel()} ${n}</a>`).replace(/\n/g, "<br>");
   const rowHTML = (label, html) => `<div class="kv"><dt>${esc(label)}</dt><dd>${html}</dd></div>`;
   const zh = (a, b) => (lang === "zh" ? a : b);
 
@@ -846,13 +874,9 @@
     renderAdvMap();
     $("#adv-tree").textContent = ADV_TREE;
     renderAdvState();
-    renderAdvMakeup();
-    renderAdvStrike();
-    renderAdvHub();
-    renderAdvSchema();
-    renderAdvVis();
     renderAdvLoad();
-    $("#adv-tbd-list").innerHTML = ADV_TBD.map(x => `<li>${esc(L(x))}</li>`).join("");
+    // Keeps its position in the list, so a [Tn] reference still lands on item n.
+    $("#adv-tbd-list").innerHTML = ADV_TBD.map((x, i) => x ? `<li value="${i + 1}">${esc(L(x))}</li>` : "").join("");
   }
 
   function renderAdvStages() {
@@ -881,7 +905,6 @@
         ${rowHTML(zh("團隊在做什麼", "What the team does"), tx(s.team))}
         ${rowHTML(zh("具名產出", "Named output"), tx(s.output))}
         ${rowHTML(zh("通過標準", "Pass standard"), tx(s.pass))}
-        ${rowHTML(zh("補件期限", "Make-up due"), tx(s.makeup))}
         ${rowHTML(zh("放哪裡", "Goes in"), `<code>60 Advisors/A01/${esc(s.folder)}</code>`)}
         ${s.extra ? rowHTML(zh("另外", "Also"), tx(s.extra)) : ""}
       </dl>`;
@@ -907,73 +930,10 @@
     $("#adv-state-panel").innerHTML = `<div class="panel__head" style="--c:var(--accent)"><h3>${esc(L(node.t))}</h3></div><p class="panel__p">${tx(ADV_STATE_INFO[adv.node].d)}</p>`;
   }
 
-  function renderAdvMakeup() {
-    const th = t("adv.makeup.th");
-    $("#adv-makeup").innerHTML = `<div class="dmwrap"><table class="dm dm--small"><thead><tr>${th.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>
-      ${ADV_MAKEUP.map(m => `<tr><td data-label="${esc(th[0])}" class="dm__duty">${m.s}</td><td data-label="${esc(th[1])}">${tx(m.end)}</td><td data-label="${esc(th[2])}">${tx(m.due)}</td><td data-label="${esc(th[3])}">${tx(m.s === "S5" ? ADV_MAKEUP_FAIL5 : ADV_MAKEUP_FAIL)}</td></tr>`).join("")}
-    </tbody></table></div>`;
-  }
-
-  function renderAdvStrike() {
-    const box = (k, cls) => `<div class="acard ${cls}"><h3>${esc(t("adv.strike." + k))}</h3><ul class="advlist">${ADV_STRIKE[k].map(x => `<li>${tx(x)}</li>`).join("")}</ul></div>`;
-    $("#adv-strike").innerHTML = box("on", "") + box("off", "") + box("how", "acard--wide");
-  }
-
-  const HUB_VIEWS = [["instructor", { zh: "Instructor", en: "Instructor" }], ["self", { zh: "Advisor A 本人", en: "Advisor A (self)" }], ["team", { zh: "2027 隊員", en: "2027 team" }]];
-
-  function renderAdvHub() {
-    $("#adv-hub-tabs").innerHTML = HUB_VIEWS.map(([id, n]) => `<button role="tab" data-view="${id}" aria-selected="${adv.view === id}">${esc(L(n))}</button>`).join("");
-    $$("#adv-hub-tabs button").forEach(b => b.addEventListener("click", () => {
-      adv.view = b.dataset.view;
-      if (adv.view === "self") adv.row = 0;
-      renderAdvHub();
-    }));
-    const th = t("adv.hub.th");
-    const full = adv.view !== "team";
-    const rows = ADV_SAMPLE.map((r, i) => ({ ...r, i })).filter(r => adv.view !== "self" || r.i === 0);
-    const glyph = { pass: ["✓", "is-pass"], now: ["●", "is-now"], fix: [zh("補", "M"), "is-fix"], fail: ["✗", "is-fail"], "": ["·", ""] };
-    const rep = r => ({ ok: zh("已確認", "Confirmed"), due: zh("待確認", "To confirm"), late: zh("逾期 6 天", "6 days late") }[r.rep]);
-    const head = [th.name, th.group, th.scope, ...(full ? [th.stages, th.hours, th.rate, th.report, th.strikes] : []), th.latest];
-    $("#adv-hub").innerHTML = `${adv.view === "instructor" ? `<p class="hub__queue">${esc(t("adv.hub.queue"))}</p>` : ""}
-      <div class="hubscroll"><table class="hubt"><thead><tr>${head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>
-      ${rows.map(r => `<tr class="${adv.row === r.i ? "is-sel" : ""}" data-row="${r.i}">
-        <td><button data-row="${r.i}">${esc(r.name)}</button>${full && r.sup ? `<small>Supporting list</small>` : ""}</td>
-        <td>${r.group}</td><td>${esc(L(r.scope))}</td>
-        ${full ? `<td class="hubt__st">${r.st.map(x => `<i class="${glyph[x][1]}">${glyph[x][0]}</i>`).join("")}</td>
-        <td class="${r.h < 8 ? "is-warn" : ""}">${r.h} / 8 h</td>
-        <td class="${r.rate < 50 ? "is-warn" : ""}">${r.rate}%</td>
-        <td class="${r.rep === "late" ? "is-warn" : ""}">${rep(r)}</td>
-        <td>${r.strikes} / 3</td>` : ""}
-        <td><code>${esc(r.latest.f)}</code> <small>${r.latest.d}</small></td>
-      </tr>`).join("")}
-      </tbody></table></div>
-      <p class="hub__note">${full ? esc(t("adv.hub.legend")) + "　" : ""}${esc(t("adv.hub.pick"))}</p>`;
-    $$("#adv-hub tr[data-row]").forEach(tr => tr.addEventListener("click", () => { adv.row = +tr.dataset.row; renderAdvHub(); }));
-    const r = ADV_SAMPLE[adv.row];
-    const check = (ok, label) => `<li class="${ok ? "is-ok" : "is-miss"}">${esc(label)}</li>`;
-    $("#adv-hub-panel").innerHTML = `<div class="panel__head" style="--c:var(--gold)"><span class="panel__kind">${zh("示範資料", "Sample data")} · ${zh("2027 年 5 月", "May 2027")}</span><h3>${esc(r.name)}</h3></div>
-      <dl>${rowHTML(th.scope, esc(L(r.scope)))}
-      ${rowHTML(th.latest, `<code>${esc(r.latest.f)}</code>`)}
-      ${full ? rowHTML(zh("本月底線", "Floor this month"), `<ul class="hubcheck">
-        ${check(r.h >= 8, zh(`實體 ${r.h} / 8 小時`, `On site ${r.h} / 8 hours`))}
-        ${check(r.sessions >= 2, zh(`組別會議 ${r.sessions} 次（至少 2）`, `Group meetings ${r.sessions} (at least 2)`))}
-        ${check(r.rate >= 50, zh(`累計出席率 ${r.rate}%（至少 50%）`, `Attendance to date ${r.rate}% (at least 50%)`))}
-        ${check(r.self, zh("自主會議紀錄", "Self-run meeting minutes"))}
-        ${check(r.meet, zh("Advisor 月會", "Advisor meeting"))}
-        ${check(r.rep !== "late", zh(`月報：${rep(r)}`, `Report: ${rep(r)}`))}
-      </ul>`) : rowHTML(zh("其他欄位", "Other columns"), esc(zh("隊員看不到狀態、時數與 strike。", "The team does not see status, hours or strikes.")))}
-      </dl>`;
-  }
-
-  function renderAdvSchema() {
-    $("#adv-schema").innerHTML = ADV_SCHEMA.map(x => `<div class="acard"><h3><code>${esc(x.t)}</code></h3><p class="acard__note">${esc(L(x.k))}</p><p class="advschema__c">${esc(x.c)}</p></div>`).join("");
-  }
-
-  function renderAdvVis() {
-    const mark = { y: "●", s: "○", w: zh("書面", "Written"), n: "–" };
-    $("#adv-vis").innerHTML = `<div class="hubscroll"><table class="hubt hubt--vis"><thead><tr><th></th>${ADV_VIS_COLS.map(c => `<th>${esc(L(c))}</th>`).join("")}</tr></thead><tbody>
-      ${ADV_VIS.map(r => `<tr><td>${esc(L(r.f))}</td>${[...r.v].map(c => `<td class="v-${c}">${mark[c]}</td>`).join("")}</tr>`).join("")}
-    </tbody></table></div>`;
+  function renderAdvRoles() {
+    const rs = PEOPLE.roles.filter(r => r.group === "adv" || r.code === "IAV");
+    $("#adv-roles").innerHTML = rs.map(roleCard).join("");
+    $$("#adv-roles [data-vg]").forEach(b => b.addEventListener("click", () => goVillage(b.dataset.vg)));
   }
 
   function renderAdvLoad() {
@@ -1027,8 +987,14 @@
   const nav = $("#nav");
   addEventListener("scroll", () => nav.classList.toggle("is-scrolled", scrollY > 8), { passive: true });
   let rz;
-  addEventListener("resize", () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(() => { drawLines(); paintGraph(); layoutTimeline(); paintFlow(false); layoutYear(); }); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { drawLines(); paintGraph(); layoutTimeline(); paintFlow(false); layoutYear(); });
+  const relayout = () => {
+    if ($("#graph")) { drawLines(); paintGraph(); }
+    if ($("#tl")) layoutTimeline();
+    if ($("#board")) paintFlow(false);
+    if ($("#yr")) layoutYear();
+  };
+  addEventListener("resize", () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(relayout); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
 
   // Hero and section intros fade up too.
   $$(".hero > *, .sec .eyebrow, .sec .headline, .sec .lede").forEach(e => e.classList.add("reveal"));

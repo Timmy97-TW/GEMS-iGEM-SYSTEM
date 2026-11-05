@@ -1,16 +1,31 @@
 # GEMS iGEM System
 
-The 2027 operating system for the GEMS Taiwan iGEM team, drawn from the 2026 season: what broke this year, the system rules and hard gates, the ID system and Hub tabs, the Google Drive structure, the year of documents, the photo system, who owns what, the interactive iGEM Village, the Student Advisor programme, and the timeline planned backwards from the iGEM deadlines.
+The 2027 operating system for the GEMS Taiwan iGEM team, drawn from the 2026 season. The home page shows today; the other pages cover the whole system, the schedule, roles, the Student Advisor programme, research and a log of updates.
 
-一個網頁，看懂 2027 年的團隊系統：今年哪裡壞了、系統規則與硬關卡、ID 與 Hub 分頁、Google Drive 結構、文件年表、照片系統、誰負責什麼、可逛的 iGEM 村莊、Student Advisor 計畫、從截止日往回排的時程。
+看懂 2027 年的團隊系統：首頁看今天，其他頁面分別是系統全貌、時程、角色、Student Advisor 計畫、Research 和更新紀錄。
+
+## Pages
+
+| Page | For | What it holds |
+|---|---|---|
+| `index.html` | Everyone, daily | Today: next node, the year so far, latest updates, doors to each page, the village |
+| `system.html` | Anyone seeing the whole system | Why, rules, architecture, Drive, flow, document year, standards, village |
+| `timeline.html` | The team, weekly | The year chart and every node with its pass condition |
+| `people.html` | Students and instructors | Seats, weekly work and estimated hours |
+| `advisors.html` | Advisors and instructors | Stages, monthly floor, one output's path, documents, roles |
+| `research.html` | Anyone doing research | The process, its flow and its place in the documents |
+| `updates.html` | Everyone | Dated log of changes |
 
 ## Files
 
-- `index.html`: page skeleton
-- `assets/data.js`: all content, Chinese and English side by side. Edit this file to change any text, role, count or date.
-- `assets/app.js`: rendering and interaction
-- `assets/village.js`: the iGEM Village, drawn in inline SVG; its text and data live in `data.js`
-- `assets/style.css`: styles
+- `assets/data.js`: nearly all content, Chinese and English side by side.
+- `assets/updates.js`: the daily log. **To post an update, add one line at the top of this file.** Today's date, the next node and the countdown are computed in the browser, so they need no daily edit.
+- `assets/site.js`: the shared nav and footer, page strings, and everything that depends on today's date. Add or rename a page here.
+- `assets/app.js`: section rendering. A renderer runs only when its root element is on the page.
+- `assets/village.js`: the iGEM Village, drawn in inline SVG.
+- `assets/style.css`: section styles. `assets/pages.css`: page shell and home page.
+
+A section can appear on more than one page. `data-only` on `#flow-tabs`, `data-lanes` on `#yr` and `data-folder` on `#tree` set what that copy shows.
 
 No build step and no external requests. Open `index.html`, or serve the folder:
 
@@ -20,4 +35,4 @@ python3 -m http.server 8765
 
 Everything here is a proposal (system spec v0.2, Drive spec v0.3). Seats are not assignments; hours are estimates. Dates follow the PI's 2027 schedule; iGEM dates marked `?` are estimates until 2027 is announced. Wiki Freeze shows as `10/6–13?` and internal gates back-plan from 10/6.
 
-This repo is public. It summarises the system only: no real names, contact details, fees, individual records, Drive links, research strategy or project content.
+This repo is public. It summarises the system only: no real names, contact details, fees, discipline rules or records, individual reviews, Drive links, Discord invites, research strategy or project content. The same rule applies to every line in `assets/updates.js`.

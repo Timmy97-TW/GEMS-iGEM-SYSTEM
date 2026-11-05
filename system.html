@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>系統全貌 · GEMS iGEM 2027</title>
+<meta name="description" content="The whole GEMS iGEM 2027 team system: why it exists, rules, architecture, Drive structure, flow, the year of documents and the iGEM Village.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231d1d1f'/%3E%3Ccircle cx='11' cy='16' r='3' fill='%23ff9500'/%3E%3Ccircle cx='21' cy='10' r='3' fill='%230071e3'/%3E%3Ccircle cx='21' cy='22' r='3' fill='%2334c759'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body data-page="system">
+
+<header class="nav" id="nav"></header>
+<nav class="subnav" aria-label="On this page"><div class="subnav__in"><a href="#brief" data-i18n="sub.brief"></a><a href="#problems" data-i18n="sub.why"></a><a href="#system" data-i18n="sub.rules"></a><a href="#architecture" data-i18n="sub.arch"></a><a href="#depth" data-i18n="sub.drive"></a><a href="#flow" data-i18n="sub.flow"></a><a href="#year" data-i18n="sub.year"></a><a href="#photo" data-i18n="sub.std"></a><a href="#village" data-i18n="sub.village"></a></div></nav>
+
+<main id="top">
+
+<section class="phead phead--system" id="brief">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="hero.eyebrow"></p>
+    <h1 class="display" data-i18n="sys.h1"></h1>
+    <p class="lede" data-i18n="sys.lede"></p>
+    <p class="ptag" data-i18n="sys.tag"></p>
+    <div class="stats stats--left" id="sys-stats"></div>
+    <div class="brief">
+      <h2 data-i18n="brief.h"></h2>
+      <p data-i18n="brief.sub"></p>
+      <ol class="brief__list" id="brief-list"></ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark" id="problems">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="prob.eyebrow"></p>
+    <h2 class="headline" data-i18n="prob.title"></h2>
+    <p class="lede" data-i18n="prob.sub"></p>
+    <ol class="problems" id="problems-list"></ol>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="audit">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="audit.eyebrow"></p>
+    <h2 class="headline" data-i18n="audit.title"></h2>
+    <p class="lede" data-i18n="audit.sub"></p>
+    <div class="astats" id="astats"></div>
+    <div class="agrid">
+      <div class="acard acard--wide"><h3 data-i18n="audit.photos"></h3><div id="aphotos"></div></div>
+      <div class="acard"><h3 data-i18n="audit.size"></h3><div id="asize"></div></div>
+      <div class="acard"><h3 data-i18n="audit.hw"></h3><ul class="alist" id="ahw"></ul></div>
+      <div class="acard acard--wide"><h3 data-i18n="audit.keep"></h3><ul class="alist alist--ok" id="akeep"></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="system">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="sys.eyebrow"></p>
+    <h2 class="headline" data-i18n="sys.title"></h2>
+    <p class="lede" data-i18n="sys.sub"></p>
+    <p class="ptag" data-i18n="sys.tag"></p>
+
+    <h3 class="adv__h" data-i18n="sys.lessons"></h3>
+    <div class="syslessons" id="sys-lessons"></div>
+
+    <h3 class="adv__h" data-i18n="sys.rules"></h3>
+    <ol class="sysrules" id="sys-rules"></ol>
+
+    <h3 class="adv__h" data-i18n="sys.gates"></h3>
+    <p class="adv__p" data-i18n="sys.gates.sub"></p>
+    <div class="sysgates" id="sys-gates"></div>
+
+    <h3 class="adv__h" data-i18n="sys.ids"></h3>
+    <p class="adv__p" data-i18n="sys.ids.sub"></p>
+    <div class="syschains" id="sys-chains"></div>
+    <div id="sys-ids"></div>
+
+    <h3 class="adv__h" data-i18n="sys.layers"></h3>
+    <div id="sys-layers"></div>
+
+    <h3 class="adv__h" data-i18n="sys.hub"></h3>
+    <p class="adv__p" data-i18n="sys.hub.sub"></p>
+    <div id="sys-hub"></div>
+
+    <h3 class="adv__h" data-i18n="sys.replaced"></h3>
+    <div id="sys-replaced"></div>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="architecture">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="arch.eyebrow"></p>
+    <h2 class="headline" data-i18n="arch.title"></h2>
+    <p class="lede" data-i18n="arch.sub"></p>
+  </div>
+  <div class="wrap wrap--wide">
+    <div class="graph" id="graph">
+      <svg class="graph__lines" id="graph-lines" aria-hidden="true"></svg>
+      <div class="graph__col"><h3 data-i18n="arch.col.streams"></h3><div id="col-streams"></div></div>
+      <div class="graph__col"><h3 data-i18n="arch.col.registers"></h3><div id="col-registers"></div></div>
+      <div class="graph__col"><h3 data-i18n="arch.col.deliverables"></h3><div id="col-deliverables"></div></div>
+    </div>
+    <div class="panel" id="graph-panel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="sec" id="depth">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="depth.eyebrow"></p>
+    <h2 class="headline" data-i18n="depth.title"></h2>
+    <p class="lede" data-i18n="depth.sub"></p>
+    <div class="layers" id="layers"></div>
+    <div class="template"><h3 class="drive__h" data-i18n="depth.template"></h3><div class="template__row" id="template"></div></div>
+    <div class="states">
+      <ol id="states"></ol>
+      <p class="note" data-i18n="depth.states"></p>
+    </div>
+    <div class="drive">
+      <h3 class="drive__h" data-i18n="depth.tree"></h3>
+      <div class="drive__grid">
+        <ul class="tree" id="tree"></ul>
+        <div class="panel panel--side" id="tree-panel" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="flow">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="flow.eyebrow"></p>
+    <h2 class="headline" data-i18n="flow.title"></h2>
+    <p class="lede" data-i18n="flow.sub"></p>
+  </div>
+  <div class="wrap wrap--wide">
+    <div class="flow__bar">
+      <div class="seg" id="flow-tabs" role="tablist"></div>
+      <div class="flow__ctl">
+        <button id="flow-prev" class="ctl"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+        <button id="flow-play" class="ctl ctl--main"><svg viewBox="0 0 16 16" class="i-play"><path d="M5 3v10l8-5z"/></svg><svg viewBox="0 0 16 16" class="i-pause"><path d="M5 3v10M11 3v10"/></svg></button>
+        <button id="flow-next" class="ctl"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
+      </div>
+    </div>
+    <div class="flow">
+      <div class="board" id="board">
+        <svg class="board__trail" id="board-trail" aria-hidden="true"></svg>
+        <div class="board__token" id="token"></div>
+      </div>
+      <div class="fpanel" id="fpanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="year">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="year.eyebrow"></p>
+    <h2 class="headline" data-i18n="year.title"></h2>
+    <p class="lede" data-i18n="year.sub"></p>
+    <p class="ptag" data-i18n="sys.tag"></p>
+  </div>
+  <div class="wrap wrap--wide wrap--xl">
+    <div class="yr" id="yr">
+      <div class="yr__bar">
+        <div class="flow__ctl">
+          <button id="yr-prev" class="ctl"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+          <button id="yr-play" class="ctl ctl--main"><svg viewBox="0 0 16 16" class="i-play"><path d="M5 3v10l8-5z"/></svg><svg viewBox="0 0 16 16" class="i-pause"><path d="M5 3v10M11 3v10"/></svg></button>
+          <button id="yr-next" class="ctl"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
+        </div>
+        <div class="yr__now" id="yr-now"></div>
+      </div>
+      <div class="yr__scrub">
+        <div class="yr__mini" id="yr-mini" aria-hidden="true"></div>
+        <input type="range" id="yr-range" min="0" max="394" step="1" value="0">
+      </div>
+      <div class="yr__scroll" id="yr-scroll"><div class="yr__in" id="yr-in"></div></div>
+      <div class="yr__legend" id="yr-legend"></div>
+    </div>
+    <div class="panel" id="yr-panel" aria-live="polite"></div>
+    <p class="note" data-i18n="year.note"></p>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="photo">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="ph.eyebrow"></p>
+    <h2 class="headline" data-i18n="ph.title"></h2>
+    <p class="lede" data-i18n="ph.sub"></p>
+    <h3 class="adv__h" data-i18n="ph.flow"></h3>
+    <ol class="ph__steps" id="ph-steps"></ol>
+    <h3 class="adv__h" data-i18n="ph.name"></h3>
+    <div id="ph-name"></div>
+    <div class="ph__grid">
+      <div class="acard"><h3 data-i18n="ph.home"></h3><dl class="ph__dl" id="ph-home"></dl></div>
+      <div class="acard"><h3 data-i18n="ph.duty"></h3><dl class="ph__dl" id="ph-duty"></dl></div>
+    </div>
+    <h3 class="adv__h" data-i18n="ph.rules"></h3>
+    <ul class="alist alist--ok" id="ph-rules"></ul>
+    <p class="note"><button class="rc__go" id="ph-village"></button></p>
+  </div>
+</section>
+
+<section class="sec sec--dark" id="facts">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="facts.eyebrow"></p>
+    <h2 class="headline" data-i18n="facts.title"></h2>
+    <p class="lede" data-i18n="facts.sub"></p>
+    <div class="facttypes" id="facttypes"></div>
+    <div class="term">
+      <div class="term__bar"><i></i><i></i><i></i><span data-i18n="facts.lint"></span></div>
+      <pre id="lint"></pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="standards">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="std.eyebrow"></p>
+    <h2 class="headline" data-i18n="std.title"></h2>
+    <p class="lede" data-i18n="std.sub"></p>
+    <div class="stds" id="stds"></div>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="village">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="vg.eyebrow"></p>
+    <h2 class="headline" data-i18n="vg.title"></h2>
+    <p class="lede" data-i18n="vg.sub"></p>
+    <p class="ptag" data-i18n="vg.tag"></p>
+  </div>
+  <div class="wrap wrap--wide wrap--vg">
+    <div class="vg" id="vg-root"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="foot"></footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/updates.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/village.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

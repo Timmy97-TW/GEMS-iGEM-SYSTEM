@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advisor 計畫 · GEMS iGEM 2027</title>
+<meta name="description" content="The GEMS iGEM 2027 Student Advisor programme: stages, monthly rhythm, outputs, documents and roles.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231d1d1f'/%3E%3Ccircle cx='11' cy='16' r='3' fill='%23ff9500'/%3E%3Ccircle cx='21' cy='10' r='3' fill='%230071e3'/%3E%3Ccircle cx='21' cy='22' r='3' fill='%2334c759'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body data-page="advisors">
+
+<header class="nav" id="nav"></header>
+<nav class="subnav" aria-label="On this page"><div class="subnav__in"><a href="#overview" data-i18n="sub.overview"></a><a href="#stages" data-i18n="sub.stages"></a><a href="#monthly" data-i18n="sub.month"></a><a href="#flow" data-i18n="sub.output"></a><a href="#year" data-i18n="sub.docs"></a><a href="#where" data-i18n="sub.map"></a><a href="#adv-people" data-i18n="sub.roles"></a><a href="#decide" data-i18n="sub.tbd"></a></div></nav>
+
+<main id="top">
+
+<section class="phead" id="overview">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="adv.eyebrow"></p>
+    <h1 class="display" data-i18n="adv.h1"></h1>
+    <p class="lede" data-i18n="adv.sub"></p>
+    <p class="ptag" data-i18n="sys.tag"></p>
+    <div class="stats stats--left" id="adv-glance"></div>
+    <h2 class="adv__h" data-i18n="adv.bound"></h2>
+    <p class="adv__p" data-i18n="adv.bound.sub"></p>
+    <div class="boundgrid" id="adv-bound"></div>
+    <p class="note" data-i18n="adv.source"></p>
+    <p class="note" data-i18n="adv.detail"></p>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="advisor">
+  <div class="wrap wrap--flush" id="stages">
+    <h3 class="adv__h adv__h--first" data-i18n="adv.stages"></h3>
+    <div class="advtrack" id="adv-track"></div>
+    <p class="note" data-i18n="adv.stages.note"></p>
+    <div class="advstages" id="adv-stages"></div>
+    <div class="panel" id="adv-stage-panel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="sec" id="monthly">
+  <div class="wrap">
+    <h2 class="headline headline--s" data-i18n="adv.month.h"></h2>
+    <div class="advfloor" id="adv-floor"></div>
+    <p class="note" data-i18n="adv.floor.note"></p>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="flow">
+  <div class="wrap">
+    <h2 class="headline headline--s" data-i18n="adv.output.h"></h2>
+    <p class="lede" data-i18n="adv.output.sub"></p>
+  </div>
+  <div class="wrap wrap--wide">
+    <div class="flow__bar">
+      <div class="seg" id="flow-tabs" data-only="adv" role="tablist"></div>
+      <div class="flow__ctl">
+        <button id="flow-prev" class="ctl"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+        <button id="flow-play" class="ctl ctl--main"><svg viewBox="0 0 16 16" class="i-play"><path d="M5 3v10l8-5z"/></svg><svg viewBox="0 0 16 16" class="i-pause"><path d="M5 3v10M11 3v10"/></svg></button>
+        <button id="flow-next" class="ctl"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
+      </div>
+    </div>
+    <div class="flow">
+      <div class="board" id="board">
+        <svg class="board__trail" id="board-trail" aria-hidden="true"></svg>
+        <div class="board__token" id="token"></div>
+      </div>
+      <div class="fpanel" id="fpanel" aria-live="polite"></div>
+    </div>
+  </div>
+
+</section>
+
+<section class="sec" id="year">
+  <div class="wrap">
+    <h2 class="headline headline--s" data-i18n="adv.docs.h"></h2>
+    <p class="lede" data-i18n="adv.docs.sub"></p>
+  </div>
+  <div class="wrap wrap--wide wrap--xl">
+    <div class="yr" id="yr" data-lanes="adv">
+      <div class="yr__bar">
+        <div class="flow__ctl">
+          <button id="yr-prev" class="ctl"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+          <button id="yr-play" class="ctl ctl--main"><svg viewBox="0 0 16 16" class="i-play"><path d="M5 3v10l8-5z"/></svg><svg viewBox="0 0 16 16" class="i-pause"><path d="M5 3v10M11 3v10"/></svg></button>
+          <button id="yr-next" class="ctl"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
+        </div>
+        <div class="yr__now" id="yr-now"></div>
+      </div>
+      <div class="yr__scrub">
+        <div class="yr__mini" id="yr-mini" aria-hidden="true"></div>
+        <input type="range" id="yr-range" min="0" max="394" step="1" value="0">
+      </div>
+      <div class="yr__scroll" id="yr-scroll"><div class="yr__in" id="yr-in"></div></div>
+      <div class="yr__legend" id="yr-legend"></div>
+    </div>
+    <div class="panel" id="yr-panel" aria-live="polite"></div>
+    <p class="note" data-i18n="year.note"></p>
+  </div>
+
+</section>
+
+<section class="sec sec--alt" id="where">
+  <div class="wrap wrap--flush">
+    <h3 class="adv__h adv__h--first" data-i18n="adv.map"></h3>
+    <p class="adv__p" data-i18n="adv.map.sub"></p>
+    <div id="adv-map"></div>
+
+    <h3 class="adv__h" data-i18n="adv.tree"></h3>
+    <pre class="advtree" id="adv-tree"></pre>
+    <p class="note" data-i18n="adv.tree.note"></p>
+    <h3 class="adv__h" data-i18n="adv.state"></h3>
+    <p class="adv__p" data-i18n="adv.state.sub"></p>
+    <div class="advstate" id="adv-state"></div>
+    <div class="panel" id="adv-state-panel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="sec" id="adv-people">
+  <div class="wrap wrap--flush">
+    <h2 class="headline headline--s" data-i18n="adv.roles.h"></h2>
+    <p class="adv__p" data-i18n="adv.roles.sub"></p>
+    <div class="rcg__grid" id="adv-roles"></div>
+    <h3 class="adv__h" data-i18n="adv.load"></h3>
+    <p class="adv__p" data-i18n="adv.load.sub"></p>
+    <div class="seg advload__seg" id="adv-load-tabs" role="tablist"></div>
+    <div id="adv-load"></div>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="decide">
+  <div class="wrap wrap--flush">
+    <h3 class="adv__h adv__h--first" id="adv-tbd" data-i18n="adv.tbd"></h3>
+    <p class="adv__p" data-i18n="adv.tbd.sub"></p>
+    <ol class="advtbd" id="adv-tbd-list"></ol>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="foot"></footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/updates.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

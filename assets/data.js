@@ -9,7 +9,7 @@ const T = {
     "sys.gate.who": "誰擋", "sys.gate.why": "為什麼",
     "sys.ids": "ID 體系", "sys.ids.sub": "整個系統的骨幹。ID 自動產生，學生不用自己編。", "sys.ids.th": ["ID", "是什麼", "誰建", "Hub 分頁"],
     "sys.layers": "每一層放什麼", "sys.layers.th": ["層", "工具", "放什麼", "不放什麼"],
-    "sys.hub": "Hub 分頁與它的讀者", "sys.hub.sub": "沒有讀者就不建。Ops Hub 只有老師看得到：完整 Roster、Accountability、Assessment、Advisor 考核、Hours。", "sys.hub.th": ["分頁", "讀者", "哪一天", "用來決定什麼"],
+    "sys.hub": "Hub 分頁與它的讀者", "sys.hub.sub": "沒有讀者就不建。Ops Hub 只有老師看得到，內容不公開。", "sys.hub.th": ["分頁", "讀者", "哪一天", "用來決定什麼"],
     "sys.replaced": "舊追蹤表去哪了", "sys.replaced.th": ["2026", "2027"],
     "year.eyebrow": "文件年表", "year.title": "每份文件，<br>何時誕生，餵給誰。",
     "year.sub": "2026 年 11 月到 2027 年 11 月。按播放，或拖動時間軸，看文件在各條泳道誕生。點任何一份，看它的規則、負責人、讀者、範本和位置。",
@@ -68,14 +68,14 @@ const T = {
     "ppl.title": "每個人，<br>各顧一件事。",
     "ppl.sub": "約 30 位學生、10 位 advisor，加上 12 位老師與 Ops。下面每個席位都寫清楚擁有什麼、每週做什麼、花多少時間、什麼時候最忙、誰是備援。全部是提案，還沒有指派任何人。",
     "ppl.students": "學生", "ppl.advisors": "學生 advisor", "ppl.staff": "Instructor 與 Ops",
-    "ppl.note": "時數都是估算，沒有實測。標「提案」的角色待 PI 確認，見<a href=\"#adv-tbd\">待決定</a>。Advisor 的階段、時數與驗收負擔見 <a href=\"#advisor\">Student Advisor</a>。",
+    "ppl.note": "時數都是估算，沒有實測。標「提案」的角色待 PI 確認，見<a href=\"advisors.html#adv-tbd\">待決定</a>。Advisor 的階段、時數與驗收負擔見 <a href=\"advisors.html\">Student Advisor</a>。",
 
     "adv.eyebrow": "Advisor 計畫",
     "adv.title": "從參與者，<br>到 advisor。",
     "adv.sub": "2026 隊員在 2027 隊伍裡的下一步。時數只是底線，Team Roster 的資格來自每個階段經 instructor 驗收的實質產出。",
     "adv.source": "規則整理自 2027 Advisor 參與同意書 v3。資料夾、檔名、範本與表格欄位是系統提案。標為「待決定」的地方同意書沒有寫，要先定案才能運作。",
     "adv.floor": "每個月的底線",
-    "adv.floor.note": "達到底線不等於通過考核。暑期集訓（7/1–8/10）的實體時數改為至少 6 天、48 小時，不另計每月實體時數。Wiki freeze 後維持每月 8 小時，並至少參加 2 次模擬 judging。離台就學後，實體時數可改以線上完成。",
+    "adv.floor.note": "達到底線不等於通過驗收。暑期集訓（7/1–8/10）的實體時數改為至少 6 天、48 小時，不另計每月實體時數。Wiki freeze 後維持每月 8 小時，並至少參加 2 次模擬 judging。離台就學後，實體時數可改以線上完成。",
     "adv.stages": "五個階段",
     "adv.stages.note": "時間軸與下方時程同一把尺。Freeze 與 Jamboree 用 2027 推估（10/6–13?、10/29?），以 iGEM 公布為準。階段文字照同意書，與時程不一致處列在待決定。",
     "adv.map": "每件事放哪裡",
@@ -85,20 +85,9 @@ const T = {
     "adv.tree.note": "隊伍要用的成果（例如 101、wiki 章節）放在隊伍的家（31–34、50 Deliverables），S 資料夾只放 Drive 捷徑，並在表單交同一個連結。不複製。",
     "adv.state": "資格怎麼走",
     "adv.state.sub": "點任何一格看條件。虛線框表示有待決定的規則。",
-    "adv.makeup": "補件期限", "adv.makeup.th": ["階段", "階段結束", "補件期限", "補件後仍未通過"],
-    "adv.strike": "Strike", "adv.strike.on": "這些情況會記", "adv.strike.off": "這些情況不記", "adv.strike.how": "怎麼記",
-    "adv.hub": "Project Hub 怎麼顯示",
-    "adv.hub.sub": "未來的 Hub 從 Ops Hub 的 ADV_ 分頁即時讀取，同一份資料依身分顯示不同欄位。這個公開網站不放真實資料。",
-    "adv.hub.sample": "示範資料。Advisor A–E 不是真實的人，時間點假設在 2027 年 5 月。",
-    "adv.hub.queue": "待處理：月報待確認 2 · 補件將到期 1 · strike 待雙簽 0",
-    "adv.hub.th": { name: "Advisor", group: "組別", scope: "本階段具名範圍", stages: "S1–S5", hours: "本月實體", rate: "組別會議累計", report: "月報", strikes: "Strike", latest: "最新產出" },
-    "adv.hub.legend": "✓ 通過　● 進行中　補 補件中　✗ 補件後未過　· 未開始",
-    "adv.hub.pick": "點一列看這位 advisor 本月的底線。",
-    "adv.schema": "來源表的欄位", "adv.schema.note": "ADV_ 分頁放在 GEMS 2027 Ops Hub，一位 advisor、一個階段或一個月各一列。Hub 的 Advisor Deliverables 分頁只用 IMPORTRANGE 帶公開欄位。",
-    "adv.vis": "誰看得到什麼", "adv.vis.note": "這張表是提案，同意書只規定書面結果和 strike 要給學生與家長。● 可見　○ 只看摘要　書面：不經 Hub，由 GEMS 交付　– 看不到",
-    "adv.load": "Instructor 的驗收負擔", "adv.load.sub": "次數來自同意書，每次分鐘數是估計值。週六到場指導、補件複審和 strike 處理不計入。",
+    "adv.load": "Instructor 的驗收負擔", "adv.load.sub": "次數來自同意書，每次分鐘數是估計值。週六到場指導不計入。",
     "adv.load.th": ["工作", "全年次數", "每次（估計）", "全年時數"],
-    "adv.load.total": "全年合計", "adv.load.week": "兩位驗收 instructor 平均每人每週", "adv.load.peak": "階段結束時的尖峰（考核加書面）",
+    "adv.load.total": "全年合計", "adv.load.week": "兩位驗收 instructor 平均每人每週", "adv.load.peak": "階段結束時的尖峰（驗收加書面）",
     "adv.tbd": "待決定", "adv.tbd.sub": "同意書沒有寫、或與時程表不一致，系統運作又需要答案的地方。這裡只列問題，不改同意書的任何規則。",
 
     "time.eyebrow": "時程",
@@ -127,7 +116,7 @@ const T = {
     "sys.gate.who": "Who holds it", "sys.gate.why": "Why",
     "sys.ids": "The ID system", "sys.ids.sub": "The backbone of the whole system. IDs are automatic; students never invent them.", "sys.ids.th": ["ID", "What it is", "Created by", "Hub tab"],
     "sys.layers": "What goes where", "sys.layers.th": ["Layer", "Tool", "Holds", "Never holds"],
-    "sys.hub": "Hub tabs and their readers", "sys.hub.sub": "No reader, no tab. The Ops Hub is for instructors only: full Roster, Accountability, Assessment, Advisor reviews, Hours.", "sys.hub.th": ["Tab", "Reader", "When", "Decides"],
+    "sys.hub": "Hub tabs and their readers", "sys.hub.sub": "No reader, no tab. The Ops Hub is for instructors only and its contents are not public.", "sys.hub.th": ["Tab", "Reader", "When", "Decides"],
     "sys.replaced": "Where the old trackers went", "sys.replaced.th": ["2026", "2027"],
     "year.eyebrow": "The year of documents", "year.title": "When each document<br>is born, and what it feeds.",
     "year.sub": "November 2026 to November 2027. Press play or drag along the year to watch documents appear on each swimlane. Click one for its rule, owner, reader, template and location.",
@@ -186,7 +175,7 @@ const T = {
     "ppl.title": "Everyone<br>owns one thing.",
     "ppl.sub": "About 30 students and 10 advisors, plus 12 instructors and Ops. Each seat below says what it owns, its weekly duties, its time, its busy weeks and its backup. All of it is a proposal; nobody has been assigned.",
     "ppl.students": "Students", "ppl.advisors": "Student advisors", "ppl.staff": "Instructors & Ops",
-    "ppl.note": "All hours are estimates and have not been measured. Roles marked proposed await the PI; see <a href=\"#adv-tbd\">to be decided</a>. Advisor stages, hours and verification load are under <a href=\"#advisor\">Student Advisor</a>.",
+    "ppl.note": "All hours are estimates and have not been measured. Roles marked proposed await the PI; see <a href=\"advisors.html#adv-tbd\">to be decided</a>. Advisor stages, hours and verification load are under <a href=\"advisors.html\">Student Advisor</a>.",
 
     "adv.eyebrow": "Advisor programme",
     "adv.title": "From participant<br>to advisor.",
@@ -203,18 +192,7 @@ const T = {
     "adv.tree.note": "Work the team uses (a 101, a wiki section) lives in the team’s home (31–34, 50 Deliverables). The S folder holds a Drive shortcut and the form gets the same link. Nothing is copied.",
     "adv.state": "How qualification moves",
     "adv.state.sub": "Click any box for its conditions. A dashed box has a rule still to be decided.",
-    "adv.makeup": "Make-up deadlines", "adv.makeup.th": ["Stage", "Stage ends", "Make-up due", "If it still fails"],
-    "adv.strike": "Strikes", "adv.strike.on": "These count", "adv.strike.off": "These never count", "adv.strike.how": "How one is recorded",
-    "adv.hub": "How the Project Hub shows it",
-    "adv.hub.sub": "The future Hub reads the Ops Hub’s ADV_ tabs live and shows different columns to different people. This public site never holds real data.",
-    "adv.hub.sample": "Sample data. Advisors A–E are not real people. The date is assumed to be May 2027.",
-    "adv.hub.queue": "To do: 2 reports to confirm · 1 make-up nearly due · 0 strikes awaiting signatures",
-    "adv.hub.th": { name: "Advisor", group: "Group", scope: "Named scope this stage", stages: "S1–S5", hours: "On-site this month", rate: "Group meetings to date", report: "Report", strikes: "Strikes", latest: "Latest output" },
-    "adv.hub.legend": "✓ passed   ● in progress   M make-up   ✗ failed after make-up   · not started",
-    "adv.hub.pick": "Click a row for this advisor’s floor this month.",
-    "adv.schema": "Source register columns", "adv.schema.note": "The ADV_ tabs sit in the GEMS 2027 Ops Hub, with one row per advisor, per stage or per month. The Hub’s Advisor Deliverables tab pulls public columns only, through IMPORTRANGE.",
-    "adv.vis": "Who sees what", "adv.vis.note": "This table is a proposal. The form only requires written results and strikes to reach students and parents. ● visible   ○ summary only   Written: delivered by GEMS outside the Hub   – hidden",
-    "adv.load": "Instructor verification load", "adv.load.sub": "Counts come from the form; minutes per item are estimates. Saturday supervision, make-up re-reviews and strike handling are not included.",
+    "adv.load": "Instructor verification load", "adv.load.sub": "Counts come from the form; minutes per item are estimates. Saturday supervision is not included.",
     "adv.load.th": ["Work", "A year", "Each (est.)", "Hours a year"],
     "adv.load.total": "Year total", "adv.load.week": "Average per week, each of two verifying instructors", "adv.load.peak": "Peak at each stage end (reviews and written results)",
     "adv.tbd": "To be decided", "adv.tbd.sub": "Where the form is silent or differs from the schedule and the system still needs an answer. This lists questions only and changes no rule in the form.",
@@ -461,14 +439,14 @@ const DRIVE = [
     rule: { zh: "11/20 結案：跑一次 Drive 健檢，把每份 master doc 匯出成 PDF，範本去識別後回收。", en: "Close-out on 20 Nov: run the Drive audit, export every master doc as PDF, and recover templates once de-identified." },
     from: ["Presentation Video / Not usable", { zh: "Gallery / Others（未標記）", en: "Gallery / Others (untagged)" }] },
   { id: "ops", name: "GEMS 2027 Ops", drive: "ops", kind: "ops",
-    kids: ["GEMS 2027 Ops Hub", "_Templates", "Instructor Meetings", "Accountability", "Consent Originals / Replies · Minor Permissions", "Restricted Media / YYYY-MM", "Scores and Exams", "Finance", "Official Documents", "Advisors"],
-    holds: { zh: "Ops Hub（完整 Roster、Accountability、Assessment、Hours、考試結果、Advisor 考核、AI 摘要）、財務、簽名正本、含校外未成年的受限媒體、公文、老師會議、老師評分與題庫", en: "Ops Hub (full Roster, Accountability, Assessment, Hours, exam results, Advisor reviews, AI digest), finance, signed originals, restricted media with outside minors, official documents, instructor meetings, instructor scoring and the question bank" },
+    kids: ["GEMS 2027 Ops Hub", "_Templates", "Instructor Meetings", "Consent Originals / Replies · Minor Permissions", "Restricted Media / YYYY-MM", "Official Documents", "Advisors"],
+    holds: { zh: "Ops Hub、簽名正本、含校外未成年的受限媒體、公文、老師會議。只有老師可見，內容不公開。", en: "The Ops Hub, signed originals, restricted media with outside minors, official documents, instructor meetings. Instructors only; contents are not public." },
     edit: { zh: "Instructor 與 Ops", en: "Instructors & Ops" },
     rule: { zh: "獨立的資料夾，學生看不到。含個資或個人紀錄的東西只放這裡。", en: "A separate space students cannot see. Anything with personal data or individual records lives only here." },
-    from: ["Official document", "*Administration", { zh: "Deliverables（內部紀錄，不進 50 Deliverables）", en: "Deliverables (internal records, not for 50 Deliverables)" }, { zh: "Exam and Question Bank（回覆與成績）", en: "Exam and Question Bank (responses and grades)" }] },
+    from: ["Official document", "*Administration"] },
   { id: "opsadv", name: "GEMS 2027 Ops / Advisors", drive: "ops", kind: "ops",
-    kids: ["_Templates", "ADV-F1 form", "Clock-in", "Reviews / <A01>", "Strikes", "Roster", "Records"],
-    holds: { zh: "考核的佐證：ADV-F1 表單、打卡匯出、書面結果、strike 紀錄、N23 的 ADV_STATE 匯出 PDF、改列通知、貢獻紀錄。ADV_ 分頁本身在 Ops Hub。", en: "Evidence for reviews: the ADV-F1 form, clock-in exports, written results, strike records, the N23 ADV_STATE PDF, Supporting notices, contribution records. The ADV_ tabs live in the Ops Hub." },
+    kids: ["_Templates", "ADV-F1 form", "Clock-in", "Reviews / <A01>", "Roster", "Records"],
+    holds: { zh: "驗收佐證：ADV-F1 表單、打卡匯出、書面結果、Roster 匯出、貢獻紀錄。只有老師可見。", en: "Review evidence: the ADV-F1 form, clock-in exports, written results, the Roster export, contribution records. Instructors only." },
     edit: { zh: "Instructor 與 Ops", en: "Instructors & Ops" },
     rule: { zh: "編號與真實姓名的對照只在 Ops Hub 的 Roster_Full。Hub 的 Advisor Deliverables 分頁只帶公開欄位過去，不反向寫入。", en: "The map from ID to real name lives only in the Ops Hub’s Roster_Full. The Hub’s Advisor Deliverables tab pulls public columns one way and never writes back." },
     from: [{ zh: "*Administration / Advisors（去識別後當範本素材）", en: "*Administration / Advisors (de-identified, as template material)" }] },
@@ -542,7 +520,7 @@ const ROLES = [
     d: { zh: "Roster、Drive 與 Discord 所有權、Ops Hub、採購、Archive。", en: "Roster, Drive and Discord ownership, Ops Hub, purchases, Archive." } },
   { id: "advreview", tier: "i", count: 2, color: "ink", hrs: "≈1 h", proposed: true,
     name: { zh: "Advisor 驗收", en: "Advisor verification" },
-    d: { zh: "確認範圍與月報、主持階段考核、寫書面結果、strike 雙簽。階段結束時有尖峰。重點是指定固定負責人，人選待決定。", en: "Confirm scope and reports, run stage reviews, write results, co-sign strikes. Peaks at each stage end. What matters is a fixed owner; who serves is to be decided." } },
+    d: { zh: "確認範圍與月報、主持階段驗收、寫書面結果。階段結束時有尖峰。重點是指定固定負責人，人選待決定。", en: "Confirm scope and reports, run stage reviews, write results. Peaks at each stage end. What matters is a fixed owner; who serves is to be decided." } },
   { id: "dev", tier: "i", count: 4, color: "ink2", hrs: "0 h", proposed: true,
     name: { zh: "專心開發", en: "Development only" },
     d: { zh: "不分配管理職責。先前的版本是 6 位，因新增 Advisor 驗收改為 4 位。", en: "No management duties. An earlier version had 6; adding advisor verification made it 4." } }
@@ -608,7 +586,7 @@ const TIMELINE = [
   { n: "N01a", date: "2026-11-29", lane: "adv", dl: { zh: "11/29", en: "29 Nov" }, t: { zh: "Advisor 任期開始", en: "Advisor term starts" }, d: { zh: "與 Discord 開啟同一天，比 First Class 早約四週。任期到 Jamboree 結束。", en: "The day Discord opens, about four weeks before First Class. The term runs to the end of the Jamboree." } },
   { n: "N11a", date: "2027-03-31", lane: "adv", dl: { zh: "3 月底", en: "End of Mar" }, t: { zh: "階段 2 驗收", en: "Stage 2 review" }, d: { zh: "依同意書標準。", en: "Under the consent form’s standard." } },
   { n: "N17", date: "2027-06-26", lane: "adv", t: { zh: "階段 3 驗收", en: "Stage 3 review" }, d: { zh: "有紀錄顯示做法改變。階段結束後可選出 Lead Advisor，名額不固定，也可以從缺。", en: "A record shows practice changed. A Lead Advisor may be chosen afterwards; no fixed number, and it may stay empty." } },
-  { n: "N23a", date: "2027-08-28", lane: "adv", key: "roster", dl: { zh: "8/28（同意書：8 月底）", en: "28 Aug (form: late Aug)" }, t: { zh: "Roster 審核", en: "Roster review" }, d: { zh: "前四階段全部通過且未滿 3 個 strike，才登錄 iGEM 官方 Team Roster。", en: "All of stages 1–4 passed and fewer than 3 strikes, or no entry on the official iGEM Team Roster." } }
+  { n: "N23a", date: "2027-08-28", lane: "adv", key: "roster", dl: { zh: "8/28（同意書：8 月底）", en: "28 Aug (form: late Aug)" }, t: { zh: "Roster 審核", en: "Roster review" }, d: { zh: "依同意書審核後登錄 iGEM 官方 Team Roster。", en: "Reviewed under the consent form before entry on the official iGEM Team Roster." } }
 ];
 
 const RITUALS = [
@@ -696,7 +674,7 @@ const PRINCIPLES = [
   { t: { zh: "重要的事用關卡擋", en: "Gates, not reminders" }, d: { zh: "不用提醒。三道硬關卡擋在下游之前。", en: "Important things get a gate. Three hard gates stand before anything goes downstream." } },
   { t: { zh: "審閱是有限容量", en: "Review is a limited capacity" }, d: { zh: "佇列、時限、抽查，不追求全審。", en: "Queues, time limits and sampling. Reviewing everything is not the goal." } },
   { t: { zh: "衝刺期變輕", en: "Lighter in the crunch" }, d: { zh: "8 月底起有 7 項更新暫停（Tasks、Roadmap、Storyline、盤點、Constructs、完整歸檔、每月圖說），只留 Issues、Pages 和站立會。", en: "From late August seven updates pause (Tasks, Roadmap, Storyline, stock count, Constructs, full filing, monthly captions), leaving Issues, Pages and stand-ups." } },
-  { t: { zh: "PI 只看例外", en: "The PI sees exceptions" }, d: { zh: "AI 每週從 Hub 算出需要處理的事。考核、strike、定題和對學生的回饋不交給 AI。", en: "AI works out from the Hub what needs attention each week. Reviews, strikes, the topic and feedback to students are never left to AI." } }
+  { t: { zh: "PI 只看例外", en: "The PI sees exceptions" }, d: { zh: "AI 每週從 Hub 算出需要處理的事。定題、驗收和對學生的回饋不交給 AI。", en: "AI works out from the Hub what needs attention each week. Reviews, the topic and feedback to students are never left to AI." } }
 ];
 
 const GATES = [
@@ -747,7 +725,7 @@ const SYS_LAYERS = [
   { name: { zh: "文件", en: "Documents" }, tool: "Google Drive", put: { zh: "文件、數據、圖、CAD、定稿", en: "Documents, data, figures, CAD, finals" }, not: { zh: "程式碼、可重新下載的公開資料、第三方軟體", en: "Code, public data you can redownload, third-party software" } },
   { name: { zh: "程式", en: "Code" }, tool: "Team GitHub org", put: { zh: "程式碼、韌體、wiki 原始碼、交接文", en: "Code, firmware, wiki source, handover notes" }, not: { zh: "個資", en: "Personal data" } },
   { name: { zh: "對話", en: "Talk" }, tool: "Discord", put: { zh: "討論、通知、求助", en: "Discussion, notices, asking for help" }, not: { zh: "決定和待辦：要寫回 Hub", en: "Decisions and to-dos: these go back to the Hub" } },
-  { name: { zh: "AI", en: "AI" }, tool: { zh: "排程 agent 只讀 Hub", en: "Scheduled agent, read-only on Hub" }, put: { zh: "例外摘要、會前簡報、資料品質檢查", en: "Exception digests, pre-meeting briefs, data checks" }, not: { zh: "判斷學生考核", en: "Judging students" } }
+  { name: { zh: "AI", en: "AI" }, tool: { zh: "排程 agent 只讀 Hub", en: "Scheduled agent, read-only on Hub" }, put: { zh: "例外摘要、會前簡報、資料品質檢查", en: "Exception digests, pre-meeting briefs, data checks" }, not: { zh: "代替老師判斷", en: "Judging for instructors" } }
 ];
 
 const HUB_TABS = [
@@ -917,10 +895,10 @@ const YEAR_ITEMS = [
   { id: "atopic", lane: "adv", d: "2026-12-12", n: { zh: "候選題目報告", en: "Candidate topic report" }, idp: "A", who: WHO.adv, reads: WHO.tch, tpl: "ADV-T1 Topic Report", loc: "60 Advisors/A01/S1 Topic", rule: { zh: "1/30 前交。內容有可查證的來源，並實際影響了題目討論。", en: "Due by 30 Jan. Sources can be checked, and it really shaped the topic discussion." }, feeds: ["card", "dr"] },
   { id: "amonth", lane: "adv", d: "2026-12-31", end: "2027-11-01", n: { zh: "月報", en: "Monthly report" }, who: WHO.adv, reads: { zh: "主責 instructor", en: "Lead instructor" }, tpl: "ADV-T8 Monthly Report", loc: "60 Advisors/A01/Reports", rule: { zh: "每月最後一日前：指導了誰、改了什麼、解決了什麼、下一步。", en: "By the last day of each month: who was coached, what changed, what got solved, what is next." }, feeds: ["areview"] },
   { id: "a101", lane: "adv", d: "2027-02-20", e: "2027-03-31", n: { zh: "101 與 workshop", en: "101 and workshop" }, idp: "A", gate: "file", who: WHO.adv, reads: { zh: "隊員", en: "Team members" }, tpl: "ADV-T2 101 Guide · ADV-T2W", loc: "60 Advisors/A01/S2 Training", rule: { zh: "隊員不靠 advisor，能照著文件獨立做到。要是檔案，不是 Canva 連結。", en: "Members can do it from the document alone. It must be a file, not a Canva link." }, feeds: ["wtrain", "areview"] },
-  { id: "areview", lane: "adv", d: "2027-03-31", end: "2027-08-10", n: { zh: "階段考核", en: "Stage reviews" }, who: { zh: "主責 instructor", en: "Lead instructor" }, reads: { zh: "學生與家長（書面）", en: "Student and parents (written)" }, tpl: "ADV-T9 Stage Result", loc: "GEMS 2027 Ops/Advisors/Reviews", rule: { zh: "當面說明，時數達標不等於通過。結果存在 Ops。", en: "Explained in person; meeting the hours does not mean passing. Results stay in Ops." }, feeds: ["aroster"] },
+  { id: "areview", lane: "adv", d: "2027-03-31", end: "2027-08-10", n: { zh: "階段驗收", en: "Stage reviews" }, who: { zh: "主責 instructor", en: "Lead instructor" }, reads: { zh: "學生與家長（書面）", en: "Student and parents (written)" }, tpl: "ADV-T9 Stage Result", loc: "GEMS 2027 Ops/Advisors/Reviews", rule: { zh: "當面說明，時數達標不等於通過。結果存在 Ops。", en: "Explained in person; meeting the hours does not mean passing. Results stay in Ops." }, feeds: ["aroster"] },
   { id: "as3", lane: "adv", d: "2027-04-03", e: "2027-06-26", n: { zh: "S3 審查紀錄", en: "S3 review log" }, idp: "A", who: WHO.adv, reads: { zh: "主責 instructor", en: "Lead instructor" }, tpl: "ADV-T3 Review Log", loc: "60 Advisors/A01/S3 Design", rule: { zh: "有紀錄顯示隊伍做法改變。判斷責任在 instructor。", en: "A record shows the team’s practice changed. The judgement stays with the instructor." }, feeds: ["areview"] },
   { id: "as4", lane: "adv", d: "2027-07-01", e: "2027-08-10", n: { zh: "S4 工作線", en: "S4 workline" }, idp: "A", who: WHO.adv, reads: WHO.tch, tpl: "ADV-T4 Workline Brief", loc: "60 Advisors/A01/S4 Workline", rule: { zh: "主導 1 條工作線，例如 video script。Promo 提前到 7/29?，script 線要更早開始。", en: "Lead one workline, such as the video script. With the Promo moved up to 29 Jul?, the script line starts earlier." }, feeds: ["areview", "promo"] },
-  { id: "aroster", lane: "adv", d: "2027-08-28", n: { zh: "Roster 審核", en: "Roster review" }, node: "N23", who: WHO.tch, reads: WHO.pi, tpl: { zh: "Ops Hub ADV_STATE，匯出 PDF", en: "Ops Hub ADV_STATE, exported as PDF" }, loc: "GEMS 2027 Ops/Advisors/Roster", rule: { zh: "前四階段全過且未滿 3 個 strike。依同意書，日期見待決定。", en: "Stages 1–4 passed and under 3 strikes, under the consent form. The date is on the to-be-decided list." }, feeds: ["ig-rf"] },
+  { id: "aroster", lane: "adv", d: "2027-08-28", n: { zh: "Roster 審核", en: "Roster review" }, node: "N23", who: WHO.tch, reads: WHO.pi, tpl: { zh: "Ops Hub ADV_STATE，匯出 PDF", en: "Ops Hub ADV_STATE, exported as PDF" }, loc: "GEMS 2027 Ops/Advisors/Roster", rule: { zh: "依同意書審核，日期見待決定。", en: "Reviewed under the consent form. The date is on the to-be-decided list." }, feeds: ["ig-rf"] },
   { id: "as5", lane: "adv", d: "2027-08-28", e: "2027-10-06", n: { zh: "S5 Freeze Checklist", en: "S5 Freeze Checklist" }, idp: "A", who: WHO.adv, reads: WHO.tch, tpl: "ADV-T5 Freeze Checklist", loc: "60 Advisors/A01/S5 Convergence", rule: { zh: "具名範圍在 freeze 前全數核對完成。", en: "The whole named scope is checked before freeze." }, feeds: ["issues"] },
   { id: "amock", lane: "adv", d: "2027-10-09", e: "2027-10-23", n: { zh: "Mock judging sheet", en: "Mock judging sheet" }, who: WHO.tch, reads: WHO.advl, tpl: "MockJudging", loc: "50 Deliverables/Jamboree/Mocks/YYYYMMDD_MockJudging_Team", rule: { zh: "同意書要求 freeze 後至少 2 次。Freeze 日未定，見待決定。", en: "The form asks for at least 2 after freeze. With the freeze date open, see the to-be-decided list." }, feeds: ["mock"] },
 
@@ -931,7 +909,6 @@ const YEAR_ITEMS = [
   { id: "dr", lane: "ops", d: "2027-01-30", n: { zh: "Decision Record", en: "Decision Record" }, idp: "D", node: "N04", who: WHO.pi, reads: WHO.allt, tpl: "DecisionRecord", loc: "20 Topic/Decision Records/YYYYMMDD_DecisionRecord_<topic>", rule: { zh: "題目、候選與結果、理由、反對意見、Plan B、未決範圍和關閉日。Advisor 報告連在此處。", en: "Topic, candidates and results, reasons, objections, Plan B, open scope and closing date. Advisor reports link here." }, feeds: ["g-pk", "g-scope", "road"] },
   { id: "exam", lane: "ops", d: "2027-03-07", n: { zh: "考試回覆與成績", en: "Exam responses" }, who: WHO.tch, reads: { zh: "老師，學生只看自己的", en: "Instructors; students see only their own" }, tpl: { zh: "表單匯出", en: "Form export" }, loc: "Ops Hub/ExamResults", rule: { zh: "含個資，不進 10 Training。題庫要先從舊回覆萃取，也放這裡。", en: "Holds personal data, so it stays out of 10 Training. The question bank, extracted from old responses first, lives here too." }, feeds: ["g-safe", "assess"] },
   { id: "assess", lane: "ops", d: "2027-03-10", e: "2027-08-14", n: { zh: "Assessment", en: "Assessment" }, node: "N06", who: { zh: "各組老師", en: "Group instructors" }, reads: { zh: "PI、學生本人", en: "PI, the student" }, tpl: { zh: "三組同格式", en: "Same format for all three groups" }, loc: "Ops Hub/Assessment", rule: { zh: "3/10、4/24、8/14。一定回饋給學生。", en: "10 Mar, 24 Apr, 14 Aug. Feedback always reaches the student." }, feeds: ["road"] },
-  { id: "acct", lane: "ops", d: "2026-12-26", end: "2027-11-20", n: { zh: "Accountability Log", en: "Accountability Log" }, who: { zh: "固定一人（待決定）", en: "One fixed owner (to be decided)" }, reads: WHO.tch, tpl: { zh: "Ops Hub 分頁", en: "Ops Hub tab" }, loc: "GEMS 2027 Ops/Accountability · Ops Hub", rule: { zh: "學生不可見，學生只見自己的。2026 的這類內部紀錄放在叫 Deliverables 的資料夾，2027 歸 Ops。", en: "Hidden from students except their own rows. In 2026 this kind of internal record sat in a folder called Deliverables; in 2027 it belongs to Ops." } },
   { id: "buy", lane: "ops", d: "2027-03-13", end: "2027-10-13", n: { zh: "Purchases", en: "Purchases" }, idp: "B", who: { zh: "任何人", en: "Anyone" }, reads: { zh: "Ops，週一", en: "Ops, on Monday" }, tpl: { zh: "Hub 分頁", en: "Hub tab" }, loc: "Hub/Purchases", rule: { zh: "週一看這張表下單。", en: "Ops reads it on Monday to place orders." }, feeds: ["order"] },
   { id: "extrev", lane: "ops", d: "2027-06-19", n: { zh: "期中外部 review", en: "External review" }, node: "N16", who: WHO.pi, reads: WHO.tch, tpl: { zh: "會議範本", en: "Meeting template" }, loc: "Hub/Decisions", rule: { zh: "專家意見入 Decisions。", en: "Expert views go in Decisions." }, feeds: ["decs"] },
   { id: "close", lane: "ops", d: "2027-11-20", n: { zh: "結案與交接", en: "Close-out and handover" }, node: "N35", who: WHO.ops, reads: { zh: "下一年", en: "Next year" }, tpl: "Handover", loc: "90 Archive", rule: { zh: "範本去識別後回收，封存，跑一次 Drive 健檢。", en: "Templates recovered once de-identified, archive sealed, Drive audit run." } }
@@ -1099,7 +1076,7 @@ const SCENARIOS = [
   { id: "adv", color: "gold",
     name: { zh: "一份 Advisor 產出", en: "An advisor output" },
     register: { zh: "Advisor Deliverables", en: "Advisor Deliverables" },
-    cols: { zh: ["A", "階段", "範圍", "檔案", "考核"], en: ["A", "Stage", "Scope", "File", "Review"] },
+    cols: { zh: ["A", "階段", "範圍", "檔案", "驗收"], en: ["A", "Stage", "Scope", "File", "Review"] },
     steps: [
       { at: "advisors", who: "advisor", file: "60 Advisors/A01/S2 Training/A01_S2_Scope", row: { 1: "S2", 2: { zh: "已確認", en: "Agreed" } },
         act: { zh: "階段開始前，advisor 和 instructor 確認具名範圍。", en: "Before the stage starts, advisor and instructor agree the named scope." } },
@@ -1112,11 +1089,11 @@ const SCENARIOS = [
       { at: "g-file", who: "instr", file: "A0207 ✓", gate: { g: "file" },
         act: { zh: "通過：收件的 instructor 確認有檔案。", en: "Passed: the receiving instructor confirms there is a file." } },
       { at: "g-node", who: "instr", file: "A01_S2", row: { 4: { zh: "當面", en: "In person" } },
-        act: { zh: "階段考核：advisor 當面說明並回答提問。標準是隊員不靠 advisor，能照著文件獨立做到。時數達標不等於通過。", en: "Stage review: the advisor explains in person and takes questions. The standard is that members can do it from the document alone. Meeting the hours does not mean passing." } },
+        act: { zh: "階段驗收：advisor 當面說明並回答提問。標準是隊員不靠 advisor，能照著文件獨立做到。時數達標不等於通過。", en: "Stage review: the advisor explains in person and takes questions. The standard is that members can do it from the document alone. Meeting the hours does not mean passing." } },
       { at: "opshub", who: "instr", file: "GEMS 2027 Ops/Advisors/Reviews/A01/A01_S2_ReviewResult", row: { 4: { zh: "書面結果", en: "Written" } },
-        act: { zh: "書面結果存在 Ops，交給學生與家長。未通過可補件一次。考核內容不經過 AI。", en: "The written result is kept in Ops and goes to student and parents. A stage that did not pass may be made up once. AI does not touch reviews." } },
+        act: { zh: "書面結果存在 Ops，交給學生與家長。驗收內容不經過 AI。", en: "The written result is kept in Ops and goes to student and parents. AI does not touch reviews." } },
       { at: "o-roster", who: "instr", file: "2027-08_RosterReview",
-        act: { zh: "前四階段都通過且未滿 3 個 strike，8/28 的 Roster 審核才會登錄。第 5 階段不影響這份名單。", en: "Stages 1–4 passed and under 3 strikes, and the 28 Aug Roster review enters the name. Stage 5 does not affect this list." } }
+        act: { zh: "8/28 的 Roster 審核依同意書進行。第 5 階段不影響這份名單。", en: "The 28 Aug Roster review follows the consent form. Stage 5 does not affect this list." } }
     ] }
 ];
 
@@ -1137,15 +1114,13 @@ const ADV_STAGES = [
     name: { zh: "發展題目", en: "Develop the topic" }, role: { zh: "探路者", en: "Pathfinder" },
     team: { zh: "老師發展題目，並輔導學生自提的題目。1/30 當天或之前，與 2027 學生決定唯一題目。", en: "Instructors develop topics and coach student proposals. One topic is decided with the 2027 students on or before 30 Jan." },
     output: { zh: "至少 1 份候選題目研究報告：research potential、論文研究、past iGEM、novelty、special prize 與避雷；或與 instructor 進行前期研究或實驗。", en: "At least 1 candidate topic report: research potential, papers, past iGEM, novelty, special prizes and pitfalls; or early research or experiments with an instructor." },
-    pass: { zh: "內容有可查證的來源，能當面說明，並實際影響了題目討論。", en: "Sources can be checked, the advisor can explain it in person, and it really shaped the topic discussion." },
-    makeup: { zh: "第 2 階段結束前（3 月底）", en: "Before stage 2 ends (end of March)" } },
+    pass: { zh: "內容有可查證的來源，能當面說明，並實際影響了題目討論。", en: "Sources can be checked, the advisor can explain it in person, and it really shaped the topic discussion." }, },
   { id: "S2", folder: "S2 Training", shade: 1, start: "2027-02-13", end: "2027-03-31",
     dates: { zh: "2 月中–3 月底", en: "Mid Feb–end of March" },
     name: { zh: "訓練與制度", en: "Training and systems" }, role: { zh: "制度建立者", en: "Systems builder" },
     team: { zh: "春節後密集訓練，research 並行：lab、wiki、data visualization and analysis、protein design、cross team communication and documentation。", en: "Intensive training after Lunar New Year alongside research: lab, wiki, data visualization and analysis, protein design, cross-team communication and documentation." },
     output: { zh: "至少 1 份 101（SOP 或 troubleshooting guide，例如 management、cloning、Registry、modeling、hardware、GIS），加上至少 1 場實體 workshop。", en: "At least 1 “101” (an SOP or troubleshooting guide, such as management, cloning, Registry, modeling, hardware, GIS), plus at least 1 in-person workshop." },
     pass: { zh: "隊員不靠 advisor，能照著文件獨立做到。", en: "Members can do it from the document alone, without the advisor." },
-    makeup: { zh: "第 3 階段結束前（暑假前）", en: "Before stage 3 ends (before summer)" },
     extra: { zh: "時程表的訓練是 2/13–3/7，3/13 Task Group 就開始，同意書到 3 月底才算階段結束 [T19]。", en: "The schedule has training on 13 Feb–7 Mar and task groups from 13 Mar, while the form runs this stage to the end of March [T19]." } },
   { id: "S3", folder: "S3 Design", shade: 2, start: "2027-04-01", end: "2027-06-30",
     dates: { zh: "4 月–暑假前", en: "April–before summer" },
@@ -1153,30 +1128,27 @@ const ADV_STAGES = [
     team: { zh: "Wetlab：experimental、protein、sequence design、cloning。Drylab：定調 novelty、protein design、codon optimization、新 software tool、wiki updating。HP：cross team management、outreach、email writing、team logo、main style、color template、design management。", en: "Wet lab: experimental, protein and sequence design, cloning. Dry lab: setting the novelty, protein design, codon optimization, new software tools, wiki updates. HP: cross-team management, outreach, email writing, logo, main style, colour template, design management." },
     output: { zh: "主導至少 1 項 task 或 research track，並主持或參與設計討論，留下具體的審查紀錄。判斷責任仍在 instructor。", en: "Lead at least 1 task or research track, host or join design discussions, and leave a concrete review record. The judgement stays with the instructor." },
     pass: { zh: "有紀錄顯示隊伍的設計或做法因此改變。", en: "A record shows the team’s design or practice changed because of it." },
-    makeup: { zh: "第 4 階段結束前（8/10）", en: "Before stage 4 ends (10 Aug)" },
-    extra: { zh: "考核時也參考隊員回饋 [T13]。階段結束後可選出 Lead Advisor。", en: "The review also draws on member feedback [T13]. A Lead Advisor may be chosen after this stage." } },
+    extra: { zh: "驗收時也參考隊員回饋 [T13]。階段結束後可選出 Lead Advisor。", en: "The review also draws on member feedback [T13]. A Lead Advisor may be chosen after this stage." } },
   { id: "S4", folder: "S4 Workline", shade: 3, start: "2027-07-01", end: "2027-08-10",
     dates: { zh: "7/1–8/10", en: "1 Jul–10 Aug" },
     name: { zh: "暑期集訓", en: "Summer intensive" }, role: { zh: "TA，工作線負責人", en: "TA and workline lead" },
     team: { zh: "週二、四、六 9:00–17:00 全隊集訓。開始製作與撰寫 wiki，提升 scientific writing，整理 data，完成 promotion video。", en: "Whole-team sessions Tue, Thu, Sat, 9:00–17:00. Wiki writing starts, scientific writing improves, data gets organised, the promotion video gets finished." },
     output: { zh: "實質認領並主導 1 條工作線，例如 wiki 單一 task 的 draft 與 review、一組關鍵數據圖表的標準化，或 video script [T22]。", en: "Claim and lead 1 workline, such as the draft and review of one wiki task, standardising a set of key data figures, or the video script [T22]." },
-    pass: { zh: "成果被隊伍採用，advisor 能當面說明自己主導的部分。", en: "The team adopts the result, and the advisor can explain in person the part they led." },
-    makeup: { zh: "8 月底 Roster 審核前", en: "Before the late-August Roster review" } },
+    pass: { zh: "成果被隊伍採用，advisor 能當面說明自己主導的部分。", en: "The team adopts the result, and the advisor can explain in person the part they led." }, },
   { id: "S5", folder: "S5 Convergence", shade: 4, start: "2027-08-28", end: "2027-10-06", after: "2027-11-01",
     dates: { zh: "8 月底–10 月中 freeze；freeze 後 3–4 週", en: "Late Aug–mid-Oct freeze; then 3–4 weeks" },
     name: { zh: "收斂與 Jamboree 準備", en: "Converge and prepare for Jamboree" }, role: { zh: "把關者", en: "Gatekeeper" },
     team: { zh: "收斂成果、整理 data、改寫 wiki、debug，完成 wiki 和 presentation video。Freeze 後進行 judging prep 與 booth prep。", en: "Converge results, organise data, rewrite the wiki, debug, finish the wiki and presentation video. Judging and booth prep after freeze." },
     output: { zh: "Freeze 前認領一份具名 checklist（頁面、data 或 debug 範圍），在最後衝刺期和全隊一起工作到完成。Freeze 後至少參加 2 次模擬 judging，協助 final presentation。", en: "Before freeze, claim a named checklist (pages, data or debug scope) and work with the team until done. After freeze, join at least 2 mock judging sessions and help with the final presentation." },
     pass: { zh: "責任範圍在 freeze 前全數核對完成。未完成自己的範圍，或在全隊衝刺時干擾工作，不算通過。", en: "The whole scope is checked before freeze. An unfinished scope, or disrupting the team’s final push, does not pass." },
-    makeup: { zh: "Jamboree 前", en: "Before the Jamboree" },
-    extra: { zh: "階段結束日與補件內容待釐清 [T3] [T4]。同意書寫 10 月中 freeze，時程表是 10/6–13? [T20]。", en: "The stage’s end date and what can be made up are unsettled [T3] [T4]. The form says a mid-October freeze; the schedule says 6–13 Oct? [T20]." } }
+    extra: { zh: "階段結束日待釐清 [T3]。同意書寫 10 月中 freeze，時程表是 10/6–13? [T20]。", en: "The stage’s end date is unsettled [T3]. The form says a mid-October freeze; the schedule says 6–13 Oct? [T20]." } }
 ];
 
 // Map of every recurring and stage duty. g: group heading.
 const ADV_MAP_GROUPS = [
   { id: "stage", name: { zh: "階段產出", en: "Stage output" } },
   { id: "month", name: { zh: "每月節奏", en: "Monthly rhythm" } },
-  { id: "review", name: { zh: "考核與資格", en: "Review and qualification" } },
+  { id: "review", name: { zh: "驗收與名單", en: "Review and Roster" } },
   { id: "close", name: { zh: "結案", en: "Close-out" } }
 ];
 const INSTR = { zh: "主責 instructor", en: "Lead instructor" };
@@ -1209,23 +1181,15 @@ const ADV_MAP = [
   { g: "month", duty: { zh: "Advisor 月會（每月 1 次）", en: "Advisor monthly meeting (1 a month)" }, loc: "60 Advisors/_Advisor Meeting", file: "YYYYMM_AdvisorMeeting", tpl: "Meeting",
     who: { zh: "Instructor 記出席與決議", en: "Instructor logs attendance and decisions" }, ver: { zh: "Instructor", en: "Instructor" }, due: { zh: "每月", en: "Monthly" }, row: "ADV_MONTH · A01-2027-03 · advisor_meeting" },
   { g: "month", duty: { zh: "月報", en: "Monthly report" }, loc: "60 Advisors/A01/Reports", file: "YYYYMM_A01_MonthlyReport", tpl: { zh: "ADV-T8 Monthly Report（指導了誰、改了什麼、解決了什麼、下一步）", en: "ADV-T8 Monthly Report (coached, changed, solved, next)" },
-    who: ADVR, ver: INSTR, due: { zh: "每月最後一日前；逾期超過兩週直接記 1 個 strike [T10]", en: "By the last day of the month; over two weeks late is 1 strike [T10]" }, row: "ADV_MONTH · A01-2027-03 · report_link, report_at" },
-  { g: "review", duty: { zh: "階段考核與書面結果", en: "Stage review and written result" }, loc: "GEMS 2027 Ops/Advisors/Reviews/A01", file: "A01_S1_ReviewResult", tpl: "ADV-T9 Stage Result",
+    who: ADVR, ver: INSTR, due: { zh: "每月最後一日前", en: "By the last day of the month" }, row: "ADV_MONTH · A01-2027-03 · report_link, report_at" },
+  { g: "review", duty: { zh: "階段驗收與書面結果", en: "Stage review and written result" }, loc: "GEMS 2027 Ops/Advisors/Reviews/A01", file: "A01_S1_ReviewResult", tpl: "ADV-T9 Stage Result",
     who: { zh: "Advisor 當面說明並回答提問；instructor 寫結果", en: "Advisor explains in person and takes questions; instructor writes the result" }, ver: { zh: "主責 instructor；書面交學生與家長", en: "Lead instructor; written result goes to student and parents" }, due: { zh: "每階段結束時，可在月會進行 [T18]", en: "At each stage end, may be at the monthly meeting [T18]" }, row: "ADV_STAGE · A01-S1 · result, written_link" },
-  { g: "review", duty: { zh: "補件（一次）", en: "Make-up (one)" }, loc: "60 Advisors/A01/S1 Topic", file: "A01_S1_Makeup_<topic>", tpl: { zh: "沿用該階段範本", en: "That stage’s template" },
-    who: ADVR, ver: INSTR, due: { zh: "見補件期限表", en: "See the make-up table" }, row: "ADV_STAGE · A01-S1 · makeup_link, makeup_result" },
-  { g: "review", duty: { zh: "改善期限與 strike 紀錄", en: "Improvement notice and strike record" }, loc: "GEMS 2027 Ops/Advisors/Strikes", file: "A01_Notice_YYYYMMDD\nA01_Strike01_YYYYMMDD", tpl: "ADV-T10 Strike Record",
-    who: { zh: "Instructor", en: "Instructor" }, ver: { zh: "兩位 instructor 共同簽署，寫明原因，告知家長", en: "Two instructors co-sign, state the cause, tell the parents" }, due: { zh: "改善期限到期時 [T12]；月報逾期超過兩週時", en: "When the deadline passes [T12]; when a report is over two weeks late" }, row: "ADV_STRIKE · ST-01 → ADV_STATE · strikes" },
   { g: "review", duty: { zh: "Lead Advisor 選任", en: "Lead Advisor selection" }, loc: "Ops Hub/ADV_STATE · Hub/Decisions", file: { zh: "不開檔，記在 ADV_STATE 的 lead 與 Decisions", en: "No file: recorded in ADV_STATE lead and Decisions" }, tpl: { zh: "不用範本", en: "No template" },
     who: { zh: "Instructor", en: "Instructor" }, ver: { zh: "Instructor（名額不固定，可從缺）", en: "Instructors (no fixed number; may stay empty)" }, due: { zh: "第 3 階段結束後", en: "After stage 3" }, row: "ADV_STATE · A01 · lead" },
   { g: "review", duty: { zh: "Roster 審核", en: "Roster review" }, loc: "Ops Hub/ADV_STATE → GEMS 2027 Ops/Advisors/Roster", file: "2027-08_RosterReview.pdf", tpl: { zh: "ADV_STATE 加決定人與日期，N23 匯出 PDF", en: "ADV_STATE plus who decided and when, exported as PDF at N23" },
     who: { zh: "Instructor 依 ADV_STATE 整理", en: "Instructors, from ADV_STATE" }, ver: { zh: "GEMS 決定名單 [T11]", en: "GEMS decides the list [T11]" }, due: { zh: "8 月底（預計）", en: "Late August (planned)" }, row: "ADV_STATE · A01 · qualification" },
-  { g: "review", duty: { zh: "改列 Supporting list 通知", en: "Move to Supporting list notice" }, loc: "GEMS 2027 Ops/Advisors/Roster", file: "A01_SupportingNotice_YYYYMMDD", tpl: "ADV-T11S Supporting Notice",
-    who: { zh: "Instructor", en: "Instructor" }, ver: { zh: "GEMS 立即告知學生與家長", en: "GEMS tells student and parents at once" }, due: { zh: "補件後仍未通過時 [T6]", en: "When a make-up still fails [T6]" }, row: "ADV_STATE · A01 · qualification" },
   { g: "close", duty: { zh: "證書與個人貢獻紀錄", en: "Certificate and contribution record" }, loc: "GEMS 2027 Ops/Advisors/Records", file: "A01_ContributionRecord", tpl: "ADV-T13 Contribution Record",
     who: { zh: "指導老師署名", en: "Signed by the supervising instructor" }, ver: { zh: "Instructor，依 ADV_ 分頁的全部列", en: "Instructor, from every ADV_ row" }, due: { zh: "第 5 階段通過後", en: "After stage 5 passes" }, row: "ADV_STATE · A01 · certificate, record" },
-  { g: "close", duty: { zh: "研習說明（Supporting list）", en: "Participation note (Supporting list)" }, loc: "GEMS 2027 Ops/Advisors/Records", file: "A01_ParticipationNote", tpl: "ADV-T14 Participation Note",
-    who: { zh: "Instructor", en: "Instructor" }, ver: { zh: "依事實發給，如實註明貢獻", en: "Issued on the facts, contribution stated as it was" }, due: { zh: "結束時 [T7]", en: "On finishing [T7]" }, row: "ADV_STATE · A01 · note" }
 ];
 
 const ADV_TREE = `60 Advisors/
@@ -1242,14 +1206,13 @@ const ADV_TREE = `60 Advisors/
 
 50 Deliverables/Jamboree/Mocks/   YYYYMMDD_MockJudging_Team
 
-GEMS 2027 Ops Hub         Roster_Full · ADV_STAGE · ADV_MONTH · ADV_STRIKE · ADV_STATE · ADV_LOG
+GEMS 2027 Ops Hub         Roster_Full · ADV_STAGE · ADV_MONTH · ADV_STATE · ADV_LOG
 GEMS 2027 Ops/Advisors/   (students cannot see this folder)
 ├─ _Templates/            ADV-T9 · ADV-T10 · ADV-T11S · ADV-T13 · ADV-T14
 ├─ ADV-F1 form
 ├─ Clock-in/              YYYYMM_ClockIn · YYYYMM_GroupMeeting_<group>
 ├─ Reviews/<A01>/         A01_S1_ReviewResult
-├─ Strikes/               A01_Notice_YYYYMMDD · A01_Strike01_YYYYMMDD
-├─ Roster/                2027-08_RosterReview.pdf · A01_SupportingNotice_YYYYMMDD
+├─ Roster/                2027-08_RosterReview.pdf
 └─ Records/               A01_ContributionRecord · A01_ParticipationNote`;
 
 // Qualification logic. Each lane is a line of boxes; to labels the arrow that follows a box.
@@ -1257,124 +1220,33 @@ const ADV_STATE_LANES = [
   { name: { zh: "每個階段", en: "Every stage" }, nodes: [
     { id: "scope", t: { zh: "確認範圍", en: "Agree scope" }, to: "" },
     { id: "submit", t: { zh: "交出產出", en: "Hand in output" }, to: "" },
-    { id: "review", t: { zh: "當面考核", en: "In-person review" }, to: { zh: "未通過", en: "not passed" } },
-    { id: "makeup", t: { zh: "補件一次", en: "One make-up" }, to: { zh: "仍未通過", en: "still fails" } },
-    { id: "supporting", t: { zh: "Supporting list", en: "Supporting list" }, tbd: 1, end: 1 }
+    { id: "review", t: { zh: "當面驗收", en: "In-person review" }, end: 1 }
   ] },
-  { name: { zh: "資格", en: "Qualification" }, nodes: [
-    { id: "s14", t: { zh: "前四階段全過，未滿 3 個 strike", en: "Stages 1–4 passed, under 3 strikes" }, to: "" },
+  { name: { zh: "走完一年", en: "Across the year" }, nodes: [
+    { id: "s14", t: { zh: "前四階段", en: "Stages 1–4" }, to: "" },
     { id: "roster", t: { zh: "Team Roster（8 月底）", en: "Team Roster (late Aug)" }, tbd: 1, to: "" },
-    { id: "s5", t: { zh: "第 5 階段通過", en: "Stage 5 passed" }, tbd: 1, to: "" },
+    { id: "s5", t: { zh: "第 5 階段", en: "Stage 5" }, tbd: 1, to: "" },
     { id: "cert", t: { zh: "證書與貢獻紀錄", en: "Certificate and record" }, end: 1 }
-  ] },
-  { name: { zh: "Strike", en: "Strikes" }, nodes: [
-    { id: "issue", t: { zh: "發生問題", en: "A problem arises" }, to: "" },
-    { id: "notice", t: { zh: "溝通，給改善期限", en: "Talk, set a deadline" }, tbd: 1, to: { zh: "未改善", en: "not fixed" } },
-    { id: "strike", t: { zh: "記 1 個 strike", en: "1 strike" }, to: { zh: "累計 3 個", en: "3 in total" } },
-    { id: "removed", t: { zh: "GEMS 有權除名", en: "GEMS may remove" }, tbd: 1, end: 1 }
-  ] },
-  { name: { zh: "重大違規", en: "Serious breach" }, nodes: [
-    { id: "breach", t: { zh: "排他、保密、研究誠信、團隊紀律", en: "Exclusivity, confidentiality, research integrity, team discipline" }, to: "" },
-    { id: "terminated", t: { zh: "立即終止資格", en: "Terminated at once" }, end: 1 }
   ] }
 ];
 const ADV_STATE_INFO = {
   scope: { d: { zh: "每階段開始前，advisor 與 instructor 確認負責範圍和具名產出。參考學生興趣與目標領域（Wet、Dry、HP），並安排跨組任務。數量是最低要求。", en: "Before each stage, advisor and instructor agree scope and named output, taking interests and target field (Wet, Dry, HP) into account and adding cross-team work. Counts are minimums." } },
   submit: { d: { zh: "檔案放進自己的 S 資料夾，連結交到 ADV-F1。ADV_LOG 記下提交時間。", en: "The file goes in the advisor’s own S folder and the link goes to ADV-F1. The Register records the time." } },
   review: { d: { zh: "每階段結束時，向 instructor 當面說明產出並回答提問，可在 advisor 月會進行。Instructor 參考月報和會議紀錄，依品質驗收，書面結果交學生與家長。時數達標不等於通過。", en: "At each stage end, the advisor explains the output to an instructor and takes questions, possibly at the monthly meeting. The instructor uses reports and minutes, judges on quality, and sends a written result to student and parents. Meeting the hours does not mean passing." } },
-  makeup: { d: { zh: "未通過的階段可補件一次，期限見下表。", en: "A stage that did not pass may be made up once. Deadlines are in the table below." } },
-  supporting: { d: { zh: "補件後仍未通過：GEMS 立即告知學生和家長，改列 Supporting list，不登錄 Roster。學生可以繼續貢獻，也可以提早結束；GEMS 如實註明貢獻，依事實發給研習說明。補件失敗同時也是 strike 事由，兩者的先後 [T6] 與之後的待遇 [T7] 待決定。", en: "A make-up that still fails: GEMS tells student and parents at once, and the student moves to the Supporting list and off the Roster. They may keep contributing or finish early; GEMS states the contribution as it was and issues a participation note. A failed make-up is also grounds for a strike; the order [T6] and what follows [T7] are to be decided." } },
-  s14: { d: { zh: "Roster 的條件只看前四階段和 strike 數。第 5 階段不影響 8 月底的名單。", en: "The Roster looks only at stages 1–4 and the strike count. Stage 5 does not affect the late-August list." } },
-  roster: { d: { zh: "GEMS 預計於 2027 年 8 月底決定名單，符合條件才登錄 iGEM 官方 Team Roster。8 月底之後資格變動怎麼處理待決定 [T8]。與 iGEM Roster Freeze 的距離見 [T21]。", en: "GEMS plans to decide the list in late August 2027; only those who qualify go on the official iGEM Team Roster. What happens if things change after August is to be decided [T8]. The gap to the iGEM Roster Freeze is at [T21]." } },
-  s5: { d: { zh: "責任範圍在 freeze 前全數核對完成，freeze 後至少 2 次模擬 judging。補件須在 Jamboree 前，內容待決定 [T4]。", en: "The whole scope checked before freeze, then at least 2 mock judging sessions. Make-up is due before the Jamboree; what it can contain is to be decided [T4]." } },
+  roster: { d: { zh: "GEMS 預計於 2027 年 8 月底決定名單，符合條件才登錄 iGEM 官方 Team Roster。8 月底之後資格變動怎麼處理待決定。與 iGEM Roster Freeze 的距離見 [T21]。", en: "GEMS plans to decide the list in late August 2027; only those who qualify go on the official iGEM Team Roster. What happens if things change after August is to be decided. The gap to the iGEM Roster Freeze is at [T21]." } },
+  s5: { d: { zh: "責任範圍在 freeze 前全數核對完成，freeze 後至少 2 次模擬 judging。", en: "The whole scope checked before freeze, then at least 2 mock judging sessions." } },
   cert: { d: { zh: "第 5 階段通過後才發給。傑出的表現具體寫入這份由指導老師署名的紀錄。", en: "Issued only after stage 5 passes. Outstanding work is written specifically into this record, signed by the supervising instructor." } },
-  issue: { d: { zh: "三類事由：時數到階段結束仍未補足；未達到組別會議、自主會議或 advisor 月會的要求；補件後階段產出仍未通過。", en: "Three grounds: hours still short at stage end; group meeting, self-run meeting or advisor meeting requirements not met; stage output still failing after make-up." } },
-  notice: { d: { zh: "Instructor 先與學生溝通並給予改善期限，期限長度待決定 [T12]。到期改善就不記。例外：月報逾期超過兩週，不走這一步，直接記 1 個 [T10]。", en: "The instructor talks with the student first and sets a deadline; its length is to be decided [T12]. Fixed in time means no strike. One exception: a report over two weeks late skips this step and is 1 strike [T10]." } },
-  strike: { d: { zh: "全年累計。同一問題在新的改善期限後仍未改善，會再記 1 個。每個都由兩位 instructor 共同簽署、寫明原因並告知家長；家長與學生有疑義時可申訴一次。", en: "Counted across the year. The same problem still unfixed after a new deadline earns another. Each is co-signed by two instructors, states its cause and goes to the parents; parents and student may appeal once." } },
-  removed: { d: { zh: "累計 3 個 strike，GEMS 有權除名，不是自動除名。除名後不具隊伍身分，不列入 Roster 或 Supporting list，沒有證書、紀錄或研習說明；留在專案裡的工作如實註明，不附職稱。滿 3 個但未除名時的身分待決定 [T8]。", en: "At 3 strikes GEMS may remove the student; it is not automatic. After removal there is no team status, no Roster or Supporting list place, no certificate, record or note; work left in the project is credited as it was, with no title. The status of someone at 3 strikes who is not removed is to be decided [T8]." } },
-  breach: { d: { zh: "四類：同時任職其他 iGEM 隊伍、未經同意對外透露、捏造或竄改數據及據為己有、重大惡意破壞團隊。這裡只列類別。", en: "Four kinds: holding a role on another iGEM team, disclosing without consent, fabricating or falsifying data or claiming others’ work, serious deliberate harm to the team. Only the categories are listed here." } },
-  terminated: { d: { zh: "不經 strike 流程。", en: "No strike process." } }
+  s14: { d: { zh: "Roster 依同意書審核。第 5 階段不影響 8 月底的名單。", en: "The Roster is reviewed under the consent form. Stage 5 does not affect the late-August list." } }
 };
 
-const ADV_MAKEUP = [
-  { s: "S1", end: { zh: "1/30", en: "30 Jan" }, due: { zh: "3 月底（第 2 階段結束前）", en: "End of March (before stage 2 ends)" } },
-  { s: "S2", end: { zh: "3 月底", en: "End of March" }, due: { zh: "暑假前（第 3 階段結束前）", en: "Before summer (before stage 3 ends)" } },
-  { s: "S3", end: { zh: "暑假前", en: "Before summer" }, due: { zh: "8/10（第 4 階段結束前）", en: "10 Aug (before stage 4 ends)" } },
-  { s: "S4", end: { zh: "8/10", en: "10 Aug" }, due: { zh: "8 月底 Roster 審核前", en: "Before the late-August Roster review" } },
-  { s: "S5", end: { zh: "待釐清 [T3]", en: "Unclear [T3]" }, due: { zh: "Jamboree 前 [T4]", en: "Before the Jamboree [T4]" } }
-];
-const ADV_MAKEUP_FAIL = { zh: "改列 Supporting list，不登錄 Roster [T6]", en: "Moves to the Supporting list, off the Roster [T6]" };
-const ADV_MAKEUP_FAIL5 = { zh: "沒有證書和貢獻紀錄；Roster 怎麼處理待決定 [T8]", en: "No certificate or record; what happens to the Roster is to be decided [T8]" };
-
-const ADV_STRIKE = {
-  on: [
-    { zh: "時數到階段結束仍未補足。", en: "Hours still short at stage end." },
-    { zh: "未達到組別會議、自主會議或 advisor 月會的要求。", en: "Group, self-run or advisor meeting requirements not met." },
-    { zh: "補件後階段產出仍未通過。", en: "Stage output still failing after make-up." },
-    { zh: "月報逾期超過兩週：視為當月無產出，直接記 1 個，不給改善期限。", en: "A report over two weeks late: treated as no output that month, 1 strike with no improvement period." }
-  ],
-  off: [
-    { zh: "題目或意見未被採用。", en: "A topic or opinion that was not adopted." },
-    { zh: "實驗失敗。", en: "A failed experiment." },
-    { zh: "事先告知並已調整安排的考試或申請時段 [T17]。", en: "Exam or application periods told in advance and rearranged [T17]." }
-  ],
-  how: [
-    { zh: "前三類先溝通、給改善期限，到期仍未改善才記。", en: "The first three start with a talk and a deadline; a strike only follows if it passes unfixed." },
-    { zh: "兩位 instructor 共同簽署、寫明原因、告知家長。", en: "Two instructors co-sign, state the cause, tell the parents." },
-    { zh: "全年累計。同一問題過了新的期限還沒改善，再記 1 個。", en: "Counted across the year. The same problem past a new deadline earns another." },
-    { zh: "未滿 3 個才能登錄 Roster。累計 3 個，GEMS 有權除名。", en: "Under 3 to go on the Roster. At 3, GEMS may remove." },
-    { zh: "家長與學生有疑義時，可向 GEMS 申訴一次 [T12]。", en: "Parents and student may appeal to GEMS once [T12]." }
-  ]
-};
-
-// Sample data for the Hub design. Not real people.
-const ADV_SAMPLE = [
-  { name: "Advisor A", group: "Wet", scope: { zh: "cloning 工作線審查", en: "Reviewing the cloning track" }, st: ["pass", "pass", "now", "", ""], h: 9, sessions: 3, rate: 62, self: 1, meet: 1, rep: "ok", strikes: 0,
-    latest: { f: "A01_S3_ReviewLog_cloning", d: "5/12" } },
-  { name: "Advisor B", group: "Dry", scope: { zh: "codon optimization 工具", en: "Codon optimization tool" }, st: ["pass", "fix", "now", "", ""], h: 8, sessions: 2, rate: 46, self: 1, meet: 1, rep: "due", strikes: 0,
-    latest: { f: "A02_S2_Makeup_modeling", d: "5/09" } },
-  { name: "Advisor C", group: "HP", scope: { zh: "outreach 流程", en: "Outreach process" }, st: ["pass", "pass", "now", "", ""], h: 5, sessions: 2, rate: 55, self: 0, meet: 1, rep: "late", strikes: 1,
-    latest: { f: "A03_S3_ReviewLog_outreach", d: "4/28" } },
-  { name: "Advisor D", group: "Wet", scope: { zh: "protein design 協助", en: "Helping protein design" }, st: ["pass", "fail", "", "", ""], h: 8, sessions: 2, rate: 51, self: 1, meet: 1, rep: "ok", strikes: 1, sup: 1,
-    latest: { f: "A04_S2_Makeup_protein", d: "4/30" } },
-  { name: "Advisor E", group: "Dry", scope: { zh: "新 software tool", en: "New software tool" }, st: ["pass", "pass", "now", "", ""], h: 8, sessions: 3, rate: 70, self: 1, meet: 1, rep: "due", strikes: 0,
-    latest: { f: "A05_S3_ReviewLog_software", d: "5/14" } }
-];
-
-const ADV_SCHEMA = [
-  { t: "Roster_Full", k: { zh: "每人一列，advisor 併在這裡，不另開表", en: "One row per person; advisors live here, no separate table" }, c: "P · group · lead_instructor · status · away_periods · …" },
-  { t: "ADV_STAGE", k: { zh: "每人每階段一列，例如 A01-S1", en: "One per advisor per stage, e.g. A01-S1" }, c: "key · advisor_id · stage · scope · scope_confirmed_on · output_link · submitted_at · review_on · result · makeup_due · makeup_link · makeup_result · written_link · notified_on · reviewer · member_feedback_link · mock_judging_n" },
-  { t: "ADV_MONTH", k: { zh: "每人每月一列，暑期一列，例如 A01-2027-03、A01-2027-SUMMER", en: "One per advisor per month, plus one for summer, e.g. A01-2027-03, A01-2027-SUMMER" }, c: "key · advisor_id · period · hours_onsite · hours_online · days · group_sessions · group_h_attended · group_h_held · selfrun_link · selfrun_h · advisor_meeting · report_link · report_at · report_late_days · report_confirmed_by · note" },
-  { t: "ADV_STRIKE", k: { zh: "每個 strike 一列", en: "One row per strike" }, c: "strike_id · advisor_id · cause · reason · notice_on · deadline · recorded_on · signer_1 · signer_2 · parents_told_on · appeal" },
-  { t: "ADV_STATE", k: { zh: "由上面算出，不手填", en: "Computed from the above, never typed" }, c: "advisor_id · stages_passed · strikes · group_rate · qualification (active | roster | supporting | removed | terminated) · lead · certificate · record · note" },
-  { t: "ADV_LOG", k: { zh: "ADV-F1 表單回覆，只增不改", en: "ADV-F1 responses, append only" }, c: "submitted_at · advisor_id · type · stage_or_month · link · hours · comment" },
-  { t: "Hub / Advisor Deliverables", k: { zh: "Hub 表的分頁，全隊可見，IMPORTRANGE 單向帶入", en: "A Hub sheet tab, visible to the team, pulled one way by IMPORTRANGE" }, c: "A_id · advisor_id · display_name · group · current_stage · scope · latest_output_link · latest_output_at" }
-];
 
 // y = visible, s = summary, w = written outside the Hub, n = hidden
-const ADV_VIS_COLS = [
-  { zh: "本人", en: "Self" }, { zh: "其他 advisor", en: "Other advisors" }, { zh: "2027 隊員", en: "2027 team" },
-  { zh: "Instructor", en: "Instructor" }, { zh: "Ops", en: "Ops" }, { zh: "家長", en: "Parents" }, { zh: "公開網站", en: "Public site" }
-];
-const ADV_VIS = [
-  { f: { zh: "具名範圍、組別", en: "Named scope, group" }, v: "yyyyywn" },
-  { f: { zh: "最新產出連結", en: "Latest output link" }, v: "yyyyynn" },
-  { f: { zh: "階段狀態（進行中、通過）", en: "Stage status (in progress, passed)" }, v: "ysnyywn" },
-  { f: { zh: "未通過、補件", en: "Not passed, make-up" }, v: "ynnyywn" },
-  { f: { zh: "時數、會議出席", en: "Hours, meeting attendance" }, v: "ynnyynn" },
-  { f: { zh: "月報內容", en: "Monthly report content" }, v: "ynnynnn" },
-  { f: { zh: "第 3 階段隊員回饋", en: "Stage 3 member feedback" }, v: "snnynnn" },
-  { f: { zh: "Strike 與原因", en: "Strikes and causes" }, v: "ynnyywn" },
-  { f: { zh: "資格（Roster、Supporting list）", en: "Qualification (Roster, Supporting list)" }, v: "ynnyywn" },
-  { f: { zh: "真實姓名對照", en: "Real-name map" }, v: "nnnyynn" }
-];
-
 // Minutes per item are estimates; n is the number of advisors.
 const ADV_LOAD = [
   { t: { zh: "具名範圍確認", en: "Scope agreement" }, count: n => n * 5, min: 10 },
   { t: { zh: "月報確認（約 12 個月）", en: "Report confirmation (about 12 months)" }, count: n => n * 12, min: 10 },
   { t: { zh: "Advisor 月會（2 位 instructor）", en: "Advisor meeting (2 instructors)" }, count: () => 24, min: 60 },
-  { t: { zh: "階段考核與書面結果", en: "Stage review and written result" }, count: n => n * 5, min: 30 },
+  { t: { zh: "階段驗收與書面結果", en: "Stage review and written result" }, count: n => n * 5, min: 30 },
   { t: { zh: "第 3 階段隊員回饋", en: "Stage 3 member feedback" }, count: n => n, min: 15 },
   { t: { zh: "Roster 審核", en: "Roster review" }, count: n => n, min: 10 },
   { t: { zh: "證書與貢獻紀錄", en: "Certificate and contribution record" }, count: n => n, min: 45 }
@@ -1383,27 +1255,27 @@ const ADV_LOAD = [
 const ADV_TBD = [
   { zh: "打卡紀錄：誰保管、誰匯出、線上會議怎麼打卡。同意書只對組別會議寫明以打卡為準，實體時數是否同樣以打卡為準。", en: "Clock-in records: who holds them, who exports them, how an online meeting is clocked. The form names clock-in only for group meetings; do on-site hours follow it too?" },
   { zh: "離台就學後：線上時數怎麼記；「當面說明」與實體 workshop 能否改線上。", en: "After leaving Taiwan: how online hours are logged, and whether “in person” reviews and the in-person workshop may go online." },
-  { zh: "第 5 階段在 freeze 結束還是 Jamboree 結束，考核安排在哪一天。", en: "Whether stage 5 ends at freeze or at the Jamboree, and when its review happens." },
-  { zh: "第 5 階段補件能補什麼。通過標準要求 freeze 前完成，freeze 之後補不回來。", en: "What a stage 5 make-up can contain. The pass standard needs the scope done before freeze, which cannot be redone after it." },
+  { zh: "第 5 階段在 freeze 結束還是 Jamboree 結束，驗收安排在哪一天。", en: "Whether stage 5 ends at freeze or at the Jamboree, and when its review happens." },
+  null, // not public
   { zh: "階段之間的空窗（1/31–2 月中、8/11–8 月底）算哪一階段的時數；任期首月、8 月、freeze 後等不足整月的時數怎麼算；多的時數能否抵其他月。", en: "Which stage owns the gaps (31 Jan–mid Feb, 11 Aug–late Aug); how part-months count (the first month, August, after freeze); whether extra hours carry to other months." },
-  { zh: "補件失敗：立即改列 Supporting list，還是先給 strike 的改善期限。改善成功時能否回到原資格。", en: "After a failed make-up: straight to the Supporting list, or first the strike improvement period? Can fixing it in time restore the place?" },
-  { zh: "Supporting list 之後：是否繼續階段考核與 strike 累計，通過第 5 階段能否拿證書和貢獻紀錄。", en: "On the Supporting list: do reviews and strikes continue, and can passing stage 5 earn the certificate and record?" },
-  { zh: "8 月底之後：第 5 階段未通過、累計 3 個 strike 或除名時，Roster 是否撤銷、iGEM 是否還能改。滿 3 個但未除名時是什麼身分。", en: "After late August: does failing stage 5, reaching 3 strikes or removal take someone off the Roster, and can iGEM still change it? What status does someone at 3 strikes who is not removed hold?" },
+  null, // not public
+  null, // not public
+  null, // not public
   { zh: "組別會議 50%：何時檢查、Roster 審核時如何算到當時為止、暑期算不算、跨組任務算哪一組。每月 2 次遠低於每週一場的一半：全年 24 場對 52 場只有 46%，所以 50% 才是真正的門檻。", en: "Group meeting 50%: when it is checked, how it counts at the Roster review, whether summer counts, which group a cross-team task belongs to. Two a month misses half of a weekly meeting: 24 of 52 is 46%, so 50% is the real bar." },
-  { zh: "月報逾期 1–14 天怎麼處理；超過兩週後還要不要補交，「當月無產出」實際影響什麼；第一份與最後一份月報是哪個月；instructor 幾天內確認。", en: "What happens 1–14 days late; whether a report over two weeks late must still be handed in, and what “no output that month” changes; which months the first and last reports cover; how fast instructors confirm." },
-  { zh: "每位 advisor 的主責 instructor 是誰；strike 的第二位簽署人；哪兩位擔任 Advisor 驗收；誰代表 GEMS 決定 Roster 名單。", en: "Each advisor’s lead instructor; the second strike signer; which two instructors take advisor verification; who decides the Roster list for GEMS." },
-  { zh: "改善期限多長、誰定。申訴期限多長，申訴期間 strike 是否生效。", en: "How long an improvement period is and who sets it. How long an appeal may take, and whether a strike stands during it." },
+  null, // not public
+  { zh: "每位 advisor 的主責 instructor 是誰；哪兩位擔任 Advisor 驗收；誰代表 GEMS 決定 Roster 名單。", en: "Each advisor’s lead instructor; which two instructors take advisor verification; who decides the Roster list for GEMS." },
+  null, // not public
   { zh: "第 3 階段隊員回饋：什麼形式、誰收、是否匿名、誰看得到。", en: "Stage 3 member feedback: what form, who collects it, whether it is anonymous, who sees it." },
-  { zh: "權限：Hub 怎麼依身分登入；60 Advisors 要如何做到每人只寫自己的資料夾。已定：學生看得到 advisor 產出，考核結果只放 Ops；「誰看得到什麼」表其餘欄位待定案。", en: "Access: how the Hub knows who is viewing; how 60 Advisors lets each advisor write only their own folder. Decided: students can see advisor outputs and reviews stay in Ops only; the rest of the “who sees what” table still needs a decision." },
+  { zh: "權限：Hub 怎麼依身分登入；60 Advisors 要如何做到每人只寫自己的資料夾。已定：學生看得到 advisor 產出，驗收結果只放 Ops；「誰看得到什麼」表其餘欄位待定案。", en: "Access: how the Hub knows who is viewing; how 60 Advisors lets each advisor write only their own folder. Decided: students can see advisor outputs and reviews stay in Ops only; the rest of the “who sees what” table still needs a decision." },
   { zh: "Advisor 人數。規模以約 10 位估算（學生約 30 位），依實際簽署為準。", en: "The number of advisors. The team is sized for about 10 (and about 30 students) until forms are signed." },
   { zh: "組別會議與 advisor 月會各多長；自主會議的出席者要有誰；這些會議與模擬 judging 能否計入實體時數。", en: "How long group and advisor meetings run; who must attend a self-run meeting; whether these and mock judging count toward on-site hours." },
-  { zh: "「事先告知」要多早、用什麼形式才算，排除 strike 的考試或申請時段記在哪裡。", en: "How early and in what form “told in advance” must be, and where exempt exam or application periods are recorded." },
-  { zh: "考核場次：月會不一定落在階段結束日，每階段的考核日怎麼排；書面結果幾天內、由誰用什麼方式交給學生與家長。", en: "Review dates: the monthly meeting may not fall on a stage’s last day, so how are they set? How soon, by whom and how do written results reach student and parents?" },
+  null, // not public
+  { zh: "驗收場次：月會不一定落在階段結束日，每階段的驗收日怎麼排；書面結果幾天內、由誰用什麼方式交給學生與家長。", en: "Review dates: the monthly meeting may not fall on a stage’s last day, so how are they set? How soon, by whom and how do written results reach student and parents?" },
   { zh: "第 2 階段：同意書寫 2 月中–3 月底，第 3 階段從 4 月開始。時程表訓練是 2/13–3/7，3/13 Task Group 就開始，3/27 序列審查。3/13–3/31 advisor 算哪一階段、要不要先確認第 3 階段的具名範圍？", en: "Stage 2: the form says mid Feb–end of March, with stage 3 from April. The schedule has training on 13 Feb–7 Mar, task groups from 13 Mar and the sequence review on 27 Mar. Which stage covers advisors in 13–31 Mar, and is stage 3 scope agreed sooner?" },
   { zh: "Wiki freeze：同意書寫 10 月中，時程表是 10/6–13?，內部關卡從 10/6 往回排。第 5 階段的 checklist 期限跟哪一個？同意書寫 freeze 後 3–4 週，但到 Jamboree 10/29? 只有約 2–3 週；若 freeze 是 10/13，10/9 那場 mock 算不算「freeze 後至少 2 次」？", en: "Wiki freeze: the form says mid-October; the schedule says 6–13 Oct?, with internal gates from 6 Oct. Which date does the stage 5 checklist follow? The form says 3–4 weeks after freeze, but the Jamboree on 29 Oct? leaves about 2–3. If freeze is 13 Oct, does the 9 Oct mock count toward “at least 2 after freeze”?" },
-  { zh: "Roster：同意書寫 8 月底審核，時程表排 8/28；iGEM Roster Freeze 是 9/1–3?，只隔幾天。第 4 階段補件期限（Roster 審核前）和第 3 個 strike 的處理來得及嗎？", en: "Roster: the form says a late-August review and the schedule has 28 Aug; the iGEM Roster Freeze on 1–3 Sep? is only days later. Do the stage 4 make-up deadline (before the review) and the handling of a third strike still fit?" },
+  { zh: "Roster：同意書寫 8 月底審核，時程表排 8/28；iGEM Roster Freeze 是 9/1–3?，只隔幾天。這段時間夠核對名單嗎？", en: "Roster: the form says a late-August review and the schedule has 28 Aug; the iGEM Roster Freeze on 1–3 Sep? is only days later. Is that long enough to check the list?" },
   { zh: "Promotion video：同意書把它放在第 4 階段（7/1–8/10），時程表的截止提前到 7/29?，拍攝 7/6–7/18。主導 video script 的 advisor 要在第 3 階段就開始，這段工作算哪一階段？", en: "Promotion video: the form places it in stage 4 (1 Jul–10 Aug), but the schedule moves the deadline up to 29 Jul? with the shoot on 6–18 Jul. An advisor leading the video script must start during stage 3. Which stage does that work count toward?" },
-  { zh: "第 3 階段：同意書寫 4 月–暑假前，暑假 Mandatory 7/1 開始，時程表把驗收排在 6/26。第 3 階段的補件期限和 Lead Advisor 選任，以哪一天為準？", en: "Stage 3: the form says April to before summer, summer starts on 1 Jul, and the schedule puts the review on 26 Jun. Which date do the make-up deadline and Lead Advisor selection follow?" },
+  { zh: "第 3 階段：同意書寫 4 月–暑假前，暑假 Mandatory 7/1 開始，時程表把驗收排在 6/26。Lead Advisor 選任以哪一天為準？", en: "Stage 3: the form says April to before summer, summer starts on 1 Jul, and the schedule puts the review on 26 Jun. Which date does Lead Advisor selection follow?" },
   { zh: "網站上的提案，待 PI 確認：先前的 agent 自行新增「Advisor 驗收 ×2」，把專心開發從 6 位改為 4 位，並把素材流導師 ×5 和頁面審稿 ×3 併入 Advisor。這些不是定案。", en: "Proposals on this site, awaiting the PI: an earlier agent added “Advisor verification ×2” on its own, cut development-only staff from 6 to 4, and merged stream mentors ×5 and page reviewers ×3 into the advisor role. None of this is settled." },
   { zh: "編號撞名：網站的 advisor 編號是 A01，系統 ID 的 A 前綴是 Advisor 產出（如 A0207）。要不要把 advisor 編號改成人員的 P？", en: "An ID clash: this site’s advisor ID is A01, while the system’s A prefix means an advisor output (such as A0207). Should the advisor ID move to the person prefix P?" }
 ];
@@ -1455,8 +1327,8 @@ const PEOPLE = {
     {"code": "IMK", "kind": "i", "group": "staff", "name": {"zh": "Mock 與 judging 主責", "en": "Mock Lead"}, "seats": 1, "sec": 0, "when": {"zh": "全年", "en": "Year-round"}, "own": {"zh": "全隊 mock；Lead Advisor 從缺時接 N33", "en": "Mock for everyone; takes N33 when Lead Advisor is vacant"}, "week": [{"zh": "Mock 前看 QA", "en": "Check QA before the mock"}], "hrs": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "peak": [], "nodes": {"2027-09": ["N26"], "2027-10": ["N33"]}, "tabs": [], "folders": ["50 Deliverables/Jamboree", "50 Deliverables/Jamboree/Mocks"], "backup": "PI", "fit": [], "rhythm": []},
     {"code": "IFV", "kind": "i", "group": "staff", "name": {"zh": "事實驗證", "en": "Fact Verification"}, "seats": 3, "sec": 0, "when": {"zh": "全年", "en": "Year-round"}, "own": {"zh": "簽圖與事實", "en": "Sign figures and facts"}, "week": [{"zh": "8 月起週日看待簽", "en": "From Aug, Sun: check items awaiting signature"}], "hrs": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "peak": [], "nodes": {"2027-09": ["N27"]}, "tabs": [], "folders": [], "backup": "IGP", "fit": [], "rhythm": [], "note": {"zh": "Wet、Dry、Hardware 各一；容量待確認 SCH-4", "en": "One each for Wet, Dry, Hardware; capacity to be confirmed (SCH-4)"}},
     {"code": "IKS", "kind": "i", "group": "staff", "name": {"zh": "同意簽核與未成年許可", "en": "Consent Sign-off"}, "seats": 2, "sec": 0, "when": {"zh": "全年", "en": "Year-round"}, "own": {"zh": "簽 K；管未成年許可與受限媒體", "en": "Sign K; manage minors' permissions and restricted media"}, "week": [{"zh": "週日看待老師簽", "en": "Sun: check items awaiting instructor signature"}, {"zh": "教育場次的現場拍攝安排", "en": "On-site filming arrangements for education sessions"}], "hrs": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "peak": [], "nodes": {"2027-09": ["N25"]}, "tabs": [], "folders": ["GEMS 2027 Ops/Consent Originals", "GEMS 2027 Ops/Consent Originals/Minor Permissions", "GEMS 2027 Ops/Restricted Media"], "backup": "OPS", "fit": [], "rhythm": []},
-    {"code": "IAV", "kind": "i", "group": "staff", "name": {"zh": "Advisor 驗收與主責", "en": "Advisor Verification"}, "seats": 2, "sec": 0, "when": {"zh": "全年", "en": "Year-round"}, "own": {"zh": "範圍確認、階段考核、書面結果、strike 雙簽", "en": "Scope confirmation, stage assessment, written results, strike double sign-off"}, "week": [{"zh": "每月讀月報", "en": "Read monthly reports each month"}, {"zh": "階段末考核", "en": "End-of-stage assessment"}], "hrs": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5], "peak": [], "nodes": {"2027-03": ["N11"], "2027-06": ["N17"], "2027-08": ["N23"]}, "tabs": ["Hub.Advisor Deliverables", "OpsHub.ADV_STAGE", "OpsHub.ADV_MONTH", "OpsHub.ADV_STRIKE", "OpsHub.ADV_STATE", "OpsHub.ADV_LOG"], "folders": ["60 Advisors", "60 Advisors/_Templates", "GEMS 2027 Ops/Advisors"], "backup": "PI", "fit": [], "rhythm": [], "note": {"zh": "人選待決定 T11", "en": "Appointee to be decided (T11)"}},
-    {"code": "IAC", "kind": "i", "group": "staff", "name": {"zh": "Accountability 負責人", "en": "Accountability Owner"}, "seats": 1, "sec": 0, "when": {"zh": "全年", "en": "Year-round"}, "own": {"zh": "遲交、缺席、處分紀錄與家長信（只有成人）", "en": "Late, absence and sanction records and parent letters (adults only)"}, "week": [{"zh": "週一看 Accountability", "en": "Mon: check Accountability"}, {"zh": "每月全掃", "en": "Full sweep monthly"}], "hrs": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "peak": [], "nodes": {}, "tabs": ["OpsHub.Accountability"], "folders": ["GEMS 2027 Ops/Accountability"], "backup": "PI", "fit": [], "rhythm": [], "note": {"zh": "待指定 D-005。學生支援只限「提醒」，不看紀錄", "en": "To be assigned (D-005). Student support is limited to reminders, with no access to records"}},
+    {"code": "IAV", "kind": "i", "group": "staff", "name": {"zh": "Advisor 驗收與主責", "en": "Advisor Verification"}, "seats": 2, "sec": 0, "when": {"zh": "全年", "en": "Year-round"}, "own": {"zh": "範圍確認、階段驗收、書面結果", "en": "Scope confirmation, stage review, written results"}, "week": [{"zh": "每月讀月報", "en": "Read monthly reports each month"}, {"zh": "階段末驗收", "en": "End-of-stage assessment"}], "hrs": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5], "peak": [], "nodes": {"2027-03": ["N11"], "2027-06": ["N17"], "2027-08": ["N23"]}, "tabs": ["Hub.Advisor Deliverables", "OpsHub.ADV_STAGE", "OpsHub.ADV_MONTH", "OpsHub.ADV_STATE", "OpsHub.ADV_LOG"], "folders": ["60 Advisors", "60 Advisors/_Templates", "GEMS 2027 Ops/Advisors"], "backup": "PI", "fit": [], "rhythm": [], "note": {"zh": "人選待決定 T11", "en": "Appointee to be decided (T11)"}},
+    {"code": "IAC", "kind": "i", "group": "staff", "name": {"zh": "內部紀錄負責人", "en": "Internal Records Owner"}, "seats": 1, "sec": 0, "when": {"zh": "全年", "en": "Year-round"}, "own": {"zh": "老師專用的內部紀錄（只有成人，內容不公開）", "en": "Instructor-only internal records (adults only, not public)"}, "week": [{"zh": "週一看內部紀錄", "en": "Mon: check internal records"}, {"zh": "每月全掃", "en": "Full sweep monthly"}], "hrs": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "peak": [], "nodes": {}, "tabs": ["OpsHub"], "folders": ["GEMS 2027 Ops/Accountability"], "backup": "PI", "fit": [], "rhythm": [], "note": {"zh": "待指定 D-005。學生支援只限「提醒」，不看紀錄", "en": "To be assigned (D-005). Student support is limited to reminders, with no access to records"}},
     {"code": "ISC", "kind": "i", "group": "staff", "name": {"zh": "安全聯絡人", "en": "Safety Contact"}, "seats": 3, "sec": 0, "when": {"zh": "全年", "en": "Year-round"}, "own": {"zh": "接收回報，24 小時內回覆", "en": "Receive reports and reply within 24 hours"}, "week": [{"zh": "看回報頻道與表單", "en": "Check the report channel and form"}], "hrs": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], "peak": [], "nodes": {}, "tabs": [], "folders": [], "backup": "ISC", "fit": [], "rhythm": [], "note": {"zh": "至少一位不是 PI，不向 PI 報告的接收人待決定（藍圖第 13 節）", "en": "At least one recipient who is not the PI and does not report to the PI, to be decided (blueprint section 13)"}},
     {"code": "IMD", "kind": "i", "group": "staff", "name": {"zh": "Discord 版務", "en": "Discord Moderator"}, "seats": 3, "sec": 0, "when": {"zh": "全年", "en": "Year-round"}, "own": {"zh": "刪訊息、禁言、處理照片牆誤發（只有成人）", "en": "Delete messages, mute, handle gallery misposts (adults only)"}, "week": [{"zh": "看伺服器紀錄", "en": "Check server logs"}], "hrs": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], "peak": [], "nodes": {}, "tabs": [], "folders": [], "backup": "ISC", "fit": [], "rhythm": []},
     {"code": "OPS", "kind": "i", "group": "staff", "name": {"zh": "Ops", "en": "Ops"}, "seats": 2, "sec": 0, "when": {"zh": "全年", "en": "Year-round"}, "own": {"zh": "Roster、Drive 與 Discord 帳務、Archive、下單", "en": "Roster, Drive and Discord admin, Archive, ordering"}, "week": [{"zh": "週一 Roster 與 Purchases", "en": "Mon: Roster and Purchases"}, {"zh": "週日貼 AI 摘要", "en": "Sun: post AI summary"}, {"zh": "每月匯出 Hours", "en": "Export Hours monthly"}], "hrs": [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], "peak": [], "nodes": {"2026-11": ["N00"], "2027-03": ["N11"], "2027-09": ["N24"], "2027-11": ["N35"]}, "tabs": ["OpsHub.Roster_Full", "Hub.Roster", "OpsHub.Hours", "ArchiveManifest.Batches", "OpsHub.AI_Digest"], "folders": ["00 Start Here", "90 Archive", "GEMS 2027 Ops", "GEMS 2027 Ops/Official Documents"], "backup": "OBG", "fit": [], "rhythm": []},
@@ -1750,7 +1622,7 @@ const PHOTO = {
   steps: [
     { t: { zh: "拍", en: "Shoot" }, who: { zh: "任何人", en: "Anyone" }, d: { zh: "記錄過程：裝置怎麼接、白板怎麼想、失敗長什麼樣。算得出數字的圖是數據，放 Data 並開 R，不走這裡。", en: "The look of the process: how it was set up, the whiteboard, what failure looked like. An image that yields a number is data and goes to Data with an R." } },
     { t: { zh: "發 gallery", en: "Post to gallery" }, who: { zh: "約 30 秒（估算）", en: "About 30 s (estimate)" }, d: { zh: "Discord 論壇 照片牆-gallery，一件事一篇。標題 MMDD ID 短描述，點組別、分類、人臉標籤。趕不上就先發，標題之後補。", en: "The Discord forum gallery, one post per event. Title MMDD ID short description; tag group, category and faces. Post first if you must; fix the title later." } },
-    { t: { zh: "週五提醒", en: "Friday nudge" }, who: { zh: "自動", en: "Automatic" }, d: { zh: "固定文字，不點名，也不統計誰發了幾張。照片數不進任何考核。", en: "Fixed text, no names, no counting who posted what. Photo counts never enter any assessment." } },
+    { t: { zh: "週五提醒", en: "Friday nudge" }, who: { zh: "自動", en: "Automatic" }, d: { zh: "固定文字，不點名，也不統計誰發了幾張。照片數不進任何驗收。", en: "Fixed text, no names, no counting who posted what. Photo counts never enter any assessment." } },
     { t: { zh: "週日歸檔", en: "Sunday filing" }, who: { zh: "Photo Steward", en: "Photo Steward" }, d: { zh: "工具改名、配 M、抓重複。上傳到 Drive 當月資料夾，貼進 Hub Media，回覆 M 編號並按 ✅。", en: "A tool renames, assigns M and catches duplicates. Upload to the month’s Drive folder, paste into Hub Media, reply with the M and tick ✅." } },
     { t: { zh: "每月精選", en: "Monthly picks" }, who: { zh: "Media lead", en: "Media Lead" }, d: { zh: "在 Hub 標精選、Wiki 候選、影片候選，每月上限 10 張精選。不複製檔案。", en: "Marks picks, wiki candidates and video candidates in the Hub, up to 10 picks a month. No copies." } }
   ],
@@ -1788,7 +1660,7 @@ const PHOTO = {
 // To be decided, added with the role catalogue and the photo system. Earlier lists stay where they were.
 const PEOPLE_DECIDED = [
   { zh: "Drive：方向定為搬到 GEMS Workspace 的 Shared Drive，解決配額與交接風險。尚未搬遷，確認帳號後由 PI 執行。", en: "Drive: the direction is a GEMS Workspace Shared Drive, to settle quota and handover risk. Not migrated yet; the PI will do it once the account is confirmed." },
-  { zh: "Advisor 產出：學生看得到，考核結果只放 Ops。", en: "Advisor outputs: students can see them; reviews stay in Ops only." },
+  { zh: "Advisor 產出：學生看得到，驗收結果只放 Ops。", en: "Advisor outputs: students can see them; reviews stay in Ops only." },
   { zh: "第一批 10 題 RQ：PI 與老師在 11/25 前寫，來不及先給 3 題。", en: "First 10 RQs: written by the PI and instructors before 25 Nov; if time runs out, 3 first." },
   { zh: "衝刺期老師減負：採選項 A＋C，Consent 不放寬。細節待寫入規格。", en: "Lighter load for instructors in the crunch: options A and C, with no relaxation on Consent. Details are still to be written into the spec." },
   { zh: "研究組長：老師代行到 N06（3/10），再依 Impact Log 選。", en: "Research Lead: instructors act until N06 (10 Mar), then the lead is chosen from the Impact Log." }
@@ -1797,7 +1669,7 @@ const PEOPLE_DECIDED = [
 const PEOPLE_TBD = [
   { zh: "這份角色清單與時數上限（H-01、H-04）。席位不是指派。", en: "This role list and the time caps (H-01, H-04). Seats are not assignments." },
   { zh: "Task lead 怎麼選（H-03）；每個角色怎麼選人、何時公布。建議 N06 公布、N07 上任，Photo Steward 與 Media lead 從 N02 先試跑。", en: "How Task Leads are chosen (H-03); how and when each role is filled. Suggested: announce at N06, start at N07, with Photo Stewards and the Media Lead trying it from N02." },
-  { zh: "Accountability 負責人（D-005）、主責 instructor（T11）、安全與物資人選（H-14）。", en: "The Accountability owner (D-005), lead instructors (T11), safety and supplies owners (H-14)." },
+  { zh: "內部紀錄負責人（D-005）、主責 instructor（T11）、安全與物資人選（H-14）。", en: "The internal records owner (D-005), lead instructors (T11), safety and supplies owners (H-14)." },
   { zh: "學生角色可不可以算進評量或 Attribution。建議列進 Attribution，不進評分。", en: "Whether student roles count toward assessment or Attribution. Suggested: Attribution yes, grading no." },
   { zh: "主職是否在暑期輪換一次，避免一人做滿一年。", en: "Whether primary seats rotate once over the summer, so nobody serves a full year." },
   { zh: "Advisor 名單未簽（T15），範圍選單要對照簽署結果。求助論壇值班是否屬於 advisor 範圍。", en: "The advisor list is unsigned (T15), and scope menus depend on it. Whether help-forum duty falls within advisor scope." },
@@ -1809,14 +1681,14 @@ const PEOPLE_TBD = [
   { zh: "實測：學生手機發文 30 秒、Steward 一輪 47 分、各角色時數。第一次衝刺站立會後回報一次。", en: "Measure it: 30 seconds to post, 47 minutes for a filing round, and each role’s hours, reported after the first crunch stand-up." },
   { zh: "Wiki 資料夾：D-047 用 Wiki/W### 頁名，Drive 規格與 File Rules 第 12 節還寫 Wiki/Pages，要改成同一種說法。40 Media 新權限也只在規格，尚未執行。", en: "Wiki folders: D-047 uses Wiki/W### page while the Drive spec and File Rules section 12 still say Wiki/Pages, and they must match. The new 40 Media permissions are also spec only, not yet applied." },
   { zh: "N11 學生暑期不在日期的回報管道（SCH-5）。", en: "How students report summer absences at N11 (SCH-5)." },
-  { zh: "Handbook 待定：分組規則（H-02）、評量量表（H-05）、遲交與缺席定義（H-06）、實驗室規則（H-07）、採購門檻（H-08）、學生 AI 使用（H-09）、衝刺期週會是否縮短（H-11）、題目評分（H-12）、Run 結果率目標（H-13）、PK 規則（H-15）、化學品與廢棄物分類（H-16）。", en: "Handbook items: group rules (H-02), assessment scale (H-05), lateness and absence definitions (H-06), lab rules (H-07), purchase thresholds (H-08), student AI use (H-09), shorter crunch meetings (H-11), topic scoring (H-12), Run result target (H-13), PK rules (H-15), chemical and waste classes (H-16)." }
+  { zh: "Handbook 待定：分組規則（H-02）、評量量表（H-05）、實驗室規則（H-07）、採購門檻（H-08）、學生 AI 使用（H-09）、衝刺期週會是否縮短（H-11）、題目評分（H-12）、Run 結果率目標（H-13）、PK 規則（H-15）、化學品與廢棄物分類（H-16）。", en: "Handbook items: group rules (H-02), assessment scale (H-05), lab rules (H-07), purchase thresholds (H-08), student AI use (H-09), shorter crunch meetings (H-11), topic scoring (H-12), Run result target (H-13), PK rules (H-15), chemical and waste classes (H-16)." }
 ];
 
 const PEOPLE_RULES = [
   { t: { zh: "一主職，最多一副職", en: "One primary seat, at most one secondary" }, d: { zh: "學生 30 個主職席、22 個副職席，所以有 8 位沒有副職，主要是 9 月本來就滿的人。", en: "30 primary and 22 secondary student seats, so 8 people have no second seat, mostly those already full in September." } },
   { t: { zh: "時間有上限", en: "Time is capped" }, d: { zh: "平時每週 3 小時，7 到 10 月每週 5 小時（提案）。算在隊員平時工時內，不是額外加的。做實驗本身不算。", en: "3 h a week, 5 h from July to October (proposal). It counts inside normal team hours, not on top. Lab work itself does not count." } },
   { t: { zh: "沒有單點", en: "No single point of failure" }, d: { zh: "每個角色都寫了備援；Photo Steward 與美術本來就兩位。", en: "Every role names a backup; Photo Stewards and Art already come in pairs." } },
-  { t: { zh: "有些事只由成人", en: "Some things stay with adults" }, d: { zh: "紀律、成績、未成年許可、Discord 版務。沒有學生或 advisor 角色擁有 Ops Hub。", en: "Discipline, grades, minors’ permissions, Discord moderation. No student or advisor role owns anything in the Ops Hub." } },
+  { t: { zh: "有些事只由成人", en: "Some things stay with adults" }, d: { zh: "未成年許可、老師專用紀錄、Discord 版務。沒有學生或 advisor 角色擁有 Ops Hub。", en: "Minors’ permissions, instructor-only records, Discord moderation. No student or advisor role owns anything in the Ops Hub." } },
   { t: { zh: "Advisor 不是席位制", en: "Advisors are not seats" }, d: { zh: "10 位是容量估算。每階段與 instructor 確認具名範圍，只留審查紀錄，不是關卡，判斷在 instructor，不保證任何角色。", en: "10 is a capacity estimate. Named scope is agreed with an instructor each stage; advisors leave review notes, are not gates, and no role is guaranteed. Judgement stays with the instructor." } }
 ];
 

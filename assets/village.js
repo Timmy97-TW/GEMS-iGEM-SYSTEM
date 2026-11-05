@@ -898,10 +898,10 @@ window.Village = (() => {
     const tabs = roles.length > 1 ? `<div class="vp__tabs">${roles.map(r => `<button data-role="${r.code}" aria-pressed="${r === cur}">${esc(L(r.name))}</button>`).join("")}</div>` : "";
     p.innerHTML = `${close}<div class="panel__head"><span class="panel__kind">${esc(L(d.name))}${b.fn ? " · " + esc(t("vg.fn")) : ""}</span><h3>${esc(L(b.name))}</h3>${cur ? `<span class="vp__seat"><code>${cur.code}</code> ${esc(L(cur.name))} ${esc(seatText(cur))}</span>` : ""}</div>
       ${b.fn ? `<p class="vp__own">${esc(L(b.fn))}</p><div class="vp__sec"><h5>${esc(t("vg.file"))}</h5><div class="vp__files">${b.files.map(f => `<code>${esc(f)}</code>`).join("")}</div></div>` : ""}
-      ${b.id === "gallery" ? `<a class="vp__week" href="#photo">${esc(t("ph.see"))}</a>` : ""}
+      ${b.id === "gallery" ? `<a class="vp__week" href="system.html#photo">${esc(t("ph.see"))}</a>` : ""}
       ${b.fn && b.roles.length ? `<div class="vp__sec"><h5>${esc(t("vg.handto"))}</h5>${b.roles.map(c => `<button class="vp__h" data-go="${HOME[c]}"><b>${esc(L(R[c].name))}</b><span>${esc(L(R[c].own))}</span></button>`).join("")}</div>` : ""}
       ${tabs}${cur ? roleBlock(cur) : ""}
-      ${b.id === "darkroom" ? `<a class="vp__week vp__week--2" href="#photo">${esc(t("ph.see"))}</a>` : ""}`;
+      ${b.id === "darkroom" ? `<a class="vp__week vp__week--2" href="system.html#photo">${esc(t("ph.see"))}</a>` : ""}`;
     wire(p);
   }
   function wire(p) {
