@@ -4,6 +4,8 @@ The 2027 operating system for the GEMS Taiwan iGEM team, drawn from the 2026 sea
 
 看懂 2027 年的團隊系統：首頁看今天，其他頁面分別是系統全貌、時程、角色、Student Advisor 計畫、Research 和更新紀錄。
 
+The site students open every day is a separate one, the **[2027 Project Hub](https://timmy97-tw.github.io/GEMS-iGEM-2027-Hub/)** ([repo](https://github.com/Timmy97-TW/GEMS-iGEM-2027-Hub)): weekly goals, milestones, homework, owners, credits and every link. This site explains why the system is built the way it is; the hub says what to do today. The hub copies `TIMELINE`, `YEAR_BANDS`, `PEOPLE`, the rules, IDs, Hub tabs, `DRIVE` and `YEAR_ITEMS` from `assets/data.js` every night, so **renaming or reshaping those breaks its sync** (its Action fails and it keeps the last good copy).
+
 ## Pages
 
 | Page | For | What it holds |

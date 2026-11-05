@@ -14,7 +14,11 @@ html:has(.subnav) { scroll-padding-top: calc(var(--nav-h) + var(--sub-h) + 12px)
 .nav__links a { padding: 6px 12px; border-radius: 999px; color: var(--ink-2); white-space: nowrap; transition: color .2s, background .2s; }
 .nav__links a:hover { color: var(--ink); background: rgba(0, 0, 0, .04); }
 .nav__links a[aria-current="page"] { color: var(--ink); background: rgba(0, 0, 0, .07); font-weight: 600; }
-@media (max-width: 860px) {
+.nav__links a.nav__hub { margin-left: 6px; color: #fff; background: var(--ink); font-weight: 600; }
+.nav__links a.nav__hub:hover { color: #fff; background: var(--accent); }
+/* With the Project Hub link the English nav needs about 980px in one row. */
+@media (max-width: 1120px) { .nav__in { gap: 18px; } .nav__links a { padding: 6px 10px; } }
+@media (max-width: 1000px) {
   :root { --nav-h: 92px; }
   .nav__in { flex-wrap: wrap; align-content: center; gap: 4px 12px; padding: 0 16px; }
   .nav__brand { flex: 1; }
@@ -22,6 +26,7 @@ html:has(.subnav) { scroll-padding-top: calc(var(--nav-h) + var(--sub-h) + 12px)
   .nav__links::-webkit-scrollbar { display: none; }
   .nav__links { gap: 0; }
   .nav__links a { padding: 6px 8px; }
+  .nav__links a.nav__hub { order: -1; margin: 0 6px 0 0; padding: 6px 11px; }
 }
 
 /* ---------- section tabs on long pages ---------- */
@@ -207,3 +212,14 @@ body[data-page="home"] #village { padding-top: 88px; }
 .btn:active { transform: scale(.98); }
 .homesec--ideas + .today { padding-top: 64px; }
 @media (max-width: 860px) { .lead { padding: 40px 0 44px; } }
+
+/* The door to the Project Hub, the separate site students use every day. */
+.hubcard { display: grid; grid-template-columns: 48px 1fr auto; gap: 16px 18px; align-items: center; max-width: 860px; margin-top: 40px; padding: 18px 22px; border-radius: var(--r-md); background: var(--card); box-shadow: 0 0 0 1px var(--hair), 0 10px 30px rgba(0, 0, 0, .06); transition: box-shadow .25s var(--ease), transform .25s var(--ease); }
+.hubcard:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(0, 113, 227, .45), 0 16px 40px rgba(0, 113, 227, .14); }
+.hubcard svg { width: 48px; height: 48px; }
+.hubcard__t small { display: block; font-size: 13px; font-weight: 600; color: var(--accent); }
+.hubcard__t b { display: block; font-size: 21px; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; }
+.hubcard__t > span { display: block; margin-top: 3px; font-size: 15px; line-height: 1.45; color: var(--ink-2); }
+.hubcard__go { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 15px; font-weight: 600; white-space: nowrap; }
+.hubcard:hover .hubcard__go { background: var(--accent); }
+@media (max-width: 700px) { .hubcard { grid-template-columns: 40px 1fr; padding: 16px; } .hubcard svg { width: 40px; height: 40px; } .hubcard__go { grid-column: 1 / -1; justify-content: center; } }

@@ -61,7 +61,9 @@ window.SITE = (() => {
     "res.flow.h": "跟著一題研究走一次", "res.flow.sub": "研究不是另一套系統。旁邊兩個分頁是它接下去的地方：題目怎麼定，實驗怎麼做。",
     "res.docs.h": "研究在文件系統裡的位置", "res.docs.sub": "研究檔案住在 15 Research，定題和實驗文件接在後面。下面的 Drive 和年表與「系統全貌」是同一份。",
     "res.year.h": "研究接到哪些文件", "res.year.sub": "拖動時間軸，看題目、訓練、實驗和 wiki 的文件依序誕生。",
-    "foot.pages": "頁面"
+    "foot.pages": "頁面",
+    "site.hub": "專案中心", "home.hub.k": "學生每天從這裡開始", "home.hub.t": "2027 專案中心", "home.hub.d": "本週目標、里程碑、作業、負責人、貢獻和所有連結。這個網站講系統為什麼這樣設計，專案中心講今天要做什麼。", "home.hub.go": "打開專案中心",
+    "door.hub": "2027 專案中心", "door.hub.who": "全隊，每天", "door.hub.d": "這週的目標、要交的作業、遇到問題問誰、每個資料夾和表的連結。和這裡用同一份節點與席位。", "door.count.pages": "個頁面"
   });
   Object.assign(T.en, {
     "site.home": "Today", "site.system": "System", "site.time": "Schedule", "site.people": "Roles", "site.advisors": "Advisors", "site.research": "Research", "site.updates": "Updates",
@@ -118,7 +120,9 @@ window.SITE = (() => {
     "res.flow.h": "Follow one research question", "res.flow.sub": "Research is not a separate system. The other two tabs are where it leads: choosing the topic and running the work.",
     "res.docs.h": "Where research sits in the documents", "res.docs.sub": "Research files live in 15 Research, and the topic and lab documents follow from them. This Drive and year chart are the same ones as on the system page.",
     "res.year.h": "The documents research feeds", "res.year.sub": "Drag the timeline to see topic, training, lab and wiki documents appear in order.",
-    "foot.pages": "Pages"
+    "foot.pages": "Pages",
+    "site.hub": "Project Hub", "home.hub.k": "Where students start each day", "home.hub.t": "2027 Project Hub", "home.hub.d": "Weekly goals, milestones, homework, owners, credits and every link. This site explains why the system is built this way; the hub says what to do today.", "home.hub.go": "Open the Project Hub",
+    "door.hub": "2027 Project Hub", "door.hub.who": "The team, daily", "door.hub.d": "This week’s goals, homework due, who to ask, and a link to every folder and sheet. It runs on the same nodes and seats as this site.", "door.count.pages": "pages"
   });
 
   // ---------- shell ----------
@@ -126,14 +130,16 @@ window.SITE = (() => {
     ["home", "index.html"], ["system", "system.html"], ["time", "timeline.html"], ["people", "people.html"], ["students", "students.html"],
     ["advisors", "advisors.html"], ["research", "research.html"], ["updates", "updates.html"]
   ];
+  // The Project Hub is a separate site for daily use; this site links to it from every page.
+  const HUB = "https://timmy97-tw.github.io/GEMS-iGEM-2027-Hub/";
   const MARK = `<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1d1d1f"/><circle cx="11" cy="16" r="3" fill="#ff9500"/><circle cx="21" cy="10" r="3" fill="#0071e3"/><circle cx="21" cy="22" r="3" fill="#34c759"/></svg>`;
   $("#nav").innerHTML = `<div class="nav__in">
     <a class="nav__brand" href="index.html">${MARK}<span>GEMS iGEM 2027</span></a>
-    <nav class="nav__links" aria-label="Pages">${NAV.map(([k, h]) => `<a href="${h}" data-i18n="site.${k}"${k === PAGE ? ' aria-current="page"' : ""}></a>`).join("")}</nav>
+    <nav class="nav__links" aria-label="Pages">${NAV.map(([k, h]) => `<a href="${h}" data-i18n="site.${k}"${k === PAGE ? ' aria-current="page"' : ""}></a>`).join("")}<a class="nav__hub" href="${HUB}"><span data-i18n="site.hub"></span> ↗</a></nav>
     <div class="lang" role="group" aria-label="Language"><button data-lang="zh">中</button><button data-lang="en">EN</button></div>
   </div>`;
   const foot = $("#foot");
-  if (foot) foot.innerHTML = `<div class="foot__in"><nav aria-label="Pages">${NAV.map(([k, h]) => `<a href="${h}" data-i18n="site.${k}"></a>`).join("")}</nav><p data-i18n="foot.line"></p></div>`;
+  if (foot) foot.innerHTML = `<div class="foot__in"><nav aria-label="Pages">${NAV.map(([k, h]) => `<a href="${h}" data-i18n="site.${k}"></a>`).join("")}<a href="${HUB}"><span data-i18n="site.hub"></span> ↗</a></nav><p data-i18n="foot.line"></p></div>`;
 
   // Links to the old single page keep working.
   if (PAGE === "home" && location.hash) {
@@ -204,6 +210,7 @@ window.SITE = (() => {
       </a>`).join("");
   }
   const doors = () => [
+    { k: "hub", href: HUB, c: "teal", n: 9, unit: "door.count.pages" }, // 9 = pages in the hub's nav
     { k: "system", href: "system.html", c: "blue", n: DRIVE.length, unit: "door.count.folders" },
     { k: "time", href: "timeline.html", c: "orange", n: NODES.length, unit: "door.count.nodes" },
     { k: "people", href: "people.html", c: "green", n: PEOPLE.roles.length, unit: "door.count.roles" },
