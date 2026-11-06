@@ -63,6 +63,7 @@ window.SITE = (() => {
     "res.year.h": "研究接到哪些文件", "res.year.sub": "拖動時間軸，看題目、訓練、實驗和 wiki 的文件依序誕生。",
     "foot.pages": "頁面",
     "site.hub": "專案中心", "home.hub.k": "學生每天從這裡開始", "home.hub.t": "2027 專案中心", "home.hub.d": "本週目標、里程碑、作業、負責人、貢獻和所有連結。這個網站講系統為什麼這樣設計，專案中心講今天要做什麼。", "home.hub.go": "打開專案中心",
+    "door.wiki": "2027 Wiki 範本", "door.wiki.who": "Wiki Lead 與頁面負責人", "door.wiki.d": "下一屆 wiki 的起點：網址、導覽、版型都做好了，內容是占位，每頁寫著評審看什麼。這是線上預覽，不是評審看的那份。",
     "door.hub": "2027 專案中心", "door.hub.who": "全隊，每天", "door.hub.d": "這週的目標、要交的作業、遇到問題問誰、每個資料夾和表的連結。和這裡用同一份節點與席位。", "door.count.pages": "個頁面"
   });
   Object.assign(T.en, {
@@ -122,6 +123,7 @@ window.SITE = (() => {
     "res.year.h": "The documents research feeds", "res.year.sub": "Drag the timeline to see topic, training, lab and wiki documents appear in order.",
     "foot.pages": "Pages",
     "site.hub": "Project Hub", "home.hub.k": "Where students start each day", "home.hub.t": "2027 Project Hub", "home.hub.d": "Weekly goals, milestones, homework, owners, credits and every link. This site explains why the system is built this way; the hub says what to do today.", "home.hub.go": "Open the Project Hub",
+    "door.wiki": "2027 wiki template", "door.wiki.who": "Wiki Lead and page owners", "door.wiki.d": "Where next year’s wiki starts: URLs, nav and layout are built, the content is placeholder, and each page says what the judges look for. A live preview, not the judged wiki.",
     "door.hub": "2027 Project Hub", "door.hub.who": "The team, daily", "door.hub.d": "This week’s goals, homework due, who to ask, and a link to every folder and sheet. It runs on the same nodes and seats as this site.", "door.count.pages": "pages"
   });
 
@@ -132,6 +134,8 @@ window.SITE = (() => {
   ];
   // The Project Hub is a separate site for daily use; this site links to it from every page.
   const HUB = "https://timmy97-tw.github.io/GEMS-iGEM-2027-Hub/";
+  // Live preview of the 2027 wiki template (GitHub Pages; iGEM judges only the gitlab.igem.org copy).
+  const WIKI = "https://timmy97-tw.github.io/GEMS-iGEM-2027-wiki-template/";
   const MARK = `<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1d1d1f"/><circle cx="11" cy="16" r="3" fill="#ff9500"/><circle cx="21" cy="10" r="3" fill="#0071e3"/><circle cx="21" cy="22" r="3" fill="#34c759"/></svg>`;
   $("#nav").innerHTML = `<div class="nav__in">
     <a class="nav__brand" href="index.html">${MARK}<span>GEMS iGEM 2027</span></a>
@@ -216,7 +220,8 @@ window.SITE = (() => {
     { k: "people", href: "people.html", c: "green", n: PEOPLE.roles.length, unit: "door.count.roles" },
     { k: "students", href: "students.html", c: "pink", n: 8, unit: "door.count.dims" }, // 8 = FACETS in journey.js
     { k: "advisors", href: "advisors.html", c: "gold", n: ADV_STAGES.length, unit: "door.count.stages" },
-    { k: "research", href: "research.html", c: "purple", n: RESEARCH_RULES.length, unit: "door.count.rules" }
+    { k: "research", href: "research.html", c: "purple", n: RESEARCH_RULES.length, unit: "door.count.rules" },
+    { k: "wiki", href: WIKI, c: "indigo", n: 24, unit: "door.count.pages" } // 24 = pages in the template's pages.json
   ];
 
   const R0 = "2026-11-01", R1 = "2027-12-01";

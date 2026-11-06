@@ -4,6 +4,7 @@
 // progress, reviews, fees, discipline, research strategy, Drive links or Discord invites.
 // The home page shows the first few entries; updates.html shows them all.
 const UPDATES = [
+  { d: "2026-11-06", tag: "site", t: { zh: "2027 Wiki 範本有線上預覽了：timmy97-tw.github.io/GEMS-iGEM-2027-wiki-template。首頁的入口和專案中心的連結頁都連得過去。評審只看 iGEM GitLab 上的那份。", en: "The 2027 wiki template has a live preview at timmy97-tw.github.io/GEMS-iGEM-2027-wiki-template, linked from the home page and the Project Hub’s Links page. Judges only see the copy on iGEM’s GitLab." } },
   { d: "2026-11-05", tag: "site", t: { zh: "2027 專案中心上線：學生每天用的入口，有本週目標、里程碑、作業、負責人、貢獻和所有連結。首頁、導覽列和頁尾都連得過去，節點與席位每天從這裡同步過去。", en: "The 2027 Project Hub is live: the daily front door for students, with weekly goals, milestones, homework, owners, credits and every link. The home page, nav and footer link to it, and it syncs its nodes and seats from this site every night." } },
   { d: "2026-11-05", tag: "system", t: { zh: "學生歷程頁重新設計：從 2026 學生的感言整理出八種成長，區分承擔與幫忙，並有 Wet、Dry、HP 三位虛構學生的一年與年鑑。", en: "Student journeys redesigned: eight kinds of growth drawn from 2026 students' words, owning versus helping, and three invented years and yearbooks for Wet, Dry and HP." } },
   { d: "2026-11-05", tag: "system", t: { zh: "新增學生歷程頁：能記下哪些貢獻與成長、怎麼記、一位虛構學生的一年，以及年鑑的樣子。", en: "Added the student journeys page: what can be recorded, how, one invented student's year, and what the yearbook looks like." } },
